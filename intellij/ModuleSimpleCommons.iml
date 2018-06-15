@@ -3,9 +3,12 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../simple-commons">
-      <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/main/java" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../simple-commons/depend" />
+      <excludeFolder url="file://$MODULE_DIR$/../simple-commons/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="simple-common-dependencies" level="project" />
   </component>
 </module>

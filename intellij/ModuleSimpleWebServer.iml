@@ -3,9 +3,11 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../simple-webserver">
-      <sourceFolder url="file://$MODULE_DIR$/../simple-webserver/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-webserver/src/main/java" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../simple-webserver/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ModuleSimpleWebUIToolkit" />
   </component>
 </module>

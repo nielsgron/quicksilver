@@ -10,14 +10,195 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="SimpleEmailServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/email/SimpleEmailServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#692#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TXT.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/i18n/TXT.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#1000#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleLogger.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/logger/SimpleLogger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#2004#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleWebServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/webserver/SimpleWebServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#1604#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlStreamStringBuffer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlStreamStringBuffer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#912#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlStream.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#865#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlPageBootstrapAppLayout.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPageBootstrapAppLayout.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#2559#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlPageBootstrap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPageBootstrap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#3911#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#1799#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlDemoPage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/demo/HtmlDemoPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#688#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="102" />
-    <option name="y" value="88" />
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/ConfigWebServer.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/SimpleConfig.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/SortedProperties.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSet.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSetMeta.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSetRow.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSetRowComparator.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/db/DatabaseConnection.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/db/ModelBeanProcessor.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/email/SimpleEmailServer.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/i18n/TXT.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/logger/SimpleLogger.java" />
+        <option value="$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/webserver/SimpleWebServer.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlStreamStringBuffer.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlStream.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPageBootstrapAppLayout.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPageBootstrap.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPage.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/demo/HtmlDemoPage.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/layouts/BSLayoutManager.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/layouts/BSFlowLayout.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/layouts/BSBorderLayout.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSBadges.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSButton.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSButtonGroup.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSButtonToolbar.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSCheckBox.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSColumn.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSComponent.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSComponentContainer.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSContainer.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSDropdown.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSForm.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSFormGroup.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSImage.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSInput.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSInputGroup.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNav.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavbar.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavbarBrand.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavItem.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavPill.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavTab.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSPanel.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSRadio.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSRow.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSSelect.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSTable.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSText.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSTextArea.java" />
+        <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSViewport.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="255" />
+    <option name="y" value="77" />
     <option name="width" value="1747" />
     <option name="height" value="1184" />
   </component>
@@ -30,7 +211,7 @@
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource />
-      <autoscrollFromSource />
+      <autoscrollFromSource ProjectPane="true" />
       <sortByType />
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
@@ -49,11 +230,189 @@
             </path>
             <path>
               <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="email" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="i18n" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="logger" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-commons" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simplecommons" type="462c0819:PsiDirectoryNode" />
+              <item name="webserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpleui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpleui" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap4" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpleui" type="462c0819:PsiDirectoryNode" />
+              <item name="bootstrap4" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-web-ui-toolkit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpleui" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="simple-webserver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-webserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-webserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-webserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SimpleServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="simple-webserver" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpleserver" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -175,11 +534,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="102" y="88" width="1747" height="1184" extended-state="1" />
+    <frame x="255" y="77" width="1747" height="1184" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -189,7 +549,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36187685" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36187685" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -199,7 +560,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -211,6 +571,517 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSCheckBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#823#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSColumn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1310#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#921#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSComponentContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2600#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2577#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSDropdown.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#732#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1669#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSFormGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#733#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#820#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2091#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSInputGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#736#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNav.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2073#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#3279#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavbarBrand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#826#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1596#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavPill.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#881#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSNavTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#877#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#877#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSRadio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#829#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSRow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1522#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#730#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#3402#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#931#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSTextArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#732#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/components/BSViewport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#1374#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/bootstrap4/layouts/BSBorderLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#6483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/app/SimpleApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/app/SimpleWebApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#845#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/ConfigApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#908#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/ConfigDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1163#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/ConfigEmailServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#714#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/ConfigLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#709#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/ConfigWebServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#712#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/SimpleConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#689#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/config/SortedProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#979#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#7290#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSetMeta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1750#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSetRow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1180#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/data/DataSetRowComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#935#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/db/DatabaseConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="123" column="105" lean-forward="false" selection-start-line="123" selection-start-column="105" selection-end-line="123" selection-end-column="105" />
+          <folding>
+            <element signature="e#0#3933#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/db/ModelBeanProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#2874#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/email/SimpleEmailServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#692#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/i18n/TXT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1000#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/logger/SimpleLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#2004#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/org/apache/simplecommons/webserver/SimpleWebServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1604#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlStreamStringBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#912#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="22" lean-forward="false" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#865#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPageBootstrapAppLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="22" column="22" lean-forward="false" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#2559#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPageBootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="20" column="22" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#3911#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/HtmlPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1799#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../simple-web-ui-toolkit/src/main/java/org/apache/webapp/simpleui/demo/HtmlDemoPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#688#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
@@ -263,7 +1134,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>ModuleSimpleCommons</last-edited>
+          <last-edited>ModuleSimpleWebServer</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -275,10 +1146,11 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>simple-common-dependencies</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.28390804" />
               </list>
             </option>
           </splitter-proportions>
