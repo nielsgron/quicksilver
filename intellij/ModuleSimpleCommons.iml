@@ -4,11 +4,12 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../simple-commons">
       <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../simple-commons/depend" />
       <excludeFolder url="file://$MODULE_DIR$/../simple-commons/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="simple-common-dependencies" level="project" />
+    <orderEntry type="library" exported="" name="simple-common-dependencies" level="project" />
   </component>
 </module>

@@ -4,10 +4,11 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../simple-webserver">
       <sourceFolder url="file://$MODULE_DIR$/../simple-webserver/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-webserver/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../simple-webserver/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="ModuleSimpleWebUIToolkit" />
+    <orderEntry type="module" module-name="ModuleSimpleWebUIToolkit" exported="" />
   </component>
 </module>

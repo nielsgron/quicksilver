@@ -4,6 +4,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../simple-web-ui-toolkit">
       <sourceFolder url="file://$MODULE_DIR$/../simple-web-ui-toolkit/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-web-ui-toolkit/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../simple-web-ui-toolkit/target" />
     </content>
     <orderEntry type="inheritedJdk" />
