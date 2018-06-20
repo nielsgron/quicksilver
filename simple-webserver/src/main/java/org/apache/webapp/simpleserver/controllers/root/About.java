@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Niels Gron All Rights Reserved.
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package org.apache.webapp.simpleserver.controllers.root;
 
-import org.apache.webapp.simpleserver.controllers.SimpleDemoBasePage;
+import org.apache.webapp.simpleserver.controllers.AbstractSitePage;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
-public class About extends SimpleDemoBasePage {
+public class About extends AbstractSitePage {
 
     public About() {
         getNavbar().setActiveItem("About");

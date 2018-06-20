@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Niels Gron All Rights Reserved.
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,15 @@
 
 package org.apache.webapp.simpleserver.controllers;
 
+import org.apache.webapp.simpleserver.controllers.components.navs.NavSite;
 import org.apache.webapp.simpleui.HtmlPageBootstrapAppLayout;
-import org.apache.webapp.simpleui.bootstrap4.components.BSForm;
-import org.apache.webapp.simpleui.bootstrap4.components.BSInput;
-import org.apache.webapp.simpleui.bootstrap4.components.BSNavItem;
 import org.apache.webapp.simpleui.bootstrap4.components.BSNavbar;
 
-public class SimpleDemoBasePage extends HtmlPageBootstrapAppLayout {
+public class AbstractSitePage extends HtmlPageBootstrapAppLayout {
 
     protected BSNavbar createNavbar() {
-
-        // Create a Navbar and set it in the viewport
-        BSNavbar navBar = new BSNavbar( false,"Simple Demo");
-        navBar.add(new BSNavItem("Components", "/components"));
-        navBar.add(new BSNavItem("About", "/about"));
-
-        BSForm searchForm = new BSForm(true, "/search", true);
-        searchForm.add(new BSInput("text", "Search"));
-
-        navBar.add(searchForm);
-
-        return navBar;
+        // Create a Navbar for the web site
+        return new NavSite();
     }
 
 }

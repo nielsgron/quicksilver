@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Niels Gron All Rights Reserved.
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,27 @@
  * limitations under the License.
  */
 
-package org.apache.webapp.simpleserver.controllers;
+package org.apache.webapp.simpleserver.controllers.root.components;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSNavItem;
+import org.apache.webapp.simpleserver.controllers.AbstractSitePage;
+import org.apache.webapp.simpleserver.controllers.components.navs.NavComponents;
 import org.apache.webapp.simpleui.bootstrap4.components.BSNavTab;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
-public class SimpleDemoComponentsPage extends SimpleDemoBasePage {
+public abstract class AbstractComponentsPage extends AbstractSitePage {
 
-    private BSNavTab componentNav;
+    private BSNavTab componentNav = new NavComponents();
+
+    public AbstractComponentsPage() {
+        getNavbar().setActiveItem("Components");
+    }
 
     protected BSPanel createContentPanelTop() {
 
-        BSNavTab tabNav = new BSNavTab();
-
-        BSNavItem overview = new BSNavItem("Overview", "/components");
-        overview.setActive(true);
-        tabNav.add(overview);
-        tabNav.add(new BSNavItem("Buttons", "/components/buttons"));
-        tabNav.add(new BSNavItem("Tabs", "/components/tabs"));
-        tabNav.add(new BSNavItem("Forms", "/components/forms"));
-        tabNav.add(new BSNavItem("Cards", "/components/cards"));
-
         BSPanel panel = new BSPanel();
         panel.add(new BSText("<br>"));
-        panel.add(tabNav);
-
-        componentNav = tabNav;
+        panel.add(componentNav);
 
         return panel;
     }

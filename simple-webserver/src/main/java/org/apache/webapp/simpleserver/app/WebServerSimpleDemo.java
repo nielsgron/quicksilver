@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Niels Gron All Rights Reserved.
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,19 @@ package org.apache.webapp.simpleserver.app;
 import org.apache.simplecommons.app.SimpleApplication;
 import org.apache.simplecommons.webserver.SimpleWebServer;
 import org.apache.webapp.simpleserver.controllers.root.About;
-import org.apache.webapp.simpleserver.controllers.root.Components;
+import org.apache.webapp.simpleserver.controllers.root.about.Contact;
+import org.apache.webapp.simpleserver.controllers.root.about.Project;
+import org.apache.webapp.simpleserver.controllers.root.about.Team;
+import org.apache.webapp.simpleserver.controllers.root.components.bootstrap.Bootstrap;
 import org.apache.webapp.simpleserver.controllers.root.Index;
 import org.apache.webapp.simpleserver.controllers.root.Search;
+import org.apache.webapp.simpleserver.controllers.root.components.bootstrap.*;
+import org.apache.webapp.simpleserver.controllers.root.components.charts.Charts;
+import org.apache.webapp.simpleserver.controllers.root.components.customforms.CustomForms;
+import org.apache.webapp.simpleserver.controllers.root.components.extras.Extras;
 import org.apache.webapp.simpleui.HtmlPage;
 import org.apache.webapp.simpleui.HtmlStream;
 import org.apache.webapp.simpleui.HtmlStreamStringBuffer;
-
-import java.sql.Connection;
 
 public class WebServerSimpleDemo  extends SimpleWebServer {
 
@@ -57,15 +62,119 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
         webServer.get("/about", (request, response) -> {
             return renderPageAndReturnStream(new About(), new HtmlStreamStringBuffer()).getText();
         });
+        webServer.get("/about/project", (request, response) -> {
+            return renderPageAndReturnStream(new Project(), new HtmlStreamStringBuffer()).getText();
+        });
+        webServer.get("/about/team", (request, response) -> {
+            return renderPageAndReturnStream(new Team(), new HtmlStreamStringBuffer()).getText();
+        });
+        webServer.get("/about/contact", (request, response) -> {
+            return renderPageAndReturnStream(new Contact(), new HtmlStreamStringBuffer()).getText();
+        });
+
         webServer.get("/search", (request, response) -> {
             return renderPageAndReturnStream(new Search(), new HtmlStreamStringBuffer()).getText();
         });
 
         // Components Pages
-        webServer.get("/components", (request, response) -> {
-            HtmlStream stream = renderPageAndReturnStream(new Components(), new HtmlStreamStringBuffer());
+        webServer.get("/components/bootstrap", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Bootstrap(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
+        webServer.get("/components/extras", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Extras(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/customforms", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new CustomForms(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Charts(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
+        webServer.get("/components/bootstrap/alerts", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Alerts(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/badges", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Badges(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/breadcrum", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Breadcrum(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/buttons", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Buttons(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/buttongroup", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ButtonGroup(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/card", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Card(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/carousel", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Carousel(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/collapse", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Collapse(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/dropdowns", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Dropdowns(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/forms", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Forms(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/inputgroup", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new InputGroup(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/jumbotron", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Jumbotron(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/modal", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Modal(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/navs", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Navs(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/navbar", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Navbar(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/pagination", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Pagination(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/popovers", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Popovers(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/progress", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Progress(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/scrollspy", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Scrollspy(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/bootstrap/tooltips", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Tooltips(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
 
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Niels Gron All Rights Reserved.
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,18 @@
 
 package org.apache.webapp.simpleserver.controllers.root;
 
-import org.apache.webapp.simpleserver.controllers.SimpleDemoComponentsPage;
-import org.apache.webapp.simpleui.bootstrap4.components.BSBadges;
-import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
-import org.apache.webapp.simpleui.bootstrap4.components.BSTable;
-import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleserver.controllers.root.components.AbstractComponentsPage;
+import org.apache.webapp.simpleui.bootstrap4.components.*;
 
 import java.sql.Connection;
 
-public class Index extends SimpleDemoComponentsPage {
+public class Index extends AbstractComponentsPage {
 
     // private DataSet someDataSet;
 
     public Index(Connection conn) {
-        getNavbar().setActiveItem("Nome");
-        getComponentNavTab().setActiveItem("Components");
+        getNavbar().setActiveItem("Home");
+        getComponentNavTab().setActiveItem("Bootstrap");
     }
 
     public String getTitle() {
@@ -43,16 +40,6 @@ public class Index extends SimpleDemoComponentsPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("Hello World! Simpole Demo of Bootstrap Components"));
-
-        panel.add(new BSBadges("Default"));
-        panel.add(new BSBadges("Primary", BSBadges.PRIMARY));
-        panel.add(new BSBadges("Secondary", BSBadges.SECONDARY));
-        panel.add(new BSBadges("Sucess", BSBadges.SUCCESS));
-        panel.add(new BSBadges("Danger", BSBadges.DANGER));
-        panel.add(new BSBadges("Warning", BSBadges.WARNING));
-        panel.add(new BSBadges("Info", BSBadges.INFO));
-        panel.add(new BSBadges("Light", BSBadges.LIGHT));
-        panel.add(new BSBadges("Dark", BSBadges.DARK));
 
         panel.add(new BSText("<br>"));
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Niels Gron All Rights Reserved.
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,14 @@
  * limitations under the License.
  */
 
-package org.apache.webapp.simpleserver.controllers.root;
+package org.apache.webapp.simpleserver.controllers.root.components.charts;
 
-import org.apache.webapp.simpleserver.controllers.SimpleDemoBasePage;
-import org.apache.webapp.simpleserver.controllers.SimpleDemoComponentsPage;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
-public class Components extends SimpleDemoComponentsPage {
+public class Charts extends AbstractComponentsChartsPage {
 
-    public Components() {
-        getNavbar().setActiveItem("Components");
-    }
-
-    public String getTitle() {
-        return "Simple Demo";
+    public Charts() {
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -36,7 +29,7 @@ public class Components extends SimpleDemoComponentsPage {
         BSPanel panel = new BSPanel();
 
         panel.add(new BSText("<br>"));
-        panel.add(new BSText("List of components"));
+        panel.add(new BSText("List of Charts Components"));
 
         return panel;
     }
