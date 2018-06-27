@@ -16,6 +16,8 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSButton;
+import org.apache.webapp.simpleui.bootstrap4.components.BSButtonGroup;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
@@ -31,6 +33,14 @@ public class ButtonGroup extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Button Group Components"));
+        panel.add(new BSText("<br>"));
+
+        BSButtonGroup g = new BSButtonGroup();
+        g.add(new BSButton("Button 1"));
+        g.add(new BSButton("Button 2"));
+        g.add(new BSButton("Button 3"));
+
+        panel.add(g);
 
         return panel;
     }

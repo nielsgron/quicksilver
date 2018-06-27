@@ -16,6 +16,7 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSCard;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
@@ -31,6 +32,8 @@ public class Card extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Card Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSCard());
 
         return panel;
     }

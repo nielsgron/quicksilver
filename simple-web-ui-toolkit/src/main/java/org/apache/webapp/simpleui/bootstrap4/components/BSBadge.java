@@ -18,7 +18,7 @@ package org.apache.webapp.simpleui.bootstrap4.components;
 
 import org.apache.webapp.simpleui.HtmlStream;
 
-public class BSBadges extends BSComponent {
+public class BSBadge extends BSComponent {
 
     public static final String PRIMARY = "badge-primary";       // blue
     public static final String SECONDARY = "badge-secondary";   // gray
@@ -35,14 +35,14 @@ public class BSBadges extends BSComponent {
     private String labelLink = null;
     private boolean isPill = false;
 
-    public BSBadges(String txt) {
+    public BSBadge(String txt) {
         labelText = txt;
     }
-    public BSBadges(String txt, String type) {
+    public BSBadge(String txt, String type) {
         labelText = txt;
         labelType = type;
     }
-    public BSBadges(String txt, String type, String link, boolean bPill) {
+    public BSBadge(String txt, String type, String link, boolean bPill) {
         labelText = txt;
         labelType = type;
         labelLink = link;

@@ -16,7 +16,7 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSBadges;
+import org.apache.webapp.simpleui.bootstrap4.components.BSBadge;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
@@ -36,15 +36,15 @@ public class Badges extends AbstractComponentsBootstrapPage {
         panel.add(new BSText("<br>"));
         panel.add(new BSText("<br>"));
 
-        panel.add(new BSBadges("Default"));
-        panel.add(new BSBadges("Primary", BSBadges.PRIMARY));
-        panel.add(new BSBadges("Secondary", BSBadges.SECONDARY));
-        panel.add(new BSBadges("Sucess", BSBadges.SUCCESS));
-        panel.add(new BSBadges("Danger", BSBadges.DANGER));
-        panel.add(new BSBadges("Warning", BSBadges.WARNING));
-        panel.add(new BSBadges("Info", BSBadges.INFO));
-        panel.add(new BSBadges("Light", BSBadges.LIGHT));
-        panel.add(new BSBadges("Dark", BSBadges.DARK));
+        panel.add(new BSBadge("Default"));
+        panel.add(new BSBadge("Primary", BSBadge.PRIMARY));
+        panel.add(new BSBadge("Secondary", BSBadge.SECONDARY));
+        panel.add(new BSBadge("Sucess", BSBadge.SUCCESS));
+        panel.add(new BSBadge("Danger", BSBadge.DANGER));
+        panel.add(new BSBadge("Warning", BSBadge.WARNING));
+        panel.add(new BSBadge("Info", BSBadge.INFO));
+        panel.add(new BSBadge("Light", BSBadge.LIGHT));
+        panel.add(new BSBadge("Dark", BSBadge.DARK));
 
         panel.add(new BSText("<br>"));
 

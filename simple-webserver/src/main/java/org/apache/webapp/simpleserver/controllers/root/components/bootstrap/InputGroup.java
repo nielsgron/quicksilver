@@ -16,6 +16,8 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSCarousel;
+import org.apache.webapp.simpleui.bootstrap4.components.BSInputGroup;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
@@ -31,6 +33,8 @@ public class InputGroup extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Input Group Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSInputGroup());
 
         return panel;
     }

@@ -16,8 +16,7 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
-import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleui.bootstrap4.components.*;
 
 public class Navs extends AbstractComponentsBootstrapPage {
 
@@ -31,6 +30,8 @@ public class Navs extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Navs Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSNav(BSNav.STYLE_TAB, BSComponent.VERTICAL_ALIGNMENT));
 
         return panel;
     }

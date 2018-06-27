@@ -37,6 +37,7 @@ public class SideBarComponentOverview extends BSNavPill {
         this.add(new BSNavItem("Forms", "/components/bootstrap/forms"));
         this.add(new BSNavItem("Input group", "/components/bootstrap/inputgroup"));
         this.add(new BSNavItem("Jumbotron", "/components/bootstrap/jumbotron"));
+        this.add(new BSNavItem("List Group", "/components/bootstrap/listgroup"));
         this.add(new BSNavItem("Modal", "/components/bootstrap/modal"));
         this.add(new BSNavItem("Navs", "/components/bootstrap/navs"));
         this.add(new BSNavItem("Navbar", "/components/bootstrap/navbar"));

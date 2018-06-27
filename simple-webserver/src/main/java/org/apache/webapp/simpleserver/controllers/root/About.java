@@ -16,7 +16,6 @@
 
 package org.apache.webapp.simpleserver.controllers.root;
 
-import org.apache.webapp.simpleserver.controllers.AbstractSitePage;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 

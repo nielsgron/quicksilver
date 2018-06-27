@@ -16,7 +16,9 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSCarousel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
+import org.apache.webapp.simpleui.bootstrap4.components.BSScrollspy;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
 public class Scrollspy extends AbstractComponentsBootstrapPage {
@@ -31,6 +33,8 @@ public class Scrollspy extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Scrollspy Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSScrollspy());
 
         return panel;
     }

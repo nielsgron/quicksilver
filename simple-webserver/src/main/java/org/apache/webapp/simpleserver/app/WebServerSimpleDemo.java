@@ -142,6 +142,10 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             HtmlStream stream = renderPageAndReturnStream(new Jumbotron(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
+        webServer.get("/components/bootstrap/listgroup", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ListGroup(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
         webServer.get("/components/bootstrap/modal", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Modal(), new HtmlStreamStringBuffer());
             return stream.getText();

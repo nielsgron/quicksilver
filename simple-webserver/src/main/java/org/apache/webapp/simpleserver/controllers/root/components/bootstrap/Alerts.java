@@ -16,6 +16,8 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSAlert;
+import org.apache.webapp.simpleui.bootstrap4.components.BSComponentType;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
@@ -31,6 +33,41 @@ public class Alerts extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Alert Components"));
+
+        BSAlert alert = new BSAlert(BSComponentType.PRIMARY);
+        alert.add(new BSText("This is a primary alert—check it out!"));
+
+        panel.add(new BSText("<br>"));
+        panel.add(new BSText("<br>"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.SECONDARY);
+        alert.add(new BSText("This is a secondary alert—check it out!"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.SUCCESS);
+        alert.add(new BSText("This is a success alert—check it out!"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.DANGER);
+        alert.add(new BSText("This is a danger alert—check it out!"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.WARNING);
+        alert.add(new BSText("This is a warning alert—check it out!"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.INFO);
+        alert.add(new BSText("This is a info alert—check it out!"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.LIGHT);
+        alert.add(new BSText("This is a light alert—check it out!"));
+        panel.add(alert);
+
+        alert = new BSAlert(BSComponentType.DARK);
+        alert.add(new BSText("This is a dark alert—check it out!"));
+        panel.add(alert);
 
         return panel;
     }

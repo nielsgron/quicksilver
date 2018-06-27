@@ -16,7 +16,9 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSCarousel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
+import org.apache.webapp.simpleui.bootstrap4.components.BSProgress;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
 
 public class Progress extends AbstractComponentsBootstrapPage {
@@ -31,6 +33,8 @@ public class Progress extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Progress Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSProgress());
 
         return panel;
     }

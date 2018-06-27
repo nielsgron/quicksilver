@@ -16,8 +16,10 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import org.apache.webapp.simpleui.bootstrap4.components.BSCarousel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
 import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleui.bootstrap4.components.BSTooltips;
 
 public class Tooltips extends AbstractComponentsBootstrapPage {
 
@@ -31,6 +33,8 @@ public class Tooltips extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Tooltips Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSTooltips());
 
         return panel;
     }

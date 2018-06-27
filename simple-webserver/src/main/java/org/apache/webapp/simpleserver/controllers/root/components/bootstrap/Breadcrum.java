@@ -16,8 +16,7 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
-import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleui.bootstrap4.components.*;
 
 public class Breadcrum extends AbstractComponentsBootstrapPage {
 
@@ -31,6 +30,15 @@ public class Breadcrum extends AbstractComponentsBootstrapPage {
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Breadcrum Components"));
+        panel.add(new BSText("<br>"));
+        panel.add(new BSText("<br>"));
+
+        BSBreadcrumb crumb = new BSBreadcrumb();
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSText("Home"));
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSText("Library"));
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(true))).add(new BSText("Data"));
+
+        panel.add(crumb);
 
         return panel;
     }

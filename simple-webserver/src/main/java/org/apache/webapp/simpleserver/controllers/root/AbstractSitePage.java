@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.apache.webapp.simpleserver.controllers;
+package org.apache.webapp.simpleserver.controllers.root;
 
 import org.apache.webapp.simpleserver.controllers.components.navs.NavSite;
 import org.apache.webapp.simpleui.HtmlPageBootstrapAppLayout;
