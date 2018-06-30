@@ -34,8 +34,8 @@ public class Breadcrum extends AbstractComponentsBootstrapPage {
         panel.add(new BSText("<br>"));
 
         BSBreadcrumb crumb = new BSBreadcrumb();
-        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSText("Home"));
-        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSText("Library"));
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSHyperlink("Home", "#"));
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSHyperlink("Library", "#"));
         ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(true))).add(new BSText("Data"));
 
         panel.add(crumb);

@@ -18,12 +18,13 @@ package org.apache.webapp.simpleui.bootstrap4.layouts;
 
 import org.apache.webapp.simpleui.HtmlStream;
 import org.apache.webapp.simpleui.bootstrap4.components.BSComponent;
+import org.apache.webapp.simpleui.html.components.HTMLComponent;
 
 public interface BSLayoutManager {
 
-    public BSComponent add(BSComponent component);
+    public HTMLComponent add(HTMLComponent component);
 
-    public BSComponent add(BSComponent component, Object constraint);
+    public HTMLComponent add(HTMLComponent component, Object constraint);
 
     public void render(HtmlStream stream);
 

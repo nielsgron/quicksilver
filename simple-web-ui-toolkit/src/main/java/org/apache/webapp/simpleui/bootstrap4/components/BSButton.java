@@ -21,14 +21,29 @@ import org.apache.webapp.simpleui.HtmlStream;
 public class BSButton extends BSComponent {
 
     private String prop_text;
+    private boolean isOutline;
 
     public BSButton(String text) {
+        this(text, BSComponent.Type.PRIMARY);
+    }
+
+    public BSButton(String text, BSComponent.Type type) {
+        this(text, type, false);
+    }
+
+    public BSButton(String text, BSComponent.Type type, boolean outline) {
+        setType(type);
         prop_text = text;
+        isOutline = outline;
     }
 
     public void render(HtmlStream stream) {
 
-        stream.writeln("<button type=\"button\" class=\"btn btn-secondary\">");
+        if ( isOutline ) {
+            stream.writeln("<button type=\"button\" class=\"btn btn-outline-" + getType().getTypeName() + "\">");
+        } else {
+            stream.writeln("<button type=\"button\" class=\"btn btn-" + getType().getTypeName() + "\">");
+        }
         stream.writeln(prop_text);
         stream.writeln("</button>");
 

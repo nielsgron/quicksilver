@@ -17,6 +17,7 @@
 package org.apache.webapp.simpleui.bootstrap4.components;
 
 import org.apache.webapp.simpleui.HtmlStream;
+import org.apache.webapp.simpleui.html.components.HTMLComponent;
 
 public class BSContainer extends BSComponentContainer {
 
@@ -62,7 +63,7 @@ public class BSContainer extends BSComponentContainer {
     }
 
     // Override add() method so that we only add BSRow components
-    public BSComponent add(BSComponent component) {
+    public HTMLComponent add(HTMLComponent component) {
         if (nRows == 0 || nColumns == 0) {
             if (component instanceof BSRow) {
                 super.add(component);

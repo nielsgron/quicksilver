@@ -16,18 +16,12 @@
 
 package org.apache.webapp.simpleui.bootstrap4.components;
 
-import org.apache.webapp.simpleui.HtmlStream;
+import org.apache.webapp.simpleui.html.components.HTMLText;
 
-public class BSText extends BSComponent {
-
-    private String text;
+public class BSText extends HTMLText {
 
     public BSText(String txt) {
-        text = txt;
-    }
-
-    public void render(HtmlStream stream) {
-        stream.write(text);
+        super(txt);
     }
 
 }

@@ -18,16 +18,17 @@ package org.apache.webapp.simpleui.bootstrap4.layouts;
 
 import org.apache.webapp.simpleui.HtmlStream;
 import org.apache.webapp.simpleui.bootstrap4.components.BSComponent;
+import org.apache.webapp.simpleui.html.components.HTMLComponent;
 
 public class BSFlowLayout implements BSLayoutManager {
 
     public static final BSFlowLayout INSTANCE = new BSFlowLayout();
 
-    public BSComponent add(BSComponent component) {
+    public HTMLComponent add(HTMLComponent component) {
         return add(component, null);
     }
 
-    public BSComponent add(BSComponent component, Object constraint) {
+    public HTMLComponent add(HTMLComponent component, Object constraint) {
         return component;
     }
 

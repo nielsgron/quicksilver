@@ -16,10 +16,7 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSAlert;
-import org.apache.webapp.simpleui.bootstrap4.components.BSComponentType;
-import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
-import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleui.bootstrap4.components.*;
 
 public class Alerts extends AbstractComponentsBootstrapPage {
 
@@ -34,38 +31,38 @@ public class Alerts extends AbstractComponentsBootstrapPage {
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Alert Components"));
 
-        BSAlert alert = new BSAlert(BSComponentType.PRIMARY);
+        BSAlert alert = new BSAlert(BSComponent.Type.PRIMARY);
         alert.add(new BSText("This is a primary alert—check it out!"));
 
         panel.add(new BSText("<br>"));
         panel.add(new BSText("<br>"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.SECONDARY);
+        alert = new BSAlert(BSComponent.Type.SECONDARY);
         alert.add(new BSText("This is a secondary alert—check it out!"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.SUCCESS);
+        alert = new BSAlert(BSComponent.Type.SUCCESS);
         alert.add(new BSText("This is a success alert—check it out!"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.DANGER);
+        alert = new BSAlert(BSComponent.Type.DANGER);
         alert.add(new BSText("This is a danger alert—check it out!"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.WARNING);
+        alert = new BSAlert(BSComponent.Type.WARNING);
         alert.add(new BSText("This is a warning alert—check it out!"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.INFO);
+        alert = new BSAlert(BSComponent.Type.INFO);
         alert.add(new BSText("This is a info alert—check it out!"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.LIGHT);
+        alert = new BSAlert(BSComponent.Type.LIGHT);
         alert.add(new BSText("This is a light alert—check it out!"));
         panel.add(alert);
 
-        alert = new BSAlert(BSComponentType.DARK);
+        alert = new BSAlert(BSComponent.Type.DARK);
         alert.add(new BSText("This is a dark alert—check it out!"));
         panel.add(alert);
 

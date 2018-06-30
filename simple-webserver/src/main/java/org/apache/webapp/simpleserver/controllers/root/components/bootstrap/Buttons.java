@@ -16,10 +16,9 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSAlert;
-import org.apache.webapp.simpleui.bootstrap4.components.BSButton;
-import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
-import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleui.bootstrap4.components.*;
+import org.apache.webapp.simpleui.html.components.HTMLHeading;
+import org.apache.webapp.simpleui.html.components.HTMLLineBreak;
 
 public class Buttons extends AbstractComponentsBootstrapPage {
 
@@ -31,10 +30,35 @@ public class Buttons extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSText("List of Buttons Components"));
-        panel.add(new BSText("<br>"));
-        panel.add(new BSButton("Button"));
+        panel.add(new HTMLLineBreak(2));
+
+        panel.add(new HTMLHeading("Example Buttons", 3));
+
+        panel.add(new BSButton("Primary", BSComponent.Type.PRIMARY));
+        panel.add(new BSButton("Secondary", BSComponent.Type.SECONDARY));
+        panel.add(new BSButton("Success", BSComponent.Type.SUCCESS));
+        panel.add(new BSButton("Danger", BSComponent.Type.DANGER));
+        panel.add(new BSButton("Warning", BSComponent.Type.WARNING));
+        panel.add(new BSButton("Info", BSComponent.Type.INFO));
+        panel.add(new BSButton("Light", BSComponent.Type.LIGHT));
+        panel.add(new BSButton("Dark", BSComponent.Type.DARK));
+        panel.add(new BSButton("Link", BSComponent.Type.LINK));
+
+        panel.add(new HTMLLineBreak(2));
+
+        panel.add(new HTMLHeading("Outline Buttons", 3));
+
+        panel.add(new BSButton("Primary", BSComponent.Type.PRIMARY, true));
+        panel.add(new BSButton("Secondary", BSComponent.Type.SECONDARY, true));
+        panel.add(new BSButton("Success", BSComponent.Type.SUCCESS, true));
+        panel.add(new BSButton("Danger", BSComponent.Type.DANGER, true));
+        panel.add(new BSButton("Warning", BSComponent.Type.WARNING, true));
+        panel.add(new BSButton("Info", BSComponent.Type.INFO, true));
+        panel.add(new BSButton("Light", BSComponent.Type.LIGHT, true));
+        panel.add(new BSButton("Dark", BSComponent.Type.DARK, true));
+        panel.add(new BSButton("Link", BSComponent.Type.LINK, true));
 
         return panel;
     }

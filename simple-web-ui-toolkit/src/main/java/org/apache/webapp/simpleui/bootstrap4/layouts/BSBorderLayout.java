@@ -18,6 +18,7 @@ package org.apache.webapp.simpleui.bootstrap4.layouts;
 
 import org.apache.webapp.simpleui.HtmlStream;
 import org.apache.webapp.simpleui.bootstrap4.components.*;
+import org.apache.webapp.simpleui.html.components.HTMLComponent;
 
 public class BSBorderLayout implements BSLayoutManager {
 
@@ -116,11 +117,11 @@ public class BSBorderLayout implements BSLayoutManager {
         container.render(stream);
     }
 
-    public BSComponent add(BSComponent component) {
+    public HTMLComponent add(HTMLComponent component) {
         return add(component, CENTER);
     }
 
-    public BSComponent add(BSComponent component, Object constraint) {
+    public HTMLComponent add(HTMLComponent component, Object constraint) {
 
         if ( constraint == null ) {
             return component;

@@ -4,19 +4,17 @@ import org.apache.webapp.simpleui.HtmlStream;
 
 public class BSAlert extends BSComponentContainer {
 
-    private String componentTypeString;
-
     public BSAlert() {
-        this(BSComponentType.PRIMARY);
+        this(BSComponent.Type.PRIMARY);
     }
 
-    public BSAlert(BSComponentType cType) {
-        componentTypeString = "alert-" + cType.getTypeName();
+    public BSAlert(BSComponent.Type cType) {
+        setType(cType);
     }
 
     public void render(HtmlStream stream) {
 
-        stream.writeln("<div class=\"alert " + componentTypeString + "\" role=\"alert\">");
+        stream.writeln("<div class=\"alert alert-" + getType().getTypeName() + "\" role=\"alert\">");
         super.render(stream);
         stream.writeln("</div>");
 

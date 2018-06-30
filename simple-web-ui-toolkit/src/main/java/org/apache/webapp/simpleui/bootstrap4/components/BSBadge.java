@@ -20,33 +20,21 @@ import org.apache.webapp.simpleui.HtmlStream;
 
 public class BSBadge extends BSComponent {
 
-    public static final String PRIMARY = "badge-primary";       // blue
-    public static final String SECONDARY = "badge-secondary";   // gray
-    public static final String SUCCESS = "badge-success";       // green
-    public static final String DANGER = "badge-danger";         // red
-    public static final String WARNING = "badge-warning";       // yellow
-    public static final String INFO = "badge-info";             // light blue
-    public static final String LIGHT = "badge-light";           // light gray
-    public static final String DARK = "badge-dark";             // dark gray
-
-    private String labelType = SECONDARY;
     private String labelText;
-
     private String labelLink = null;
     private boolean isPill = false;
 
     public BSBadge(String txt) {
-        labelText = txt;
+        this(txt, Type.PRIMARY);
     }
-    public BSBadge(String txt, String type) {
-        labelText = txt;
-        labelType = type;
+    public BSBadge(String txt, Type type) {
+        this(txt, type, null, false);
     }
-    public BSBadge(String txt, String type, String link, boolean bPill) {
+    public BSBadge(String txt, Type type, String link, boolean bPill) {
         labelText = txt;
-        labelType = type;
         labelLink = link;
         isPill = bPill;
+        setType(type);
     }
 
     public void render(HtmlStream stream) {
@@ -63,7 +51,7 @@ public class BSBadge extends BSComponent {
         if ( isPill ) {
             stream.write("badge-pill ");
         }
-        stream.write(labelType);
+        stream.write("badge-" + getType().getTypeName());
         stream.writeln("\">");
         stream.writeln(labelText);
 

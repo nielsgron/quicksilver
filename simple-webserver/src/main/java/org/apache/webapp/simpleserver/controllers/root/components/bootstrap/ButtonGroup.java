@@ -34,6 +34,7 @@ public class ButtonGroup extends AbstractComponentsBootstrapPage {
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Button Group Components"));
         panel.add(new BSText("<br>"));
+        panel.add(new BSText("<br>"));
 
         BSButtonGroup g = new BSButtonGroup();
         g.add(new BSButton("Button 1"));

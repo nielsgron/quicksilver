@@ -18,15 +18,16 @@ package org.apache.webapp.simpleui.bootstrap4.components;
 
 import org.apache.webapp.simpleui.HtmlStream;
 import org.apache.webapp.simpleui.bootstrap4.layouts.BSLayoutManager;
+import org.apache.webapp.simpleui.html.components.HTMLComponent;
 
 import java.util.ArrayList;
 
 public abstract class BSComponentContainer extends BSComponent {
 
     private BSLayoutManager layoutManager = null; // BSFlowLayout.INSTANCE;
-    protected ArrayList<BSComponent> children = new ArrayList<BSComponent>();
+    protected ArrayList<HTMLComponent> children = new ArrayList<HTMLComponent>();
 
-    public BSComponent add(BSComponent component) {
+    public HTMLComponent add(HTMLComponent component) {
         if ( component == null ) {
             return null;
         }
@@ -57,7 +58,7 @@ public abstract class BSComponentContainer extends BSComponent {
         children.remove(component);
     }
 
-    public BSComponent get(int index) {
+    public HTMLComponent get(int index) {
         if ( children.size() == 0 ) {
             return null;
         }
