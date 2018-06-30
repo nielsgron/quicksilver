@@ -56,6 +56,10 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         return getViewport().getContentPane();
     }
 
+    protected String getBootstrapBaseURI() {
+        return "/bootstrap-4.1";
+    }
+
     public void renderHEAD(HtmlStream stream) {
 
         super.renderHEAD(stream);
@@ -69,7 +73,7 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         stream.writeln("<title>" + getTitle() + "</title>");
 
         stream.writeln("<!-- Bootstrap core CSS -->");
-        stream.writeln("<link href=\"/bootstrap-4.0/css/bootstrap.min.css\" rel=\"stylesheet\">");
+        stream.writeln("<link href=\" " + getBootstrapBaseURI() + "/css/bootstrap.min.css\" rel=\"stylesheet\">");
 
 //        stream.writeln("<!-- Custom styles for this template -->");
 //        stream.writeln("<link href=\"starter-template.css\" rel=\"stylesheet\">");
@@ -100,7 +104,7 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         stream.writeln("<script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>");
         stream.writeln("<script>window.jQuery || document.write('<script src=\"../../../../assets/js/vendor/jquery.min.js\"><\\/script>')</script>");
         stream.writeln("<script src=\"/popper.js/popper.min.js\"></script>");
-        stream.writeln("<script src=\"/bootstrap-4.0/js/bootstrap.min.js\"></script>");
+        stream.writeln("<script src=\" " + getBootstrapBaseURI() + "/js/bootstrap.min.js\"></script>");
         //stream.writeln("<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->");
         //stream.writeln("<script src=\"../../../../assets/js/ie10-viewport-bug-workaround.js\"></script>");
 
