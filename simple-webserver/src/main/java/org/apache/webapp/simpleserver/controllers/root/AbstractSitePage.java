@@ -22,6 +22,16 @@ import org.apache.webapp.simpleui.bootstrap4.components.BSNavbar;
 
 public class AbstractSitePage extends HtmlPageBootstrapAppLayout {
 
+    public AbstractSitePage() {
+
+        setBootstrapTheme(BootstrapTheme.DEFAULT);
+    }
+
+//    NOTE : I could override this method to set my own custom theme path or set a pre-defined theme in constructor.
+//    protected String getBootstrapBaseURI() {
+//        return "/bootstrap-4.1-simplex";
+//    }
+
     protected BSNavbar createNavbar() {
         // Create a Navbar for the web site
         return new NavSite();

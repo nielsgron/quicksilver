@@ -20,6 +20,7 @@ import org.apache.webapp.simpleui.bootstrap4.components.*;
 
 public abstract class HtmlPageBootstrap extends HtmlPage {
 
+    private BootstrapTheme theme = BootstrapTheme.DEFAULT;
     private BSViewport viewport;
 
     public HtmlPageBootstrap() {
@@ -56,8 +57,12 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         return getViewport().getContentPane();
     }
 
+    public void setBootstrapTheme(BootstrapTheme t) {
+        theme = t;
+    }
+
     protected String getBootstrapBaseURI() {
-        return "/bootstrap-4.1";
+        return theme.getName();
     }
 
     public void renderHEAD(HtmlStream stream) {
@@ -107,6 +112,25 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         stream.writeln("<script src=\" " + getBootstrapBaseURI() + "/js/bootstrap.min.js\"></script>");
         //stream.writeln("<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->");
         //stream.writeln("<script src=\"../../../../assets/js/ie10-viewport-bug-workaround.js\"></script>");
+
+    }
+
+    public enum BootstrapTheme {
+
+        DEFAULT("/bootstrap-4.1"),
+        FLATLY("/bootstrap-4.1-flatly"),
+        SIMPLEX("/bootstrap-4.1-simplex"),
+        CYBORG("/bootstrap-4.1-cyborg");
+
+        private final String bootstrapBaseURI;
+
+        BootstrapTheme(String baseURI) {
+            bootstrapBaseURI = baseURI;
+        }
+
+        String getName() {
+            return bootstrapBaseURI;
+        }
 
     }
 
