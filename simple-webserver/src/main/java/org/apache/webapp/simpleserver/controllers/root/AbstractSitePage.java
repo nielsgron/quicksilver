@@ -23,7 +23,6 @@ import org.apache.webapp.simpleui.bootstrap4.components.BSNavbar;
 public class AbstractSitePage extends HtmlPageBootstrapAppLayout {
 
     public AbstractSitePage() {
-
         setBootstrapTheme(BootstrapTheme.DEFAULT);
     }
 
@@ -31,6 +30,11 @@ public class AbstractSitePage extends HtmlPageBootstrapAppLayout {
 //    protected String getBootstrapBaseURI() {
 //        return "/bootstrap-4.1-simplex";
 //    }
+
+    // Customize a CSS for styling such as the font size
+    protected String getCustomCSSURL() {
+        return "/application/demo-custom.css";
+    }
 
     protected BSNavbar createNavbar() {
         // Create a Navbar for the web site

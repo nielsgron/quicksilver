@@ -65,6 +65,10 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         return theme.getName();
     }
 
+    protected String getCustomCSSURL() {
+        return "/application/custom.css";
+    }
+
     public void renderHEAD(HtmlStream stream) {
 
         super.renderHEAD(stream);
@@ -80,8 +84,8 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         stream.writeln("<!-- Bootstrap core CSS -->");
         stream.writeln("<link href=\" " + getBootstrapBaseURI() + "/css/bootstrap.min.css\" rel=\"stylesheet\">");
 
-//        stream.writeln("<!-- Custom styles for this template -->");
-//        stream.writeln("<link href=\"starter-template.css\" rel=\"stylesheet\">");
+        stream.writeln("<!-- Custom styles -->");
+        stream.writeln("<link href=\"" + getCustomCSSURL() + "\" rel=\"stylesheet\">");
 
     }
 
