@@ -20,6 +20,7 @@ import org.apache.webapp.simpleui.bootstrap4.components.*;
 
 public abstract class HtmlPageBootstrap extends HtmlPage {
 
+    private String customCSSURL = "/application/custom.css";
     private BootstrapTheme theme = BootstrapTheme.DEFAULT;
     private BSViewport viewport;
 
@@ -65,8 +66,12 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         return theme.getName();
     }
 
+    protected void setCustomCSSURL(String url) {
+        customCSSURL = url;
+    }
+
     protected String getCustomCSSURL() {
-        return "/application/custom.css";
+        return customCSSURL;
     }
 
     public void renderHEAD(HtmlStream stream) {
@@ -84,8 +89,11 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         stream.writeln("<!-- Bootstrap core CSS -->");
         stream.writeln("<link href=\" " + getBootstrapBaseURI() + "/css/bootstrap.min.css\" rel=\"stylesheet\">");
 
-        stream.writeln("<!-- Custom styles -->");
-        stream.writeln("<link href=\"" + getCustomCSSURL() + "\" rel=\"stylesheet\">");
+        String cssURL = getCustomCSSURL();
+        if ( cssURL != null ) {
+            stream.writeln("<!-- Custom styles -->");
+            stream.writeln("<link href=\"" + getCustomCSSURL() + "\" rel=\"stylesheet\">");
+        }
 
     }
 
