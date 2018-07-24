@@ -16,9 +16,8 @@
 
 package org.apache.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import org.apache.webapp.simpleui.bootstrap4.components.BSCard;
-import org.apache.webapp.simpleui.bootstrap4.components.BSPanel;
-import org.apache.webapp.simpleui.bootstrap4.components.BSText;
+import org.apache.webapp.simpleui.bootstrap4.components.*;
+import org.apache.webapp.simpleui.html.components.HTMLHeading;
 
 public class Card extends AbstractComponentsBootstrapPage {
 
@@ -33,8 +32,29 @@ public class Card extends AbstractComponentsBootstrapPage {
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Card Components"));
         panel.add(new BSText("<br>"));
-        panel.add(new BSCard());
+        panel.add(new HTMLHeading("Body", 3));
+        panel.add(new BSCard(new BSText("Card text")));
 
+        panel.add(new HTMLHeading("Titles, text, and links", 3));
+        panel.add(new BSCard("Card title", "Subtitle", "The card text", "#", "Card Link", "#", "Another link"));
+
+        panel.add(new HTMLHeading("Images", 3));
+        panel.add(new BSCard("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg/190px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg", "Wikipedia", new BSText("Van Gogh"))
+            .style("width: 18rem;"));
+
+        panel.add(new HTMLHeading("List groups", 3));
+        panel.add(new BSCard(null)
+                .listGroup("Hello", "List", "World")
+                .style("width: 18rem;"));
+        panel.add(new BSCard(null)
+                .header("Featured")
+                .listGroup("Hello", "List", "World")
+                .style("width: 18rem;"));
+
+        panel.add(new HTMLHeading("Header and footer", 3));
+        panel.add(new BSCard("Special title", null, "Some content to display with more words.")
+                .header("Featured")
+                .buttons(new BSButton("Click me"), new BSButton("Or me", BSComponent.Type.SECONDARY)));
         return panel;
     }
 
