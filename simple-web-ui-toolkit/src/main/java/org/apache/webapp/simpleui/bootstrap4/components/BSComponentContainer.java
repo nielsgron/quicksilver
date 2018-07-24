@@ -39,7 +39,7 @@ public abstract class BSComponentContainer extends BSComponent {
         return component;
     }
 
-    public BSComponent add(BSComponent component, Object constraint) {
+    public HTMLComponent add(HTMLComponent component, Object constraint) {
         if ( component == null ) {
             return null;
         }
@@ -51,7 +51,7 @@ public abstract class BSComponentContainer extends BSComponent {
         return component;
     }
 
-    public void remove(BSComponent component) {
+    public void remove(HTMLComponent component) {
         if ( component == null ) {
             return;
         }

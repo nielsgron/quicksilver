@@ -84,7 +84,6 @@ public abstract class BSComponent extends HTMLComponent {
 
         SMALL("sm"),
         LARGE("lg"),
-        XLARGE("xl"),
         NORMAL("");
 
         private final String sizeName;

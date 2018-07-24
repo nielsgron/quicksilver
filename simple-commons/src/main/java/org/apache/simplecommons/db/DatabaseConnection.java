@@ -65,13 +65,14 @@ public class DatabaseConnection {
 
     }
 
-    public void connect() throws SQLException {
+    public synchronized void connect() throws SQLException {
 
         // This is how you make connections for ActiveJDBC library.
         // http://javalite.io/database_connection_management
         // Base.open(mysqlDriverClass, getURL(), _userName, _password);
-
-        _DB.open(_dataSource);
+        if ( !_DB.hasConnection() ) {
+            _DB.open(_dataSource);
+        }
 
     }
 

@@ -52,4 +52,12 @@ public class BSNavItem extends BSComponent {
         isActive = active;
     }
 
+    public String getURL() {
+        return urlReference;
+    }
+
+    public void setURL(String url) {
+        urlReference = url;
+    }
+
 }

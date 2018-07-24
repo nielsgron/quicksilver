@@ -39,11 +39,20 @@ public class BSButton extends BSComponent {
 
     public void render(HtmlStream stream) {
 
+        stream.writeln("<button type=\"button\" ");
+
         if ( isOutline ) {
-            stream.writeln("<button type=\"button\" class=\"btn btn-outline-" + getType().getTypeName() + "\">");
+            stream.write("class=\"btn btn-outline-" + getType().getTypeName() );
         } else {
-            stream.writeln("<button type=\"button\" class=\"btn btn-" + getType().getTypeName() + "\">");
+            stream.write("class=\"btn btn-" + getType().getTypeName() );
         }
+        if ( getSize() == Size.SMALL ) {
+            stream.write(" btn-sm");
+        } else if ( getSize() == Size.LARGE ) {
+            stream.write(" btn-lg");
+        }
+
+        stream.writeln("\">");
         stream.writeln(prop_text);
         stream.writeln("</button>");
 

@@ -121,6 +121,7 @@ public class DataSet {
             result = run.query(dbConnection, query, h, params);
         } catch ( Exception e ) {
             result = null;
+            e.printStackTrace();
         }
         return result;
     }

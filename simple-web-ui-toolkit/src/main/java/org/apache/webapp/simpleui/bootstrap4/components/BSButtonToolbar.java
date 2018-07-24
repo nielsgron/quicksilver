@@ -28,4 +28,14 @@ public class BSButtonToolbar extends BSComponentContainer {
 
     }
 
+    public void addAsGroup(BSButton ...buttons) {
+
+        BSButtonGroup g = new BSButtonGroup();
+        for (BSButton b: buttons) {
+            g.add(b);
+        }
+        add(g);
+
+    }
+
 }

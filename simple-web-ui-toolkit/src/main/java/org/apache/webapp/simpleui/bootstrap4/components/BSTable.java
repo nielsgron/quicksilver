@@ -20,6 +20,9 @@ import org.apache.simplecommons.data.DataSet;
 import org.apache.simplecommons.data.DataSetRow;
 import org.apache.webapp.simpleui.HtmlStream;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class BSTable extends BSComponentContainer {
 
     private String title;
@@ -52,7 +55,13 @@ public class BSTable extends BSComponentContainer {
         html.append("<tr>");
         for ( int j = 0; j < dataSet.getColumnCount(); j++ ) {
             // Add Column
-            html.append("<th scope='col'>");
+            String align = "left";
+            Class valClass = dataSet.getColumnType(j);
+            if ( Number.class.isAssignableFrom(valClass) ) {
+                align = "right";
+            }
+
+            html.append("<th scope=\"col\" style=\"text-align: " + align + ";\">");
             html.append(dataSet.getColumnName(j));
             html.append("</th>");
         }
@@ -67,13 +76,32 @@ public class BSTable extends BSComponentContainer {
 
             for ( int j = 0; j < dataSet.getColumnCount(); j++ ) {
                 // Add Column
-                html.append("<td>");
+                Object val = row.get(j);
                 if ( renderers[j] == null ) {
-                    html.append(row.get(j));
+                    String align = "left";
+                    if ( val instanceof Number ) {
+                        align = "right";
+                    } else if ( val instanceof java.util.Date ) {
+                        align = "right";
+                    }
+
+                    html.append("<td style=\"text-align: " + align + ";\">");
+                    html.append(val);
+
                 } else {
-                    html.append(renderers[j].render(row.get(j)));
+                    String align = "left";
+                    if ( val instanceof Number ) {
+                        align = "right";
+                    } else if ( val instanceof java.util.Date ) {
+                        align = "right";
+                    }
+
+                    html.append("<td style=\"text-align: " + align + ";\">");
+                    html.append(renderers[j].render(val));
+
                 }
                 html.append("</td>");
+
             }
 
             // End Row
@@ -90,6 +118,22 @@ public class BSTable extends BSComponentContainer {
 
     public static class HTMLTableCellRenderer implements TableCellRenderer {
 
+        private String targetWindow = "_blank";
+        private boolean blankTarget = false;
+
+        public HTMLTableCellRenderer() {
+
+        }
+
+        public HTMLTableCellRenderer(boolean bTarget) {
+            blankTarget = bTarget;
+        }
+
+        public HTMLTableCellRenderer(boolean bTarget, String tWindow) {
+            blankTarget = bTarget;
+            targetWindow = tWindow;
+        }
+
         @Override
         public String render(Object value) {
             if ( value == null ) {
@@ -99,9 +143,77 @@ public class BSTable extends BSComponentContainer {
 
             sb.append("<a href=\"");
             sb.append(getHREF(value));
-            sb.append("\">");
+            sb.append("\"");
+            if ( blankTarget ) {
+                sb.append(" target=\"" + targetWindow + "\" ");
+            }
+            sb.append(">");
             sb.append(value.toString());
             sb.append("</a>");
+
+            return sb.toString();
+        }
+
+        protected String getHREF(Object value) {
+            return "/" + value.toString();
+        }
+
+    }
+
+    public static class NumberTableCellRenderer implements TableCellRenderer {
+
+        private NumberFormat DECIMAL_FORMAT;
+
+        private int numberOfDigits = 0;
+        private boolean includeThousandSeparator = true;
+        private boolean includeCurrency = false;
+        private boolean includePercent = false;
+
+        public NumberTableCellRenderer() {
+
+        }
+
+        public NumberTableCellRenderer(int numberOfDigits, boolean includeThousandSeparator, boolean includeCurrency, boolean includePercent) {
+            this.numberOfDigits = numberOfDigits;
+            this.includeThousandSeparator = includeThousandSeparator;
+            this.includePercent = includePercent;
+
+            StringBuilder pattern = new StringBuilder();
+            if ( includeCurrency ) {
+                pattern.append("$");
+            }
+
+            if ( includeThousandSeparator ) {
+                pattern.append("###,##0");
+            } else {
+                pattern.append("##0");
+            }
+
+            if ( numberOfDigits < 0 ) {
+                pattern.append(".########################################");
+            } else if ( numberOfDigits == 0 ) {
+                // no digits
+            } else {
+                pattern.append(".");
+                for ( int i = 0; i < numberOfDigits; i++ ) {
+                    pattern.append("0");
+                }
+            }
+
+            DECIMAL_FORMAT = new DecimalFormat(pattern.toString());
+        }
+
+        @Override
+        public String render(Object value) {
+            if ( value == null ) {
+                return null;
+            }
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(DECIMAL_FORMAT.format(value));
+            if ( includePercent ) {
+                sb.append("%");
+            }
 
             return sb.toString();
         }
