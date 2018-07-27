@@ -16,5 +16,15 @@
 
 package org.apache.webapp.simpleui.bootstrap4.components;
 
+import org.apache.webapp.simpleui.HtmlStream;
+
 public class BSFormGroup extends BSComponentContainer {
+
+    @Override
+    public void render(HtmlStream stream) {
+        stream.write("<div class=\"form-group\">");
+        super.render(stream);
+        stream.write("</div>");
+    }
+
 }

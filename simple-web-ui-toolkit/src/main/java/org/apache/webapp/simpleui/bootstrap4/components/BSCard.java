@@ -7,15 +7,23 @@ import org.apache.webapp.simpleui.html.components.HTMLText;
 public class BSCard extends BSComponent {
 
     private final HTMLComponent body;
+    private HeaderBody header;
     private final String style;
 
     public BSCard(HTMLComponent body) {
-        this(body, null);
+        this(body, null, null);
     }
 
-    public BSCard(HTMLComponent body, String style) {
+    public BSCard(HTMLComponent body, String header) {
+        this(body, header, null);
+    }
+
+    public BSCard(HTMLComponent body, String header, String style) {
         this.body = body;
         this.style = style;
+        if ( header != null ) {
+            this.header = new HeaderBody(header);
+        }
     }
 
     /**
@@ -49,6 +57,9 @@ public class BSCard extends BSComponent {
             stream.write("\"");
         }
         stream.writeln(">");
+        if ( header != null ) {
+            header.render(stream);
+        }
         stream.writeln("<div class=\"card-body\">");
         body.render(stream);
         stream.writeln("</div>");

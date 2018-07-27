@@ -20,7 +20,8 @@ import org.apache.webapp.simpleui.HtmlStream;
 
 public class BSButton extends BSComponent {
 
-    private String prop_text;
+    private String text;
+    private String hyperlink;
     private boolean isOutline;
 
     public BSButton(String text) {
@@ -28,18 +29,23 @@ public class BSButton extends BSComponent {
     }
 
     public BSButton(String text, BSComponent.Type type) {
-        this(text, type, false);
+        this(text, type, false, null);
     }
 
-    public BSButton(String text, BSComponent.Type type, boolean outline) {
+    public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink) {
         setType(type);
-        prop_text = text;
-        isOutline = outline;
+        this.text = text;
+        this.hyperlink = hyperLink;
+        this.isOutline = isOutline;
     }
 
     public void render(HtmlStream stream) {
 
-        stream.writeln("<button type=\"button\" ");
+        if ( hyperlink != null ) {
+            stream.writeln("<a href=\"" + hyperlink + "\" ");
+        } else {
+            stream.writeln("<button type=\"button\" ");
+        }
 
         if ( isOutline ) {
             stream.write("class=\"btn btn-outline-" + getType().getTypeName() );
@@ -53,9 +59,12 @@ public class BSButton extends BSComponent {
         }
 
         stream.writeln("\">");
-        stream.writeln(prop_text);
-        stream.writeln("</button>");
-
+        stream.writeln(text);
+        if ( hyperlink != null ) {
+            stream.writeln("</a>");
+        } else {
+            stream.writeln("</button>");
+        }
     }
 
 }

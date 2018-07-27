@@ -17,6 +17,7 @@
 package org.apache.webapp.simpleui.bootstrap4.components;
 
 import org.apache.webapp.simpleui.HtmlStream;
+import org.apache.webapp.simpleui.html.components.HTMLComponent;
 
 public class BSForm extends BSComponentContainer {
 
@@ -54,6 +55,16 @@ public class BSForm extends BSComponentContainer {
         super.render(stream);
         stream.writeln("</form>");
 
+    }
+
+    public void addAsGroup(HTMLComponent... c) {
+
+        BSFormGroup group = new BSFormGroup();
+        for ( int i = 0; i < c.length; i++ ) {
+            group.add(c[i]);
+        }
+
+        add(group);
     }
 
 }
