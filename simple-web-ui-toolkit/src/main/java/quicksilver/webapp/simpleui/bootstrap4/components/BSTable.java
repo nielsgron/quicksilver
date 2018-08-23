@@ -17,7 +17,6 @@
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.commons.data.DataSet;
-import quicksilver.commons.data.DataSetRow;
 import quicksilver.webapp.simpleui.HtmlStream;
 
 import java.text.DecimalFormat;
@@ -33,17 +32,22 @@ public class BSTable extends BSComponentContainer {
         dataSet = ds;
         title = t;
         renderers = new TableCellRenderer[dataSet.getColumnCount()];
+
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Table");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "table");
+
+        addTagAttribute("class", "table table-sm");
+
     }
 
     public void setTableCellRenderer(TableCellRenderer renderer, int column) {
         renderers[column] = renderer;
     }
 
-    public void render(HtmlStream stream) {
+    public void renderBody(HtmlStream stream) {
 
         StringBuilder html = new StringBuilder();
-
-        html.append("<table class='table table-sm'>");
 
         if ( title != null && title.trim().length() > 0 ) {
             html.append("<caption>");
@@ -57,7 +61,9 @@ public class BSTable extends BSComponentContainer {
             // Add Column
             String align = "left";
             Class valClass = dataSet.getColumnType(j);
-            if ( Number.class.isAssignableFrom(valClass) ) {
+            if ( renderers[j] != null ) {
+                align = renderers[j].titleAlignment(valClass);
+            } else if ( Number.class.isAssignableFrom(valClass) ) {
                 align = "right";
             }
 
@@ -70,13 +76,12 @@ public class BSTable extends BSComponentContainer {
 
         html.append("<tbody>");
         for ( int i = 0; i < dataSet.getRowCount(); i++ ) {
-            DataSetRow row = dataSet.getRow(i);
             // Add Row
             html.append("<tr>");
 
             for ( int j = 0; j < dataSet.getColumnCount(); j++ ) {
                 // Add Column
-                Object val = row.get(j);
+                Object val = dataSet.getValue(j, i);
                 if ( renderers[j] == null ) {
                     String align = "left";
                     if ( val instanceof Number ) {
@@ -89,13 +94,7 @@ public class BSTable extends BSComponentContainer {
                     html.append(val);
 
                 } else {
-                    String align = "left";
-                    if ( val instanceof Number ) {
-                        align = "right";
-                    } else if ( val instanceof java.util.Date ) {
-                        align = "right";
-                    }
-
+                    String align = renderers[j].textAlignment(val);
                     html.append("<td style=\"text-align: " + align + ";\">");
                     html.append(renderers[j].render(val));
 
@@ -110,13 +109,11 @@ public class BSTable extends BSComponentContainer {
         }
         html.append("</tbody>");
 
-        html.append("</table>");
-
         stream.write(html.toString());
 
     }
 
-    public static class HTMLTableCellRenderer implements TableCellRenderer {
+    public static class HTMLTableCellRenderer extends DefaultTableCellRenderer {
 
         private String targetWindow = "_blank";
         private boolean blankTarget = false;
@@ -160,7 +157,7 @@ public class BSTable extends BSComponentContainer {
 
     }
 
-    public static class NumberTableCellRenderer implements TableCellRenderer {
+    public static class NumberTableCellRenderer extends DefaultTableCellRenderer {
 
         private NumberFormat DECIMAL_FORMAT;
 
@@ -204,15 +201,24 @@ public class BSTable extends BSComponentContainer {
         }
 
         @Override
+        public String textAlignment(Object value) {
+            return "right";
+        }
+
+        @Override
         public String render(Object value) {
             if ( value == null ) {
                 return null;
             }
             StringBuilder sb = new StringBuilder();
 
-            sb.append(DECIMAL_FORMAT.format(value));
-            if ( includePercent ) {
-                sb.append("%");
+            try {
+                sb.append(DECIMAL_FORMAT.format(value));
+                if (includePercent) {
+                    sb.append("%");
+                }
+            } catch ( Exception e ) {
+                sb.append("[Err:" + value.toString() + "]");
             }
 
             return sb.toString();
@@ -224,8 +230,33 @@ public class BSTable extends BSComponentContainer {
 
     }
 
+    public static abstract class DefaultTableCellRenderer implements TableCellRenderer {
+
+        public String titleAlignment(Class valClass) {
+            String align = "left";
+            if ( Number.class.isAssignableFrom(valClass) ) {
+                align = "right";
+            }
+            return align;
+        }
+
+        public String textAlignment(Object value) {
+            String align = "left";
+            if ( value instanceof Number ) {
+                align = "right";
+            } else if ( value instanceof java.util.Date ) {
+                align = "right";
+            }
+            return align;
+        }
+        public abstract String render(Object value);
+
+    }
+
     public interface TableCellRenderer {
 
+        String titleAlignment(Class valClass);
+        String textAlignment(Object value);
         String render(Object value);
 
     }

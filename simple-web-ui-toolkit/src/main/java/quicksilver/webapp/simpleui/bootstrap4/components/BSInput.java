@@ -16,8 +16,6 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
-
 public class BSInput extends BSComponent {
 
     private String input_type;
@@ -26,12 +24,11 @@ public class BSInput extends BSComponent {
     private String input_aria_describedby;
 
     public BSInput(String type) {
-        input_type = type;
+        this(type, null, null, null);
     }
 
     public BSInput(String type, String placeholder) {
-        input_type = type;
-        input_placeholder = placeholder;
+        this(type, placeholder, null, null);
     }
 
     public BSInput(String type, String placeholder, String aria_label, String aria_describedby) {
@@ -39,26 +36,23 @@ public class BSInput extends BSComponent {
         input_placeholder = placeholder;
         input_aria_label = aria_label;
         input_aria_describedby = aria_describedby;
-    }
 
-    public void render(HtmlStream stream) {
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Input");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.FALSE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "input");
 
-        stream.write("<input");
-
-        stream.write(" class=\"form-control\"");
-        stream.write(" type=\"" + input_type + "\"");
+        addTagAttribute("class", "form-control");
+        addTagAttribute("type", input_type);
 
         if ( input_placeholder != null && input_placeholder.length() > 0 ) {
-            stream.write(" placeholder=\"" + input_placeholder + "\"");
+            addTagAttribute("placeholder", input_placeholder);
         }
         if ( input_aria_label != null && input_aria_label.length() > 0 ) {
-            stream.write(" aria-label=\"" + input_aria_label + "\"");
+            addTagAttribute("aria-label", input_aria_label);
         }
         if ( input_aria_describedby != null && input_aria_describedby.length() > 0 ) {
-            stream.write(" aria-describedby=\"" + input_aria_describedby + "\"");
+            addTagAttribute("aria-describedby", input_aria_describedby);
         }
-
-        stream.writeln(">");
 
     }
 

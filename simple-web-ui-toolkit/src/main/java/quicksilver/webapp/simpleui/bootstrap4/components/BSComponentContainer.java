@@ -79,7 +79,7 @@ public abstract class BSComponentContainer extends BSComponent {
         return layoutManager;
     }
 
-    public void render(HtmlStream stream) {
+    public void renderBody(HtmlStream stream) {
 
         if ( layoutManager != null ) {
             layoutManager.render(stream);

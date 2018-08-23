@@ -35,32 +35,26 @@ public class BSBadge extends BSComponent {
         labelLink = link;
         isPill = bPill;
         setType(type);
+
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Badge");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        if ( labelLink == null ) {
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "span");
+        } else {
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "a");
+            addTagAttribute("href", labelLink);
+        }
+
+        if ( isPill ) {
+            addTagAttribute("class", "badge badge-pill badge-" + getType().getTypeName());
+        } else {
+            addTagAttribute("class", "badge badge-" + getType().getTypeName());
+        }
+
     }
 
-    public void render(HtmlStream stream) {
-
-        if ( labelLink == null ) {
-            stream.write("<span ");
-        } else {
-            stream.write("<a href=\"");
-            stream.write(labelLink);
-            stream.write("\" ");
-        }
-
-        stream.write("class=\"badge ");
-        if ( isPill ) {
-            stream.write("badge-pill ");
-        }
-        stream.write("badge-" + getType().getTypeName());
-        stream.writeln("\">");
+    public void renderBody(HtmlStream stream) {
         stream.writeln(labelText);
-
-        if ( labelLink == null ) {
-            stream.writeln("</span>");
-        } else {
-            stream.writeln("</a>");
-        }
-
     }
 
 }

@@ -37,34 +37,35 @@ public class BSButton extends BSComponent {
         this.text = text;
         this.hyperlink = hyperLink;
         this.isOutline = isOutline;
-    }
 
-    public void render(HtmlStream stream) {
-
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Button");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         if ( hyperlink != null ) {
-            stream.writeln("<a href=\"" + hyperlink + "\" ");
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "a");
+            addTagAttribute("href", hyperlink);
         } else {
-            stream.writeln("<button type=\"button\" ");
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "button");
+            addTagAttribute("type", "button" );
         }
 
+        String classList = "btn";
         if ( isOutline ) {
-            stream.write("class=\"btn btn-outline-" + getType().getTypeName() );
+            classList += " btn-outline-" + getType().getTypeName();
         } else {
-            stream.write("class=\"btn btn-" + getType().getTypeName() );
+            classList += " btn-" + getType().getTypeName();
         }
         if ( getSize() == Size.SMALL ) {
-            stream.write(" btn-sm");
+            classList += " btn-sm";
         } else if ( getSize() == Size.LARGE ) {
-            stream.write(" btn-lg");
+            classList += " btn-lg";
         }
 
-        stream.writeln("\">");
+        addTagAttribute("class", classList);
+
+    }
+
+    public void renderBody(HtmlStream stream) {
         stream.writeln(text);
-        if ( hyperlink != null ) {
-            stream.writeln("</a>");
-        } else {
-            stream.writeln("</button>");
-        }
     }
 
 }

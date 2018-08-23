@@ -16,31 +16,31 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
-
 public class BSColumn extends BSComponentContainer {
 
     private int prop_columnWeight = -1;
 
-    @Override
-    public void render(HtmlStream stream) {
+    public BSColumn() {
 
-        stream.write("<div class=\"");
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Column");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
-        if ( prop_columnWeight <= 0 || prop_columnWeight > 12 ) {
-            stream.write("column");
-        } else {
-            stream.write("col-md-" + prop_columnWeight );
-        }
-
-        stream.writeln("\">");
-        super.render(stream);
-        stream.writeln("</div>");
+        addTagAttribute("class", "column");
 
     }
 
     public void setColumnWeight(int columnWeight) {
         prop_columnWeight = columnWeight;
+
+        if ( prop_columnWeight <= 0 || prop_columnWeight > 12 ) {
+            removeTagAttribute("class");
+            addTagAttribute("class", "column");
+        } else {
+            removeTagAttribute("class");
+            addTagAttribute("class", "col-md-" + prop_columnWeight);
+        }
+
     }
 
 }

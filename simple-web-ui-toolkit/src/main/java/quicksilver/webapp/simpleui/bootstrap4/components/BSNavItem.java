@@ -27,17 +27,22 @@ public class BSNavItem extends BSComponent {
     public BSNavItem(String name, String url) {
         itemName = name;
         urlReference = url;
+
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Nav Item");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "li");
+
+        addTagAttribute("class", "nav-item");
+
     }
 
     @Override
-    public void render(HtmlStream stream) {
-        stream.writeln("<li class=\"nav-item\">");
+    public void renderBody(HtmlStream stream) {
         if ( isActive ) {
             stream.writeln("  <a class=\"nav-link active\" href=\"" + urlReference + "\">" + itemName + "</a>");
         } else {
             stream.writeln("  <a class=\"nav-link\" href=\"" + urlReference + "\">" + itemName + "</a>");
         }
-        stream.writeln("</li>");
     }
 
     public String getName() {

@@ -23,21 +23,18 @@ public class BSRow extends BSComponentContainer {
 
     public BSRow(int columns) {
         initColumns(columns);
+
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Row");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
+
+        addTagAttribute("class", "row");
     }
 
     private void initColumns(int columns) {
         for ( int i = 0; i < columns; i++ ) {
             add(new BSColumn());
         }
-    }
-
-    public void render(HtmlStream stream) {
-
-        stream.writeln("<div class=\"row\">");
-        // Render BSColumn children
-        super.render(stream);
-        stream.writeln("</div>");
-
     }
 
     // Override add() method so that we only add BSColumn components

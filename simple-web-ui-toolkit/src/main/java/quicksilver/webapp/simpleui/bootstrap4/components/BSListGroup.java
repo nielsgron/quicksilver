@@ -4,12 +4,13 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 public class BSListGroup extends BSComponentContainer {
 
-    @Override
-    public void render(HtmlStream stream) {
+    public BSListGroup() {
 
-        stream.writeln("<ul class=\"list-group\">");
-        super.render(stream);
-        stream.writeln("</ul>");
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "List Group");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "ul");
+
+        addTagAttribute("class", "list-group");
 
     }
 

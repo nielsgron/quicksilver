@@ -16,15 +16,16 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
-
 public class BSButtonToolbar extends BSComponentContainer {
 
-    public void render(HtmlStream stream) {
+    public BSButtonToolbar() {
 
-        stream.writeln("<div class=\"btn-toolbar\" role=\"toolbar\">");
-        super.render(stream);
-        stream.writeln("</div>");
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Button Toolbar");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
+
+        addTagAttribute("class", "btn-toolbar");
+        addTagAttribute("role", "toolbar");
 
     }
 

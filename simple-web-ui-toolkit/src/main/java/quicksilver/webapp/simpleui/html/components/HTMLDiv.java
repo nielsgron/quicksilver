@@ -44,7 +44,7 @@ public class HTMLDiv extends HTMLComponentContainer {
         }
 
         stream.writeln(">");
-        super.render(stream);
+        super.renderBody(stream);
         stream.writeln("</div>");
 
     }

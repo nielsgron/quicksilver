@@ -16,15 +16,16 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
-
 public class BSFormGroup extends BSComponentContainer {
 
-    @Override
-    public void render(HtmlStream stream) {
-        stream.write("<div class=\"form-group\">");
-        super.render(stream);
-        stream.write("</div>");
+    public BSFormGroup() {
+
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Form Group");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
+
+        addTagAttribute("class", "form-group");
+
     }
 
 }

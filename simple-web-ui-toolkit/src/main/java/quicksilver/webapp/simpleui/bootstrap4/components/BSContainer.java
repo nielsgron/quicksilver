@@ -56,7 +56,7 @@ public class BSContainer extends BSComponentContainer {
 
             stream.writeln("\">");
             // Render all the BSRow children
-            super.render(stream);
+            super.renderBody(stream);
             stream.writeln("</div>");
         }
 

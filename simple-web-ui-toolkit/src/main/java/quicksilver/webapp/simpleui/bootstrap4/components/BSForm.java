@@ -16,7 +16,6 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
 public class BSForm extends BSComponentContainer {
@@ -33,27 +32,24 @@ public class BSForm extends BSComponentContainer {
         prop_isInline = bInline;
         prop_action = action;
         prop_isGET = isGET;
-    }
 
-    public void render(HtmlStream stream) {
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Form");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "form");
 
-        if ( !prop_isInline) {
-            stream.writeln("<form");
+        if ( prop_isInline ) {
+            addTagAttribute("class", "form-inline my-2 my-md-0");
         } else {
-            stream.writeln("<form class=\"form-inline my-2 my-md-0\"");
+            // no class
         }
 
-        stream.write(" action=\"" + prop_action + "\"");
+        addTagAttribute("action", prop_action);
+
         if ( prop_isGET ) {
-            stream.write(" method=\"get\"");
+            addTagAttribute("method", "get");
         } else {
-            stream.write(" method=\"post\"");
+            addTagAttribute("method", "post");
         }
-
-        stream.writeln(">");
-
-        super.render(stream);
-        stream.writeln("</form>");
 
     }
 

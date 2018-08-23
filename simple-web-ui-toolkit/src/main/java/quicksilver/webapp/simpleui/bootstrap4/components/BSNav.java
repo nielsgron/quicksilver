@@ -30,6 +30,27 @@ public class BSNav extends BSComponentContainer {
     public BSNav(int style, int alignment) {
         prop_style = style;
         prop_alignment = alignment;
+
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Nav");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "ul");
+
+        String classList = "nav";
+
+        if ( prop_alignment == VERTICAL_ALIGNMENT ) {
+            classList += " flex-column";
+        }
+
+        if ( prop_style == STYLE_BASE ) {
+
+        } else if ( prop_style == STYLE_TAB ) {
+            classList += " nav-tabs";
+        } else if ( prop_style == STYLE_PILL ) {
+            classList += " nav-pills";
+        }
+
+        addTagAttribute("class", classList);
+
     }
 
     public void setActiveItem(String name) {
@@ -43,28 +64,6 @@ public class BSNav extends BSComponentContainer {
                 }
             }
         }
-    }
-
-    public void render(HtmlStream stream) {
-
-        stream.write("<ul class=\"nav");
-
-        if ( prop_alignment == VERTICAL_ALIGNMENT ) {
-            stream.write(" flex-column");
-        }
-
-        if ( prop_style == STYLE_BASE ) {
-
-        } else if ( prop_style == STYLE_TAB ) {
-            stream.write(" nav-tabs");
-        } else if ( prop_style == STYLE_PILL ) {
-            stream.write(" nav-pills");
-        }
-
-        stream.writeln("\">");
-        super.render(stream);
-        stream.writeln("</ul>");
-
     }
 
 }

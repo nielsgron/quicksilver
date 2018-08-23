@@ -16,15 +16,16 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
-
 public class BSButtonGroup extends BSComponentContainer {
 
-    public void render(HtmlStream stream) {
+    public BSButtonGroup() {
 
-        stream.writeln("<div class=\"btn-group mr-2\" role=\"group\">");
-        super.render(stream);
-        stream.writeln("</div>");
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Button Group");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
+
+        addTagAttribute("class", "btn-group mr-2");
+        addTagAttribute("role", "group");
 
     }
 

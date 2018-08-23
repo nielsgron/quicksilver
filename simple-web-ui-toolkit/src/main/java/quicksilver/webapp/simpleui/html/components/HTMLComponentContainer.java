@@ -47,7 +47,7 @@ public class HTMLComponentContainer extends HTMLComponent {
         return children.size();
     }
 
-    public void render(HtmlStream stream) {
+    public void renderBody(HtmlStream stream) {
 
         // Render each of the children components
         for (int i = 0; i < children.size(); i++) {
