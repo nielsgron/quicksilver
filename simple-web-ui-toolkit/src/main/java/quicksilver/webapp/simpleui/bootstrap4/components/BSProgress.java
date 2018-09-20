@@ -17,6 +17,8 @@
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
+import quicksilver.webapp.simpleui.html.components.HTMLDiv;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 
 /*
     Example :
@@ -93,26 +95,46 @@ public class BSProgress extends BSComponent {
 
     @Override
     public void render(HtmlStream stream) {
-        stream.writeln("<div class=\"progress\">");
-        stream.write(
-                "  <div class=\"progress-bar");
-        if(background != null) {
-            stream.write(" ");
-            stream.write(background.name);
-        }
-        if(striped) {
-            stream.write("  progress-bar-striped");
-            if(animated) {
-                stream.write(" progress-bar-animated");
+        HTMLDiv outer = new HTMLDiv("progress");
+
+        HTMLDiv inner = new HTMLDiv() {
+            {
+                addTagAttribute("role", "progressbar");
+                addTagAttribute("aria-valuenow", String.valueOf(percentage));
+                addTagAttribute("aria-valuemin", "0");
+                addTagAttribute("aria-valuemax", "100");
+
+                add(new HTMLText(label));
             }
-        }
-        stream.write("\" role=\"progressbar\" style=\"width: ");
-        stream.write(String.valueOf(percentage));
-        stream.write("%\" aria-valuenow=\"");
-        stream.write(String.valueOf(percentage));
-        stream.write("\" aria-valuemin=\"0\" aria-valuemax=\"100\">");
-        stream.write(label);
-        stream.writeln("</div>");
-        stream.writeln("</div>");
+
+            @Override
+            protected String getStyle() {
+                return "width: " + String.valueOf(percentage) + "%";
+            }
+
+            @Override
+            protected String getClassNames() {
+                StringBuilder sb = new StringBuilder();
+
+                sb.append("progress-bar");
+                if (background != null) {
+                    sb.append(" ")
+                            .append(background.name);
+                }
+                if (striped) {
+                    sb.append(" progress-bar-striped");
+                    if (animated) {
+                        sb.append(" progress-bar-animated");
+                    }
+                }
+
+                return sb.toString();
+            }
+
+        };
+
+        outer.add(inner);
+        
+        outer.render(stream);
     }
 }
