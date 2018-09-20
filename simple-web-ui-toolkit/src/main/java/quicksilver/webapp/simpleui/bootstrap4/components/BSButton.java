@@ -18,6 +18,13 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
 
+/*
+    Example : <button type="button" class="btn btn-primary btn-sm">Small button</button>
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_buttons.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/buttons/
+ */
+
 public class BSButton extends BSComponent {
 
     private String text;
@@ -37,6 +44,10 @@ public class BSButton extends BSComponent {
         this.text = text;
         this.hyperlink = hyperLink;
         this.isOutline = isOutline;
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Button");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
@@ -48,21 +59,29 @@ public class BSButton extends BSComponent {
             addTagAttribute("type", "button" );
         }
 
-        String classList = "btn";
-        if ( isOutline ) {
-            classList += " btn-outline-" + getType().getTypeName();
-        } else {
-            classList += " btn-" + getType().getTypeName();
-        }
-        if ( getSize() == Size.SMALL ) {
-            classList += " btn-sm";
-        } else if ( getSize() == Size.LARGE ) {
-            classList += " btn-lg";
-        }
-
-        addTagAttribute("class", classList);
+        addTagAttribute("class", getClassNames());
 
     }
+
+    protected String getClassNames() {
+        StringBuilder cNames = new StringBuilder();
+
+        cNames.append("btn");
+
+        if ( isOutline ) {
+            cNames.append(" btn-outline-").append(getType().getTypeName());
+        } else {
+            cNames.append(" btn-").append(getType().getTypeName());
+        }
+        if ( getSize() == Size.SMALL ) {
+            cNames.append(" btn-sm");
+        } else if ( getSize() == Size.LARGE ) {
+            cNames.append(" btn-lg");
+        }
+
+        return cNames.toString();
+    }
+
 
     public void renderBody(HtmlStream stream) {
         stream.writeln(text);

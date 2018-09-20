@@ -16,7 +16,12 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
+/*
+    Example :
+
+    W3Schools :
+    Bootstrap Docs :
+ */
 
 public class BSNav extends BSComponentContainer {
 
@@ -30,6 +35,10 @@ public class BSNav extends BSComponentContainer {
     public BSNav(int style, int alignment) {
         prop_style = style;
         prop_alignment = alignment;
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Nav");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

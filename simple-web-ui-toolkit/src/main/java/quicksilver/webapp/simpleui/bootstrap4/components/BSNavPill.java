@@ -16,6 +16,13 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    W3Schools :
+    Bootstrap Docs :
+ */
+
 public class BSNavPill extends BSNav {
 
     public BSNavPill() {

@@ -18,6 +18,13 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
 
+/*
+    Example : <span class="badge badge-primary">Primary</span>
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_badges.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/badge/
+ */
+
 public class BSBadge extends BSComponent {
 
     private String labelText;
@@ -35,6 +42,10 @@ public class BSBadge extends BSComponent {
         labelLink = link;
         isPill = bPill;
         setType(type);
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Badge");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
@@ -45,13 +56,24 @@ public class BSBadge extends BSComponent {
             addTagAttribute("href", labelLink);
         }
 
-        if ( isPill ) {
-            addTagAttribute("class", "badge badge-pill badge-" + getType().getTypeName());
-        } else {
-            addTagAttribute("class", "badge badge-" + getType().getTypeName());
-        }
+        addTagAttribute("class", getClassNames());
 
     }
+
+    protected String getClassNames() {
+        StringBuilder cNames = new StringBuilder();
+
+        cNames.append("badge");
+
+        if ( isPill ) {
+            cNames.append(" badge-pill");
+        }
+
+        cNames.append(" badge-").append(getType().getTypeName());
+
+        return cNames.toString();
+    }
+
 
     public void renderBody(HtmlStream stream) {
         stream.writeln(labelText);

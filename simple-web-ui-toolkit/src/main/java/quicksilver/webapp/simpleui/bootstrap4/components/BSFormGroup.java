@@ -16,9 +16,20 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/forms/
+ */
+
 public class BSFormGroup extends BSComponentContainer {
 
     public BSFormGroup() {
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Form Group");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

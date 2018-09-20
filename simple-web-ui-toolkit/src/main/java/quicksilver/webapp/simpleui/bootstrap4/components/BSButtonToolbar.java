@@ -16,9 +16,29 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group" role="group" aria-label="First group">
+        <button type="button" class="btn btn-secondary">1</button>
+      </div>
+      <div class="btn-group" role="group" aria-label="Second group">
+        <button type="button" class="btn btn-secondary">5</button>
+      </div>
+    </div>
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_button_groups.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/button-group/
+ */
+
 public class BSButtonToolbar extends BSComponentContainer {
 
     public BSButtonToolbar() {
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Button Toolbar");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

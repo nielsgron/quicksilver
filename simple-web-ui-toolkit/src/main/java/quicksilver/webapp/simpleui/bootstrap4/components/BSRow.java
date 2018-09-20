@@ -16,19 +16,30 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_tables.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/content/tables/
+ */
 
 public class BSRow extends BSComponentContainer {
 
     public BSRow(int columns) {
         initColumns(columns);
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Row");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
         addTagAttribute("class", "row");
+
     }
 
     private void initColumns(int columns) {

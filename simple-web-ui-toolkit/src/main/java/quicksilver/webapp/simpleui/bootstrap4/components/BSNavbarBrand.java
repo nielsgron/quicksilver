@@ -18,6 +18,13 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
 
+/*
+    Example :
+
+    W3Schools :
+    Bootstrap Docs :
+ */
+
 public class BSNavbarBrand extends BSComponent {
 
     public void render(HtmlStream stream) {

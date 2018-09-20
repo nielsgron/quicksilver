@@ -22,6 +22,13 @@ import quicksilver.webapp.simpleui.HtmlStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_tables.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/content/tables/
+ */
+
 public class BSTable extends BSComponentContainer {
 
     private String title;
@@ -32,6 +39,10 @@ public class BSTable extends BSComponentContainer {
         dataSet = ds;
         title = t;
         renderers = new TableCellRenderer[dataSet.getColumnCount()];
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Table");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

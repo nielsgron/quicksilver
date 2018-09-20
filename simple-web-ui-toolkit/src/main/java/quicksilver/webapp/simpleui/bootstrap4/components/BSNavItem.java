@@ -18,6 +18,13 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
 
+/*
+    Example :
+
+    W3Schools :
+    Bootstrap Docs :
+ */
+
 public class BSNavItem extends BSComponent {
 
     private String itemName;
@@ -27,6 +34,10 @@ public class BSNavItem extends BSComponent {
     public BSNavItem(String name, String url) {
         itemName = name;
         urlReference = url;
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Nav Item");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

@@ -18,6 +18,13 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp
+    Bootstrap Docs : ??? https://getbootstrap.com/docs/4.1/components/forms/
+ */
+
 public class BSRadio extends BSComponentContainer {
 
     public void render(HtmlStream stream) {

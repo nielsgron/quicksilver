@@ -16,11 +16,22 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_tables.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/content/tables/
+ */
+
 public class BSColumn extends BSComponentContainer {
 
     private int prop_columnWeight = -1;
 
     public BSColumn() {
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Column");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

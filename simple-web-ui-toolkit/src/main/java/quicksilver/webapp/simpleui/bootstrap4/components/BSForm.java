@@ -18,6 +18,13 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/forms/
+ */
+
 public class BSForm extends BSComponentContainer {
 
     private boolean prop_isInline = false;
@@ -32,6 +39,10 @@ public class BSForm extends BSComponentContainer {
         prop_isInline = bInline;
         prop_action = action;
         prop_isGET = isGET;
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Form");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

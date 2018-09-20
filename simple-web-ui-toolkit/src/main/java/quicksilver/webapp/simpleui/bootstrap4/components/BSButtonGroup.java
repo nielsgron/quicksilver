@@ -16,9 +16,26 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary">Left</button>
+        <button type="button" class="btn btn-secondary">Middle</button>
+        <button type="button" class="btn btn-secondary">Right</button>
+    </div>
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_button_groups.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/button-group/
+ */
+
 public class BSButtonGroup extends BSComponentContainer {
 
     public BSButtonGroup() {
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Button Group");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);

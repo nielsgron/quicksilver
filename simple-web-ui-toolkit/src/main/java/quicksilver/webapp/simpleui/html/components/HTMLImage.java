@@ -1,6 +1,20 @@
-package quicksilver.webapp.simpleui.html.components;
+/*
+ * Copyright 2018 Niels Gron and Contributors All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import quicksilver.webapp.simpleui.HtmlStream;
+package quicksilver.webapp.simpleui.html.components;
 
 public class HTMLImage extends HTMLComponent {
 
@@ -10,17 +24,20 @@ public class HTMLImage extends HTMLComponent {
     public HTMLImage(String url, String alt) {
         this.url = url;
         this.alt = alt;
+        defineAttributes();
     }
 
-    @Override
-    public void render(HtmlStream stream) {
+    protected void defineAttributes() {
 
-        stream.write("<img width=\"16\" height=\"16\"");
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Image");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.FALSE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "img");
 
-        stream.write(" src=\"" + url + "\"");
-        stream.write(" alt=\"" + alt + "\"");
-
-        stream.write(">");
+        addTagAttribute("width", "16");
+        addTagAttribute("height", "16");
+        addTagAttribute("src", url);
+        addTagAttribute("alt", alt);
 
     }
+
 }

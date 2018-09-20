@@ -16,6 +16,13 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp
+    Bootstrap Docs : ??? https://getbootstrap.com/docs/4.1/components/forms/
+ */
+
 public class BSInput extends BSComponent {
 
     private String input_type;
@@ -36,6 +43,10 @@ public class BSInput extends BSComponent {
         input_placeholder = placeholder;
         input_aria_label = aria_label;
         input_aria_describedby = aria_describedby;
+        defineAttributes();
+    }
+
+    protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Input");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.FALSE);

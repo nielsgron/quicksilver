@@ -16,5 +16,12 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/*
+    Example :
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_dropdowns.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/dropdowns/
+ */
+
 public class BSDropdown extends BSComponentContainer {
 }
