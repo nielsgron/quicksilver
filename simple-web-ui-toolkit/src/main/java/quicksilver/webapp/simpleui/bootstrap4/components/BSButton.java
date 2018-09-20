@@ -30,19 +30,29 @@ public class BSButton extends BSComponent {
     private String text;
     private String hyperlink;
     private boolean isOutline;
+    private boolean collapsed;
 
     public BSButton(String text) {
         this(text, BSComponent.Type.PRIMARY);
     }
 
     public BSButton(String text, BSComponent.Type type) {
-        this(text, type, false, null);
+        this(text, type, false, (String) null);
+    }
+
+    public BSButton(String text, BSComponent.Type type, boolean isOutline, BSCollapse collapse) {
+        this(text, type, isOutline, "#" + collapse.getId(), true);
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink) {
+        this(text, type, isOutline, hyperLink, false);
+    }
+
+    protected BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink, boolean collapsed) {
         setType(type);
         this.text = text;
         this.hyperlink = hyperLink;
+        this.collapsed = collapsed;
         this.isOutline = isOutline;
         defineAttributes();
     }
@@ -61,6 +71,11 @@ public class BSButton extends BSComponent {
 
         addTagAttribute("class", getClassNames());
 
+        if (collapsed) {
+            addTagAttribute("data-toggle", "collapse");
+            addTagAttribute("aria-expanded", "false");
+            addTagAttribute("aria-controls", "collapseExample");
+        }
     }
 
     protected String getClassNames() {

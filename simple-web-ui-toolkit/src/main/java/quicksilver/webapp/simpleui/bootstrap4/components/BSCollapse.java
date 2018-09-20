@@ -16,7 +16,9 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import java.util.UUID;
 import quicksilver.webapp.simpleui.HtmlStream;
+import quicksilver.webapp.simpleui.html.components.HTMLDiv;
 
 /*
     Example :
@@ -27,8 +29,27 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 public class BSCollapse extends BSComponent {
 
+    private final BSComponent body;
+    private final String id;
+
+    public BSCollapse(BSComponent body) {
+        this.body = body;
+        this.id = "collapse_"+UUID.randomUUID().toString().replaceAll("-", "_");
+    }
+
+    public String getId() {
+        return id;
+    }
+
     @Override
     public void render(HtmlStream stream) {
+        HTMLDiv div = new HTMLDiv("collapse") {
+            {
+                addTagAttribute("id", getId());
+            }
+        };
+        div.add(body);
 
+        div.render(stream);
     }
 }
