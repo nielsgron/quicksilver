@@ -44,6 +44,10 @@ public class BSButton extends BSComponent {
         this(text, type, isOutline, "#" + collapse.getId(), true);
     }
 
+    public BSButton(String text, BSComponent.Type type, boolean isOutline) {
+        this(text, type, isOutline, (String) null);
+    }
+
     public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink) {
         this(text, type, isOutline, hyperLink, false);
     }
