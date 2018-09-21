@@ -53,15 +53,15 @@ public class Buttons extends AbstractComponentsBootstrapPage {
 
         panel.add(new HTMLHeading("Outline Buttons", 3));
 
-        panel.add(new BSButton("Primary", BSComponent.Type.PRIMARY, true, null));
-        panel.add(new BSButton("Secondary", BSComponent.Type.SECONDARY, true, null));
-        panel.add(new BSButton("Success", BSComponent.Type.SUCCESS, true, null));
-        panel.add(new BSButton("Danger", BSComponent.Type.DANGER, true, null));
-        panel.add(new BSButton("Warning", BSComponent.Type.WARNING, true, null));
-        panel.add(new BSButton("Info", BSComponent.Type.INFO, true, null));
-        panel.add(new BSButton("Light", BSComponent.Type.LIGHT, true, null));
-        panel.add(new BSButton("Dark", BSComponent.Type.DARK, true, null));
-        panel.add(new BSButton("Link", BSComponent.Type.LINK, true, null));
+        panel.add(new BSButton("Primary", BSComponent.Type.PRIMARY, true));
+        panel.add(new BSButton("Secondary", BSComponent.Type.SECONDARY, true));
+        panel.add(new BSButton("Success", BSComponent.Type.SUCCESS, true));
+        panel.add(new BSButton("Danger", BSComponent.Type.DANGER, true));
+        panel.add(new BSButton("Warning", BSComponent.Type.WARNING, true));
+        panel.add(new BSButton("Info", BSComponent.Type.INFO, true));
+        panel.add(new BSButton("Light", BSComponent.Type.LIGHT, true));
+        panel.add(new BSButton("Dark", BSComponent.Type.DARK, true));
+        panel.add(new BSButton("Link", BSComponent.Type.LINK, true));
 
         return panel;
     }
