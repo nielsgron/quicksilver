@@ -11,6 +11,7 @@
       <root url="file://$PROJECT_DIR$/../simple-commons/depend/slf4j" />
       <root url="file://$PROJECT_DIR$/../simple-commons/depend/spark" />
       <root url="file://$PROJECT_DIR$/../simple-commons/depend/svnkit" />
+      <root url="file://$PROJECT_DIR$/../simple-commons/depend/tablesaw-core" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
@@ -24,5 +25,6 @@
     <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/slf4j" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/spark" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/svnkit" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/tablesaw-core" recursive="false" />
   </library>
 </component>
