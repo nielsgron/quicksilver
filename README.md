@@ -1,2 +1,2 @@
-# SimpleServer
+# Quicksilver
 Simple Java Application Server
