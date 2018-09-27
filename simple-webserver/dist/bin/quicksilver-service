@@ -1,0 +1,47 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          Quicksilver
+# Required-Start:    $local_fs $remote_fs
+# Required-Stop:     $local_fs $remote_fs
+# Default-Start:     3 4 5
+# Default-Stop:      S 0 1 2 6
+# Short-Description: Quicksilver - Simple Application Server
+### END INIT INFO
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+APPLICATION="/home/quicksilver/quicksilver"
+TOMCAT="$APPLICATION/tomcat"
+ARCH=`uname -m`
+USER="quicksilver"
+MAX_MEM="1024m"
+CATALINA_HOME="$APPLICATION/tomcat"
+JRE32="$APPLICATION/jre"
+JRE64="$APPLICATION/jre"
+TOMCAT_ARGUMENTS="-cp $TOMCAT/bin/bootstrap.jar -user $USER -outfile $TOMCAT/logs/catalina.out -pidfile $TOMCAT/logs/catalina.pid -errfile $TOMCAT/logs/catalina.err -Xmx$MAX_MEM -XX:MaxPermSize=192m org.apache.catalina.startup.Bootstrap"
+
+case "$1" in
+  start)
+	cd $TOMCAT
+	case "$ARCH" in
+		"x86_64") JAVA_HOME=$JRE64 $APPLICATION/jsvc-qs $TOMCAT_ARGUMENTS ;;
+		*) JAVA_HOME=$JRE32 $APPLICATION/jsvc-qs $TOMCAT_ARGUMENTS ;;
+	esac
+	;;
+  stop)
+	kill `cat $TOMCAT/logs/catalina.pid`
+	;;
+  restart|force-reload)
+	kill `cat $TOMCAT/logs/catalina.pid`
+	cd $TOMCAT
+	case "$ARCH" in
+		"x86_64") JAVA_HOME=$JRE64 $APPLICATION/jsvc-qs $TOMCAT_ARGUMENTS ;;
+		*) JAVA_HOME=$JRE32 $APPLICATION/jsvc-qs $TOMCAT_ARGUMENTS ;;
+	esac
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload}" >&2
+	exit 3
+	;;
+esac
+
+:
