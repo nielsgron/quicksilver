@@ -87,7 +87,7 @@ public class DatabaseConnection {
     }
 
     private String getURL() {
-        return "jdbc:mysql://" + _host + ":" + _port + "/" + _database;
+        return "jdbc:mysql://" + _host + ":" + _port + "/" + _database + "?serverTimezone=UTC";
     }
 
     public Connection testDirectJDBCConnection() throws SQLException {
