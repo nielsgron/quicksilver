@@ -103,6 +103,24 @@ public class BasicDataSet implements DataSet {
         rows.sort(comparator);
     }
 
+    public DataSet createPropertyDataSetFromRow(int row) {
+
+        DataSet dataSet = new BasicDataSet(new BasicDataSetMeta( new String[] {"Name", "Value"}, new Class[] {String.class, String.class} ));
+
+        int columnCount = metaData.getColumnCount();
+        for (int i = 0; i < columnCount; i++) {
+
+            if ( getRowCount() > 0 ) {
+                dataSet.addRow(new Object[]{metaData.getColumnName(i), getValue(i, row)});
+            } else {
+                dataSet.addRow(new Object[]{metaData.getColumnName(i), ""});
+            }
+        }
+
+        return dataSet;
+    }
+
+
     public String toHtmlString(String title, int border) {
 
         StringBuilder html = new StringBuilder();
