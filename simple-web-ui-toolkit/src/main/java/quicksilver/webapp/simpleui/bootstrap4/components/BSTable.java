@@ -34,11 +34,19 @@ public class BSTable extends BSComponentContainer {
     private String title;
     private DataSet dataSet;
     private TableCellRenderer[] renderers;
+    private boolean showCaption = true;
+    private boolean showHeader = true;
 
     public BSTable(DataSet ds, String t) {
-        dataSet = ds;
-        title = t;
-        renderers = new TableCellRenderer[dataSet.getColumnCount()];
+        this(ds,t,false,true);
+    }
+
+    public BSTable(DataSet ds, String t, boolean showCaption, boolean showHeader) {
+        this.showCaption = showCaption;
+        this.showHeader = showHeader;
+        this.dataSet = ds;
+        this.title = t;
+        this.renderers = new TableCellRenderer[dataSet.getColumnCount()];
         defineAttributes();
     }
 
@@ -60,30 +68,34 @@ public class BSTable extends BSComponentContainer {
 
         StringBuilder html = new StringBuilder();
 
-        if ( title != null && title.trim().length() > 0 ) {
-            html.append("<caption>");
-            html.append(title);
-            html.append("</caption>");
-        }
-
-        html.append("<thead>");
-        html.append("<tr>");
-        for ( int j = 0; j < dataSet.getColumnCount(); j++ ) {
-            // Add Column
-            String align = "left";
-            Class valClass = dataSet.getColumnType(j);
-            if ( renderers[j] != null ) {
-                align = renderers[j].titleAlignment(valClass);
-            } else if ( Number.class.isAssignableFrom(valClass) ) {
-                align = "right";
+        if ( showCaption ) {
+            if (title != null && title.trim().length() > 0) {
+                html.append("<caption>");
+                html.append(title);
+                html.append("</caption>");
             }
-
-            html.append("<th scope=\"col\" style=\"text-align: " + align + ";\">");
-            html.append(dataSet.getColumnName(j));
-            html.append("</th>");
         }
-        html.append("</tr>");
-        html.append("</thead>");
+
+        if ( showHeader ) {
+            html.append("<thead>");
+            html.append("<tr>");
+            for (int j = 0; j < dataSet.getColumnCount(); j++) {
+                // Add Column
+                String align = "left";
+                Class valClass = dataSet.getColumnType(j);
+                if (renderers[j] != null) {
+                    align = renderers[j].titleAlignment(valClass);
+                } else if (Number.class.isAssignableFrom(valClass)) {
+                    align = "right";
+                }
+
+                html.append("<th scope=\"col\" style=\"text-align: " + align + ";\">");
+                html.append(dataSet.getColumnName(j));
+                html.append("</th>");
+            }
+            html.append("</tr>");
+            html.append("</thead>");
+        }
 
         html.append("<tbody>");
         for ( int i = 0; i < dataSet.getRowCount(); i++ ) {
@@ -107,7 +119,7 @@ public class BSTable extends BSComponentContainer {
                 } else {
                     String align = renderers[j].textAlignment(val);
                     html.append("<td style=\"text-align: " + align + ";\">");
-                    html.append(renderers[j].render(val));
+                    html.append(renderers[j].render(i,j,val));
 
                 }
                 html.append("</td>");
@@ -143,7 +155,7 @@ public class BSTable extends BSComponentContainer {
         }
 
         @Override
-        public String render(Object value) {
+        public String render(int row, int column, Object value) {
             if ( value == null ) {
                 return null;
             }
@@ -217,7 +229,7 @@ public class BSTable extends BSComponentContainer {
         }
 
         @Override
-        public String render(Object value) {
+        public String render(int row, int column, Object value) {
             if ( value == null ) {
                 return null;
             }
@@ -260,7 +272,7 @@ public class BSTable extends BSComponentContainer {
             }
             return align;
         }
-        public abstract String render(Object value);
+        public abstract String render(int row, int column, Object value);
 
     }
 
@@ -268,7 +280,7 @@ public class BSTable extends BSComponentContainer {
 
         String titleAlignment(Class valClass);
         String textAlignment(Object value);
-        String render(Object value);
+        String render(int row, int column, Object value);
 
     }
 
