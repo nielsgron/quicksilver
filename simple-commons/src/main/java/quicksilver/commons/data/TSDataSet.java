@@ -3,6 +3,7 @@ package quicksilver.commons.data;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import tech.tablesaw.api.*;
+import tech.tablesaw.api.ColumnType.*;
 import tech.tablesaw.columns.Column;
 
 import java.sql.Connection;
@@ -56,40 +57,10 @@ public class TSDataSet extends Table implements DataSet {
 
     @Override
     public Object getValue(int colidx, int rowidx) {
-        Object val = null;
+
         Column column = this.column(colidx);
+        return column.get(rowidx);
 
-        ColumnType type = column.type();
-        switch(type) {
-            case NUMBER:
-                NumberColumn numberColumn = (NumberColumn)column;
-                val = numberColumn.get(rowidx);
-                break;
-            case BOOLEAN:
-                BooleanColumn booleanColumn = (BooleanColumn)column;
-                val = booleanColumn.get(rowidx);
-                break;
-            case LOCAL_DATE:
-                DateColumn localDateColumn = (DateColumn)column;
-                val = localDateColumn.get(rowidx);
-                break;
-            case LOCAL_TIME:
-                TimeColumn timeColumn = (TimeColumn)column;
-                val = timeColumn.get(rowidx);
-                break;
-            case LOCAL_DATE_TIME:
-                DateTimeColumn localDateTimeColumn = (DateTimeColumn)column;
-                val = localDateTimeColumn.get(rowidx);
-                break;
-            case STRING:
-                StringColumn stringColumn = (StringColumn)column;
-                val = stringColumn.get(rowidx);
-                break;
-            default:
-                throw new IllegalStateException("Unhandled column type updating columns");
-        }
-
-        return val;
     }
 
     @Override

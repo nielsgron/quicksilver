@@ -102,6 +102,10 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
 
     public void renderBODY(HtmlStream stream) {
 
+        stream.writeln("<!-- Plotly JavaScript");
+        stream.writeln("================================================== -->");
+        stream.writeln("<script src=\"https://cdn.plot.ly/plotly-latest.min.js\"></script>");
+
         // Render Navbar if one is set
         BSNavbar navBar = getViewport().getNavbar();
         if ( navBar != null ) {

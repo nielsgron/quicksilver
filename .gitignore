@@ -1,2 +1,6 @@
 out
 .DS_Store
+simple-commons/target
+simple-webserver/target
+simple-web-ui-toolkit/target
+
