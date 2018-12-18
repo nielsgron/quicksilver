@@ -20,6 +20,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSComponentContainer;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNavbar;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSViewport;
+import quicksilver.webapp.simpleui.icons.FontAwesomeIcon;
 
 public abstract class HtmlPageBootstrap extends HtmlPage {
 
@@ -91,6 +92,9 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
 
         stream.writeln("<!-- Bootstrap core CSS -->");
         stream.writeln("<link href=\" " + getBootstrapBaseURI() + "/css/bootstrap.min.css\" rel=\"stylesheet\">");
+
+        stream.writeln("<!-- Font Awesome Icons -->");
+        stream.writeln(FontAwesomeIcon.getScriptCDN());
 
         String cssURL = getCustomCSSURL();
         if ( cssURL != null ) {

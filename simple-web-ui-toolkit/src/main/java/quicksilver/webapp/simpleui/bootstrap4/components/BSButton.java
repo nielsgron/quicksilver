@@ -29,8 +29,9 @@ public class BSButton extends BSComponent {
 
     private String text;
     private String hyperlink;
+    private boolean isActive;
     private boolean isOutline;
-    private boolean collapsed;
+    private boolean isCollapsed;
 
     public BSButton(String text) {
         this(text, BSComponent.Type.PRIMARY);
@@ -41,7 +42,7 @@ public class BSButton extends BSComponent {
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline, BSCollapse collapse) {
-        this(text, type, isOutline, "#" + collapse.getId(), true);
+        this(text, type, isOutline, "#" + collapse.getId(), true, false);
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline) {
@@ -49,14 +50,15 @@ public class BSButton extends BSComponent {
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink) {
-        this(text, type, isOutline, hyperLink, false);
+        this(text, type, isOutline, hyperLink, false, false);
     }
 
-    protected BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink, boolean collapsed) {
+    public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink, boolean isCollapsed, boolean isActive) {
         setType(type);
         this.text = text;
         this.hyperlink = hyperLink;
-        this.collapsed = collapsed;
+        this.isActive = isActive;
+        this.isCollapsed = isCollapsed;
         this.isOutline = isOutline;
         defineAttributes();
     }
@@ -75,7 +77,7 @@ public class BSButton extends BSComponent {
 
         addTagAttribute("class", getClassNames());
 
-        if (collapsed) {
+        if (isCollapsed) {
             addTagAttribute("data-toggle", "collapse");
             addTagAttribute("aria-expanded", "false");
             addTagAttribute("aria-controls", "collapseExample");
@@ -97,8 +99,18 @@ public class BSButton extends BSComponent {
         } else if ( getSize() == Size.LARGE ) {
             cNames.append(" btn-lg");
         }
+        if ( isActive ) {
+            cNames.append(" active");
+        }
 
         return cNames.toString();
+    }
+
+    // TODO : Remove this method later once framework is fixed
+    public void setSize(Size size) {
+        super.setSize(size);
+        removeTagAttribute("class");
+        addTagAttribute("class", getClassNames());
     }
 
 

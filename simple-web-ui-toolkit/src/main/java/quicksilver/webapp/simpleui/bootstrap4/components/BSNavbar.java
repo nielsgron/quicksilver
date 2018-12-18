@@ -53,10 +53,12 @@ public class BSNavbar extends BSComponentContainer {
         // Wrap the children components in the container tags
         //stream.writeln("<nav class=\"navbar\" navbar-expand-md navbar-dark bg-dark mb-4>");
         stream.writeln("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">");
-        if ( !isFluid ) {
+        if ( isFluid ) {
+            stream.writeln("<div class=\"container-fluid\">");
+        } else {
             stream.writeln("<div class=\"container\">");
         }
-        stream.writeln("<a class=\"navbar-brand\" href=\"/\">" + navBarBrand + "</a>");
+        renderHeader(stream);
 
         // Define for NavItem buttons
         stream.writeln("<button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">");
@@ -66,8 +68,30 @@ public class BSNavbar extends BSComponentContainer {
         // Start collapse
         stream.writeln("<div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">");
 
+        renderNav(stream);
+
+        renderNavRight(stream);
+
+        // Close collapse
+        stream.writeln("</div>");
+        // Close container
+        stream.writeln("</div>");
+        // Close navbar
+        stream.writeln("</nav>");
+
+    }
+
+    private void renderHeader(HtmlStream stream) {
+        //stream.writeln("<div class=\"navbar-header\">");
+        stream.writeln("<a class=\"navbar-brand\" href=\"/\">" + navBarBrand + "</a>");
+        //stream.writeln("<div>");
+    }
+
+    private void renderNav(HtmlStream stream) {
         // Start Navbar Nav
         stream.writeln("<ul class=\"navbar-nav mr-auto mt-2 mt-lg-0\">");
+        //stream.writeln("<ul class=\"nav navbar-nav\">");
+
         // Render each of the children components which are NavItems
         for (int i = 0; i < children.size(); i++) {
             if ( children.get(i) instanceof BSNavItem ) {
@@ -76,6 +100,10 @@ public class BSNavbar extends BSComponentContainer {
         }
         // Close Navbar Nav
         stream.writeln("</ul>");
+    }
+
+    private void renderNavRight(HtmlStream stream) {
+        stream.writeln("<ul class=\"nav navbar-nav navbar-right\">");
 
         // Render each of the children components which are NOT NavItems, like a form-inline
         for (int i = 0; i < children.size(); i++) {
@@ -83,17 +111,8 @@ public class BSNavbar extends BSComponentContainer {
                 children.get(i).render(stream);
             }
         }
-
-        // Close collapse
-        stream.writeln("</div>");
-
-        if ( !isFluid ) {
-            stream.writeln("</div>");
-        }
-
-        // Close container wrapper
-        stream.writeln("</nav>");
-
+        // Close Navbar Nav
+        stream.writeln("</ul>");
     }
 
 }

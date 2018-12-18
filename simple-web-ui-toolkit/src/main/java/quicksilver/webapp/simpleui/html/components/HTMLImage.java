@@ -40,4 +40,12 @@ public class HTMLImage extends HTMLComponent {
 
     }
 
+    public String getURL() {
+        return url;
+    }
+
+    public String getALT() {
+        return alt;
+    }
+
 }

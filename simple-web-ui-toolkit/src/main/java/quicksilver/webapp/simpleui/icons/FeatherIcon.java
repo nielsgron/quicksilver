@@ -23,6 +23,7 @@ public class FeatherIcon extends HTMLImage {
     public static FeatherIcon ACTIVITY = new FeatherIcon("/icons/feather/activity.svg");
     public static FeatherIcon DATABASE = new FeatherIcon("/icons/feather/database.svg");
     public static FeatherIcon DELETE = new FeatherIcon("/icons/feather/delete.svg");
+    public static FeatherIcon SETTINGS = new FeatherIcon("/icons/feather/settings.svg");
     public static FeatherIcon TRASH = new FeatherIcon("/icons/feather/trash.svg");
     public static FeatherIcon TRASH_2 = new FeatherIcon("/icons/feather/trash-2.svg");
 
@@ -36,6 +37,14 @@ public class FeatherIcon extends HTMLImage {
 
     protected FeatherIcon(FeatherIcon icon, String alt) {
         super(icon.url, alt);
+    }
+
+    public static String getScriptLocal() {
+        return "";
+    }
+
+    public static String getScriptCDN() {
+        return "<script src=\"https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js\"></script>";
     }
 
 }

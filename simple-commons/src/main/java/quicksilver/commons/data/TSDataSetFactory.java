@@ -1,16 +1,56 @@
 package quicksilver.commons.data;
 
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import tech.tablesaw.api.*;
 import tech.tablesaw.columns.Column;
+import tech.tablesaw.io.jdbc.SqlResultSetReader;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TSDataSetFactory {
+
+    private static final Map<Integer, ColumnType> SQL_TYPE_TO_TABLESAW_TYPE = initializeMap();
+
+    private static Map<Integer, ColumnType> initializeMap() {
+        return new HashMap<>(
+                new ImmutableMap.Builder<Integer, ColumnType>()
+                        .put(Types.BINARY, ColumnType.BOOLEAN)
+                        .put(Types.BOOLEAN, ColumnType.BOOLEAN)
+                        .put(Types.BIT, ColumnType.BOOLEAN)
+
+                        // TODO: DateTime on MySQL returns a java.sql.Date value, but DateColumn doesn't support this type
+                        .put(Types.DATE, ColumnType.LOCAL_DATE_TIME)
+                        //.put(Types.DATE, ColumnType.LOCAL_DATE)
+                        .put(Types.TIME, ColumnType.LOCAL_TIME)
+                        .put(Types.TIMESTAMP, ColumnType.LOCAL_DATE_TIME)
+
+                        .put(Types.DECIMAL, ColumnType.DOUBLE)
+                        .put(Types.DOUBLE, ColumnType.DOUBLE)
+                        .put(Types.FLOAT, ColumnType.DOUBLE)
+                        .put(Types.NUMERIC, ColumnType.DOUBLE)
+                        .put(Types.REAL, ColumnType.FLOAT)
+
+                        .put(Types.INTEGER, ColumnType.INTEGER)
+                        .put(Types.SMALLINT, ColumnType.SHORT)
+                        .put(Types.TINYINT, ColumnType.SHORT)
+                        // TODO: BIGINT on MySQL returns a Long value, but DoubleColumn doesn't support Long or BigInteger.
+                        .put(Types.BIGINT, ColumnType.LONG)
+                        //.put(Types.BIGINT, ColumnType.DOUBLE)
+
+                        .put(Types.CHAR, ColumnType.STRING)
+                        .put(Types.NCHAR, ColumnType.STRING)
+                        .put(Types.NVARCHAR, ColumnType.STRING)
+                        .put(Types.VARCHAR, ColumnType.STRING)
+                        .put(Types.LONGVARCHAR, ColumnType.TEXT)
+                        .put(Types.LONGNVARCHAR, ColumnType.TEXT)
+                        .build());
+    }
 
     public static TSDataSet createDataSetFromQuery(Connection dbConnection, String query, Object... params ) {
 
@@ -47,79 +87,16 @@ public class TSDataSetFactory {
 
         try {
             for (int i = 0; i < columnCount; i++) {
+                int columnTypeInt = metadata.getColumnType(i + 1);
                 colNames[i] = metadata.getColumnLabel(i + 1);
                 colTypes[i] = Class.forName(metadata.getColumnClassName(i + 1));
-
-                switch (metadata.getColumnType(i + 1)) {
-
-                    case -7 : // -7 BIT
-                        colObjects[i] = BooleanColumn.create(colNames[i]);
-                        break;
-                    case -6 : // -6 TINYINT
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case -5 : // -5 BIGINT
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case -4 : // -4 LONGVARBINARY
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case -3 : // -3 VARBINARY
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case -2 : // -2 BINARY
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case -1 : // -1 LONGVARCHAR
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case 0 : // 0 NULL
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case 1 : // 1 CHAR
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case 2 : // 2 NUMERIC
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 3 : // 3 DECIMAL
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 4 : // 4 INTEGER
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 5 : // 5 SMALLINT
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 6 : // 6 FLOAT
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 7 : // 7 REAL
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 8 : // 8 DOUBLE
-                        colObjects[i] = DoubleColumn.create(colNames[i]);
-                        break;
-                    case 12 : // 12 VARCHAR
-                        colObjects[i] = StringColumn.create(colNames[i]);
-                        break;
-                    case 91 : // 91 DATE
-                        colObjects[i] = DateColumn.create(colNames[i]);
-                        break;
-                    case 92 : // 92 TIME
-                        colObjects[i] = TimeColumn.create(colNames[i]);
-                        break;
-                    case 93 : // 93 TIMESTAMP
-                        colObjects[i] = DateTimeColumn.create(colNames[i]);
-                        break;
-                    default :  // 1111 OTHER
-                        colObjects[i] = StringColumn.create(colNames[i]);
-
-                }
+                colObjects[i] = createColumnByJDBCType(columnTypeInt, colNames[i]);
             }
         } catch ( Exception e ) {
             e.printStackTrace();
         }
+
+        //Table t = SqlResultSetReader.read(rs,"tableName");
 
         TSDataSetMeta meta = new TSDataSetMeta(colObjects, colNames, colTypes);
         TSDataSet dataSet = new TSDataSet(meta);
@@ -129,11 +106,64 @@ public class TSDataSetFactory {
             Object[] row = new Object[columnCount];
             for (int i = 0; i < columnCount; i++) {
                 row[i] = rs.getObject(i + 1);
+                if ( row[i] instanceof java.sql.Date ) {
+                    row[i] = new java.sql.Timestamp(((java.sql.Date)row[i]).getTime());
+                }
             }
             dataSet.addRow(row);
         }
 
         return dataSet;
+    }
+
+    public static Column createColumnByJDBCType(int type, String colName) {
+
+        ColumnType colType = SQL_TYPE_TO_TABLESAW_TYPE.get(type);
+
+        Column colObject;
+
+        if ( colType != null ) {
+            colObject = colType.create(colName);
+        } else {
+            colObject = StringColumn.create(colName);
+        }
+
+        return colObject;
+
+    }
+
+    public static Column createColumnByJavaType(Class type, String colName) {
+
+        Column colObject = null;
+
+        if ( type == String.class ) {
+            colObject = StringColumn.create(colName);
+        } else if ( type == Double.class ) {
+            colObject = DoubleColumn.create(colName);
+        } else if ( type == Float.class ) {
+            colObject = FloatColumn.create(colName);
+        } else if ( type == Long.class ) {
+            colObject = LongColumn.create(colName);
+        } else if ( type == Integer.class ) {
+            colObject = IntColumn.create(colName);
+        } else if ( type == Short.class ) {
+            colObject = ShortColumn.create(colName);
+        } else if ( type == BigDecimal.class ) {
+            colObject = DoubleColumn.create(colName);
+        } else if ( type == BigInteger.class ) {
+            colObject = DoubleColumn.create(colName);
+        } else if ( type == Boolean.class ) {
+            colObject = BooleanColumn.create(colName);
+        } else if ( type == java.sql.Timestamp.class ) {
+            colObject = DateTimeColumn.create(colName);
+        } else if ( type == java.sql.Date.class ) {
+            colObject = DateTimeColumn.create(colName);
+        } else if ( type == java.util.Date.class ) {
+            colObject = DateTimeColumn.create(colName);
+        }
+
+        return colObject;
+
     }
 
 }

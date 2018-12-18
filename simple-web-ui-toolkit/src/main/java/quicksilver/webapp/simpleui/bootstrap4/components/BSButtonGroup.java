@@ -31,7 +31,14 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSButtonGroup extends BSComponentContainer {
 
+    private boolean bToggle = false;
+
     public BSButtonGroup() {
+        defineAttributes();
+    }
+
+    public BSButtonGroup(boolean bToggle) {
+        this.bToggle = bToggle;
         defineAttributes();
     }
 
@@ -41,7 +48,12 @@ public class BSButtonGroup extends BSComponentContainer {
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
-        addTagAttribute("class", "btn-group mr-2");
+        if ( bToggle ) {
+            addTagAttribute("class", "btn-group btn-group-toggle mr-2");
+            addTagAttribute("data-toggle", "buttons");
+        } else {
+            addTagAttribute("class", "btn-group mr-2");
+        }
         addTagAttribute("role", "group");
 
     }

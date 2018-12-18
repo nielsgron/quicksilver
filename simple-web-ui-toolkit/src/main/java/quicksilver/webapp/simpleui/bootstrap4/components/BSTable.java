@@ -36,6 +36,7 @@ public class BSTable extends BSComponentContainer {
     private TableCellRenderer[] renderers;
     private boolean showCaption = true;
     private boolean showHeader = true;
+    private int rowLimit = -1;
 
     public BSTable(DataSet ds, String t) {
         this(ds,t,false,true);
@@ -62,6 +63,10 @@ public class BSTable extends BSComponentContainer {
 
     public void setTableCellRenderer(TableCellRenderer renderer, int column) {
         renderers[column] = renderer;
+    }
+
+    public void setRowLimit(int rowLimit) {
+        this.rowLimit = rowLimit;
     }
 
     public void renderBody(HtmlStream stream) {
@@ -98,7 +103,13 @@ public class BSTable extends BSComponentContainer {
         }
 
         html.append("<tbody>");
-        for ( int i = 0; i < dataSet.getRowCount(); i++ ) {
+
+        int maxRows = dataSet.getRowCount();
+        if ( rowLimit > 0 && rowLimit < maxRows ) {
+            maxRows = rowLimit;
+        }
+
+        for ( int i = 0; i < maxRows; i++ ) {
             // Add Row
             html.append("<tr>");
 
