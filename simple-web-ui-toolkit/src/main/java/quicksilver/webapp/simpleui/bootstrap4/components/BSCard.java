@@ -43,7 +43,7 @@ public class BSCard extends BSComponent {
     private final String style;
 
     public BSCard(HTMLComponent body) {
-        this(body, null, null);
+        this(body, null);
     }
 
     public BSCard(HTMLComponent body, String header) {
@@ -80,6 +80,12 @@ public class BSCard extends BSComponent {
         this(imageURL, imageAlt, null, null, text);
     }
 
+    private BSCard(HTMLComponent body, HeaderBody header, String style) {
+        this.body = body;
+        this.style = style;
+        this.header = header;
+    }
+
     @Override
     public void render(HtmlStream stream) {
         stream.write("<div class=\"card\"");
@@ -99,7 +105,7 @@ public class BSCard extends BSComponent {
     }
 
     public BSCard style(String s) {
-        return new BSCard(body, s);
+        return new BSCard(body, header, s);
     }
 
 
