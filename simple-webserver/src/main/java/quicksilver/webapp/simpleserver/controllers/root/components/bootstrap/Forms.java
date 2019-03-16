@@ -16,9 +16,15 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCheckInput;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCheckLabel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSForm;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSFormButton;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSInputDescription;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSTextInput;
+import quicksilver.webapp.simpleui.html.components.HTMLLabel;
 
 public class Forms extends AbstractComponentsBootstrapPage {
 
@@ -33,7 +39,20 @@ public class Forms extends AbstractComponentsBootstrapPage {
         panel.add(new BSText("<br>"));
         panel.add(new BSText("List of Forms Components"));
         panel.add(new BSText("<br>"));
-        panel.add(new BSForm("go", false));
+
+        BSForm form = new BSForm(null, true);
+        form.addAsGroup(new HTMLLabel("Email address", "emailInput"),
+                new BSTextInput("email", "Enter email", null, "emailHelp", "emailInput"),
+                new BSInputDescription("We'll never share your email with anyone else.", "emailHelp"));
+        form.addAsGroup(new HTMLLabel("Password", "passwordInput"),
+                new BSTextInput("password", "Password", null, null, "passwordInput")
+                );
+        form.addAsCheckGroup(new BSCheckInput("checkbox", null, null, null, "exampleCheck1"),
+                new BSCheckLabel("Check", "exampleCheck1")
+                );
+            form.add(new BSFormButton("Submit"));
+
+        panel.add(form);
 
         return panel;
     }

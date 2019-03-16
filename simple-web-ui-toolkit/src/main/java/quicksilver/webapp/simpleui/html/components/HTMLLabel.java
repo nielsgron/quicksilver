@@ -16,8 +16,11 @@
 
 package quicksilver.webapp.simpleui.html.components;
 
-public class HTMLLabel extends HTMLText {
+import quicksilver.webapp.simpleui.HtmlStream;
 
+public class HTMLLabel extends HTMLComponent {
+
+    private String text;
     private String forAttribute;
 
     public HTMLLabel(String text) {
@@ -25,7 +28,7 @@ public class HTMLLabel extends HTMLText {
     }
 
     public HTMLLabel(String text, String forAttribute) {
-        super(text);
+        this.text = text;
         this.forAttribute = forAttribute;
         defineAttributes();
     }
@@ -40,6 +43,11 @@ public class HTMLLabel extends HTMLText {
             addTagAttribute("for", forAttribute);
         }
 
+    }
+
+    @Override
+    public void renderBody(HtmlStream stream) {
+        stream.write(text);
     }
 
 }

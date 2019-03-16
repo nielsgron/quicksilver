@@ -64,6 +64,10 @@ public abstract class HTMLComponent {
             String name = tagAttributes.get(i).getKey();
             String value = tagAttributes.get(i).getValue();
 
+            if(value == null) {
+                continue;
+            }
+
             stream.write(" " + name + "=\"" + value + "\"" );
         }
 

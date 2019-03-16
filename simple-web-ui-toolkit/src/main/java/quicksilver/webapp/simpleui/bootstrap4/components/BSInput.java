@@ -23,26 +23,28 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
     Bootstrap Docs : ??? https://getbootstrap.com/docs/4.1/components/forms/
  */
 
-public class BSInput extends BSComponent {
+public abstract class BSInput extends BSComponent {
 
     private String input_type;
     private String input_placeholder;
     private String input_aria_label;
     private String input_aria_describedby;
+    private String input_id;
 
     public BSInput(String type) {
-        this(type, null, null, null);
+        this(type, null);
     }
 
     public BSInput(String type, String placeholder) {
-        this(type, placeholder, null, null);
+        this(type, placeholder, null, null, null);
     }
 
-    public BSInput(String type, String placeholder, String aria_label, String aria_describedby) {
+    public BSInput(String type, String placeholder, String aria_label, String aria_describedby, String id) {
         input_type = type;
         input_placeholder = placeholder;
         input_aria_label = aria_label;
         input_aria_describedby = aria_describedby;
+        input_id = id;
         defineAttributes();
     }
 
@@ -52,7 +54,7 @@ public class BSInput extends BSComponent {
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.FALSE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "input");
 
-        addTagAttribute("class", "form-control");
+        addTagAttribute("class", getClassNames());
         addTagAttribute("type", input_type);
 
         if ( input_placeholder != null && input_placeholder.length() > 0 ) {
@@ -64,7 +66,14 @@ public class BSInput extends BSComponent {
         if ( input_aria_describedby != null && input_aria_describedby.length() > 0 ) {
             addTagAttribute("aria-describedby", input_aria_describedby);
         }
+        if(input_id != null && input_id.length() > 0) {
+            addTagAttribute("id", input_id);
+        }
 
+    }
+
+    protected String getClassNames() {
+        return "form-control";
     }
 
 }
