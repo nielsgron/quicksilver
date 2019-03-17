@@ -57,7 +57,7 @@ public class BSForm extends BSComponentContainer {
         addTagAttribute("action", prop_action);
 
         if ( prop_isGET ) {
-            addTagAttribute("method", "get");
+            //no need, it's the default
         } else {
             addTagAttribute("method", "post");
         }
@@ -74,4 +74,13 @@ public class BSForm extends BSComponentContainer {
         add(group);
     }
 
+    public void addAsCheckGroup(HTMLComponent... c) {
+
+        BSFormCheckGroup group = new BSFormCheckGroup();
+        for ( int i = 0; i < c.length; i++ ) {
+            group.add(c[i]);
+        }
+
+        add(group);
+    }
 }

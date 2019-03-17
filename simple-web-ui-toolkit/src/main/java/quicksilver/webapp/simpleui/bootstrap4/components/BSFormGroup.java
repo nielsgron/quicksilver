@@ -35,8 +35,12 @@ public class BSFormGroup extends BSComponentContainer {
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
-        addTagAttribute("class", "form-group");
+        addTagAttribute("class", getClassNames());
 
+    }
+
+    protected String getClassNames() {
+        return "form-group";
     }
 
 }
