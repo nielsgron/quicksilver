@@ -1,0 +1,9 @@
+name: Quicksilver
+desc: Simple Java Application Server with a Bootstrap frontend
+site: https://github.com/nielsgron/quicksilver
+tags:
+- Java
+- bootstrap
+upforgrabs:
+  name: good first issue
+  link: https://github.com/nielsgron/quicksilver/labels/good%20first%20issue
