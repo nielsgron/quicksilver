@@ -71,7 +71,7 @@ public class TSDataSet implements DataSet {
 
     @Override
     public void removeRow(int rowidx) {
-        // TODO : Can't find a way to remove a row in TableSaw
+	table.dropRows(rowidx);
     }
 
     @Override
