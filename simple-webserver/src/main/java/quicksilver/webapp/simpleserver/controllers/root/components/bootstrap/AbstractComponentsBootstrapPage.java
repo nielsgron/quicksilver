@@ -21,6 +21,7 @@ import quicksilver.webapp.simpleserver.controllers.root.components.AbstractCompo
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNavPill;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public abstract class AbstractComponentsBootstrapPage extends AbstractComponentsPage {
 
@@ -37,13 +38,14 @@ public abstract class AbstractComponentsBootstrapPage extends AbstractComponents
         }
 
         BSPanel panel = new BSPanel();
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         BSText gettingStartedHeader = new BSText("Getting Started");
         panel.add(gettingStartedHeader);
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(2));
 
         panel.add(sideBar);
+
+        panel.add(new HTMLLineBreak(1));
 
         return panel;
     }

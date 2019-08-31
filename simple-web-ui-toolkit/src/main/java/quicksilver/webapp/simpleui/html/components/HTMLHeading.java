@@ -16,15 +16,13 @@
 
 package quicksilver.webapp.simpleui.html.components;
 
-public class HTMLHeading extends HTMLText {
+public class HTMLHeading extends HTMLComponentContainer {
 
     private int level;
 
     public HTMLHeading(String text, int level) {
-        super(text);
         this.level = level;
-
-        defineAttributes();
+        add(new HTMLText(text));
     }
 
     protected void defineAttributes() {

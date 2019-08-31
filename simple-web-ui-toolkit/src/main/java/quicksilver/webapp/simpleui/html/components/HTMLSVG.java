@@ -26,7 +26,7 @@ public class HTMLSVG extends HTMLComponent {
     public HTMLSVG(String url, String alt) {
         this.url = url;
         this.alt = alt;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

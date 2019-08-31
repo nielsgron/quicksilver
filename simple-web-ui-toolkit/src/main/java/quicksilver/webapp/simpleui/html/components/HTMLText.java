@@ -26,6 +26,10 @@ public class HTMLText extends HTMLComponent {
         text = txt;
     }
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream stream) {
         stream.write(text);

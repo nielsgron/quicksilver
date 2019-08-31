@@ -26,7 +26,7 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 public class BSFormGroup extends BSComponentContainer {
 
     public BSFormGroup() {
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

@@ -63,6 +63,10 @@ public class HTMLComponentContainer extends HTMLComponent {
         return children.size();
     }
 
+    protected void defineAttributes() {
+
+    }
+
     public void renderBody(HtmlStream stream) {
 
         // Render each of the children components

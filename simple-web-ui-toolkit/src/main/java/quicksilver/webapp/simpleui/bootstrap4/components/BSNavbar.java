@@ -48,6 +48,10 @@ public class BSNavbar extends BSComponentContainer {
         }
     }
 
+    protected void defineAttributes() {
+        // TODO: Need to implement
+    }
+
     public void render(HtmlStream stream) {
 
         // Wrap the children components in the container tags

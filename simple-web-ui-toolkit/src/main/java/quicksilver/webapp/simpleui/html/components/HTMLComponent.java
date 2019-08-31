@@ -27,6 +27,7 @@ public abstract class HTMLComponent {
     protected final String COMPONENT_ATTRIB_NAME = "Name";
     protected final String COMPONENT_ATTRIB_TAG_NAME = "tagName";
     protected final String COMPONENT_ATTRIB_TAG_CLOSE = "tagClose";
+    protected final String COMPONENT_ATTRIB_END_WITH_LINEBREAK = "endLineBreak";
 
     protected HashMap<String, Object> componentAttributes = new HashMap<String, Object>();
     protected ArrayList<AbstractMap.SimpleEntry<String, String>> tagAttributes = new ArrayList<AbstractMap.SimpleEntry<String, String>>();
@@ -50,11 +51,18 @@ public abstract class HTMLComponent {
         }
     }
 
+    protected abstract void defineAttributes();
+
     public void renderBody(HtmlStream stream) {
         // Do nothing by default, but can be overriden
     }
 
     public void render(HtmlStream stream) {
+
+        // Call this to tell the implementing component to build the attributes for rendering
+        defineAttributes();
+
+        Boolean eol = (Boolean)componentAttributes.get(COMPONENT_ATTRIB_END_WITH_LINEBREAK);
 
         // Open Tag
         stream.write("<");
@@ -82,7 +90,13 @@ public abstract class HTMLComponent {
         if ( Boolean.TRUE.equals(tagClose) ) {
             stream.write("</");
             stream.write((String) componentAttributes.get(COMPONENT_ATTRIB_TAG_NAME));
-            stream.writeln(">");
+
+            if ( eol != null && eol.equals(Boolean.FALSE )) {
+                stream.write(">");
+            } else {
+                stream.writeln(">");
+            }
+
         }
 
     }

@@ -24,4 +24,9 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
  */
 
 public class BSTextArea extends BSComponentContainer {
+
+    protected void defineAttributes() {
+
+    }
+
 }

@@ -24,4 +24,9 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
  */
 
 public class BSSelect extends BSComponentContainer {
+
+    protected void defineAttributes() {
+
+    }
+
 }

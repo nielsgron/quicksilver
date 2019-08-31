@@ -43,6 +43,10 @@ public class BSContainer extends BSComponentContainer {
         }
     }
 
+    protected void defineAttributes() {
+
+    }
+
     public void render(HtmlStream stream) {
 
         if (nRows == 0 || nColumns == 0) {

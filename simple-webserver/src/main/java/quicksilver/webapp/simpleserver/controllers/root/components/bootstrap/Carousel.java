@@ -19,6 +19,7 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCarousel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public class Carousel extends AbstractComponentsBootstrapPage {
 
@@ -30,9 +31,10 @@ public class Carousel extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSText("List of Carousel Components"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
+
         panel.add(new BSCarousel());
 
         return panel;

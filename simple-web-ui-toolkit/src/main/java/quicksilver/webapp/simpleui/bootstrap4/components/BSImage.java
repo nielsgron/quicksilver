@@ -27,6 +27,10 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 public class BSImage extends BSComponent {
 
+    protected void defineAttributes() {
+
+    }
+
     public void render(HtmlStream stream) {
 
     }

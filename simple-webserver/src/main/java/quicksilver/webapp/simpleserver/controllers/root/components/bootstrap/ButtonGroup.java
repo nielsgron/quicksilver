@@ -17,7 +17,9 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
 import quicksilver.webapp.simpleui.bootstrap4.components.*;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class ButtonGroup extends AbstractComponentsBootstrapPage {
 
@@ -29,9 +31,9 @@ public class ButtonGroup extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Button Group Components"));
         panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Group Examples", 4));
+        panel.add(new HTMLThematicBreak());
 
         BSButtonGroup g = new BSButtonGroup();
         g.add(new BSButton("Button 1"));
@@ -39,8 +41,12 @@ public class ButtonGroup extends AbstractComponentsBootstrapPage {
         g.add(new BSButton("Button 3"));
 
         panel.add(g);
-        panel.add(new HTMLLineBreak(2));
 
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Toolbar Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Button Toolbar
         BSButtonGroup g1 = new BSButtonGroup();
         g1.add(new BSButton("1"));
         g1.add(new BSButton("2"));
@@ -62,6 +68,24 @@ public class ButtonGroup extends AbstractComponentsBootstrapPage {
         toolbar.add(g3);
 
         panel.add(toolbar);
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Group Size Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Button Group Size
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Group Nesting Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Button Group Nesting
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Vertical Button Group Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Vertical Button Groups
 
         return panel;
     }

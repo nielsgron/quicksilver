@@ -34,7 +34,7 @@ import quicksilver.webapp.simpleui.HtmlStream;
 public class BSBreadcrumb extends BSComponentContainer {
 
     public BSBreadcrumb() {
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

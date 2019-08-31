@@ -22,6 +22,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Buttons extends AbstractComponentsBootstrapPage {
 
@@ -33,11 +34,9 @@ public class Buttons extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Buttons Components"));
         panel.add(new HTMLLineBreak(2));
-
-        panel.add(new HTMLHeading("Example Buttons", 3));
+        panel.add(new HTMLHeading("Button Examples", 4));
+        panel.add(new HTMLThematicBreak());
 
         panel.add(new BSButton("Primary", BSComponent.Type.PRIMARY));
         panel.add(new BSButton("Secondary", BSComponent.Type.SECONDARY));
@@ -50,8 +49,8 @@ public class Buttons extends AbstractComponentsBootstrapPage {
         panel.add(new BSButton("Link", BSComponent.Type.LINK));
 
         panel.add(new HTMLLineBreak(2));
-
-        panel.add(new HTMLHeading("Outline Buttons", 3));
+        panel.add(new HTMLHeading("Outline Button Examples", 4));
+        panel.add(new HTMLThematicBreak());
 
         panel.add(new BSButton("Primary", BSComponent.Type.PRIMARY, true));
         panel.add(new BSButton("Secondary", BSComponent.Type.SECONDARY, true));
@@ -62,6 +61,37 @@ public class Buttons extends AbstractComponentsBootstrapPage {
         panel.add(new BSButton("Light", BSComponent.Type.LIGHT, true));
         panel.add(new BSButton("Dark", BSComponent.Type.DARK, true));
         panel.add(new BSButton("Link", BSComponent.Type.LINK, true));
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Size Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Button Sizes
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Block Button Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Block Buttons
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Active & Disabled State Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Button Active & Disabled States
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Button Toggle State Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Button Toggle States
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Check Box and Radio Button Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Checkbox and Radio Button
+
 
         return panel;
     }

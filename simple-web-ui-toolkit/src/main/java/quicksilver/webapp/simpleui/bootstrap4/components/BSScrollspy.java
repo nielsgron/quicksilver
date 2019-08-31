@@ -27,6 +27,10 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 public class BSScrollspy extends BSComponent {
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream stream) {
 

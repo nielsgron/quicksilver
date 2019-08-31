@@ -35,7 +35,7 @@ public class BSBreadcrumbItem extends BSComponentContainer {
 
     public BSBreadcrumbItem(boolean active) {
         isActive = active;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

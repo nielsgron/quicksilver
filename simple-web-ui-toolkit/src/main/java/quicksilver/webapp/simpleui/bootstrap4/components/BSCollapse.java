@@ -41,6 +41,10 @@ public class BSCollapse extends BSComponent {
         return id;
     }
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream stream) {
         HTMLDiv div = new HTMLDiv("collapse") {

@@ -34,12 +34,12 @@ public class BSButtonGroup extends BSComponentContainer {
     private boolean bToggle = false;
 
     public BSButtonGroup() {
-        defineAttributes();
+
     }
 
     public BSButtonGroup(boolean bToggle) {
         this.bToggle = bToggle;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

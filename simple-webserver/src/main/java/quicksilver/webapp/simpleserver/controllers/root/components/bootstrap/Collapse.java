@@ -22,6 +22,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCollapse;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public class Collapse extends AbstractComponentsBootstrapPage {
 
@@ -33,12 +34,15 @@ public class Collapse extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSText("List of Collapse Components"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
+
         BSCollapse collapse = new BSCollapse(new BSCard("A card", null, "Collapsed cards may become visible again with a buton, as seen above"));
+
         panel.add(new BSButton("Link with href", BSComponent.Type.PRIMARY, false, collapse));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
+
         panel.add(collapse);
 
         return panel;

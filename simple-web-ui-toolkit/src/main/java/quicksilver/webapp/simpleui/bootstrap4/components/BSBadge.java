@@ -20,6 +20,8 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 /*
     Example : <span class="badge badge-primary">Primary</span>
+            : <span class="badge badge-pill badge-primary">Primary</span>
+            : <a href="#" class="badge badge-primary">Primary</a>
 
     W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_badges.asp
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/badge/
@@ -34,6 +36,9 @@ public class BSBadge extends BSComponent {
     public BSBadge(String txt) {
         this(txt, Type.PRIMARY);
     }
+    public BSBadge(String txt, boolean bPill) {
+        this(txt, Type.PRIMARY, null, bPill);
+    }
     public BSBadge(String txt, Type type) {
         this(txt, type, null, false);
     }
@@ -42,7 +47,7 @@ public class BSBadge extends BSComponent {
         labelLink = link;
         isPill = bPill;
         setType(type);
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

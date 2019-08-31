@@ -93,6 +93,10 @@ public class BSProgress extends BSComponent {
         return new BSProgress(this.percentage, this.label, this.background, this.striped, true);
     }
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream stream) {
         HTMLDiv outer = new HTMLDiv("progress");

@@ -16,10 +16,11 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import quicksilver.webapp.simpleui.bootstrap4.components.BSAlert;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.bootstrap4.components.*;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
+import quicksilver.webapp.simpleui.html.components.HTMLHyperlink;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Alerts extends AbstractComponentsBootstrapPage {
 
@@ -31,14 +32,13 @@ public class Alerts extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("List of Alert Components"));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Alert Examples", 4));
+        panel.add(new HTMLThematicBreak());
 
         BSAlert alert = new BSAlert(BSComponent.Type.PRIMARY);
         alert.add(new BSText("This is a primary alert—check it out!"));
 
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("<br>"));
         panel.add(alert);
 
         alert = new BSAlert(BSComponent.Type.SECONDARY);
@@ -68,6 +68,34 @@ public class Alerts extends AbstractComponentsBootstrapPage {
         alert = new BSAlert(BSComponent.Type.DARK);
         alert.add(new BSText("This is a dark alert—check it out!"));
         panel.add(alert);
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Content & Link Example", 4));
+        panel.add(new HTMLThematicBreak());
+
+        alert = new BSAlert(BSComponent.Type.PRIMARY);
+        alert.add(new HTMLHeading("Well Done!", 4));
+        alert.add(new BSText("A simple info alert with "));
+        alert.add(new HTMLHyperlink("an example link", "#"));
+        alert.add(new BSText(". Give it a click if you like."));
+
+        alert.add(new HTMLThematicBreak());
+
+        alert.add(new BSText("Whenever you need to, be sure to use margin utilities to keep things nice and tidy."));
+
+        panel.add(alert);
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Dismissable Example", 4));
+        panel.add(new HTMLThematicBreak());
+
+        alert = new BSAlert(BSComponent.Type.WARNING, true);
+        alert.add(new BSText("Holy guacamole! You should check in on some of those fields below."));
+        alert.add(new BSButtonClose());
+
+        panel.add(alert);
+
+        panel.add(new HTMLLineBreak(1));
 
         return panel;
     }

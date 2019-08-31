@@ -24,7 +24,7 @@ public class HTMLImage extends HTMLComponent {
     public HTMLImage(String url, String alt) {
         this.url = url;
         this.alt = alt;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

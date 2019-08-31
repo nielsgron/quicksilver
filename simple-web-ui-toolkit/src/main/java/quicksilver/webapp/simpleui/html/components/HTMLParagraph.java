@@ -19,12 +19,12 @@ package quicksilver.webapp.simpleui.html.components;
 public class HTMLParagraph extends HTMLComponentContainer {
 
     public HTMLParagraph() {
-        defineAttributes();
+
     }
 
     public HTMLParagraph(String text) {
         add(new HTMLText(text));
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

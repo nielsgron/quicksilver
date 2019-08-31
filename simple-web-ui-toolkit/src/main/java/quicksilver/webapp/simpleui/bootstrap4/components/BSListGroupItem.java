@@ -37,7 +37,7 @@ public class BSListGroupItem extends BSComponentContainer {
         itemName = name;
         urlReference = url;
         add(new BSText(name));
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

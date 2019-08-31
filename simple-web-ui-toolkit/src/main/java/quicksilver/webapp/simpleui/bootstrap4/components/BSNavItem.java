@@ -34,7 +34,7 @@ public class BSNavItem extends BSComponent {
     public BSNavItem(String name, String url) {
         itemName = name;
         urlReference = url;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

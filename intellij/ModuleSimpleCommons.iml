@@ -13,47 +13,62 @@
     <orderEntry type="library" exported="" name="Maven: commons-dbutils:commons-dbutils:1.7" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.apache.commons:commons-lang3:3.8.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-core:0.30.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.poi:poi:4.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: commons-codec:commons-codec:1.11" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.commons:commons-collections4:4.2" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.commons:commons-math3:3.6.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-core:0.32.7" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.google.guava:guava:25.1-jre" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.checkerframework:checker-qual:2.0.0" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.google.errorprone:error_prone_annotations:2.1.3" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.univocity:univocity-parsers:2.7.5" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.commons:commons-math3:3.6.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.jsoup:jsoup:1.11.3" level="project" />
     <orderEntry type="library" exported="" name="Maven: it.unimi.dsi:fastutil:8.2.1" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.roaringbitmap:RoaringBitmap:0.7.14" level="project" />
-    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-beakerx:0.30.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-aggregate:0.30.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-jsplot:0.30.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: io.pebbletemplates:pebble:2.6.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.coverity.security:coverity-escapers:1.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.univocity:univocity-parsers:2.7.5" level="project" />
+    <orderEntry type="library" exported="" name="Maven: io.github.classgraph:classgraph:4.8.22" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-beakerx:0.32.7" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-aggregate:0.32.7" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-excel:0.32.7" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.poi:poi-ooxml:4.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.poi:poi-ooxml-schemas:4.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.xmlbeans:xmlbeans:3.0.2" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.commons:commons-compress:1.18" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.github.virtuald:curvesapi:1.05" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-html:0.32.7" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.jsoup:jsoup:1.11.3" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-json:0.32.7" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.8" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.github.wnameless:json-flattener:0.6.0" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.eclipsesource.minimal-json:minimal-json:0.9.5" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.commons:commons-text:1.4" level="project" />
+    <orderEntry type="library" exported="" name="Maven: tech.tablesaw:tablesaw-jsplot:0.32.7" level="project" />
+    <orderEntry type="library" exported="" name="Maven: io.pebbletemplates:pebble:3.0.8" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.unbescape:unbescape:1.1.6.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.zaxxer:HikariCP:3.2.0" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.javalite:activejdbc:2.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.javalite:javalite-common:2.2" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.4" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.4" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.javalite:app-config:2.2" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.sparkjava:spark-core:2.8.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-server:9.4.12.v20180830" level="project" />
+    <orderEntry type="library" exported="" name="Maven: com.sparkjava:spark-core:2.9.1" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-server:9.4.18.v20190429" level="project" />
     <orderEntry type="library" exported="" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-http:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-util:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-io:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-webapp:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-xml:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-security:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-server:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-common:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-client:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-servlet:9.4.12.v20180830" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.4.12.v20180830" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-http:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-util:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-io:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-webapp:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-xml:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-servlet:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-security:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-server:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-common:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty:jetty-client:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-servlet:9.4.18.v20190429" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.4.18.v20190429" level="project" />
     <orderEntry type="library" exported="" name="Maven: mysql:mysql-connector-java:8.0.12" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.google.protobuf:protobuf-java:2.6.0" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.eclipse.jgit:org.eclipse.jgit:5.1.3.201810200350-r" level="project" />

@@ -20,6 +20,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNav;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public class Navs extends AbstractComponentsBootstrapPage {
 
@@ -31,9 +32,10 @@ public class Navs extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSText("List of Navs Components"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
+
         panel.add(new BSNav(BSNav.STYLE_TAB, BSComponent.VERTICAL_ALIGNMENT));
 
         return panel;

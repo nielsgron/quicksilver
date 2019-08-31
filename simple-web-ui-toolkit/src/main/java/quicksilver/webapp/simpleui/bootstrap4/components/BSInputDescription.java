@@ -11,7 +11,7 @@ public class BSInputDescription extends HTMLComponent {
     public BSInputDescription(String text, String id) {
         this.text = text;
         this.id = id;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

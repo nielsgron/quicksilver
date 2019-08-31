@@ -27,6 +27,10 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 public class BSNavbarBrand extends BSComponent {
 
+    protected void defineAttributes() {
+
+    }
+
     public void render(HtmlStream stream) {
 
     }

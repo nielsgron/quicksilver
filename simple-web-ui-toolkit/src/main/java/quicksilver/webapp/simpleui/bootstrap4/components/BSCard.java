@@ -86,6 +86,10 @@ public class BSCard extends BSComponent {
         this.header = header;
     }
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream stream) {
         stream.write("<div class=\"card\"");
@@ -128,6 +132,10 @@ public class BSCard extends BSComponent {
             this.header = header;
         }
 
+        protected void defineAttributes() {
+
+        }
+
         @Override
         public void render(HtmlStream stream) {
             stream.writeln("<div class=\"card-header\">");
@@ -142,6 +150,10 @@ public class BSCard extends BSComponent {
 
         MultiBody(HTMLComponent... children) {
             this.children = children;
+        }
+
+        protected void defineAttributes() {
+
         }
 
         @Override
@@ -160,6 +172,10 @@ public class BSCard extends BSComponent {
 
         public ListBody(String... list) {
             this.list = list;
+        }
+
+        protected void defineAttributes() {
+
         }
 
         @Override
@@ -190,6 +206,10 @@ public class BSCard extends BSComponent {
             this.subTitle = subTitle;
             this.text = text;
             this.links = links;
+        }
+
+        protected void defineAttributes() {
+
         }
 
         @Override

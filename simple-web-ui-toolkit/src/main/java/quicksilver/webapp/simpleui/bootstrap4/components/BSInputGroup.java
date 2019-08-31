@@ -25,5 +25,8 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSInputGroup extends BSComponentContainer {
 
+    protected void defineAttributes() {
+
+    }
 
 }

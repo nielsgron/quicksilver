@@ -25,6 +25,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSTextInput;
 import quicksilver.webapp.simpleui.html.components.HTMLLabel;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public class Forms extends AbstractComponentsBootstrapPage {
 
@@ -36,9 +37,9 @@ public class Forms extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSText("List of Forms Components"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
 
         BSForm form = new BSForm(null, true);
         form.addAsGroup(new HTMLLabel("Email address", "emailInput"),

@@ -26,7 +26,7 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 public class BSListGroup extends BSComponentContainer {
 
     public BSListGroup() {
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

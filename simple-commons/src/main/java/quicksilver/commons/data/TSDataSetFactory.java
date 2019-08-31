@@ -10,6 +10,7 @@ import tech.tablesaw.io.jdbc.SqlResultSetReader;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -160,6 +161,8 @@ public class TSDataSetFactory {
             colObject = DateTimeColumn.create(colName);
         } else if ( type == java.util.Date.class ) {
             colObject = DateTimeColumn.create(colName);
+        } else if ( type == LocalDate.class ) {
+            colObject = DateColumn.create(colName);
         }
 
         return colObject;

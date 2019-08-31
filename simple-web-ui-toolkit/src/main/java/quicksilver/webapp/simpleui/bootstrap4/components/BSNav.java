@@ -35,7 +35,7 @@ public class BSNav extends BSComponentContainer {
     public BSNav(int style, int alignment) {
         prop_style = style;
         prop_alignment = alignment;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

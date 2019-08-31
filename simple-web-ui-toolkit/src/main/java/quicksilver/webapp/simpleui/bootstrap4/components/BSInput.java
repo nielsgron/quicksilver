@@ -45,7 +45,7 @@ public abstract class BSInput extends BSComponent {
         input_aria_label = aria_label;
         input_aria_describedby = aria_describedby;
         input_id = id;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

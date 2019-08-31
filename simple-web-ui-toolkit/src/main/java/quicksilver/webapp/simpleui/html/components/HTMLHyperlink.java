@@ -22,19 +22,19 @@ public class HTMLHyperlink extends HTMLComponentContainer {
 
     public HTMLHyperlink(String url) {
         this.url = url;
-        defineAttributes();
+
     }
 
     public HTMLHyperlink(String text, String url) {
         this.url = url;
         add(new HTMLText(text));
-        defineAttributes();
+
     }
 
     public HTMLHyperlink(HTMLComponent component, String url) {
         this.url = url;
         add(component);
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {
@@ -42,6 +42,7 @@ public class HTMLHyperlink extends HTMLComponentContainer {
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Hyperlink");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "a");
+        putComponentAttribute(COMPONENT_ATTRIB_END_WITH_LINEBREAK, Boolean.FALSE);
 
         addTagAttribute("href", url);
 

@@ -28,7 +28,7 @@ public class BSColumn extends BSComponentContainer {
     private int prop_columnWeight = -1;
 
     public BSColumn() {
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

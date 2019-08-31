@@ -48,7 +48,7 @@ public class BSTable extends BSComponentContainer {
         this.dataSet = ds;
         this.title = t;
         this.renderers = new TableCellRenderer[dataSet.getColumnCount()];
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

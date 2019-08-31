@@ -30,6 +30,10 @@ public class HTMLLineBreak extends HTMLComponent {
         this.numberOfLineBreaks = numberOfLineBreaks;
     }
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream stream) {
         for (int i = 0; i < numberOfLineBreaks; i++ ) {

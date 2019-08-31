@@ -19,6 +19,7 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSProgress;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public class Progress extends AbstractComponentsBootstrapPage {
 
@@ -30,51 +31,50 @@ public class Progress extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSText("List of Progress Components"));
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(2));
 
         panel.add(new BSProgress(0));
         //XXX: The demo has a margin-top on progress
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(25));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(50));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(75));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(100));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
 
         panel.add(new BSText("<h1>Labels</h1>"));
         panel.add(new BSProgress(25, "25%"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
 
         panel.add(new BSText("<h1>Backgrounds</h1>"));
         panel.add(new BSProgress(25).background(BSProgress.Background.success));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(50).background(BSProgress.Background.info));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(75).background(BSProgress.Background.warning));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(100).background(BSProgress.Background.danger));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
 
         //TODO: multiple bars?
 
         panel.add(new BSText("<h1>Striped</h1>"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(10).striped());
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(25).background(BSProgress.Background.success).striped());
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(50).background(BSProgress.Background.info).striped());
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(75).background(BSProgress.Background.warning).striped());
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
         panel.add(new BSProgress(100).background(BSProgress.Background.danger).striped());
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(1));
 
         panel.add(new BSText("<h1>Animated stripes</h1>"));
         panel.add(new BSProgress(75).striped().animated());

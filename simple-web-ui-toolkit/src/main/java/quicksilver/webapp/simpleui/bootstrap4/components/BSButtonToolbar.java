@@ -32,10 +32,12 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/button-group/
  */
 
+import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+
 public class BSButtonToolbar extends BSComponentContainer {
 
     public BSButtonToolbar() {
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {
@@ -66,6 +68,43 @@ public class BSButtonToolbar extends BSComponentContainer {
         }
         add(g);
 
+    }
+
+    public void addButtons(BSButton ...buttons) {
+
+        for (BSButton b: buttons) {
+            add(b);
+        }
+
+    }
+
+    public void setActiveButton(String title) {
+        int count = getChildrenCount();
+        for ( int i = 0; i < count; i++ ) {
+            HTMLComponent component = get(i);
+            if ( component instanceof BSButton) {
+                if ( ((BSButton)component).getText().equals(title) ) {
+                    ((BSButton)component).setActive(true);
+                } else {
+                    ((BSButton)component).setActive(false);
+                }
+            } else if (component instanceof BSButtonGroup) {
+
+                BSButtonGroup bg = (BSButtonGroup)component;
+
+                int groupCount = bg.getChildrenCount();
+                for ( int j = 0; j < groupCount; j++ ) {
+                    HTMLComponent groupComponent = bg.get(j);
+                    if ( groupComponent instanceof BSButton) {
+                        if ( ((BSButton)groupComponent).getText().equals(title) ) {
+                            ((BSButton)groupComponent).setActive(true);
+                        } else {
+                            ((BSButton)groupComponent).setActive(false);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

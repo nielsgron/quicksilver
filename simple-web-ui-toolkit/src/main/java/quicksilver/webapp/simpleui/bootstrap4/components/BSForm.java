@@ -39,7 +39,7 @@ public class BSForm extends BSComponentContainer {
         prop_isInline = bInline;
         prop_action = action;
         prop_isGET = isGET;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

@@ -29,7 +29,7 @@ public class BSRow extends BSComponentContainer {
 
     public BSRow(int columns) {
         initColumns(columns);
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

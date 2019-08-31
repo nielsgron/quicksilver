@@ -27,12 +27,12 @@ public class HTMLDiv extends HTMLComponentContainer {
     private String borderBottom;
 
     public HTMLDiv() {
-        defineAttributes();
+
     }
 
     public HTMLDiv(String classNames) {
         this.classNames = classNames;
-        defineAttributes();
+
     }
 
     public HTMLDiv(String textAlign, String padding, String margin, String color, String bgColor, String borderBottom) {
@@ -43,7 +43,7 @@ public class HTMLDiv extends HTMLComponentContainer {
         this.color = color;
         this.bgColor = bgColor;
         this.borderBottom = borderBottom;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

@@ -17,7 +17,7 @@
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
 /*
-    Example : <div class="alert alert-danger alert-dismissible fade show">
+    Example : <div class="alert alert-primary alert-dismissible fade show">
 
     W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_alerts.asp
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/alerts/
@@ -25,13 +25,28 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSAlert extends BSComponentContainer {
 
+    private boolean isDismissible = false;
+
     public BSAlert() {
         this(BSComponent.Type.PRIMARY);
     }
 
     public BSAlert(BSComponent.Type cType) {
         setType(cType);
-        defineAttributes();
+    }
+
+    public BSAlert(BSComponent.Type cType, boolean isDismissible) {
+        setType(cType);
+        setDismissible(isDismissible);
+    }
+
+    public void setDismissible(boolean dismissible) {
+        isDismissible = dismissible;
+    }
+
+    public void addDismissButton() {
+        // <button type="button" class="close" data-dismiss="alert">&times;</button>
+        //add(new BSButton());
     }
 
     protected void defineAttributes() {
@@ -50,6 +65,10 @@ public class BSAlert extends BSComponentContainer {
 
         cNames.append("alert");
         cNames.append(" alert-").append(getType().getTypeName());
+
+        if ( isDismissible ) {
+            cNames.append(" alert-dismissible fade show");
+        }
 
         return cNames.toString();
     }

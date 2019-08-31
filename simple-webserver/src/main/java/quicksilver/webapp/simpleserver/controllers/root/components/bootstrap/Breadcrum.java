@@ -17,6 +17,9 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
 import quicksilver.webapp.simpleui.bootstrap4.components.*;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Breadcrum extends AbstractComponentsBootstrapPage {
 
@@ -28,16 +31,23 @@ public class Breadcrum extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("List of Breadcrum Components"));
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Breadcrum Examples", 4));
+        panel.add(new HTMLThematicBreak());
 
         BSBreadcrumb crumb = new BSBreadcrumb();
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(true))).add(new BSText("Home"));
+        panel.add(crumb);
+
+        crumb = new BSBreadcrumb();
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSHyperlink("Home", "#"));
+        ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(true))).add(new BSText("Library"));
+        panel.add(crumb);
+
+        crumb = new BSBreadcrumb();
         ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSHyperlink("Home", "#"));
         ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(false))).add(new BSHyperlink("Library", "#"));
         ((BSBreadcrumbItem)crumb.add(new BSBreadcrumbItem(true))).add(new BSText("Data"));
-
         panel.add(crumb);
 
         return panel;

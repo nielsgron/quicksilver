@@ -34,6 +34,10 @@ public class BSPagination extends BSComponent {
 	this.links = links;
     }
 
+    protected void defineAttributes() {
+
+    }
+
     @Override
     public void render(HtmlStream s) {
 	s.writeln("<nav>");

@@ -24,4 +24,9 @@ public class BSPanel extends BSComponentContainer {
 
     }
 
+    protected void defineAttributes() {
+
+    }
+
+
 }

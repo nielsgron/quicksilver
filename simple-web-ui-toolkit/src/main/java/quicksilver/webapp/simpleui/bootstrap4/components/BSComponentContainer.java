@@ -79,6 +79,10 @@ public abstract class BSComponentContainer extends BSComponent {
         return layoutManager;
     }
 
+    protected void defineAttributes() {
+
+    }
+
     public void renderBody(HtmlStream stream) {
 
         if ( layoutManager != null ) {

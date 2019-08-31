@@ -17,6 +17,7 @@
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.HtmlStream;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 
 /*
     Example : <button type="button" class="btn btn-primary btn-sm">Small button</button>
@@ -25,7 +26,7 @@ import quicksilver.webapp.simpleui.HtmlStream;
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/buttons/
  */
 
-public class BSButton extends BSComponent {
+public class BSButton extends BSComponentContainer {
 
     private String text;
     private String hyperlink;
@@ -60,7 +61,17 @@ public class BSButton extends BSComponent {
         this.isActive = isActive;
         this.isCollapsed = isCollapsed;
         this.isOutline = isOutline;
-        defineAttributes();
+
+        add(new HTMLText(text));
+
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getText() {
+        return text;
     }
 
     protected void defineAttributes() {
@@ -104,18 +115,6 @@ public class BSButton extends BSComponent {
         }
 
         return cNames.toString();
-    }
-
-    // TODO : Remove this method later once framework is fixed
-    public void setSize(Size size) {
-        super.setSize(size);
-        removeTagAttribute("class");
-        addTagAttribute("class", getClassNames());
-    }
-
-
-    public void renderBody(HtmlStream stream) {
-        stream.writeln(text);
     }
 
 }

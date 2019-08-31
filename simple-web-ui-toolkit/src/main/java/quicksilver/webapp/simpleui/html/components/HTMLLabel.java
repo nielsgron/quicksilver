@@ -30,7 +30,7 @@ public class HTMLLabel extends HTMLComponent {
     public HTMLLabel(String text, String forAttribute) {
         this.text = text;
         this.forAttribute = forAttribute;
-        defineAttributes();
+
     }
 
     protected void defineAttributes() {

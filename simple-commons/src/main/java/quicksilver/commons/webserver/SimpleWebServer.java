@@ -29,10 +29,6 @@ public class SimpleWebServer {
 
         application = app;
 
-        initServer();
-        initRoutes();
-        initFilters();
-
     }
 
     protected void initServer() {
@@ -62,6 +58,11 @@ public class SimpleWebServer {
     }
 
     public void startServer() {
+
+        initServer();
+        initFilters();
+        initRoutes();
+
         webServer.init();
     }
 
