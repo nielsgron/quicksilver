@@ -26,7 +26,7 @@ public class ExcelExporter {
     private SimpleDateFormat simpleDateFormat;
     private SimpleDateFormat simpleDateTimeFormat;
 
-    private ArrayList<HashMap.SimpleEntry> dataSetList = new ArrayList<HashMap.SimpleEntry>();
+    private ArrayList<HashMap.SimpleEntry<DataSet, String>> dataSetList = new ArrayList<HashMap.SimpleEntry<DataSet, String>>();
 
     public ExcelExporter(String filePath) {
         this(filePath, TimeZone.getTimeZone("UTC"));
@@ -44,7 +44,7 @@ public class ExcelExporter {
     }
 
     public void addDataSet(DataSet dataset, String sheetName) {
-        dataSetList.add(new HashMap.SimpleEntry(dataset, sheetName));
+        dataSetList.add(new HashMap.SimpleEntry<DataSet, String>(dataset, sheetName));
     }
 
     public void export() throws IOException {
@@ -53,9 +53,9 @@ public class ExcelExporter {
         Workbook workbook = new XSSFWorkbook();
 
         for ( int i = 0; i < dataSetList.size(); i++ ) {
-            HashMap.SimpleEntry entry = dataSetList.get(i);
-            DataSet dataSet = (DataSet)entry.getKey();
-            String sheetName = (String)entry.getValue();
+            HashMap.SimpleEntry<DataSet, String> entry = dataSetList.get(i);
+            DataSet dataSet = entry.getKey();
+            String sheetName = entry.getValue();
 
             // Create or get a Sheet
             Sheet sheet = workbook.getSheet(sheetName);

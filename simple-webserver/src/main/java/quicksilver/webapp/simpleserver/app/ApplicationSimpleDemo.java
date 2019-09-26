@@ -32,11 +32,14 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
 
     public static void main(String[] args) {
 
-        // Create the application CodeMonster
+        // Create the application Simple Demo
         SimpleApplication application = new SimpleApplication(APPLICATION_NAME, APPLICATION_CONFIG_FOLDER);
 
         // Initialize database connection pool and test if connection can be established.  If it fails, close application.
         initializeDatabaseOrExitApplication(application, true);
+
+        // Start Job Manager
+        //JobManager.getInstance().startTask(new JobSynchRepo(application.getDatabaseConnection()));
 
         // Create a web server to run the CodeMonster application and start it
         WebServerSimpleDemo webServer = new WebServerSimpleDemo(application);
@@ -48,6 +51,15 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
         super(appName, configFolder);
     }
 
+    protected void setDefaultConfigDatabase() {
+        // Override method and set default database options
+        configDatabase.getHost(DEFAULT_DB_HOST);
+        configDatabase.getPort(DEFAULT_DB_PORT);
+        configDatabase.getDatabase(DEFAULT_DB_DBNAME);
+        configDatabase.getUsername(DEFAULT_DB_USERNAME);
+        configDatabase.getPassword(DEFAULT_DB_PASSWORD);
+    }
+
     private static void initializeDatabaseOrExitApplication(SimpleApplication app, boolean skipInitialization) {
 
         if ( skipInitialization ) {
@@ -55,7 +67,7 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
         }
 
         try {
-            app.initializeDatabaseConnection(DEFAULT_DB_HOST, DEFAULT_DB_PORT, DEFAULT_DB_DBNAME, DEFAULT_DB_USERNAME, DEFAULT_DB_PASSWORD);
+            app.initializeDatabaseConnection();
         } catch ( Exception e ) {
             e.printStackTrace();
             System.exit(0);

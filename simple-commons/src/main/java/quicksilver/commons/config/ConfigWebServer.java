@@ -16,5 +16,66 @@
 
 package quicksilver.commons.config;
 
+import spark.Service;
+
+import java.io.File;
+
 public class ConfigWebServer extends SimpleConfig {
+
+    public static String DEFAULT_WEBSERVER_PORT = String.valueOf(Service.SPARK_DEFAULT_PORT);
+    public static String DEFAULT_WEBSERVER_MAX_THREADS = "100";
+    public static String DEFAULT_WEBSERVER_MIN_THREADS = "2";
+    public static String DEFAULT_WEBSERVER_TIMEOUT = "30000";
+
+    private static String PROP_WEBSERVER_PORT = "webserver.port";
+    private static String PROP_WEBSERVER_MAX_THREADS = "webserver.max_threads";
+    private static String PROP_WEBSERVER_MIN_THREADS = "webserver.min_threads";
+    private static String PROP_WEBSERVER_TIMEOUT = "webserver.timeout";
+
+    public ConfigWebServer(File configFile) {
+        super(configFile);
+    }
+
+    public ConfigWebServer(File configFile, String port, String maxThreads, String minThreads, String timeout) {
+        super(configFile);
+
+        DEFAULT_WEBSERVER_PORT = port;
+        DEFAULT_WEBSERVER_MAX_THREADS = maxThreads;
+        DEFAULT_WEBSERVER_MIN_THREADS = minThreads;
+        DEFAULT_WEBSERVER_TIMEOUT = timeout;
+
+        addSections();
+    }
+
+    private void addSections() {
+
+        addSection("webserver.", "Web Server Properties");
+
+    }
+
+    public String getPort(String defaultPort) {
+        return getPropertyOrSetDefault(PROP_WEBSERVER_PORT, defaultPort);
+    }
+
+    public String getMaxThreads(String defaultMaxThreads) {
+        return getPropertyOrSetDefault(PROP_WEBSERVER_MAX_THREADS, defaultMaxThreads);
+    }
+
+    public String getMinThreads(String defaultMinThreads) {
+        return getPropertyOrSetDefault(PROP_WEBSERVER_MIN_THREADS, defaultMinThreads);
+    }
+
+    public String getTimeOut(String defaultTimeOut) {
+        return getPropertyOrSetDefault(PROP_WEBSERVER_TIMEOUT, defaultTimeOut);
+    }
+
+    public void setDefaultPropertiesAndValues() {
+
+        put(PROP_WEBSERVER_PORT, DEFAULT_WEBSERVER_PORT);
+        put(PROP_WEBSERVER_MAX_THREADS, DEFAULT_WEBSERVER_MAX_THREADS);
+        put(PROP_WEBSERVER_MIN_THREADS, DEFAULT_WEBSERVER_MIN_THREADS);
+        put(PROP_WEBSERVER_TIMEOUT, DEFAULT_WEBSERVER_TIMEOUT);
+
+    }
+
 }

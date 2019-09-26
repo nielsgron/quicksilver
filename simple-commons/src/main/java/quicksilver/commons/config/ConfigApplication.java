@@ -16,14 +16,16 @@
 
 package quicksilver.commons.config;
 
+import java.io.File;
+
 public class ConfigApplication extends SimpleConfig {
 
-    public ConfigDatabase getConfigDatabase() {
-        return new ConfigDatabase();
+    public ConfigApplication(File configFile) {
+        super(configFile);
     }
 
-    public ConfigEmailServer getConfigEmailServer() {
-        return new ConfigEmailServer();
+    public void setDefaultPropertiesAndValues() {
+
     }
 
 }

@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package quicksilver.commons.webserver;
+package quicksilver.commons.app;
 
 import quicksilver.commons.app.SimpleApplication;
+import quicksilver.commons.config.ConfigWebServer;
 import spark.Service;
 
 public class SimpleWebServer {
@@ -24,10 +25,12 @@ public class SimpleWebServer {
     protected final Service webServer = Service.ignite();
 
     protected SimpleApplication application;
+    protected ConfigWebServer configWebServer;
 
     public SimpleWebServer(SimpleApplication app) {
 
         application = app;
+        configWebServer = app.getConfigWebServer();
 
     }
 
@@ -35,10 +38,10 @@ public class SimpleWebServer {
 
         webServer.staticFiles.location("/public");
 
-        int port = Service.SPARK_DEFAULT_PORT;
-        int maxThreads = 15;
-        int minThreads = 2;
-        int timeOutMillis = 30000;
+        int port = Integer.valueOf(configWebServer.getPort(ConfigWebServer.DEFAULT_WEBSERVER_PORT));
+        int maxThreads = Integer.valueOf(configWebServer.getMaxThreads(ConfigWebServer.DEFAULT_WEBSERVER_MAX_THREADS));
+        int minThreads = Integer.valueOf(configWebServer.getMinThreads(ConfigWebServer.DEFAULT_WEBSERVER_MIN_THREADS));
+        int timeOutMillis = Integer.valueOf(configWebServer.getTimeOut(ConfigWebServer.DEFAULT_WEBSERVER_TIMEOUT));
 
         webServer.port(port);
         webServer.threadPool(maxThreads, minThreads, timeOutMillis);

@@ -19,7 +19,9 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSProgress;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Progress extends AbstractComponentsBootstrapPage {
 
@@ -31,9 +33,11 @@ public class Progress extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Progress Components"));
         panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Progress Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Progess Examples
 
         panel.add(new BSProgress(0));
         //XXX: The demo has a margin-top on progress

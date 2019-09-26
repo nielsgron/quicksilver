@@ -53,6 +53,14 @@ public abstract class HTMLComponent {
 
     protected abstract void defineAttributes();
 
+    protected String getClassNames() {
+        return null;
+        // Return null by default, but can be overriden
+    }
+    protected String getStyle() {
+        return null;
+        // Return null by default, but can be overriden
+    }
     public void renderBody(HtmlStream stream) {
         // Do nothing by default, but can be overriden
     }

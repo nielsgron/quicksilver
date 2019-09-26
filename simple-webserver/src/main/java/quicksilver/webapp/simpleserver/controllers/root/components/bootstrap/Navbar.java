@@ -19,7 +19,9 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNavbar;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Navbar extends AbstractComponentsBootstrapPage {
 
@@ -31,9 +33,11 @@ public class Navbar extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Navbar Components"));
-        panel.add(new HTMLLineBreak(1));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Navbar Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Navbar Examples
 
         panel.add(new BSNavbar(false, "Brand"));
 

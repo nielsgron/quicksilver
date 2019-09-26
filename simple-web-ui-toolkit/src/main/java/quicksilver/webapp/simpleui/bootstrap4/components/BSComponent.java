@@ -88,8 +88,8 @@ public abstract class BSComponent extends HTMLComponent {
 
         private final String sizeName;
 
-        Size(String typeString) {
-            sizeName = typeString;
+        Size(String sizeString) {
+            sizeName = sizeString;
         }
 
         String getSizeName() {

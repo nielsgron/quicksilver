@@ -40,10 +40,22 @@ public class BSCarousel extends BSComponent {
 
     protected void defineAttributes() {
 
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Carousel");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
+
+        addTagAttribute("class", getClassNames());
+        addTagAttribute("data-ride", "carousel");
+
     }
 
-    @Override
-    public void render(HtmlStream stream) {
+    protected String getClassNames() {
+        StringBuilder cNames = new StringBuilder();
 
+        cNames.append("carousel slide");
+        //cNames.append(" alert-").append(getType().getTypeName());
+
+        return cNames.toString();
     }
+
 }

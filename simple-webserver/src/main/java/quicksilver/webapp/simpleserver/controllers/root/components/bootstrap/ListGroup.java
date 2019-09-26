@@ -4,7 +4,9 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroup;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroupItem;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class ListGroup  extends AbstractComponentsBootstrapPage {
 
@@ -16,9 +18,11 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of List Group Components"));
         panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("List Group Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // List Group Examples
 
         BSListGroup listGroup = new BSListGroup();
         listGroup.add(new BSListGroupItem("Item 1"));

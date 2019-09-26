@@ -17,7 +17,7 @@
 package quicksilver.webapp.simpleserver.app;
 
 import quicksilver.commons.app.SimpleApplication;
-import quicksilver.commons.webserver.SimpleWebServer;
+import quicksilver.commons.app.SimpleWebServer;
 import quicksilver.webapp.simpleserver.controllers.root.About;
 import quicksilver.webapp.simpleserver.controllers.root.about.Contact;
 import quicksilver.webapp.simpleserver.controllers.root.about.Project;

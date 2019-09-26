@@ -19,6 +19,9 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPagination;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
+import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Pagination extends AbstractComponentsBootstrapPage {
 
@@ -30,20 +33,22 @@ public class Pagination extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new BSText("<br>"));
-        panel.add(new BSText("List of Pagination Components"));
-        panel.add(new BSText("<br>"));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Pagination Examples", 4));
+        panel.add(new HTMLThematicBreak());
 
-	BSPagination.Link previous = new BSPagination.Link("Previous", "#", true);
-	BSPagination.Link one = new BSPagination.Link("1", "#");
-	BSPagination.Link two = new BSPagination.Link("2", "#");
-	BSPagination.Link three = new BSPagination.Link("3", "#");
-	BSPagination.Link next = new BSPagination.Link("Next", "#");
+        // Pagination Examples
 
-	BSPagination p = new BSPagination(previous, one, two, three, next);
-	p.setActiveLink(two);
+        BSPagination.Link previous = new BSPagination.Link("Previous", "#", true);
+        BSPagination.Link one = new BSPagination.Link("1", "#");
+        BSPagination.Link two = new BSPagination.Link("2", "#");
+        BSPagination.Link three = new BSPagination.Link("3", "#");
+        BSPagination.Link next = new BSPagination.Link("Next", "#");
 
-	panel.add(p);
+        BSPagination p = new BSPagination(previous, one, two, three, next);
+        p.setActiveLink(two);
+
+        panel.add(p);
 
         return panel;
     }

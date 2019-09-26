@@ -19,7 +19,9 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSInputGroup;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class InputGroup extends AbstractComponentsBootstrapPage {
 
@@ -31,9 +33,11 @@ public class InputGroup extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Input Group Components"));
-        panel.add(new HTMLLineBreak(1));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Input Group Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // InputGroup
 
         panel.add(new BSInputGroup());
 

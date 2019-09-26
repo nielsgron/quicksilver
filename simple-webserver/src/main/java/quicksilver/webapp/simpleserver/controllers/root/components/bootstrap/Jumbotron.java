@@ -19,7 +19,9 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSJumbotron;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Jumbotron extends AbstractComponentsBootstrapPage {
 
@@ -31,9 +33,11 @@ public class Jumbotron extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Jumbotron Components"));
-        panel.add(new HTMLLineBreak(1));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Jumbotron Examples", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Jumbotron Examples
 
         panel.add(new BSJumbotron());
 

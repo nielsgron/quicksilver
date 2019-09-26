@@ -16,6 +16,52 @@
 
 package quicksilver.commons.config;
 
-public class SimpleConfig {
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class SimpleConfig extends SectionedProperties {
+
+    private File configFile;
+
+    public SimpleConfig(File configFile) {
+        this.configFile = configFile;
+
+        if ( configFile.exists() ) {
+            load();
+        } else {
+            //this.configFile.mkdirs();
+        }
+    }
+
+    public File getConfigFile() {
+        return configFile;
+    }
+
+    public void load() {
+
+        try {
+            FileInputStream fis = new FileInputStream(configFile);
+            this.load(fis);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void save() {
+
+        try {
+            FileOutputStream fos = new FileOutputStream(configFile);
+            this.store(fos, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setDefaultPropertiesAndValues() {
+        // Default implementation doesn't do anything
+    }
 
 }

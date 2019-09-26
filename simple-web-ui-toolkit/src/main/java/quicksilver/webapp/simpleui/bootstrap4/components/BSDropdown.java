@@ -25,8 +25,78 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSDropdown extends BSComponentContainer {
 
+    private boolean isBtnGroup = false;
+
+    private Direction direction = Direction.DOWN;
+
+    public enum Direction {
+
+        DOWN("down"),
+        UP("up"),
+        LEFT("left"),
+        RIGHT("right");
+
+        private final String dirName;
+
+        Direction(String dirString) {
+            dirName = dirString;
+        }
+
+        String getDirectionName() {
+            return dirName;
+        }
+
+    }
+
+    public BSDropdown() {
+
+    }
+
+    public BSDropdown(boolean isBtnGroup) {
+        this.isBtnGroup = isBtnGroup;
+    }
+
     protected void defineAttributes() {
 
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Dropdown");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
+
+        addTagAttribute("class", getClassNames());
+
+    }
+
+    protected String getClassNames() {
+        StringBuilder cNames = new StringBuilder();
+
+        cNames.append("btn-group");
+
+        switch (direction) {
+
+            case DOWN:
+                cNames.append(" dropdown");
+                break;
+
+            case UP:
+                cNames.append(" dropup");
+                break;
+
+            case RIGHT:
+                cNames.append(" dropright");
+                break;
+
+            case LEFT:
+                cNames.append(" dropleft");
+                break;
+
+        }
+        cNames.append(" mr-2");
+
+        return cNames.toString();
+    }
+
+    public void setDirection(Direction dir) {
+        direction = dir;
     }
 
 }

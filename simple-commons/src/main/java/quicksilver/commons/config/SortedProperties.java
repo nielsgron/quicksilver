@@ -28,4 +28,19 @@ public class SortedProperties extends Properties {
         return Collections.enumeration(new TreeSet<Object>(super.keySet()));
     }
 
+    public String getPropertyOrSetDefault(String key, String defaultValue) {
+        String val = getProperty(key);
+        if (val == null) {
+            if ( defaultValue != null ) {
+                setProperty(key, defaultValue);
+            }
+            return defaultValue;
+        } else {
+            if ( defaultValue != null ) {
+                setProperty(key, defaultValue);
+            }
+            return val;
+        }
+    }
+
 }

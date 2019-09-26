@@ -22,7 +22,9 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCollapse;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Collapse extends AbstractComponentsBootstrapPage {
 
@@ -34,9 +36,9 @@ public class Collapse extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Collapse Components"));
-        panel.add(new HTMLLineBreak(1));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Example Collapse Component", 4));
+        panel.add(new HTMLThematicBreak());
 
         BSCollapse collapse = new BSCollapse(new BSCard("A card", null, "Collapsed cards may become visible again with a buton, as seen above"));
 
@@ -44,6 +46,20 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         panel.add(new HTMLLineBreak(1));
 
         panel.add(collapse);
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Multiple Targets", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Multiple Targets
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Accordian Example", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Accordian Example
+
+
 
         return panel;
     }

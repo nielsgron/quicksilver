@@ -33,6 +33,7 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
  */
 
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 
 public class BSButtonToolbar extends BSComponentContainer {
 
@@ -74,6 +75,7 @@ public class BSButtonToolbar extends BSComponentContainer {
 
         for (BSButton b: buttons) {
             add(b);
+            add(new HTMLText("&nbsp;"));
         }
 
     }

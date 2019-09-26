@@ -19,7 +19,9 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCarousel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
+import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
 
 public class Carousel extends AbstractComponentsBootstrapPage {
 
@@ -31,9 +33,37 @@ public class Carousel extends AbstractComponentsBootstrapPage {
 
         BSPanel panel = new BSPanel();
 
-        panel.add(new HTMLLineBreak(1));
-        panel.add(new BSText("List of Carousel Components"));
-        panel.add(new HTMLLineBreak(1));
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Example Carousel - Slides Only", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Carousel - Slides only
+        panel.add(new BSCarousel());
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("With controls", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Carousel - With controls
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("With indicators", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Carousel - With indicators
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("With captions", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Carousel - With captions
+
+        panel.add(new HTMLLineBreak(2));
+        panel.add(new HTMLHeading("Crossfades", 4));
+        panel.add(new HTMLThematicBreak());
+
+        // Carousel - Crossfades
+
 
         panel.add(new BSCarousel());
 

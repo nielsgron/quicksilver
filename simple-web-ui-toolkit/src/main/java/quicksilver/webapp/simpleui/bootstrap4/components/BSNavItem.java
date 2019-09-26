@@ -45,15 +45,33 @@ public class BSNavItem extends BSComponent {
 
         addTagAttribute("class", "nav-item");
 
+        String style = getStyle();
+        if ( style != null ) {
+            addTagAttribute("style", style);
+        }
+
     }
 
     @Override
     public void renderBody(HtmlStream stream) {
-        if ( isActive ) {
-            stream.writeln("  <a class=\"nav-link active\" href=\"" + urlReference + "\">" + itemName + "</a>");
+
+        stream.writeln("  <a class=\"nav-link");
+
+        if ( isActive() ) {
+            stream.writeln(" active\"");
         } else {
-            stream.writeln("  <a class=\"nav-link\" href=\"" + urlReference + "\">" + itemName + "</a>");
+            stream.writeln("\"");
         }
+
+        stream.writeln(" href=\"" + getURL() + "\"");
+
+        String style = getStyle();
+        if ( style != null ) {
+            stream.writeln(" style=\"" + style + "\"");
+        }
+
+        stream.writeln(" >" + getName() + "</a>");
+
     }
 
     public String getName() {

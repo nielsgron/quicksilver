@@ -16,26 +16,73 @@
 
 package quicksilver.commons.config;
 
+import java.io.File;
+
 public class ConfigDatabase extends SimpleConfig {
 
+    private String DEFAULT_DATABASE_HOST = "localhost";
+    private String DEFAULT_DATABASE_PORT = "3306";
+    private String DEFAULT_DATABASE_DBNAME = "mysql";
+    private String DEFAULT_DATABASE_USERNAME = "root";
+    private String DEFAULT_DATABASE_PASSWORD = "password";
+
+    private String PROP_DATABASE_HOST = "database.host";
+    private String PROP_DATABASE_PORT = "database.port";
+    private String PROP_DATABASE_NAME = "database.name";
+    private String PROP_DATABASE_USERNAME = "database.username";
+    private String PROP_DATABASE_PASSWORD = "database.password";
+
+    public ConfigDatabase(File configFile) {
+        super(configFile);
+        addSections();
+    }
+
+    public ConfigDatabase(File configFile, String host, String port, String dbname, String username, String password) {
+        super(configFile);
+
+        DEFAULT_DATABASE_HOST = host;
+        DEFAULT_DATABASE_PORT = port;
+        DEFAULT_DATABASE_DBNAME = dbname;
+        DEFAULT_DATABASE_USERNAME = username;
+        DEFAULT_DATABASE_PASSWORD = password;
+
+        addSections();
+    }
+
+    private void addSections() {
+
+        addSection("database.", "Database Server Properties");
+
+    }
+
     public String getHost(String defaultHost) {
-        return defaultHost;
+        return getPropertyOrSetDefault(PROP_DATABASE_HOST, defaultHost);
     }
 
     public String getPort(String defaultPort) {
-        return defaultPort;
+        return getPropertyOrSetDefault(PROP_DATABASE_PORT, defaultPort);
     }
 
     public String getDatabase(String defaultDatabase) {
-        return defaultDatabase;
+        return getPropertyOrSetDefault(PROP_DATABASE_NAME, defaultDatabase);
     }
 
     public String getUsername(String defaultUsername) {
-        return defaultUsername;
+        return getPropertyOrSetDefault(PROP_DATABASE_USERNAME, defaultUsername);
     }
 
     public String getPassword(String defaultPassword) {
-        return defaultPassword;
+        return getPropertyOrSetDefault(PROP_DATABASE_PASSWORD, defaultPassword);
+    }
+
+    public void setDefaultPropertiesAndValues() {
+
+        put(PROP_DATABASE_HOST, DEFAULT_DATABASE_HOST);
+        put(PROP_DATABASE_PORT, DEFAULT_DATABASE_PORT);
+        put(PROP_DATABASE_NAME, DEFAULT_DATABASE_DBNAME);
+        put(PROP_DATABASE_USERNAME, DEFAULT_DATABASE_USERNAME);
+        put(PROP_DATABASE_PASSWORD, DEFAULT_DATABASE_PASSWORD);
+
     }
 
 }

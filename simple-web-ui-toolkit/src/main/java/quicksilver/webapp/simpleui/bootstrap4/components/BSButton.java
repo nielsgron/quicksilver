@@ -28,11 +28,14 @@ import quicksilver.webapp.simpleui.html.components.HTMLText;
 
 public class BSButton extends BSComponentContainer {
 
+    private String id;
     private String text;
     private String hyperlink;
     private boolean isActive;
     private boolean isOutline;
     private boolean isCollapsed;
+    private boolean isDropdown;
+    private boolean isSplit;
 
     public BSButton(String text) {
         this(text, BSComponent.Type.PRIMARY);
@@ -43,7 +46,7 @@ public class BSButton extends BSComponentContainer {
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline, BSCollapse collapse) {
-        this(text, type, isOutline, "#" + collapse.getId(), true, false);
+        this(text, type, isOutline, "#" + collapse.getId(), true, false, false);
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline) {
@@ -51,16 +54,31 @@ public class BSButton extends BSComponentContainer {
     }
 
     public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink) {
-        this(text, type, isOutline, hyperLink, false, false);
+        this(text, type, isOutline, hyperLink, false, false, false);
     }
 
-    public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink, boolean isCollapsed, boolean isActive) {
+    public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink, boolean isCollapsed, boolean isDropdown, boolean isActive) {
         setType(type);
         this.text = text;
         this.hyperlink = hyperLink;
         this.isActive = isActive;
         this.isCollapsed = isCollapsed;
         this.isOutline = isOutline;
+        this.isDropdown = isDropdown;
+
+        add(new HTMLText(text));
+
+    }
+
+    public BSButton(String text, BSComponent.Type type, boolean isOutline, String hyperLink, boolean isCollapsed, boolean isDropdown, boolean isSplit, boolean isActive) {
+        setType(type);
+        this.text = text;
+        this.hyperlink = hyperLink;
+        this.isActive = isActive;
+        this.isCollapsed = isCollapsed;
+        this.isOutline = isOutline;
+        this.isDropdown = isDropdown;
+        this.isSplit = isSplit;
 
         add(new HTMLText(text));
 
@@ -88,11 +106,25 @@ public class BSButton extends BSComponentContainer {
 
         addTagAttribute("class", getClassNames());
 
+        String style = getStyle();
+        if ( style != null ) {
+            addTagAttribute("style", style);
+        }
+
+        if ( id != null ) {
+            addTagAttribute("id", id);
+        }
+
         if (isCollapsed) {
             addTagAttribute("data-toggle", "collapse");
             addTagAttribute("aria-expanded", "false");
             addTagAttribute("aria-controls", "collapseExample");
+        } else if ( isDropdown ) {
+            addTagAttribute("data-toggle", "dropdown");
+            addTagAttribute("aria-haspopup", "true");
+            addTagAttribute("aria-expanded", "false");
         }
+
     }
 
     protected String getClassNames() {
@@ -110,11 +142,29 @@ public class BSButton extends BSComponentContainer {
         } else if ( getSize() == Size.LARGE ) {
             cNames.append(" btn-lg");
         }
+        if ( isDropdown ) {
+            cNames.append(" dropdown-toggle");
+        }
+        if ( isSplit ) {
+            cNames.append(" dropdown-toggle-split");
+        }
         if ( isActive ) {
             cNames.append(" active");
         }
 
         return cNames.toString();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
 }

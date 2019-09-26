@@ -31,7 +31,7 @@ import java.util.List;
 
 public class DatabaseConnection {
 
-    private static String mysqlDriverClass = "com.mysql.jdbc.Driver";
+    private static String mysqlDriverClass = "com.mysql.cj.jdbc.Driver";
 
     static {
         try {
@@ -87,7 +87,7 @@ public class DatabaseConnection {
     }
 
     private String getURL() {
-        return "jdbc:mysql://" + _host + ":" + _port + "/" + _database + "?serverTimezone=UTC";
+        return "jdbc:mysql://" + _host + ":" + _port + "/" + _database + "?verifyServerCertificate=false&useSSL=true&requireSSL=true&serverTimezone=UTC";
     }
 
     public Connection testDirectJDBCConnection() throws SQLException {
