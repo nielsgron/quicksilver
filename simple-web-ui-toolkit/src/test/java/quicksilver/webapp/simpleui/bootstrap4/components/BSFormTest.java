@@ -31,12 +31,12 @@ public class BSFormTest {
 
 		BSForm form = new BSForm(null, true);
 		form.addAsGroup(new HTMLLabel("Email address", "emailInput"),
-				new BSTextInput("email", "Enter email", null, "emailHelp", "emailInput"),
-				new BSInputDescription("We'll never share your email with anyone else.", "emailHelp"));
+				new BSInputEmail("Enter email", null, "emailHelp", "emailInput"),
+				new BSInputHelpText("We'll never share your email with anyone else.", "emailHelp"));
 		form.addAsGroup(new HTMLLabel("Password", "passwordInput"),
-				new BSTextInput("password", "Password", null, null, "passwordInput")
+				new BSInputPassword("Password", null, null, "passwordInput")
 				);
-		form.addAsCheckGroup(new BSCheckInput("checkbox", null, null, null, "exampleCheck1"),
+		form.addAsCheckGroup(new BSInputCheckbox(null, null, null, "exampleCheck1"),
 				new BSCheckLabel("Check", "exampleCheck1")
 				);
 		form.add(new BSFormButton("Submit"));

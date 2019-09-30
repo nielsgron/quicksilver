@@ -81,10 +81,10 @@ public abstract class HTMLComponent {
             String value = tagAttributes.get(i).getValue();
 
             if(value == null) {
-                continue;
+                stream.write(" " + name );
+            } else {
+                stream.write(" " + name + "=\"" + value + "\"");
             }
-
-            stream.write(" " + name + "=\"" + value + "\"" );
         }
 
         stream.writeln(">");

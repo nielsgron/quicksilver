@@ -19,7 +19,7 @@ package quicksilver.webapp.simpleserver.controllers.components.navs;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSForm;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNavItem;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNavbar;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSTextInput;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSInputText;
 
 public class NavSite extends BSNavbar {
 
@@ -30,7 +30,7 @@ public class NavSite extends BSNavbar {
         this.add(new BSNavItem("About", "/about/project"));
 
         BSForm searchForm = new BSForm(true, "/search", true);
-        searchForm.add(new BSTextInput("text", "Search..."));
+        searchForm.add(new BSInputText("Search..."));
 
         this.add(searchForm);
 

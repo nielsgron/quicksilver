@@ -11,7 +11,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ModuleSimpleCommons" />
-    <orderEntry type="module" module-name="ModuleSimpleWebUIToolkit" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.12.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-web:2.12.1" level="project" />
@@ -83,14 +82,11 @@
     <orderEntry type="library" name="Maven: com.jcraft:jsch:0.1.54" level="project" />
     <orderEntry type="library" name="Maven: com.jcraft:jzlib:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.javaewah:JavaEWAH:1.1.6" level="project" />
-    <orderEntry type="library" name="Maven: com.github.javafaker:javafaker:0.16" level="project" />
-    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:android:1.20" level="project" />
-    <orderEntry type="library" name="Maven: com.github.mifmif:generex:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: dk.brics.automaton:automaton:1.11-8" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: com.mchange:c3p0:0.9.5.3" level="project" />
     <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.15" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP-java7:2.4.13" level="project" />
+    <orderEntry type="module" module-name="ModuleSimpleWebUIToolkit" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
   </component>

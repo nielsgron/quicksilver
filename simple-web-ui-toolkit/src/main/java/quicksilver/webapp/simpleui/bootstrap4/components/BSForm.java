@@ -20,6 +20,22 @@ import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
 /*
     Example :
+        <form action="/action_page.jsp">
+          <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+          </div>
+          <div class="form-group form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox"> Remember me
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Create an account</button>
+        </form>
 
     W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms.asp
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/forms/
@@ -76,7 +92,7 @@ public class BSForm extends BSComponentContainer {
 
     public void addAsCheckGroup(HTMLComponent... c) {
 
-        BSFormCheckGroup group = new BSFormCheckGroup();
+        BSFormCheck group = new BSFormCheck();
         for ( int i = 0; i < c.length; i++ ) {
             group.add(c[i]);
         }

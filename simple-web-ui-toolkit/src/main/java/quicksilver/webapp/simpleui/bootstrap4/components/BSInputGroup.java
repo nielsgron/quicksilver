@@ -19,14 +19,50 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 /*
     Example :
 
-    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp
+      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+      </div>
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms_input_group.asp
     Bootstrap Docs : ??? https://getbootstrap.com/docs/4.1/components/forms/
  */
 
-public class BSInputGroup extends BSComponentContainer {
+import quicksilver.webapp.simpleui.html.components.HTMLDiv;
 
-    protected void defineAttributes() {
+public class BSInputGroup extends HTMLDiv {
 
+    private boolean isAppend = false;
+    private boolean isPrepend = false;
+    private boolean isText = false;
+
+    public BSInputGroup() {
+
+    }
+
+    public BSInputGroup(boolean isAppend, boolean isPrepend, boolean isText) {
+        this.isAppend = isAppend;
+        this.isPrepend = isPrepend;
+        this.isText = isText;
+    }
+
+    protected String getClassNames() {
+        StringBuilder cNames = new StringBuilder();
+
+        cNames.append("input-group");
+
+        if ( isAppend ) {
+            cNames.append("-append");
+        } else if ( isPrepend ) {
+            cNames.append("-prepend");
+        } else if ( isText ) {
+            cNames.append("-text");
+        }
+
+        return cNames.toString();
     }
 
 }

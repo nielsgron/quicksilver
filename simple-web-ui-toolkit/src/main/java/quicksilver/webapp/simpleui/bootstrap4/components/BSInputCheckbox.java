@@ -16,11 +16,15 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-public class BSFormCheckGroup extends BSFormGroup {
+public class BSInputCheckbox extends BSInput {
 
-	@Override
-	protected String getClassNames() {
-		return super.getClassNames() + " form-check";
-	}
+    public BSInputCheckbox(String placeholder, String aria_label, String aria_describedby, String id) {
+        super("checkbox", placeholder, aria_label, aria_describedby, id);
+    }
+
+    @Override
+    protected String getClassNames() {
+        return "form-check-input";
+    }
 
 }

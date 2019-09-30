@@ -22,30 +22,74 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSNavPill;
 
 public class SideBarComponentOverview extends BSNavPill {
 
+    private static String padding = "padding: 1px 1px 1px 5px;";
+
     public SideBarComponentOverview() {
         super(BSComponent.VERTICAL_ALIGNMENT);
 
-        this.add(new BSNavItem("Alerts", "/components/bootstrap/alerts"));
-        this.add(new BSNavItem("Badges", "/components/bootstrap/badges"));
-        this.add(new BSNavItem("Breadcrum", "/components/bootstrap/breadcrum"));
-        this.add(new BSNavItem("Buttons", "/components/bootstrap/buttons"));
-        this.add(new BSNavItem("Button group", "/components/bootstrap/buttongroup"));
-        this.add(new BSNavItem("Card", "/components/bootstrap/card"));
-        this.add(new BSNavItem("Carousel", "/components/bootstrap/carousel"));
-        this.add(new BSNavItem("Collapse", "/components/bootstrap/collapse"));
-        this.add(new BSNavItem("Dropdowns", "/components/bootstrap/dropdowns"));
-        this.add(new BSNavItem("Forms", "/components/bootstrap/forms"));
-        this.add(new BSNavItem("Input group", "/components/bootstrap/inputgroup"));
-        this.add(new BSNavItem("Jumbotron", "/components/bootstrap/jumbotron"));
-        this.add(new BSNavItem("List Group", "/components/bootstrap/listgroup"));
-        this.add(new BSNavItem("Modal", "/components/bootstrap/modal"));
-        this.add(new BSNavItem("Navs", "/components/bootstrap/navs"));
-        this.add(new BSNavItem("Navbar", "/components/bootstrap/navbar"));
-        this.add(new BSNavItem("Pagination", "/components/bootstrap/pagination"));
-        this.add(new BSNavItem("Popovers", "/components/bootstrap/popovers"));
-        this.add(new BSNavItem("Progress", "/components/bootstrap/progress"));
-        this.add(new BSNavItem("Scrollspy", "/components/bootstrap/scrollspy"));
-        this.add(new BSNavItem("Tooltips", "/components/bootstrap/tooltips"));
+        this.add(new BSNavItem("Alerts", "/components/bootstrap/alerts") {
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Badges", "/components/bootstrap/badges"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Breadcrum", "/components/bootstrap/breadcrum"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Buttons", "/components/bootstrap/buttons"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Button group", "/components/bootstrap/buttongroup"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Card", "/components/bootstrap/card"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Carousel", "/components/bootstrap/carousel"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Collapse", "/components/bootstrap/collapse"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Dropdowns", "/components/bootstrap/dropdowns"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Forms", "/components/bootstrap/forms") {
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Input group", "/components/bootstrap/inputgroup"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Jumbotron", "/components/bootstrap/jumbotron"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("List Group", "/components/bootstrap/listgroup"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Modal", "/components/bootstrap/modal"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Navs", "/components/bootstrap/navs"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Navbar", "/components/bootstrap/navbar"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Pagination", "/components/bootstrap/pagination"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Popovers", "/components/bootstrap/popovers"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Progress", "/components/bootstrap/progress"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Scrollspy", "/components/bootstrap/scrollspy"){
+            protected String getStyle() { return padding; }
+        });
+        this.add(new BSNavItem("Tooltips", "/components/bootstrap/tooltips"){
+            protected String getStyle() { return padding; }
+        });
 
         this.setActiveItem("Alerts");
 

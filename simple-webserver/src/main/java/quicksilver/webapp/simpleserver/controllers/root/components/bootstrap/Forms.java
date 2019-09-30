@@ -16,14 +16,7 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
-import quicksilver.webapp.simpleui.bootstrap4.components.BSCheckInput;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSCheckLabel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSForm;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSFormButton;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSInputDescription;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSTextInput;
+import quicksilver.webapp.simpleui.bootstrap4.components.*;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLabel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -43,19 +36,64 @@ public class Forms extends AbstractComponentsBootstrapPage {
         panel.add(new HTMLHeading("Forms Components", 4));
         panel.add(new HTMLThematicBreak());
 
-        BSForm form = new BSForm(null, true);
-        form.addAsGroup(new HTMLLabel("Email address", "emailInput"),
-                new BSTextInput("email", "Enter email", null, "emailHelp", "emailInput"),
-                new BSInputDescription("We'll never share your email with anyone else.", "emailHelp"));
-        form.addAsGroup(new HTMLLabel("Password", "passwordInput"),
-                new BSTextInput("password", "Password", null, null, "passwordInput")
-                );
-        form.addAsCheckGroup(new BSCheckInput("checkbox", null, null, null, "exampleCheck1"),
-                new BSCheckLabel("Check", "exampleCheck1")
-                );
-            form.add(new BSFormButton("Submit"));
+        BSForm form = new BSForm(null, false);
 
-        panel.add(form);
+        // Input Checkbox
+        form.addAsCheckGroup(new BSInputCheckbox(null, null, null, "exampleCheck1"),
+                new BSCheckLabel("Check-1", "exampleCheck1")
+        );
+
+        // Input Radio
+        form.addAsCheckGroup(new BSInputRadio(null, null, null, "exampleRadio1"),
+                new BSCheckLabel("Radio-1", "exampleRadio1")
+        );
+        form.addAsCheckGroup(new BSInputRadio(null, null, null, "exampleRadio2"),
+                new BSCheckLabel("Radio-2", "exampleRadio2")
+        );
+
+        // Input Text
+        form.addAsGroup(new HTMLLabel("Username", "usernameInput"),
+                new BSInputText("Username", null, "usernameHelp", "usernameInput"),
+                new BSInputHelpText("Username.", "usernameHelp"));
+
+        // Input Email
+        form.addAsGroup(new HTMLLabel("Email address", "emailInput"),
+                new BSInputEmail("Enter email", null, "emailHelp", "emailInput"),
+                new BSInputHelpText("We'll never share your email with anyone else.", "emailHelp"));
+
+        // Input Password
+        form.addAsGroup(new HTMLLabel("Password", "passwordInput"),
+                new BSInputPassword("Password", null, "passwordHelp", "passwordInput"),
+                new BSInputHelpText("Password is encrypted.", "passwordHelp"));
+
+        // Input Select
+        form.addAsGroup(new HTMLLabel("Select Options", "selectInput"),
+                new BSInputSelect("SelectInput", false, new String[] { "1", "2", "3", "4"}),
+                new BSInputHelpText("You choose.", "selectHelp"));
+
+        // Input Range
+        form.addAsGroup(new HTMLLabel("Range", "rangeInput"),
+                new BSInputRange("Choose Range", null, "rangeHelp", "rangeInput"),
+                new BSInputHelpText("You must choose a range.", "rangeHelp"));
+
+        // Input TextArea
+        form.addAsGroup(new HTMLLabel("Text Area", "textAreaInput"),
+                new BSInputTextArea("textAreaInput", 4),
+                new BSInputHelpText("Write your story.", "textAreaHelp"));
+
+        // Input File
+        form.addAsGroup(new HTMLLabel("Choose File", "fileInput"),
+                new BSInputFile("Choose File", null, "fileHelp", "fileInput"),
+                new BSInputHelpText("Browse for the file and choose it.", "fileHelp"));
+
+
+        form.add(new BSFormButton("Submit"));
+
+        BSBorderedPanel bPanel = new BSBorderedPanel(".15rem", "#f2f2f2", "solid", null);
+        bPanel.add(form);
+        panel.add(bPanel);
+
+        panel.add(new HTMLLineBreak(1));
 
         return panel;
     }

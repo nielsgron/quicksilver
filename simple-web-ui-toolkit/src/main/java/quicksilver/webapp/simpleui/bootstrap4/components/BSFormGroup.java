@@ -19,6 +19,11 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 /*
     Example :
 
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      </div>
+
     W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms.asp
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/forms/
  */

@@ -16,23 +16,41 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
-import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+/*
+    Example :
 
-public class BSInputDescription extends HTMLComponent {
+      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+      </div>
+
+    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp
+    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/forms/#help-text
+ */
+
+public class BSInputHelpText extends BSComponentContainer {
 
     private String text;
     private String id;
+    private boolean isInline = false;
 
-    public BSInputDescription(String text, String id) {
+    public BSInputHelpText(String text, String id) {
+        this(text, id, false);
+    }
+
+    public BSInputHelpText(String text, String id, boolean isInline) {
         this.text = text;
         this.id = id;
-
+        this.isInline = isInline;
+        add(new BSText(text));
     }
 
     protected void defineAttributes() {
 
-        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Small");
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Help Text");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "small");
 
@@ -44,11 +62,11 @@ public class BSInputDescription extends HTMLComponent {
     }
 
     protected String getClassNames() {
-        return "form-text text-muted";
+        if ( isInline ) {
+            return "text-muted";
+        } else {
+            return "form-text text-muted";
+        }
     }
 
-    @Override
-    public void renderBody(HtmlStream stream) {
-        stream.write(text);
-    }
 }
