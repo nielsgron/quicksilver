@@ -14,21 +14,28 @@
  * limitations under the License.
  */
 
-package quicksilver.webapp.simpleui.bootstrap4.components;
+package quicksilver.commons.datafeed;
 
-public class BSInputEmail extends BSInput {
+import tech.tablesaw.api.Table;
 
-    public BSInputEmail(String placeholder) {
-        super("email", placeholder);
-    }
+public class DataFeedCSV extends DataFeed {
 
-    public BSInputEmail(String placeholder, String aria_label, String aria_describedby, String id) {
-        super("email", placeholder, aria_label, aria_describedby, id);
+    public DataFeedCSV(String baseURLString) {
+        super(baseURLString);
     }
 
     @Override
-    protected String getClassNames() {
-        return "form-control";
+    protected void buildDataSet() {
+
+        // TODO : create the object for dataTable using the member dataPayload
+
+        try {
+            //dataTable = Table.read().csv("../data/file.csv");
+            dataTable = Table.read().csv(dataPayload, "csvTableName");
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+
     }
 
 }

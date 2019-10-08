@@ -19,6 +19,8 @@ package quicksilver.webapp.simpleserver.app;
 import quicksilver.commons.app.SimpleApplication;
 import quicksilver.commons.app.SimpleWebApplication;
 
+import java.io.File;
+
 public class ApplicationSimpleDemo extends SimpleWebApplication {
 
     private static String APPLICATION_NAME = "Simple Demo";
@@ -33,7 +35,7 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
     public static void main(String[] args) {
 
         // Create the application Simple Demo
-        SimpleApplication application = new SimpleApplication(APPLICATION_NAME, APPLICATION_CONFIG_FOLDER);
+        SimpleApplication application = new ApplicationSimpleDemo(APPLICATION_NAME, APPLICATION_CONFIG_FOLDER);
 
         // Initialize database connection pool and test if connection can be established.  If it fails, close application.
         initializeDatabaseOrExitApplication(application, true);
@@ -58,6 +60,12 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
         configDatabase.getDatabase(DEFAULT_DB_DBNAME);
         configDatabase.getUsername(DEFAULT_DB_USERNAME);
         configDatabase.getPassword(DEFAULT_DB_PASSWORD);
+
+        File configFile = configDatabase.getConfigFile();
+        if ( !configFile.exists() ) {
+            configDatabase.save();
+        }
+
     }
 
     private static void initializeDatabaseOrExitApplication(SimpleApplication app, boolean skipInitialization) {

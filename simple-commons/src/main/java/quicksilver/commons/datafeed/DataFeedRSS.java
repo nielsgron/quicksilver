@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package quicksilver.webapp.simpleui.bootstrap4.components;
+package quicksilver.commons.datafeed;
 
-public class BSInputEmail extends BSInput {
+public class DataFeedRSS extends DataFeed {
 
-    public BSInputEmail(String placeholder) {
-        super("email", placeholder);
-    }
-
-    public BSInputEmail(String placeholder, String aria_label, String aria_describedby, String id) {
-        super("email", placeholder, aria_label, aria_describedby, id);
+    public DataFeedRSS(String baseURLString) {
+        super(baseURLString);
     }
 
     @Override
-    protected String getClassNames() {
-        return "form-control";
+    protected void buildDataSet() {
+
+        // TODO : create the object for dataTable using the member dataPayload
+        // https://github.com/rometools/rome
     }
 
 }
