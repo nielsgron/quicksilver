@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.commons.datafeed;
 
 import tech.tablesaw.api.Table;
@@ -26,16 +25,7 @@ public class DataFeedCSV extends DataFeed {
 
     @Override
     protected void buildDataSet() {
-
-        // TODO : create the object for dataTable using the member dataPayload
-
-        try {
-            //dataTable = Table.read().csv("../data/file.csv");
-            dataTable = Table.read().csv(dataPayload, "csvTableName");
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-
+        dataTable = Table.read().csv(dataPayload, "csvTableName");
     }
 
 }
