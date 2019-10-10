@@ -59,11 +59,11 @@ public class HttpRequester {
 //
 //    }
 
-    public String requestURLToMemory(URL source) throws IOException {
+    public byte[] requestURLToMemory(URL source) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         requestURLToFile(source, baos);
-        return new String(baos.toByteArray());
+        return baos.toByteArray();
     }
 
     public void requestURLToFile(URL source, File destination) throws IOException {

@@ -15,8 +15,8 @@
  */
 package quicksilver.commons.datafeed;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import tech.tablesaw.io.Source;
 import tech.tablesaw.io.html.HtmlReadOptions;
 import tech.tablesaw.io.html.HtmlReader;
@@ -50,7 +50,7 @@ public class DataFeedHTML extends DataFeed {
                     //ignore
                 }
             }
-            HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new StringReader(dataPayload)));
+            HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload)));
             if (tableIndex != null) {
                 //available after 0.36.1 see https://github.com/jtablesaw/tablesaw/pull/682
 //                b.tableIndex(tableIndex);

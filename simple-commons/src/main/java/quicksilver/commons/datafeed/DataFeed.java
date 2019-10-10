@@ -31,7 +31,7 @@ public abstract class DataFeed extends HttpRequester {
     // Members for DataSet returned
     protected Table dataTable;
     // Members for Data Payload
-    protected String dataPayload;
+    protected byte[] dataPayload;
 
     public DataFeed(String baseURLString) {
         this.baseURLString = baseURLString;

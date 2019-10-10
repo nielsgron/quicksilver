@@ -15,6 +15,8 @@
  */
 package quicksilver.commons.datafeed;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import tech.tablesaw.api.Table;
 
 public class DataFeedCSV extends DataFeed {
@@ -25,7 +27,11 @@ public class DataFeedCSV extends DataFeed {
 
     @Override
     protected void buildDataSet() {
-        dataTable = Table.read().csv(dataPayload, "csvTableName");
+        try {
+            dataTable = Table.read().csv(new ByteArrayInputStream(dataPayload), "csvTableName");
+        } catch (IOException ex) {
+            //ignore
+        }
     }
 
 }

@@ -15,8 +15,8 @@
  */
 package quicksilver.commons.datafeed;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import tech.tablesaw.io.Source;
 import tech.tablesaw.io.json.JsonReader;
 
@@ -29,7 +29,7 @@ public class DataFeedJSON extends DataFeed {
     @Override
     protected void buildDataSet() {
         try {
-            dataTable = new JsonReader().read(new Source(new StringReader(dataPayload)));
+            dataTable = new JsonReader().read(new Source(new ByteArrayInputStream(dataPayload)));
         } catch (IOException ex) {
             //ignore?
         }
