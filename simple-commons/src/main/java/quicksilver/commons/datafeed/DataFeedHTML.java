@@ -13,28 +13,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.commons.datafeed;
+
+import java.io.IOException;
+import java.io.StringReader;
+import tech.tablesaw.io.Source;
+import tech.tablesaw.io.html.HtmlReadOptions;
+import tech.tablesaw.io.html.HtmlReader;
 
 public class DataFeedHTML extends DataFeed {
 
+    /**
+     *
+     * @param baseURLString The URL to read the table from. If a numeric HTML
+     * anchor is used, this will select which table to read when there are
+     * multiple tables on that page
+     */
     public DataFeedHTML(String baseURLString) {
         super(baseURLString);
     }
 
     @Override
     protected void buildDataSet() {
-
-        // TODO : create the object for dataTable using the member dataPayload
-
         try {
-            //dataTable = Table.read().csv("../data/file.csv");
-            //tech.tablesaw.io.html.HtmlReader reader = new tech.tablesaw.io.html.HtmlReader();
-            //dataTable = reader.read("?Source");
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
+            String rurl = buildRequestURL();
+            int anchorIndex = rurl.indexOf("#");
 
+            Integer tableIndex = null;
+
+            if (anchorIndex != -1) {
+                //see if there's an index in there
+                String anchor = rurl.substring(anchorIndex + 1);
+                try {
+                    tableIndex = Integer.parseInt(anchor);
+                } catch (NumberFormatException nfe) {
+                    //ignore
+                }
+            }
+            HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new StringReader(dataPayload)));
+            if (tableIndex != null) {
+                //available after 0.36.1 see https://github.com/jtablesaw/tablesaw/pull/682
+//                b.tableIndex(tableIndex);
+            }
+            HtmlReadOptions o = b.build();
+            dataTable = new HtmlReader().read(o);
+        } catch (IOException ex) {
+            //ignore? it's all in RAM
+        }
     }
 
 }
