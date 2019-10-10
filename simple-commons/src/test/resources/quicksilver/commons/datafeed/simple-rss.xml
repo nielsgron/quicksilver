@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+    <channel>
+        <title>Simple RSS</title>
+        <link>http://www.example.com</link>
+        <description>News</description>
+        <language>en-us</language>
+        <generator>Some gen</generator>
+        <ttl>10</ttl>
+    
+        <feedburner:info uri="xyz" />
+        <item>
+            <title>First item</title>
+            <link>http://example.com/1</link>
+            <description>&lt;p align="center"&gt;Hello world&lt;/p&gt;</description>
+            <pubDate>Thu, 10 Oct 2019 17:13:00 +0300</pubDate>
+            <dc:creator>John Doe</dc:creator>
+            <comments>http://example.com/1#comment</comments>
+            <guid isPermaLink="false">tag:1</guid>
+            <category>news,</category>
+            <feedburner:origLink>http://example.com/1</feedburner:origLink>
+        </item>
+        <item>
+            <title>Second item</title>
+            <link>http://example.com/2</link>
+        </item>
+        <item>
+            <link>http://example.com/3</link>
+            <description>&lt;p align="center"&gt;Hello world 3&lt;/p&gt;</description>
+        </item>
+
+    </channel>
+</rss>
+
+
