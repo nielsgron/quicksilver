@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.commons.datafeed;
 
-import tech.tablesaw.api.Table;
+import java.io.IOException;
+import java.io.StringReader;
+import tech.tablesaw.io.Source;
+import tech.tablesaw.io.json.JsonReader;
 
 public class DataFeedJSON extends DataFeed {
 
@@ -26,17 +28,11 @@ public class DataFeedJSON extends DataFeed {
 
     @Override
     protected void buildDataSet() {
-
-        // TODO : create the object for dataTable using the member dataPayload
-
         try {
-            //dataTable = Table.read().csv("../data/file.csv");
-            //tech.tablesaw.io.json.JsonReader reader = new tech.tablesaw.io.json.JsonReader();
-            //dataTable = reader.read("?Source");
-        } catch ( Exception e ) {
-            e.printStackTrace();
+            dataTable = new JsonReader().read(new Source(new StringReader(dataPayload)));
+        } catch (IOException ex) {
+            //ignore?
         }
-
     }
 
 }
