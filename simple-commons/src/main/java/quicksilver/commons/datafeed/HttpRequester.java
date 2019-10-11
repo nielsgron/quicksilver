@@ -16,12 +16,16 @@
 
 package quicksilver.commons.datafeed;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
+import org.apache.commons.io.IOUtils;
 
 public class HttpRequester {
 
@@ -37,8 +41,6 @@ public class HttpRequester {
         getOutputStream
 
      */
-
-    private int BUFFER_SIZE = 4096;
 
     private String contentDisposition;
     private String contentEncoding;
@@ -57,40 +59,48 @@ public class HttpRequester {
 //
 //    }
 
-    public String requestURLToMemory(URL source) {
+    public byte[] requestURLToMemory(URL source) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        // TODO: Get the file from the URL and return as String.  Use requestURLToFile()
+        requestURLToFile(source, baos);
+        return baos.toByteArray();
+    }
 
-        return "";
+    public void requestURLToFile(URL source, File destination) throws IOException {
+            // opens an output stream to save into file
+            try(FileOutputStream outputStream = new FileOutputStream(destination)) {
+                requestURLToFile(source, outputStream);
+            }
     }
 
     // Java Http
-    public void requestURLToFile(URL source, File destination) throws IOException {
-
+    public void requestURLToFile(URL source, OutputStream outputStream ) throws IOException {
         // Get an instance of a HttpURLConnection
-        HttpURLConnection httpConnection = (HttpURLConnection) source.openConnection();
+        URLConnection connection = source.openConnection();
+        HttpURLConnection httpConnection = connection instanceof HttpURLConnection ? (HttpURLConnection) connection : null;
 
         // Set any options on the URLConnection before we connect
         // ...
         // httpConnection.setRequestMethod("GET / POST");
 
         // Initiate connection
-        httpConnection.connect();
+        connection.connect();
 
-        responseCode = httpConnection.getResponseCode();
+        responseCode = httpConnection != null ? httpConnection.getResponseCode() : HttpURLConnection.HTTP_OK;
 
         // If the HTTP response code is OK, then process request
         if (responseCode == HttpURLConnection.HTTP_OK) {
 
-            contentDisposition = httpConnection.getHeaderField("Content-Disposition");
+            contentEncoding = connection.getContentEncoding();
+            contentLength = connection.getContentLength();
+            contentType = connection.getContentType();
 
-            contentEncoding = httpConnection.getContentEncoding();
-            contentLength = httpConnection.getContentLength();
-            contentType = httpConnection.getContentType();
+            urlDate = connection.getDate();
+            urlExpiration = connection.getExpiration();
+            urlLastModified = connection.getLastModified();
 
-            urlDate = httpConnection.getDate();
-            urlExpiration = httpConnection.getExpiration();
-            urlLastModified = httpConnection.getLastModified();
+            /*
+            contentDisposition = connection.getHeaderField("Content-Disposition");
 
             String fileName = "";
             if (contentDisposition != null) {
@@ -104,17 +114,12 @@ public class HttpRequester {
                 // extracts file name from URL
                 fileName = destination.getName();
             }
+            */
 
             // opens input stream from the HTTP connection
-            InputStream inputStream = httpConnection.getInputStream();
-            // opens an output stream to save into file
-            FileOutputStream outputStream = new FileOutputStream(destination);
+            InputStream inputStream = connection.getInputStream();
 
-            int bytesRead = -1;
-            byte[] buffer = new byte[BUFFER_SIZE];
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
+            IOUtils.copy(inputStream, outputStream);
 
             outputStream.close();
             inputStream.close();
@@ -123,13 +128,11 @@ public class HttpRequester {
         } else {
             System.out.println("No file to download. Server replied HTTP code: " + responseCode);
         }
-        httpConnection.disconnect();
+        if(httpConnection != null) {
+            httpConnection.disconnect();
+        }
 
         printDebug();
-    }
-
-    public void setBufferSize(int size) {
-        BUFFER_SIZE = size;
     }
 
     public void printDebug() {

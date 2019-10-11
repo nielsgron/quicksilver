@@ -16,12 +16,13 @@
 
 package quicksilver.commons.datafeed;
 
+import java.io.IOException;
 import quicksilver.commons.data.TSDataSet;
 import tech.tablesaw.api.Table;
 
 public class DataFeedTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         DataFeed dataFeed;
         Table dataTable;

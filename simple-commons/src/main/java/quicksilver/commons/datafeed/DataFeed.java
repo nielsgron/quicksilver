@@ -16,6 +16,7 @@
 
 package quicksilver.commons.datafeed;
 
+import java.io.IOException;
 import tech.tablesaw.api.Table;
 
 import java.net.URL;
@@ -30,7 +31,7 @@ public abstract class DataFeed extends HttpRequester {
     // Members for DataSet returned
     protected Table dataTable;
     // Members for Data Payload
-    protected String dataPayload;
+    protected byte[] dataPayload;
 
     public DataFeed(String baseURLString) {
         this.baseURLString = baseURLString;
@@ -48,7 +49,7 @@ public abstract class DataFeed extends HttpRequester {
         return urlStringBuilder.toString();
     }
 
-    public void request() {
+    public void request() throws IOException {
 
         URL url;
         String urlString = buildRequestURL();

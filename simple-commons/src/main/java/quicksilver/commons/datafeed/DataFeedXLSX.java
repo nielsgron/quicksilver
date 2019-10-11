@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.commons.datafeed;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import tech.tablesaw.io.Source;
+import tech.tablesaw.io.xlsx.XlsxReader;
 
 public class DataFeedXLSX extends DataFeed {
 
@@ -24,17 +28,12 @@ public class DataFeedXLSX extends DataFeed {
 
     @Override
     protected void buildDataSet() {
-
-        // TODO : create the object for dataTable using the member dataPayload
-
         try {
-            //dataTable = Table.read().csv("../data/file.csv");
-            //tech.tablesaw.io.xlsx.XlsxReader reader = new tech.tablesaw.io.xlsx.XlsxReader();
-            //dataTable = reader.read("?Source");
-        } catch ( Exception e ) {
-            e.printStackTrace();
+            //TODO: Add an #anchor feature to select which sheet to load?
+            dataTable = new XlsxReader().read(new Source(new ByteArrayInputStream(dataPayload)));
+        } catch (IOException ex) {
+            //ignore
         }
-
     }
 
 }
