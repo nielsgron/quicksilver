@@ -6,6 +6,8 @@
     <content url="file://$MODULE_DIR$/../simple-commons">
       <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../simple-commons/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../simple-commons/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -89,5 +91,10 @@
     <orderEntry type="library" name="Maven: com.mchange:c3p0:0.9.5.3" level="project" />
     <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.15" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP-java7:2.4.13" level="project" />
+    <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="Maven: com.rometools:rome:1.12.2" level="project" />
+    <orderEntry type="library" name="Maven: com.rometools:rome-utils:1.12.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jdom:jdom2:2.0.6" level="project" />
   </component>
 </module>

@@ -29,20 +29,6 @@ import org.apache.commons.io.IOUtils;
 
 public class HttpRequester {
 
-    /*
-        - https://www.codejava.net/java-se/networking/use-httpurlconnection-to-download-file-from-an-http-url
-        - https://stackoverflow.com/questions/921262/how-to-download-and-save-a-file-from-internet-using-java
-
-        The following methods are used to access the header fields and the contents after the connection is made to the remote object:
-
-        getContent
-        getHeaderField
-        getInputStream
-        getOutputStream
-
-     */
-
-    private String contentDisposition;
     private String contentEncoding;
     private String contentType;
     private long contentLength;
@@ -51,13 +37,6 @@ public class HttpRequester {
     private long urlLastModified;
 
     private int responseCode;
-
-    // Apache Commons IO
-//    public void requestURLToFileApache(URL source, File destination) throws IOException {
-//
-//        FileUtils.copyURLToFile(source, destination);
-//
-//    }
 
     public byte[] requestURLToMemory(URL source) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -99,23 +78,6 @@ public class HttpRequester {
             urlExpiration = connection.getExpiration();
             urlLastModified = connection.getLastModified();
 
-            /*
-            contentDisposition = connection.getHeaderField("Content-Disposition");
-
-            String fileName = "";
-            if (contentDisposition != null) {
-                // extracts file name from header field
-                int index = contentDisposition.indexOf("filename=");
-                if (index > 0) {
-                    fileName = contentDisposition.substring(index + 10,
-                            contentDisposition.length() - 1);
-                }
-            } else {
-                // extracts file name from URL
-                fileName = destination.getName();
-            }
-            */
-
             // opens input stream from the HTTP connection
             InputStream inputStream = connection.getInputStream();
 
@@ -132,7 +94,7 @@ public class HttpRequester {
             httpConnection.disconnect();
         }
 
-        printDebug();
+        //printDebug();
     }
 
     public void printDebug() {
@@ -140,7 +102,6 @@ public class HttpRequester {
         System.out.println("Content-Encoding = " + contentEncoding);
         System.out.println("Content-Type = " + contentType);
         System.out.println("Content-Length = " + contentLength);
-        System.out.println("Content-Disposition = " + contentDisposition);
 
         System.out.println("URL-Date = " + urlDate);
         System.out.println("URL-Expiration = " + urlExpiration);
@@ -154,7 +115,6 @@ public class HttpRequester {
 
         String fileURL = "https://jdbc.postgresql.org/download/postgresql-42.2.5.jar";
         String savedFileName = System.getProperty("user.home") + File.separator + "pg-download.jar";
-        String apacheFileName = System.getProperty("user.home") + File.separator + "pg-apache.jar";
 
         HttpRequester requester = new HttpRequester();
         try {
@@ -162,11 +122,7 @@ public class HttpRequester {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-//        try {
-//            requester.requestURLToFileApache(new URL(fileURL), new File(apacheFileName));
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
+
     }
 
 }

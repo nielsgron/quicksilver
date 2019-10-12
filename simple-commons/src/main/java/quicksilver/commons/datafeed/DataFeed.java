@@ -21,6 +21,7 @@ import tech.tablesaw.api.Table;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class DataFeed extends HttpRequester {
 
@@ -44,7 +45,23 @@ public abstract class DataFeed extends HttpRequester {
         StringBuilder urlStringBuilder = new StringBuilder();
 
         urlStringBuilder.append(baseURLString);
-        // TODO: Need to also add parameters seperated by &
+
+        if ( parameters.size() > 0 ) {
+            int paramCount = 0;
+
+            for (Map.Entry<String, String> entry : parameters.entrySet()) {
+                paramCount++;
+                if ( paramCount == 1 ) {
+                    urlStringBuilder.append("?");
+                } else {
+                    urlStringBuilder.append("&");
+                }
+                urlStringBuilder.append(entry.getKey());
+                urlStringBuilder.append("=");
+                // TODO : Do we need to URL encode this value? Does Apache Commons have a utility method?
+                urlStringBuilder.append(entry.getValue());
+            }
+        }
 
         return urlStringBuilder.toString();
     }
@@ -67,7 +84,7 @@ public abstract class DataFeed extends HttpRequester {
     }
 
     public void addParameter(String key, String value) {
-
+        parameters.put(key, value);
     }
 
     public Table getDataTable() {
