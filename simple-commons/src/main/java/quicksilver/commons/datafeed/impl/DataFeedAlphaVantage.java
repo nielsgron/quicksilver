@@ -1,6 +1,12 @@
 package quicksilver.commons.datafeed.impl;
 
-import quicksilver.commons.datafeed.DataFeed;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.util.Iterator;
+import java.util.Map;
 import quicksilver.commons.datafeed.DataFeedCSV;
 import quicksilver.commons.datafeed.DataFeedJSON;
 import tech.tablesaw.api.Table;
@@ -41,6 +47,75 @@ public class DataFeedAlphaVantage extends DataFeedCSV {
         // addParameter("datatype", "json");
         addParameter("datatype", "csv");
 
+    }
+
+    /**
+     * Transform the JSON format
+     * <pre>
+     * {
+     * "Meta Data": { ... }
+     *   "Time Series (60min)": {
+     *     "2019-10-11 15:30:00": {
+     *       "1. open": "v1",
+     *       "2. high": "v2",
+     *       "3. low": "v3",
+     *       "4. close": "v4",
+     *       "5. volume": "v5"
+     *     }, ...
+     *   }
+     * }
+     * </pre>
+     *
+     * into what Tablesaw can parse:
+     * <pre>
+     * [
+     *   {
+     *     "timestamp": "2019-10-11 15:30:00",
+     *     "1. open": "v1",
+     *     "2. high": "v2",
+     *     "3. low": "v3",
+     *     "4. close": "v4",
+     *     "5. volume": "v5"
+     *   },...
+     * ]
+     * </pre>
+     *
+     * @param text the transformed JSON or the same text if any (IO)error happened
+     * @return
+     */
+    @Override
+    protected byte[] transformPayload(byte[] text) {
+        //transform the JSON format only
+        if (!"json".equals(getParameter("datatype"))) {
+            return text;
+        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode tree = null;
+        try {
+            tree = mapper.readTree(text);
+        } catch (IOException ex) {
+            //not really possible?
+            return text;
+        }
+
+        tree = tree.at("/Time Series (60min)");
+
+        ArrayNode array = mapper.createArrayNode();
+        Iterator<Map.Entry<String, JsonNode>> fields = tree.fields();
+        while (fields.hasNext()) {
+            Map.Entry<String, JsonNode> field = fields.next();
+            if (field.getValue() instanceof ObjectNode) {
+                ((ObjectNode) field.getValue()).put("timestamp", field.getKey());
+            }
+            array.add(field.getValue());
+        }
+        try {
+            return mapper.writeValueAsBytes(array);
+        } catch (JsonProcessingException ex) {
+            //TODO: log
+            return text;
+        }
     }
 
     public void setFunction(String value) {
