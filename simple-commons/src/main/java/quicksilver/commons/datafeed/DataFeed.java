@@ -78,13 +78,22 @@ public abstract class DataFeed extends HttpRequester {
         }
 
         dataPayload = requestURLToMemory(url);
+        dataPayload = transformPayload(dataPayload);
 
         buildDataSet();
 
     }
 
+    protected byte[] transformPayload(byte[] text) {
+        return text;
+    }
+
     public void addParameter(String key, String value) {
         parameters.put(key, value);
+    }
+
+    public String getParameter(String key) {
+        return parameters.get(key);
     }
 
     public Table getDataTable() {

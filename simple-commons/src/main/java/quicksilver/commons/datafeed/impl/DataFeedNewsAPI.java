@@ -1,6 +1,5 @@
 package quicksilver.commons.datafeed.impl;
 
-import quicksilver.commons.datafeed.DataFeed;
 import quicksilver.commons.datafeed.DataFeedJSON;
 import tech.tablesaw.api.Table;
 
@@ -20,8 +19,7 @@ public class DataFeedNewsAPI extends DataFeedJSON {
     public static String SECTION_TOPHEADLINES = "top-headlines";
 
     public DataFeedNewsAPI(String section) {
-        super("https://newsapi.org/v2/" + section);
-
+        super("https://newsapi.org/v2/" + section, "/articles");
     }
 
     public void setSearchTerm(String value) {
