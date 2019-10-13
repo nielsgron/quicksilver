@@ -38,6 +38,10 @@ public abstract class DataFeed extends HttpRequester {
         this.baseURLString = baseURLString;
     }
 
+    public void setBaseURLString(String value) {
+        this.baseURLString = value;
+    }
+
     protected abstract void buildDataSet();
 
     protected String buildRequestURL() {

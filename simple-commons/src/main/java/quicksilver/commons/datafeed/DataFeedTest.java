@@ -26,19 +26,26 @@ public class DataFeedTest {
         DataFeed dataFeed;
         Table dataTable;
 
-        // Test CSV
-        dataFeed = new DataFeedCSV("https://raw.githubusercontent.com/jtablesaw/tablesaw/master/data/bush.csv");
+        // Test RSS
+        dataFeed = new DataFeedRSS("http://feeds.reuters.com/reuters/technologyNews");
         dataFeed.request();
         dataTable = dataFeed.getDataTable();
         System.out.print(dataTable.structure());
         System.out.print(dataTable.print());
 
-        // Test JSON
-        dataFeed = new DataFeedCSV("http://someurl.com/file.json");
-        dataFeed.request();
-        dataTable = dataFeed.getDataTable();
-        System.out.print(dataTable.structure());
-        System.out.print(dataTable.print());
+//        // Test CSV
+//        dataFeed = new DataFeedCSV("https://raw.githubusercontent.com/jtablesaw/tablesaw/master/data/bush.csv");
+//        dataFeed.request();
+//        dataTable = dataFeed.getDataTable();
+//        System.out.print(dataTable.structure());
+//        System.out.print(dataTable.print());
+//
+//        // Test JSON
+//        dataFeed = new DataFeedCSV("http://someurl.com/file.json");
+//        dataFeed.request();
+//        dataTable = dataFeed.getDataTable();
+//        System.out.print(dataTable.structure());
+//        System.out.print(dataTable.print());
 
     }
 
