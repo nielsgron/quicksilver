@@ -1,6 +1,5 @@
 package quicksilver.commons.datafeed.impl;
 
-import quicksilver.commons.datafeed.DataFeed;
 import quicksilver.commons.datafeed.DataFeedJSON;
 import tech.tablesaw.api.Table;
 
@@ -13,7 +12,7 @@ public class DataFeedTwitter extends DataFeedJSON {
     // URL Example : https://api.twitter.com/1.1/search/tweets.json?q=from%3Atwitterdev&result_type=mixed&count=2
 
     public DataFeedTwitter() {
-        super("https://api.twitter.com/1.1/search/tweets.json");
+        super("https://api.twitter.com/1.1/search/tweets.json", "/statuses");
 
     }
 
