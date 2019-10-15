@@ -16,9 +16,7 @@
 
 package quicksilver.commons.datafeed;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,7 +25,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import org.apache.commons.io.IOUtils;
 
-public class HttpRequester {
+public class HttpRequester extends AbstractHttpRequester {
 
     private String contentEncoding;
     private String contentType;
@@ -38,22 +36,9 @@ public class HttpRequester {
 
     private int responseCode;
 
-    public byte[] requestURLToMemory(URL source) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        requestURLToFile(source, baos);
-        return baos.toByteArray();
-    }
-
-    public void requestURLToFile(URL source, File destination) throws IOException {
-            // opens an output stream to save into file
-            try(FileOutputStream outputStream = new FileOutputStream(destination)) {
-                requestURLToFile(source, outputStream);
-            }
-    }
-
     // Java Http
-    public void requestURLToFile(URL source, OutputStream outputStream ) throws IOException {
+    @Override
+    public void requestURL(URL source, OutputStream outputStream ) throws IOException {
         // Get an instance of a HttpURLConnection
         URLConnection connection = source.openConnection();
         HttpURLConnection httpConnection = connection instanceof HttpURLConnection ? (HttpURLConnection) connection : null;
@@ -118,7 +103,7 @@ public class HttpRequester {
 
         HttpRequester requester = new HttpRequester();
         try {
-            requester.requestURLToFile(new URL(fileURL), new File(savedFileName));
+            requester.requestURL(new URL(fileURL), new File(savedFileName));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
