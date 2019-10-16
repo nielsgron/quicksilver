@@ -41,7 +41,7 @@ public class DataFeedJSON extends DataFeed {
 
     @Override
     protected void buildDataSet() throws IOException {
-        JsonReadOptions.Builder builder = JsonReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload)));
+        JsonReadOptions.Builder builder = JsonReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload), charset));
         if (!jsonPath.isEmpty()) {
             builder = applyPath(builder, jsonPath);
         }

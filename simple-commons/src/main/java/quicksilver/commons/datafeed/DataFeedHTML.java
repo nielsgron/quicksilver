@@ -49,7 +49,7 @@ public class DataFeedHTML extends DataFeed {
                 //ignore
             }
         }
-        HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload)));
+        HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload), charset));
         if (tableIndex != null) {
             //available after 0.36.1 see https://github.com/jtablesaw/tablesaw/pull/682
 //                b.tableIndex(tableIndex);

@@ -18,6 +18,7 @@ package quicksilver.commons.datafeed;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import tech.tablesaw.api.Table;
 
 import java.util.Map;
@@ -34,6 +35,8 @@ public abstract class DataFeed {
     protected Table dataTable;
     // Members for Data Payload
     protected byte[] dataPayload;
+    
+    protected Charset charset = Charset.forName("UTF-8");
 
     public DataFeed(String baseURLString) {
         this.baseURLString = baseURLString;
@@ -41,6 +44,10 @@ public abstract class DataFeed {
 
     public void setBaseURLString(String value) {
         this.baseURLString = value;
+    }
+    
+    public void setCharset(Charset c) {
+        charset = c;
     }
 
     protected abstract void buildDataSet() throws IOException;
