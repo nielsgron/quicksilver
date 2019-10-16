@@ -68,8 +68,8 @@ public class DataFeedTwitter extends DataFeedJSON {
 
         String apiKey = System.getProperty("datafeed.apikey.twitter");
         if ( apiKey == null ) {
-            System.out.println("Set API Key with -Ddatafeed.apikey.twitter=KEY");
-            System.exit(0);
+            //System.out.println("Set API Key with -Ddatafeed.apikey.twitter=KEY");
+            //System.exit(0);
         }
 
         DataFeedTwitter dataFeed;

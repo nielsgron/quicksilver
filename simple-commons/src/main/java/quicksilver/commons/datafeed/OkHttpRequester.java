@@ -30,6 +30,8 @@ import org.apache.commons.io.IOUtils;
 
 public class OkHttpRequester extends AbstractHttpRequester {
 
+    private int responseCode;
+
     public final OkHttpClient client = new OkHttpClient.Builder()
             //.cache(new Cache(cacheDir, cacheSize))
             .build();
@@ -51,11 +53,20 @@ public class OkHttpRequester extends AbstractHttpRequester {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            ResponseBody body = response.body();
-            if (body == null) {
-                throw new IOException("Null body");
+            responseCode = response.code();
+
+            // If the HTTP response code is OK, then process request
+            if (responseCode == 200) {
+                ResponseBody body = response.body();
+                if (body == null) {
+                    throw new IOException("Null body");
+                }
+                IOUtils.copy(body.byteStream(), outputStream);
+
+                System.out.println("File downloaded");
+            } else {
+                System.out.println("No file to download. Server replied HTTP code: " + responseCode);
             }
-            IOUtils.copy(body.byteStream(), outputStream);
         }
     }
 

@@ -82,20 +82,6 @@ public class HttpRequester extends AbstractHttpRequester {
         //printDebug();
     }
 
-    public void printDebug() {
-
-        System.out.println("Content-Encoding = " + contentEncoding);
-        System.out.println("Content-Type = " + contentType);
-        System.out.println("Content-Length = " + contentLength);
-
-        System.out.println("URL-Date = " + urlDate);
-        System.out.println("URL-Expiration = " + urlExpiration);
-        System.out.println("URL-LastModified = " + urlLastModified);
-
-        // System.out.println("fileName = " + fileName);
-
-    }
-
     public static void main(String[] args) {
 
         String fileURL = "https://jdbc.postgresql.org/download/postgresql-42.2.5.jar";
