@@ -20,14 +20,15 @@ import java.io.IOException;
 import tech.tablesaw.api.Table;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
+import org.springframework.web.util.UriComponentsBuilder;
 
 public abstract class DataFeed {
 
     // Members for URL building
     private String baseURLString;
-    private HashMap<String, String> parameters = new HashMap<String, String>();
+    private Map<String, String> parameters = new TreeMap<String, String>();
 
     // Members for DataSet returned
     protected Table dataTable;
@@ -45,29 +46,10 @@ public abstract class DataFeed {
     protected abstract void buildDataSet();
 
     protected String buildRequestURL() {
-
-        StringBuilder urlStringBuilder = new StringBuilder();
-
-        urlStringBuilder.append(baseURLString);
-
-        if ( parameters.size() > 0 ) {
-            int paramCount = 0;
-
-            for (Map.Entry<String, String> entry : parameters.entrySet()) {
-                paramCount++;
-                if ( paramCount == 1 ) {
-                    urlStringBuilder.append("?");
-                } else {
-                    urlStringBuilder.append("&");
-                }
-                urlStringBuilder.append(entry.getKey());
-                urlStringBuilder.append("=");
-                // TODO : Do we need to URL encode this value? Does Apache Commons have a utility method?
-                urlStringBuilder.append(entry.getValue());
-            }
-        }
-
-        return urlStringBuilder.toString();
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseURLString);
+        parameters.forEach((key, value) -> builder.queryParam(key, value));
+        builder.encode();
+        return builder.build().toUriString();
     }
 
     public void request() throws IOException {
