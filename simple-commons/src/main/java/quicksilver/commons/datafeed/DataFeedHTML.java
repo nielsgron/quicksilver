@@ -35,7 +35,7 @@ public class DataFeedHTML extends DataFeed {
 
     @Override
     protected void buildDataSet() throws IOException {
-        String rurl = buildRequestURL();
+        String rurl = buildRequest().toString();
         int anchorIndex = rurl.indexOf("#");
 
         Integer tableIndex = null;

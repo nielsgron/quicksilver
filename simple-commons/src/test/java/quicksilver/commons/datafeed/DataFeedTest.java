@@ -16,10 +16,10 @@ public class DataFeedTest {
 
         f.addParameter("k", "hello world");
 
-        assertEquals("http://example.com?k=hello%20world", f.buildRequestURL());
+        assertEquals("http://example.com?k=hello%20world", f.buildRequest().toString());
 
         f.addParameter("v", "<&");
-        assertEquals("http://example.com?k=hello%20world&v=%3C%26", f.buildRequestURL());
+        assertEquals("http://example.com?k=hello%20world&v=%3C%26", f.buildRequest().toString());
     }
 
 }

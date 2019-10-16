@@ -78,7 +78,7 @@ public class DataFeedTwitter extends DataFeedJSON {
         dataFeed = new DataFeedTwitter();
         dataFeed.setSearchTerm("bitcoin");
 
-        System.out.println("API Requesting URL : " + dataFeed.buildRequestURL());
+        System.out.println("API Requesting URL : " + dataFeed.buildRequest());
 
         try {
             dataFeed.request();

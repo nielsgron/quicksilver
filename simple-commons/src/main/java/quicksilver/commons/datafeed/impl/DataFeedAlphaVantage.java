@@ -172,7 +172,7 @@ public class DataFeedAlphaVantage extends DataFeedCSV {
         dataFeed.setOutputSize(OUTPUTSIZE_COMPACT);
         dataFeed.setAPIKey(apiKey);
 
-        System.out.println("API Requesting URL : " + dataFeed.buildRequestURL());
+        System.out.println("API Requesting URL : " + dataFeed.buildRequest());
 
         try {
             dataFeed.request();

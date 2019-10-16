@@ -17,9 +17,9 @@
 package quicksilver.commons.datafeed;
 
 import java.io.IOException;
+import java.net.URI;
 import tech.tablesaw.api.Table;
 
-import java.net.URL;
 import java.util.Map;
 import java.util.TreeMap;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,11 +45,11 @@ public abstract class DataFeed {
 
     protected abstract void buildDataSet() throws IOException;
 
-    protected String buildRequestURL() {
+    protected URI buildRequest() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseURLString);
         parameters.forEach((key, value) -> builder.queryParam(key, value));
         builder.encode();
-        return builder.build().toUriString();
+        return builder.build().toUri();
     }
 
     public void request() throws IOException {
@@ -57,16 +57,9 @@ public abstract class DataFeed {
     }
 
     public void request(AbstractHttpRequester req) throws IOException {
-        URL url;
-        String urlString = buildRequestURL();
+        URI uri = buildRequest();
 
-        try {
-            url = new java.net.URL(urlString);
-        } catch ( Exception e ) {
-            url = null;
-        }
-
-        dataPayload = req.requestURL(url);
+        dataPayload = req.requestURL(uri.toURL());
         dataPayload = transformPayload(dataPayload);
 
         buildDataSet();

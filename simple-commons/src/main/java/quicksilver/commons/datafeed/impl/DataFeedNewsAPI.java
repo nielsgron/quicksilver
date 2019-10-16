@@ -89,7 +89,7 @@ public class DataFeedNewsAPI extends DataFeedJSON {
         dataFeed.setDomains("wsj.com");
         dataFeed.setAPIKey(apiKey);
 
-        System.out.println("API Requesting URL : " + dataFeed.buildRequestURL());
+        System.out.println("API Requesting URL : " + dataFeed.buildRequest());
 
         try {
             dataFeed.request();
