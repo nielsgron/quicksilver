@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class DataFeed extends OkHttpRequester {
+public abstract class DataFeed {
 
     // Members for URL building
     private String baseURLString;
@@ -71,7 +71,10 @@ public abstract class DataFeed extends OkHttpRequester {
     }
 
     public void request() throws IOException {
+        request(new OkHttpRequester());
+    }
 
+    public void request(AbstractHttpRequester req) throws IOException {
         URL url;
         String urlString = buildRequestURL();
 
@@ -81,7 +84,7 @@ public abstract class DataFeed extends OkHttpRequester {
             url = null;
         }
 
-        dataPayload = requestURL(url);
+        dataPayload = req.requestURL(url);
         dataPayload = transformPayload(dataPayload);
 
         buildDataSet();
