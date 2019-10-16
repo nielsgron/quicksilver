@@ -18,12 +18,14 @@ package quicksilver.commons.datafeed;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import tech.tablesaw.api.Table;
 
 import java.util.Map;
 import java.util.TreeMap;
-import org.springframework.web.util.UriComponentsBuilder;
+import java.util.stream.Collectors;
 
 public abstract class DataFeed {
 
@@ -36,7 +38,7 @@ public abstract class DataFeed {
     // Members for Data Payload
     protected byte[] dataPayload;
     
-    protected Charset charset = Charset.forName("UTF-8");
+    protected Charset charset = StandardCharsets.UTF_8;
 
     public DataFeed(String baseURLString) {
         this.baseURLString = baseURLString;
@@ -53,10 +55,20 @@ public abstract class DataFeed {
     protected abstract void buildDataSet() throws IOException;
 
     protected URI buildRequest() {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseURLString);
-        parameters.forEach((key, value) -> builder.queryParam(key, value));
-        builder.encode();
-        return builder.build().toUri();
+        try {
+            String query = parameters.entrySet()
+                    .stream()
+                    .map(e
+                            -> e.getKey() + "=" + SpringUtil.encodeUriComponent(e.getValue(), StandardCharsets.UTF_8, SpringUtil.Type.QUERY_PARAM))
+                    .collect(Collectors.joining("&"));
+            if (!query.isEmpty()) {
+                query = "?" + query;
+            }
+
+            return new URI(baseURLString + query);
+        } catch (URISyntaxException use) {
+            throw new IllegalArgumentException(use);
+        }
     }
 
     public void request() throws IOException {
