@@ -43,7 +43,7 @@ public abstract class DataFeed {
         this.baseURLString = value;
     }
 
-    protected abstract void buildDataSet();
+    protected abstract void buildDataSet() throws IOException;
 
     protected String buildRequestURL() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(baseURLString);

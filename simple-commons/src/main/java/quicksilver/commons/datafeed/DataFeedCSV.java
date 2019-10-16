@@ -26,12 +26,8 @@ public class DataFeedCSV extends DataFeed {
     }
 
     @Override
-    protected void buildDataSet() {
-        try {
-            dataTable = Table.read().csv(new ByteArrayInputStream(dataPayload), "csvTableName");
-        } catch (IOException ex) {
-            //ignore
-        }
+    protected void buildDataSet() throws IOException {
+        dataTable = Table.read().csv(new ByteArrayInputStream(dataPayload), "csvTableName");
     }
 
 }

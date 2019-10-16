@@ -27,13 +27,9 @@ public class DataFeedXLSX extends DataFeed {
     }
 
     @Override
-    protected void buildDataSet() {
-        try {
-            //TODO: Add an #anchor feature to select which sheet to load?
-            dataTable = new XlsxReader().read(new Source(new ByteArrayInputStream(dataPayload)));
-        } catch (IOException ex) {
-            //ignore
-        }
+    protected void buildDataSet() throws IOException {
+        //TODO: Add an #anchor feature to select which sheet to load?
+        dataTable = new XlsxReader().read(new Source(new ByteArrayInputStream(dataPayload)));
     }
 
 }

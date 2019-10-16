@@ -34,32 +34,28 @@ public class DataFeedHTML extends DataFeed {
     }
 
     @Override
-    protected void buildDataSet() {
-        try {
-            String rurl = buildRequestURL();
-            int anchorIndex = rurl.indexOf("#");
+    protected void buildDataSet() throws IOException {
+        String rurl = buildRequestURL();
+        int anchorIndex = rurl.indexOf("#");
 
-            Integer tableIndex = null;
+        Integer tableIndex = null;
 
-            if (anchorIndex != -1) {
-                //see if there's an index in there
-                String anchor = rurl.substring(anchorIndex + 1);
-                try {
-                    tableIndex = Integer.parseInt(anchor);
-                } catch (NumberFormatException nfe) {
-                    //ignore
-                }
+        if (anchorIndex != -1) {
+            //see if there's an index in there
+            String anchor = rurl.substring(anchorIndex + 1);
+            try {
+                tableIndex = Integer.parseInt(anchor);
+            } catch (NumberFormatException nfe) {
+                //ignore
             }
-            HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload)));
-            if (tableIndex != null) {
-                //available after 0.36.1 see https://github.com/jtablesaw/tablesaw/pull/682
-//                b.tableIndex(tableIndex);
-            }
-            HtmlReadOptions o = b.build();
-            dataTable = new HtmlReader().read(o);
-        } catch (IOException ex) {
-            //ignore? it's all in RAM
         }
+        HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload)));
+        if (tableIndex != null) {
+            //available after 0.36.1 see https://github.com/jtablesaw/tablesaw/pull/682
+//                b.tableIndex(tableIndex);
+        }
+        HtmlReadOptions o = b.build();
+        dataTable = new HtmlReader().read(o);
     }
 
 }
