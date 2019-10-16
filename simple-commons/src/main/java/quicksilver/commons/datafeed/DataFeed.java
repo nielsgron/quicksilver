@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class DataFeed extends HttpRequester {
+public abstract class DataFeed extends OkHttpRequester {
 
     // Members for URL building
     private String baseURLString;
@@ -81,7 +81,7 @@ public abstract class DataFeed extends HttpRequester {
             url = null;
         }
 
-        dataPayload = requestURLToMemory(url);
+        dataPayload = requestURL(url);
         dataPayload = transformPayload(dataPayload);
 
         buildDataSet();
