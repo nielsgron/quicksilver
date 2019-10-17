@@ -1,15 +1,29 @@
 package quicksilver.commons.datafeed;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import org.apache.commons.io.IOUtils;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
+import static spark.Spark.get;
 import tech.tablesaw.api.Table;
 
 public class DataFeedJSONTest {
 
+    @Before
+    public void setUp() {
+        get("/arrays.json", (req, resp) -> {
+            return IOUtils.toString(getClass().getResourceAsStream("arrays.json"), StandardCharsets.UTF_8);
+        });
+        get("/object.json", (req, resp) -> {
+            return IOUtils.toString(getClass().getResourceAsStream("object.json"), StandardCharsets.UTF_8);
+        });
+    }
+
     @Test
     public void arrayOfArrays() throws IOException {
-        DataFeedJSON d = new DataFeedJSON(getClass().getResource("arrays.json").toString());
+        DataFeedJSON d = new DataFeedJSON("http://127.0.0.1:4567/arrays.json");
         d.request();
         Table t = d.getDataTable();
         assertTrue(t.rowCount() > 0);
@@ -23,7 +37,7 @@ public class DataFeedJSONTest {
 
     @Test
     public void object() throws IOException {
-        DataFeedJSON d = new DataFeedJSON(getClass().getResource("object.json").toString());
+        DataFeedJSON d = new DataFeedJSON("http://127.0.0.1:4567/object.json");
         d.request();
         Table t = d.getDataTable();
         assertTrue(t.rowCount() > 0);

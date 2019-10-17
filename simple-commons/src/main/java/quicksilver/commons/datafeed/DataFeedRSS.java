@@ -42,7 +42,7 @@ public class DataFeedRSS extends DataFeed {
     @Override
     protected void buildDataSet() {
         try {
-            SyndFeed feed = new SyndFeedInput().build(new InputStreamReader(new ByteArrayInputStream(dataPayload)));
+            SyndFeed feed = new SyndFeedInput().build(new InputStreamReader(new ByteArrayInputStream(dataPayload), charset));
             List<SyndEntry> entries = feed.getEntries();
 
             Table t = Table.create("RSS");

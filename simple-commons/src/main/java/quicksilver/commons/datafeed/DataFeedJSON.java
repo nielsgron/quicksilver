@@ -40,16 +40,12 @@ public class DataFeedJSON extends DataFeed {
     }
 
     @Override
-    protected void buildDataSet() {
-        JsonReadOptions.Builder builder = JsonReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload)));
-        try {
-            if (!jsonPath.isEmpty()) {
-                builder = applyPath(builder, jsonPath);
-            }
-            dataTable = new JsonReader().read(builder.build());
-        } catch (IOException ex) {
-            //ignore?
+    protected void buildDataSet() throws IOException {
+        JsonReadOptions.Builder builder = JsonReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload), charset));
+        if (!jsonPath.isEmpty()) {
+            builder = applyPath(builder, jsonPath);
         }
+        dataTable = new JsonReader().read(builder.build());
     }
 
     private JsonReadOptions.Builder applyPath(JsonReadOptions.Builder builder, String jsonPath) throws IOException {
