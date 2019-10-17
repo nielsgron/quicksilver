@@ -16,11 +16,8 @@
 
 package quicksilver.commons.datafeed;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -38,16 +35,6 @@ public class OkHttpRequester extends AbstractHttpRequester {
 
     @Override
     public void requestURL(URL source, OutputStream outputStream) throws IOException {
-        //turns out OkHttp doesn't handle file://
-        if ("file".equals(source.getProtocol())) {
-            try (FileInputStream fos = new FileInputStream(new File(source.toURI()))) {
-                IOUtils.copy(fos, outputStream);
-                return;
-            } catch (URISyntaxException use) {
-                //ignore, let OkHttp also try...
-            }
-        }
-
         Request request = new Request.Builder()
                 .url(source)
                 .build();
