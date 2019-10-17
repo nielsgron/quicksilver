@@ -18,14 +18,13 @@ package quicksilver.commons.datafeed;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import tech.tablesaw.api.Table;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
+import okhttp3.HttpUrl;
 
 public abstract class DataFeed {
 
@@ -55,20 +54,22 @@ public abstract class DataFeed {
     protected abstract void buildDataSet() throws IOException;
 
     protected URI buildRequest() {
-        try {
-            String query = parameters.entrySet()
-                    .stream()
-                    .map(e
-                            -> e.getKey() + "=" + SpringUtil.encodeUriComponent(e.getValue(), StandardCharsets.UTF_8, SpringUtil.Type.QUERY_PARAM))
-                    .collect(Collectors.joining("&"));
-            if (!query.isEmpty()) {
-                query = "?" + query;
-            }
-
-            return new URI(baseURLString + query);
-        } catch (URISyntaxException use) {
-            throw new IllegalArgumentException(use);
+        HttpUrl parse = HttpUrl.parse(baseURLString);
+        if (parse == null) {
+            throw new IllegalStateException("Cannot parse " + baseURLString);
         }
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme(parse.scheme())
+                .username(parse.username())
+                .host(parse.host())
+                .fragment(parse.fragment());
+
+        parse.pathSegments().forEach(s -> builder.addPathSegment(s));
+        if (parse.port() >= 0) {
+            builder.port(parse.port());
+        }
+        parameters.forEach((k, v) -> builder.addQueryParameter(k, v));
+        return builder.build().uri();
     }
 
     public void request() throws IOException {

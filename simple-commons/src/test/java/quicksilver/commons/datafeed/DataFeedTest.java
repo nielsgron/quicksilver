@@ -14,12 +14,17 @@ public class DataFeedTest {
             }
         };
 
-        f.addParameter("k", "hello world");
+        //XXX: OkHttp's path defaults to /, there's no way for it to be empty...
+        assertEquals("http://example.com/", f.buildRequest().toString());
 
-        assertEquals("http://example.com?k=hello%20world", f.buildRequest().toString());
+        f.addParameter("k", "hello world");
+        
+        f.setBaseURLString("http://example.com/search");
+
+        assertEquals("http://example.com/search?k=hello%20world", f.buildRequest().toString());
 
         f.addParameter("v", "<&");
-        assertEquals("http://example.com?k=hello%20world&v=%3C%26", f.buildRequest().toString());
+        assertEquals("http://example.com/search?k=hello%20world&v=%3C%26", f.buildRequest().toString());
     }
 
 }
