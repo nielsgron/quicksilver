@@ -70,7 +70,7 @@ public class ConfigLogger extends SimpleConfig {
         setProperty("appender.rolling.type", "RollingFile");
         setProperty("appender.rolling.name", "RollingFile");
         setProperty("appender.rolling.fileName", "${logsfolder}/" + fileName );
-        setProperty("appender.rolling.filePattern", fileName + "-%d{MM-dd-yy-HH-mm-ss}-%i.log.gz");
+        setProperty("appender.rolling.filePattern", "${logsfolder}/" + fileName + "-%d{MM-dd-yy-HH-mm-ss}-%i.log.gz");
         setProperty("appender.rolling.layout.type", "PatternLayout");
         setProperty("appender.rolling.layout.pattern", "%d %p %C{1.} [%t] %m%n");
         setProperty("appender.rolling.policies.type", "Policies");

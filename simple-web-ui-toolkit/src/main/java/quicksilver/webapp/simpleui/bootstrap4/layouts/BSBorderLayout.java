@@ -189,4 +189,30 @@ public class BSBorderLayout implements BSLayoutManager {
         return panel;
     }
 
+    public static BSPanel createBorderPanel(HTMLComponent left, HTMLComponent right, HTMLComponent top, HTMLComponent bottom, HTMLComponent center) {
+
+        // Final Panel
+        BSPanel panel = new BSPanel();
+        panel.setLayout(new BSBorderLayout());
+
+        if ( left != null ) {
+            panel.add(left, BSBorderLayout.WEST);
+        }
+        if ( right != null ) {
+            panel.add(right, BSBorderLayout.EAST);
+        }
+        if ( top != null ) {
+            panel.add(top, BSBorderLayout.NORTH);
+        }
+        if ( bottom != null ) {
+            panel.add(bottom, BSBorderLayout.SOUTH);
+        }
+        if ( center != null ) {
+            panel.add(center, BSBorderLayout.CENTER);
+        }
+
+        return panel;
+
+    }
+
 }

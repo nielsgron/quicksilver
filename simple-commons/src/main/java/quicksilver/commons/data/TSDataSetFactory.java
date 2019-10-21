@@ -185,4 +185,44 @@ public class TSDataSetFactory {
 
     }
 
+    public static TSDataSet createSampleDataSet(String[] colNames, Class[] colTypes) {
+
+        // Get the column names and types
+        Column[] colObjects = new Column[colNames.length];
+
+        // Populate column objects
+        for ( int i = 0; i < colNames.length; i++ ) {
+            colObjects[i] = TSDataSetFactory.createColumnByJavaType(colTypes[i], colNames[i]);
+        }
+
+        // Construct DataSet
+        TSDataSetMeta meta = new TSDataSetMeta(colObjects, colNames, colTypes);
+        TSDataSet dataSet = new TSDataSet(meta);
+
+        // Populate rows
+        // ?
+
+        return dataSet;
+    }
+
+    public static TSDataSet createSampleStockPrices() {
+
+        // Stock, Date, Open, High, Low, Close
+
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Stock", "Date", "Open", "High", "Low", "Close"}, new Class[]{String.class, LocalDate.class, Double.class, Double.class, Double.class, Double.class});
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 1), 120D, 121D, 118D, 119D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 2), 119D, 119D, 110D, 112D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 3), 112D, 112D, 103D, 103D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 4), 103D, 115D, 103D, 114D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 5), 114D, 131D, 112D, 130D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 6), 130D, 142D, 129D, 141D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 7), 141D, 147D, 137D, 145D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 8), 145D, 165D, 143D, 165D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 9), 165D, 165D, 153D, 154D });
+
+        dataSet.sort("Date");
+
+        return dataSet;
+    }
+
 }

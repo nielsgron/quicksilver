@@ -16,12 +16,24 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.webapp.simpleserver.controllers.components.toolbar.TBarCharts;
 import quicksilver.webapp.simpleserver.controllers.root.components.AbstractComponentsPage;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSNavbarToolbarContainer;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 
 public abstract class AbstractComponentsChartsPage extends AbstractComponentsPage {
 
+    protected TBarCharts toolbar;
+
     public AbstractComponentsChartsPage() {
         getComponentNavTab().setActiveItem("Charts");
+    }
+
+    protected BSPanel createContentPanelTop() {
+        toolbar = new TBarCharts();
+        BSPanel panel = super.createContentPanelTop();
+        panel.add(new BSNavbarToolbarContainer(toolbar));
+        return panel;
     }
 
 }

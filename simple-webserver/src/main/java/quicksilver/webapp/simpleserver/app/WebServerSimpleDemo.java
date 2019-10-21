@@ -25,7 +25,7 @@ import quicksilver.webapp.simpleserver.controllers.root.about.Team;
 import quicksilver.webapp.simpleserver.controllers.root.components.bootstrap.Bootstrap;
 import quicksilver.webapp.simpleserver.controllers.root.Index;
 import quicksilver.webapp.simpleserver.controllers.root.Search;
-import quicksilver.webapp.simpleserver.controllers.root.components.charts.Charts;
+import quicksilver.webapp.simpleserver.controllers.root.components.charts.*;
 import quicksilver.webapp.simpleserver.controllers.root.components.customforms.CustomForms;
 import quicksilver.webapp.simpleserver.controllers.root.components.extras.Extras;
 import quicksilver.webapp.simpleserver.controllers.root.components.bootstrap.*;
@@ -87,10 +87,6 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
         });
         webServer.get("/components/customforms", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new CustomForms(), new HtmlStreamStringBuffer());
-            return stream.getText();
-        });
-        webServer.get("/components/charts", (request, response) -> {
-            HtmlStream stream = renderPageAndReturnStream(new Charts(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
 
@@ -176,6 +172,69 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
         });
         webServer.get("/components/bootstrap/tooltips", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Tooltips(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
+
+        webServer.get("/components/charts", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Charts(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
+        webServer.get("/components/charts/area", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsArea(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/bubble", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsBubble(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/candlestick", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsCandlestick(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/heatmap", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsHeatmap(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/histogram", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsHistogram(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/hbar", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsHBar(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/line", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsLine(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/ohlc", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsOHLC(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/pie", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsPie(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/scatter", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsScatter(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/sunburst", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsSunburst(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/timeseries", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsTimeseries(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/treemap", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsTreemap(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/charts/vbar", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsVBar(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
 

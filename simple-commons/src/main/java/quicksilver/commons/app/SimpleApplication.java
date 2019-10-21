@@ -60,13 +60,17 @@ public class SimpleApplication {
         initializeLogger();
         initializeI18N();
         initializeEmailService();
-        initializeSchedulerService();
+        if ( isSchedulerEnabled() ) {
+            initializeSchedulerService();
+        }
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 // Shutdown all services
                 EmailService.shutdown();
-                SchedulerService.shutdown();
+                if ( isSchedulerEnabled() ) {
+                    SchedulerService.shutdown();
+                }
             }
         });
 
@@ -86,12 +90,18 @@ public class SimpleApplication {
         configLogger = new ConfigLogger(applicationName, applicationHomePath.getAppFolderName(), applicationHomePath.getLogPath(), new File(applicationHomePath.getConfigPath(), "config-logger.properties"));
         setDefaultConfigLogger();
 
-        configScheduler = new ConfigScheduler(new File(applicationHomePath.getConfigPath(), "config-scheduler.properties"));
-        setDefaultConfigScheduler();
+        if ( isSchedulerEnabled() ) {
+            configScheduler = new ConfigScheduler(new File(applicationHomePath.getConfigPath(), "config-scheduler.properties"));
+            setDefaultConfigScheduler();
+        }
 
         configWebServer = new ConfigWebServer(new File(applicationHomePath.getConfigPath(), "config-webserver.properties"));
         setDefaultConfigWebServer();
 
+    }
+
+    public boolean isSchedulerEnabled() {
+        return true;
     }
 
     protected void setDefaultConfigApplication() {
@@ -136,10 +146,11 @@ public class SimpleApplication {
         //System.setProperty("log4j2.debug", "true");
 
         // This is the first call to get a Log4j-2 logger, which will initialize it
+        System.out.println("Initializing logger ...");
         Logger LOG = LogManager.getLogger();
 
         String fullPath = configLogger.getConfigFile().getAbsolutePath();
-        LOG.debug("Logger service started and configured with : " + fullPath);
+        System.out.println("Logger service started and configured with : " + fullPath);
 
     }
 
@@ -217,7 +228,9 @@ public class SimpleApplication {
         configDatabase.save();
         configEmailServer.save();
         configLogger.save();
-        configScheduler.save();
+        if ( isSchedulerEnabled() ) {
+            configScheduler.save();
+        }
         configWebServer.save();
     }
 

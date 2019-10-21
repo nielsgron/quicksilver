@@ -68,6 +68,10 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
 
     }
 
+    public boolean isSchedulerEnabled() {
+        return false;
+    }
+
     private static void initializeDatabaseOrExitApplication(SimpleApplication app, boolean skipInitialization) {
 
         if ( skipInitialization ) {
