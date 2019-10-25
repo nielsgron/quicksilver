@@ -31,6 +31,10 @@ public class TSHorizontalBarChartPanel extends TSFigurePanel {
     }
 
     public TSHorizontalBarChartPanel(Table table, String divName, int height, int width, boolean enableLegend) {
+        this(table, "Name", "Value", divName, height, width, enableLegend);
+    }
+
+    public TSHorizontalBarChartPanel(Table table, String groupColName, String numberColName, String divName, int height, int width, boolean enableLegend) {
         super(divName);
 
         setHeight(height);
@@ -40,7 +44,7 @@ public class TSHorizontalBarChartPanel extends TSFigurePanel {
         Figure figure = null;
 
         try {
-            figure = createFigure( table,"Name", "Value", "");
+            figure = createFigure( table, groupColName, numberColName, "");
         } catch ( Exception e ) {
             e.printStackTrace();
         }

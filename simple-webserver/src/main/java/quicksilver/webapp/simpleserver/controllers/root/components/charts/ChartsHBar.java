@@ -16,6 +16,7 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSHorizontalBarChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
@@ -35,21 +36,22 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        //Table table = Charts.createPieDataSet(true);
+        Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(table, "div1", 200, 900, true), "Wide Chart")
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div1", 200, 900, true), "Country GDP (Nominal)")
         );
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(table, "div2", 200, 450, true), "Half Wide Chart"),
-            new BSCard( new TSHorizontalBarChartPanel(table, "div3", 200, 450, true), "Half Wide Chart")
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div2", 200, 450, true), "Country GDP (Nominal)"),
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "Population", "div3", 200, 450, true), "Country Population")
         );
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(table, "div4", 200, 300, true), "Narrow Chart"),
-            new BSCard( new TSHorizontalBarChartPanel(table, "div5", 200, 300, true), "Narrow Chart"),
-            new BSCard( new TSHorizontalBarChartPanel(table, "div6", 200, 300, true), "Narrow Chart")
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div4", 200, 300, true), "Country GDP (Nominal)"),
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP_PPP", "div5", 200, 300, true), "Country GDP (PPP)"),
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "Population", "div6", 200, 300, true), "Country Population")
         );
 
         body.doLayout();

@@ -205,11 +205,54 @@ public class TSDataSetFactory {
         return dataSet;
     }
 
+    public static TSDataSet createSampleCountryEconomicData() {
+
+        // Country, GDP, Population
+
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_PPP", "Population"},
+                new Class[]{String.class, Double.class, Double.class, Double.class});
+        dataSet.addRow(new Object[] { "US"          , 20.58D    , 20.58D        , 327167434D });
+        dataSet.addRow(new Object[] { "China"       , 14.216D   , 27.331D       , 1403500365D });
+        dataSet.addRow(new Object[] { "Japan"       , 5.176D    , 5.749D        , 126317000D });
+        dataSet.addRow(new Object[] { "Germany"     , 4.117D    , 4.555D        , 83019200D });
+        dataSet.addRow(new Object[] { "India"       , 2.972D    , 11.468D       , 1324171354D });
+        dataSet.addRow(new Object[] { "France"      , 2.845D    , 3.081D        , 67022000D });
+        dataSet.addRow(new Object[] { "UK"          , 2.829D    , 3.039D        , 67545757D });
+        dataSet.addRow(new Object[] { "Canada"      , 1.820D    , 1.930D        , 37602103D });
+        dataSet.addRow(new Object[] { "Spain"       , 1.583D    , 1.946D        , 46733038D });
+        dataSet.addRow(new Object[] { "Australia"   , 1.376D    , 1.365D        , 25546800D });
+
+        dataSet.sort("GDP");
+
+        return dataSet;
+    }
+
+    public static TSDataSet createSampleStockMarketEquities() {
+
+        // Exchange, Ticker, Company, Sector, Industry, MarketCap, Price
+
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Exchange", "Ticker", "Company", "Sector", "Industry", "MarketCap", "Price"},
+                new Class[]{String.class, String.class, String.class, String.class, String.class , Double.class, Double.class});
+        dataSet.addRow(new Object[] { "NYSE", "SQ", "Square, Inc", "Technology", "Internet Software & Services", 27.65D, 61.72D });
+        dataSet.addRow(new Object[] { "NYSE", "FB", "Facebook, Inc.", "Technology", "Internet Information Providers", 544.72D, 186.38D });
+        dataSet.addRow(new Object[] { "NYSE", "CRM", "salesforce.com, inc.", "Technology", "Application Software", 131.78D, 148.12D });
+        dataSet.addRow(new Object[] { "NYSE", "DBX", "Dropbox, Inc.", "Technology", "Application Software", 8.31D, 19.55D });
+        dataSet.addRow(new Object[] { "NYSE", "DOCU", "DocuSign, Inc.", "Technology", "Business Software & Services", 11.81D, 64.91D });
+        dataSet.addRow(new Object[] { "NYSE", "APLT", "Applied Therapeutics, Inc.", "Healthcare", "Biotechnology", 0.25226D, 17.01D });
+        dataSet.addRow(new Object[] { "NYSE", "ABMD", "Abiomed, Inc.", "Healthcare", "Medical Appliances & Equipment", 8.22D, 179.96D });
+        dataSet.addRow(new Object[] { "NYSE", "ACM", "AECOM", "Services", "Technical Services", 6.41D, 40.59D });
+
+        dataSet.sort("MarketCap");
+
+        return null;
+    }
+
     public static TSDataSet createSampleStockPrices() {
 
         // Stock, Date, Open, High, Low, Close
 
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Stock", "Date", "Open", "High", "Low", "Close"}, new Class[]{String.class, LocalDate.class, Double.class, Double.class, Double.class, Double.class});
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Stock", "Date", "Open", "High", "Low", "Close"},
+                new Class[]{String.class, LocalDate.class, Double.class, Double.class, Double.class, Double.class});
         dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 1), 120D, 121D, 118D, 119D });
         dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 2), 119D, 119D, 110D, 112D });
         dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 3), 112D, 112D, 103D, 103D });
