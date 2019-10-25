@@ -33,7 +33,10 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table table = Charts.createMarketDataSet();
+        //"Sector", "Company" -> "Name", "Value" aka child, parent
+        table.column("Sector").setName("Value");
+        table.column("Company").setName("Name");
 
         body.addRowOfColumns(
                 Charts.addTreemapChart(table, "div1", "Wide Chart")
