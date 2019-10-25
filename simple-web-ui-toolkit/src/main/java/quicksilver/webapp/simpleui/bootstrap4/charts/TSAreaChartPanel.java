@@ -24,12 +24,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSAreaChartPanel extends TSFigurePanel {
 
     public TSAreaChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value");
+    }
+
+    public TSAreaChartPanel(Table table, String divName, String xCol, String yCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = AreaPlot.create("", table, "Name", "Value");
+            figure = AreaPlot.create("", table, xCol, yCol);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

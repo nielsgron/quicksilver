@@ -34,23 +34,20 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         // Add Chart
         Table table = Charts.createMarketDataSet();
-        //"Sector", "Company" -> "Name", "Value" aka child, parent
-        table.column("Sector").setName("Value");
-        table.column("Company").setName("Name");
 
         body.addRowOfColumns(
-                Charts.addTreemapChart(table, "div1", "Wide Chart")
+                Charts.addTreemapChart(table, "div1", "Wide Chart", "Sector", "Company")
         );
 
         body.addRowOfColumns(
-                Charts.addTreemapChart(table, "div2", "Half Width Chart"),
-                Charts.addTreemapChart(table, "div3", "Half Width Chart")
+                Charts.addTreemapChart(table, "div2", "Half Width Chart", "Sector", "Company"),
+                Charts.addTreemapChart(table, "div3", "Half Width Chart", "Sector", "Company")
         );
 
         body.addRowOfColumns(
-                Charts.addTreemapChart(table, "div4", "Narrow Chart"),
-                Charts.addTreemapChart(table, "div5", "Narrow Chart"),
-                Charts.addTreemapChart(table, "div6", "Narrow Chart")
+                Charts.addTreemapChart(table, "div4", "Narrow Chart", "Sector", "Company"),
+                Charts.addTreemapChart(table, "div5", "Narrow Chart", "Sector", "Company"),
+                Charts.addTreemapChart(table, "div6", "Narrow Chart", "Sector", "Company")
         );
 
         body.doLayout();

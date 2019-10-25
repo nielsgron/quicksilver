@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSTreeMapChartPanel extends TSFigurePanel {
 
     public TSTreeMapChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value");
+    }
+
+    public TSTreeMapChartPanel(Table table, String divName, String col, String parentCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = TreemapPlot.create("", table, "Name", "Value");
+            figure = TreemapPlot.create("", table, col, parentCol);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSHeatMapChartPanel extends TSFigurePanel {
 
     public TSHeatMapChartPanel(Table table, String divName) {
+        this(table, divName, "Sector", "Company");
+    }
+
+    public TSHeatMapChartPanel(Table table, String divName, String categoryCol1, String categoryCol2) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = Heatmap.create("", table, "Sector", "Company");
+            figure = Heatmap.create("", table, categoryCol1, categoryCol2);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

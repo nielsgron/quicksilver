@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSTimeSeriesChartPanel extends TSFigurePanel {
 
     public TSTimeSeriesChartPanel(Table table, String divName) {
+        this(table, divName, "Date", "Close");
+    }
+
+    public TSTimeSeriesChartPanel(Table table, String divName, String dateColXName, String yColName) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = TimeSeriesPlot.create("", table, "Date", "Close");
+            figure = TimeSeriesPlot.create("", table, dateColXName, yColName);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

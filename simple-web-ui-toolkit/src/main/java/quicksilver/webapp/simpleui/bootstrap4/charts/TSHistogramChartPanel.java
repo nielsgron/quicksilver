@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSHistogramChartPanel extends TSFigurePanel {
 
     public TSHistogramChartPanel(Table table, String divName) {
+        this(table, divName, "Value");
+    }
+
+    public TSHistogramChartPanel(Table table, String divName, String numericColumnName) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = Histogram.create("", table, "Value");
+            figure = Histogram.create("", table, numericColumnName);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSLineChartPanel extends TSFigurePanel {
 
     public TSLineChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value");
+    }
+
+    public TSLineChartPanel(Table table, String divName, String xCol, String yCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = LinePlot.create("", table, "Name", "Value");
+            figure = LinePlot.create("", table, xCol, yCol);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

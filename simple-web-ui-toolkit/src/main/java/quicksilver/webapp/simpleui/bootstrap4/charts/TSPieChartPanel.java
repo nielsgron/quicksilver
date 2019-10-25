@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSPieChartPanel extends TSFigurePanel {
 
     public TSPieChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value");
+    }
+
+    public TSPieChartPanel(Table table, String divName, String groupColName, String numberColName) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = PiePlot.create("", table, "Name", "Value");
+            figure = PiePlot.create("", table, groupColName, numberColName);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

@@ -101,12 +101,12 @@ public class Charts extends AbstractComponentsChartsPage {
 
         // Add Treemap Chart
         // Add Sunburst Chart
-        Table treemapTable = createPieDataSet(true);
-        Table sunburstTable = createPieDataSet(true);
+        Table treemapTable = createMarketDataSet();
+        Table sunburstTable = createMarketDataSet();
 
         body.addRowOfColumns(
-            addTreemapChart(treemapTable, "treemapDiv", "Treemap Chart"),
-            addSunburstChart(sunburstTable, "sunburstDiv", "Sunburst Chart")
+            addTreemapChart(treemapTable, "treemapDiv", "Treemap Chart", "Sector", "Company"),
+            addSunburstChart(sunburstTable, "sunburstDiv", "Sunburst Chart", "Company", "MarketCap")
         );
 
         body.doLayout();
@@ -144,8 +144,8 @@ public class Charts extends AbstractComponentsChartsPage {
         return new BSCard(chart, header);
     }
 
-    public static BSCard addSunburstChart(Table table, String divName, String header) {
-        TSSunburstChartPanel chart = new TSSunburstChartPanel(table, divName);
+    public static BSCard addSunburstChart(Table table, String divName, String header, String groupColName, String numberColName) {
+        TSSunburstChartPanel chart = new TSSunburstChartPanel(table, divName, groupColName, numberColName);
         return new BSCard(chart, header);
     }
 
@@ -164,8 +164,8 @@ public class Charts extends AbstractComponentsChartsPage {
         return new BSCard(chart, header);
     }
 
-    public static BSCard addTreemapChart(Table table, String divName, String header) {
-        TSTreeMapChartPanel chart = new TSTreeMapChartPanel(table, divName);
+    public static BSCard addTreemapChart(Table table, String divName, String header, String col, String parentCol) {
+        TSTreeMapChartPanel chart = new TSTreeMapChartPanel(table, divName, col, parentCol);
         return new BSCard(chart, header);
     }
 
@@ -190,21 +190,8 @@ public class Charts extends AbstractComponentsChartsPage {
     }
 
     public static Table createMarketDataSet() {
-        // Sector, Company, Valuation, Price
 
-        TSDataSet dataSet = TSDataSetFactory.createSampleDataSet(new String[]{"Sector", "Company", "Valuation", "Price"}, new Class[]{String.class, String.class, Double.class, Double.class});
-        dataSet.addRow(new Object[]{"Technology", "Google", 150D, 90D});
-        dataSet.addRow(new Object[]{"Financial", "JPMorgan", 50D, 80D});
-        dataSet.addRow(new Object[]{"Services", "Amazon", 50D, 80D});
-        dataSet.addRow(new Object[]{"Consumer Goods", "Apple", 50D, 80D});
-        dataSet.addRow(new Object[]{"Basic Materials", "Gold Inc", 50D, 80D});
-        dataSet.addRow(new Object[]{"Healthcare", "United Health Group", 50D, 80D});
-        dataSet.addRow(new Object[]{"Industrial Goods", "Machine Inc", 50D, 80D});
-        dataSet.addRow(new Object[]{"Utilities", "", 50D, 80D});
-
-        dataSet.sort("Company");
-
-        return dataSet.getTSTable();
+        return TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
     }
 
 

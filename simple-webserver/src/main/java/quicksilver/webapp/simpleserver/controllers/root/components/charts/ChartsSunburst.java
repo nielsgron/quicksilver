@@ -33,21 +33,21 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table table = Charts.createMarketDataSet();
 
         body.addRowOfColumns(
-                Charts.addSunburstChart(table, "div1", "Wide Chart")
+                Charts.addSunburstChart(table, "div1", "Wide Chart", "Company", "MarketCap")
         );
 
         body.addRowOfColumns(
-                Charts.addSunburstChart(table, "div2", "Half Width Chart"),
-                Charts.addSunburstChart(table, "div3", "Half Width Chart")
+                Charts.addSunburstChart(table, "div2", "Half Width Chart", "Company", "MarketCap"),
+                Charts.addSunburstChart(table, "div3", "Half Width Chart", "Company", "MarketCap")
         );
 
         body.addRowOfColumns(
-                Charts.addSunburstChart(table, "div4", "Narrow Chart"),
-                Charts.addSunburstChart(table, "div5", "Narrow Chart"),
-                Charts.addSunburstChart(table, "div6", "Narrow Chart")
+                Charts.addSunburstChart(table, "div4", "Narrow Chart", "Company", "MarketCap"),
+                Charts.addSunburstChart(table, "div5", "Narrow Chart", "Company", "MarketCap"),
+                Charts.addSunburstChart(table, "div6", "Narrow Chart", "Company", "MarketCap")
         );
 
         body.doLayout();

@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSOHLCChartPanel extends TSFigurePanel {
 
     public TSOHLCChartPanel(Table table, String divName) {
+        this(table, divName, "Date", "Open", "High", "Low", "Close");
+    }
+
+    public TSOHLCChartPanel(Table table, String divName, String xCol, String openCol, String highCol, String lowCol, String closeCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = OHLCPlot.create("", table, "Date", "Open", "High", "Low", "Close");
+            figure = OHLCPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

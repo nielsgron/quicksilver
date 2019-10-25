@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSVerticalBarChartPanel extends TSFigurePanel {
 
     public TSVerticalBarChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value");
+    }
+
+    public TSVerticalBarChartPanel(Table table, String divName, String groupColName, String numberColName) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = VerticalBarPlot.create("", table, "Name", "Value");
+            figure = VerticalBarPlot.create("", table, groupColName, numberColName);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
