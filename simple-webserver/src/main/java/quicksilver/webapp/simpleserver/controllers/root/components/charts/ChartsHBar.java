@@ -40,18 +40,18 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div1", 200, 900, true), "Country GDP (Nominal)")
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div1", 900, 200, true), "Country GDP (Nominal)")
         );
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div2", 200, 450, true), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "Population", "div3", 200, 450, true), "Country Population")
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div2", 450, 200, true), "Country GDP (Nominal)"),
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "Population", "div3", 450, 200, true), "Country Population")
         );
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div4", 200, 300, true), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP_PPP", "div5", 200, 300, true), "Country GDP (PPP)"),
-            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "Population", "div6", 200, 300, true), "Country Population")
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP", "div4", 300, 200, true), "Country GDP (Nominal)"),
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "GDP_PPP", "div5", 300, 200, true), "Country GDP (PPP)"),
+            new BSCard( new TSHorizontalBarChartPanel(table, "Country", "Population", "div6", 300, 200, true), "Country Population")
         );
 
         body.doLayout();

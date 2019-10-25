@@ -16,6 +16,7 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -33,21 +34,21 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addBubbleChart(table, "div1", "Wide Chart")
+                Charts.addBubbleChart(table, "div1", "Wide Chart", "Population", "GDP", "GDP_Capita")
         );
 
         body.addRowOfColumns(
-                Charts.addBubbleChart(table, "div2", "Half Width Chart"),
-                Charts.addBubbleChart(table, "div3", "Half Width Chart")
+                Charts.addBubbleChart(table, "div2", "Half Width Chart", "Population", "GDP", "GDP_Capita"),
+                Charts.addBubbleChart(table, "div3", "Half Width Chart", "Population", "GDP", "GDP_Capita")
         );
 
         body.addRowOfColumns(
-                Charts.addBubbleChart(table, "div4", "Narrow Chart"),
-                Charts.addBubbleChart(table, "div5", "Narrow Chart"),
-                Charts.addBubbleChart(table, "div6", "Narrow Chart")
+                Charts.addBubbleChart(table, "div4", "Narrow Chart", "Population", "GDP", "GDP_Capita"),
+                Charts.addBubbleChart(table, "div5", "Narrow Chart", "Population", "GDP", "GDP_Capita"),
+                Charts.addBubbleChart(table, "div6", "Narrow Chart", "Population", "GDP", "GDP_Capita")
         );
 
         body.doLayout();

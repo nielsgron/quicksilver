@@ -209,18 +209,18 @@ public class TSDataSetFactory {
 
         // Country, GDP, Population
 
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_PPP", "Population"},
-                new Class[]{String.class, Double.class, Double.class, Double.class});
-        dataSet.addRow(new Object[] { "US"          , 20.58D    , 20.58D        , 327167434D });
-        dataSet.addRow(new Object[] { "China"       , 14.216D   , 27.331D       , 1403500365D });
-        dataSet.addRow(new Object[] { "Japan"       , 5.176D    , 5.749D        , 126317000D });
-        dataSet.addRow(new Object[] { "Germany"     , 4.117D    , 4.555D        , 83019200D });
-        dataSet.addRow(new Object[] { "India"       , 2.972D    , 11.468D       , 1324171354D });
-        dataSet.addRow(new Object[] { "France"      , 2.845D    , 3.081D        , 67022000D });
-        dataSet.addRow(new Object[] { "UK"          , 2.829D    , 3.039D        , 67545757D });
-        dataSet.addRow(new Object[] { "Canada"      , 1.820D    , 1.930D        , 37602103D });
-        dataSet.addRow(new Object[] { "Spain"       , 1.583D    , 1.946D        , 46733038D });
-        dataSet.addRow(new Object[] { "Australia"   , 1.376D    , 1.365D        , 25546800D });
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_PPP", "GDP_Capita", "Population"},
+                new Class[]{String.class, Double.class, Double.class, Double.class, Double.class});
+        dataSet.addRow(new Object[] { "US"          , 20.58D    , 20.58D        , 62869D    , 327167434D });
+        dataSet.addRow(new Object[] { "China"       , 14.216D   , 27.331D       , 10153D    , 1403500365D });
+        dataSet.addRow(new Object[] { "Japan"       , 5.176D    , 5.749D        , 41021D    , 126317000D });
+        dataSet.addRow(new Object[] { "Germany"     , 4.117D    , 4.555D        , 49692D    , 83019200D });
+        dataSet.addRow(new Object[] { "India"       , 2.972D    , 11.468D       , 2199D    , 1324171354D });
+        dataSet.addRow(new Object[] { "France"      , 2.845D    , 3.081D        , 43500D    , 67022000D });
+        dataSet.addRow(new Object[] { "UK"          , 2.829D    , 3.039D        , 42580D    , 67545757D });
+        dataSet.addRow(new Object[] { "Canada"      , 1.820D    , 1.930D        , 48601D    , 37602103D });
+        dataSet.addRow(new Object[] { "Spain"       , 1.583D    , 1.946D        , 34281D    , 46733038D });
+        dataSet.addRow(new Object[] { "Australia"   , 1.376D    , 1.365D        , 53825D    , 25546800D });
 
         dataSet.sort("GDP");
 
@@ -244,7 +244,7 @@ public class TSDataSetFactory {
 
         dataSet.sort("MarketCap");
 
-        return null;
+        return dataSet;
     }
 
     public static TSDataSet createSampleStockPrices() {
@@ -262,6 +262,9 @@ public class TSDataSetFactory {
         dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 7), 141D, 147D, 137D, 145D });
         dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 8), 145D, 165D, 143D, 165D });
         dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 9), 165D, 165D, 153D, 154D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 10), 154D, 154D, 130D, 130D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 11), 130D, 130D, 128D, 130D });
+        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 12), 130D, 145D, 129D, 144D });
 
         dataSet.sort("Date");
 

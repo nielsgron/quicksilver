@@ -36,6 +36,10 @@ public class Charts extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        Table economicTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
+        Table stockEquitiesTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
+        Table stockPricesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+
         // Add Vertical Bar Chart
         // Add Horizontal Bar Chart
         Table hBarTable = createPieDataSet(true);
@@ -67,12 +71,12 @@ public class Charts extends AbstractComponentsChartsPage {
 
         // Add Scatter Plot Chart
         // Add Bubble Chart
-        Table scatterTable = createPieDataSet(true);
-        Table bubbleTable = createPieDataSet(true);
+        Table scatterTable = economicTable;
+        Table bubbleTable = economicTable;
 
         body.addRowOfColumns(
-            addScatterChart(scatterTable, "scatterDiv", "Scatter Chart"),
-            addBubbleChart(bubbleTable, "bubbleDiv", "Bubble Chart")
+            addScatterChart(scatterTable, "scatterDiv", "Scatter Chart", "Population", "GDP"),
+            addBubbleChart(bubbleTable, "bubbleDiv", "Bubble Chart", "Population", "GDP", "GDP_Capita")
         );
 
         // Add Histogram Chart
@@ -145,13 +149,13 @@ public class Charts extends AbstractComponentsChartsPage {
         return new BSCard(chart, header);
     }
 
-    public static BSCard addScatterChart(Table table, String divName, String header) {
-        TSScatterChartPanel chart = new TSScatterChartPanel(table, divName);
+    public static BSCard addScatterChart(Table table, String divName, String header, String xCol, String yCol) {
+        TSScatterChartPanel chart = new TSScatterChartPanel(table, divName, xCol, yCol);
         return new BSCard(chart, header);
     }
 
-    public static BSCard addBubbleChart(Table table, String divName, String header) {
-        TSBubbleChartPanel chart = new TSBubbleChartPanel(table, divName);
+    public static BSCard addBubbleChart(Table table, String divName, String header, String xCol, String yCol, String sizeColumn) {
+        TSBubbleChartPanel chart = new TSBubbleChartPanel(table, divName, xCol, yCol, sizeColumn);
         return new BSCard(chart, header);
     }
 

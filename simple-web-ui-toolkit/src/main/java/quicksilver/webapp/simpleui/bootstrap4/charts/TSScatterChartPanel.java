@@ -25,12 +25,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSScatterChartPanel extends TSFigurePanel {
 
     public TSScatterChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value");
+    }
+
+    public TSScatterChartPanel(Table table, String divName, String xCol, String yCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = ScatterPlot.create("", table, "Name", "Value");
+            figure = ScatterPlot.create("", table, xCol, yCol);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

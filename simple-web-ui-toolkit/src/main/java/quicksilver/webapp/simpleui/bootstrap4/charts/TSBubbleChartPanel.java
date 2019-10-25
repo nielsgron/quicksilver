@@ -23,12 +23,16 @@ import tech.tablesaw.plotly.components.Figure;
 public class TSBubbleChartPanel extends TSFigurePanel {
 
     public TSBubbleChartPanel(Table table, String divName) {
+        this(table, divName, "Name", "Value", "Size");
+    }
+
+    public TSBubbleChartPanel(Table table, String divName, String xCol, String yCol, String sizeColumn) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = BubblePlot.create("", table, "Name", "Value", "Size");
+            figure = BubblePlot.create("", table, xCol, yCol, sizeColumn);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
