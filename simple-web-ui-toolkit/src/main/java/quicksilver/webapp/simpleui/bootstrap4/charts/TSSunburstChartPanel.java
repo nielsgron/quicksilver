@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSSunburstChartPanel extends TSFigurePanel {
 
-    public TSSunburstChartPanel(Table table, String divName) {
-        this(table, divName, "Name", "Value");
-    }
-
-    public TSSunburstChartPanel(Table table, String divName, String groupColName, String numberColName) {
+    public TSSunburstChartPanel(Table table, String divName, String groupColName, String numberColName, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

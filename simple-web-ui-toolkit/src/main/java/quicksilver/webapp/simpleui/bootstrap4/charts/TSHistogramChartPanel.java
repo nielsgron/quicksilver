@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSHistogramChartPanel extends TSFigurePanel {
 
-    public TSHistogramChartPanel(Table table, String divName) {
-        this(table, divName, "Value");
-    }
-
-    public TSHistogramChartPanel(Table table, String divName, String numericColumnName) {
+    public TSHistogramChartPanel(Table table, String divName, String numericColumnName, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSLineChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -33,21 +36,27 @@ public class ChartsLine extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table lineTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addLineChart(table, "div1", "Wide Chart")
+                new BSCard(new TSLineChartPanel(lineTable, "div1", "Country", "GDP", 900, 200, false),
+                        "Wide Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addLineChart(table, "div2", "Half Width Chart"),
-                Charts.addLineChart(table, "div3", "Half Width Chart")
+                new BSCard(new TSLineChartPanel(lineTable, "div2", "Country", "GDP", 450, 200, false),
+                        "Line Chart"),
+                new BSCard(new TSLineChartPanel(lineTable, "div3", "Country", "GDP", 450, 200, false),
+                        "Line Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addLineChart(table, "div4", "Narrow Chart"),
-                Charts.addLineChart(table, "div5", "Narrow Chart"),
-                Charts.addLineChart(table, "div6", "Narrow Chart")
+                new BSCard(new TSLineChartPanel(lineTable, "div4", "Country", "GDP", 300, 200, false),
+                        "Narrow Chart"),
+                new BSCard(new TSLineChartPanel(lineTable, "div5", "Country", "GDP", 300, 200, false),
+                        "Narrow Chart"),
+                new BSCard(new TSLineChartPanel(lineTable, "div6", "Country", "GDP", 300, 200, false),
+                        "Narrow Chart")
         );
 
         body.doLayout();

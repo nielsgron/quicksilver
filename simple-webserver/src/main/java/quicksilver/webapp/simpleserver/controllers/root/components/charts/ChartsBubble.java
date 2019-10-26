@@ -17,6 +17,8 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSBubbleChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -34,21 +36,27 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
+        Table bubbleTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addBubbleChart(table, "div1", "Wide Chart", "Population", "GDP", "GDP_Capita")
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv1", "Population", "GDP", "GDP_Capita", 900, 200, false) ,
+                        "Bubble Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addBubbleChart(table, "div2", "Half Width Chart", "Population", "GDP", "GDP_Capita"),
-                Charts.addBubbleChart(table, "div3", "Half Width Chart", "Population", "GDP", "GDP_Capita")
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv2", "Population", "GDP", "GDP_Capita", 450, 200, false) ,
+                        "Bubble Chart"),
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv3", "Population", "GDP", "GDP_Capita", 450, 200, false) ,
+                        "Bubble Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addBubbleChart(table, "div4", "Narrow Chart", "Population", "GDP", "GDP_Capita"),
-                Charts.addBubbleChart(table, "div5", "Narrow Chart", "Population", "GDP", "GDP_Capita"),
-                Charts.addBubbleChart(table, "div6", "Narrow Chart", "Population", "GDP", "GDP_Capita")
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv4", "Population", "GDP", "GDP_Capita", 300, 200, false) ,
+                        "Bubble Chart"),
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv5", "Population", "GDP", "GDP_Capita", 300, 200, false) ,
+                        "Bubble Chart"),
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv6", "Population", "GDP", "GDP_Capita", 300, 200, false) ,
+                        "Bubble Chart")
         );
 
         body.doLayout();

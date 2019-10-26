@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSAreaChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -33,21 +36,27 @@ public class ChartsArea extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table areaTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addAreaChart(table, "div1", "Wide Chart")
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv1", "Country", "GDP", 900, 200, false),
+                        "Wide Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addAreaChart(table, "div2", "Half Width Chart"),
-                Charts.addAreaChart(table, "div3", "Half Width Chart")
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv2", "Country", "GDP", 450, 200, false),
+                        "Half Width Chart"),
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv3", "Country", "GDP", 450, 200, false),
+                "Half Width Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addAreaChart(table, "div4", "Narrow Chart"),
-                Charts.addAreaChart(table, "div5", "Narrow Chart"),
-                Charts.addAreaChart(table, "div6", "Narrow Chart")
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv4", "Country", "GDP", 300, 200, false),
+                        "Narrow Chart"),
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv5", "Country", "GDP", 300, 200, false),
+                        "Narrow Chart"),
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv6", "Country", "GDP", 300, 200, false),
+                        "Narrow Chart")
         );
 
         body.doLayout();

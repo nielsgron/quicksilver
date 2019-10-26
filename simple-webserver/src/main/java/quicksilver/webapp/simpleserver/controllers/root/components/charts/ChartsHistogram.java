@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSHistogramChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -33,21 +36,27 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table histogramTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addHistogramChart(table, "div1", "Wide Chart")
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv1", "Population", 900, 200, false) ,
+                        "Histogram Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addHistogramChart(table, "div2", "Half Width Chart"),
-                Charts.addHistogramChart(table, "div3", "Half Width Chart")
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv2", "Population", 450, 200, false) ,
+                        "Histogram Chart"),
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv3", "Population", 450, 200, false) ,
+                        "Histogram Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addHistogramChart(table, "div4", "Narrow Chart"),
-                Charts.addHistogramChart(table, "div5", "Narrow Chart"),
-                Charts.addHistogramChart(table, "div6", "Narrow Chart")
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv4", "Population", 300, 200, false) ,
+                        "Histogram Chart"),
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv5", "Population", 300, 200, false) ,
+                        "Histogram Chart"),
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv6", "Population", 300, 200, false) ,
+                        "Histogram Chart")
         );
 
         body.doLayout();

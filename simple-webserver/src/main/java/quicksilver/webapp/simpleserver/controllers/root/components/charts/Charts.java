@@ -42,31 +42,37 @@ public class Charts extends AbstractComponentsChartsPage {
 
         // Add Vertical Bar Chart
         // Add Horizontal Bar Chart
-        Table hBarTable = createPieDataSet(true);
+        Table hBarTable = economicTable;
 
         body.addRowOfColumns(
-            addVBarChart(hBarTable, "vbarDiv", "Vertical Bar Chart"),
-            addHBarChart(hBarTable, "hbarDiv", "Horizontal Bar Chart")
+                new BSCard(new TSVerticalBarChartPanel(hBarTable, "vbarDiv", "Country", "GDP", 500, 200, false),
+                        "Vertical Bar Chart"),
+                new BSCard(new TSHorizontalBarChartPanel(hBarTable, "hbarDiv", "Country", "GDP", 500, 200, false),
+                        "Horizontal Bar Chart")
         );
 
         // Add Line Chart
         // Add Area Chart
-        Table lineTable = createPieDataSet(true);
-        Table areaTable = createPieDataSet(true);
+        Table lineTable = economicTable;
+        Table areaTable = economicTable;
 
         body.addRowOfColumns(
-            addLineChart(lineTable, "lineDiv", "Line Chart"),
-            addAreaChart(areaTable, "areaDiv", "Area Chart")
+                new BSCard(new TSLineChartPanel(lineTable, "lineDiv", "Country", "GDP", 500, 200, false),
+                        "Line Chart"),
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv", "Country", "GDP", 500, 200, false),
+                        "Area Chart")
         );
 
         // Add Pie Chart
         // Add Timeseries Chart
-        Table pieTable = createPieDataSet(true);
-        Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table pieTable = economicTable;
+        Table timeSeriesTable = stockPricesTable;
 
         body.addRowOfColumns(
-            addPieChart(pieTable, "pieDiv", "Pie Chart"),
-            addTimeseriesChart(timeSeriesTable, "timeseriesDiv", "Timeseries Chart")
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv", "Country", "GDP", 500, 200, false),
+                        "Pie Chart"),
+                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv", "Date", "Close", 500, 200, false),
+                        "Timeseries Chart")
         );
 
         // Add Scatter Plot Chart
@@ -75,38 +81,46 @@ public class Charts extends AbstractComponentsChartsPage {
         Table bubbleTable = economicTable;
 
         body.addRowOfColumns(
-            addScatterChart(scatterTable, "scatterDiv", "Scatter Chart", "Population", "GDP"),
-            addBubbleChart(bubbleTable, "bubbleDiv", "Bubble Chart", "Population", "GDP", "GDP_Capita")
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv", "Population", "GDP", 500, 200, false) ,
+                        "Scatter Chart"),
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv", "Population", "GDP", "GDP_Capita", 500, 200, false) ,
+                        "Bubble Chart")
         );
 
         // Add Histogram Chart
         // Add Heatmap Chart
-        Table histogramTable = createPieDataSet(true);
-        Table heatmapTable = createMarketDataSet();
+        Table histogramTable = economicTable;
+        Table heatmapTable = stockEquitiesTable;
 
         body.addRowOfColumns(
-            addHistogramChart(histogramTable, "histogramDiv", "Histogram Chart"),
-            addHeatmapChart(heatmapTable, "heatmapDiv", "Heatmap Chart")
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv", "Population", 500, 200, false) ,
+                        "Histogram Chart"),
+                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv", "Sector", "Company", 500, 200, false) ,
+                        "Heatmap Chart")
         );
 
         // Add Candlestick Chart
         // Add Open High Low Close Chart
-        Table candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
-        Table ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table candleStickTable = stockPricesTable;
+        Table ohlcTable = stockPricesTable;
 
         body.addRowOfColumns(
-            addCandlestickChart(candleStickTable, "candlestickDiv", "Candlestick Chart"),
-            addOHLCChart(ohlcTable, "ohlcDiv", "OHLC Chart")
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv", "Date", "Open", "High", "Low", "Close", 500, 200, false) ,
+                        "Candlestick Chart"),
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv", "Date", "Open", "High", "Low", "Close", 500, 200, false) ,
+                        "OHLC Chart")
         );
 
         // Add Treemap Chart
         // Add Sunburst Chart
-        Table treemapTable = createMarketDataSet();
-        Table sunburstTable = createMarketDataSet();
+        Table treemapTable = stockEquitiesTable;
+        Table sunburstTable = stockEquitiesTable;
 
         body.addRowOfColumns(
-            addTreemapChart(treemapTable, "treemapDiv", "Treemap Chart", "Sector", "Company"),
-            addSunburstChart(sunburstTable, "sunburstDiv", "Sunburst Chart", "Company", "MarketCap")
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv", "Sector", "Company", 500, 200, false) ,
+                        "Treemap Chart"),
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv", "Company", "MarketCap", 500, 200, false) ,
+                        "Sunburst Chart")
         );
 
         body.doLayout();
@@ -117,156 +131,6 @@ public class Charts extends AbstractComponentsChartsPage {
         panel.add(new HTMLLineBreak(2));
 
         return panel;
-    }
-
-    public static BSCard addVBarChart(Table table, String divName, String header) {
-        TSVerticalBarChartPanel chart = new TSVerticalBarChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addHBarChart(Table table, String divName, String header) {
-        TSHorizontalBarChartPanel chart = new TSHorizontalBarChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addLineChart(Table table, String divName, String header) {
-        TSLineChartPanel chart = new TSLineChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addAreaChart(Table table, String divName, String header) {
-        TSAreaChartPanel chart = new TSAreaChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addPieChart(Table table, String divName, String header) {
-        TSPieChartPanel chart = new TSPieChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addSunburstChart(Table table, String divName, String header, String groupColName, String numberColName) {
-        TSSunburstChartPanel chart = new TSSunburstChartPanel(table, divName, groupColName, numberColName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addScatterChart(Table table, String divName, String header, String xCol, String yCol) {
-        TSScatterChartPanel chart = new TSScatterChartPanel(table, divName, xCol, yCol);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addBubbleChart(Table table, String divName, String header, String xCol, String yCol, String sizeColumn) {
-        TSBubbleChartPanel chart = new TSBubbleChartPanel(table, divName, xCol, yCol, sizeColumn);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addHistogramChart(Table table, String divName, String header) {
-        TSHistogramChartPanel chart = new TSHistogramChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addTreemapChart(Table table, String divName, String header, String col, String parentCol) {
-        TSTreeMapChartPanel chart = new TSTreeMapChartPanel(table, divName, col, parentCol);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addHeatmapChart(Table table, String divName, String header) {
-        TSHeatMapChartPanel chart = new TSHeatMapChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addTimeseriesChart(Table table, String divName, String header) {
-        TSTimeSeriesChartPanel chart = new TSTimeSeriesChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addCandlestickChart(Table table, String divName, String header) {
-        TSCandlestickChartPanel chart = new TSCandlestickChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static BSCard addOHLCChart(Table table, String divName, String header) {
-        TSOHLCChartPanel chart = new TSOHLCChartPanel(table, divName);
-        return new BSCard(chart, header);
-    }
-
-    public static Table createMarketDataSet() {
-
-        return TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
-    }
-
-
-    public static Table createPieDataSet() {
-        return createPieDataSet(false);
-    }
-
-    public static Table createPieDataSet(boolean withSize) {
-
-        String[] colNames;
-        Class[] classNames;
-        String[] nameValues = new String[] {"US", "China", "Canada", "France"};
-
-        if ( withSize ) {
-            colNames = new String[]{"Name", "Value", "Size"};
-            classNames = new Class[]{String.class, Double.class, Double.class};
-        } else {
-            colNames = new String[]{"Name", "Value"};
-            classNames = new Class[]{String.class, Double.class};
-        }
-
-        return createRandomPercentNVDataSet(nameValues, withSize).getTSTable();
-
-    }
-
-    public static TSDataSet createRandomPercentNVDataSet(String[] nameValues, boolean withSize) {
-
-        String[] colNames;
-        Class[] colClass;
-
-        if ( withSize ) {
-            colNames = new String[] {"Name", "Value", "Size"};
-            colClass = new Class[] { String.class, Double.class, Double.class };
-        } else {
-            colNames = new String[] {"Name", "Value"};
-            colClass = new Class[] { String.class, Double.class };
-        }
-
-        int rowCount = nameValues.length;
-
-        // Get the column names and types
-        Column[] colObjects;
-
-        if ( withSize ) {
-            colObjects = new Column[3];
-            colObjects[2] = TSDataSetFactory.createColumnByJavaType(colClass[2], colNames[2]);
-        } else {
-            colObjects = new Column[2];
-        }
-        colObjects[0] = TSDataSetFactory.createColumnByJavaType(colClass[0], colNames[0]);
-        colObjects[1] = TSDataSetFactory.createColumnByJavaType(colClass[1], colNames[1]);
-
-        // Construct DataSet
-        TSDataSetMeta meta = new TSDataSetMeta(colObjects, colNames, colClass);
-        TSDataSet dataSet = new TSDataSet(meta);
-
-        // Populate rows
-        for ( int i = 0; i < rowCount; i++ ) {
-            // Get the row values
-            Object[] row = new Object[colNames.length];
-            //for (int j = 0; j < colNames.length; j++) {
-            row[0] = nameValues[i];
-            row[1] = createRandomPercentData();
-            if ( withSize ) {
-                row[2] = createRandomPercentData();
-            }
-            //}
-            dataSet.addRow(row);
-        }
-
-        return dataSet;
-    }
-
-    public static Object createRandomPercentData() {
-        return Math.random();
     }
 
 }

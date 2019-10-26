@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSPieChartPanel extends TSFigurePanel {
 
-    public TSPieChartPanel(Table table, String divName) {
-        this(table, divName, "Name", "Value");
-    }
-
-    public TSPieChartPanel(Table table, String divName, String groupColName, String numberColName) {
+    public TSPieChartPanel(Table table, String divName, String groupColName, String numberColName, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSPieChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -33,21 +36,27 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createPieDataSet(true);
+        Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addPieChart(table, "div1", "Wide Chart")
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv1", "Country", "GDP", 900, 200, false),
+                        "Pie Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addPieChart(table, "div2", "Half Width Chart"),
-                Charts.addPieChart(table, "div3", "Half Width Chart")
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv2", "Country", "GDP", 450, 200, false),
+                        "Pie Chart"),
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv3", "Country", "GDP", 450, 200, false),
+                        "Pie Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addPieChart(table, "div4", "Narrow Chart"),
-                Charts.addPieChart(table, "div5", "Narrow Chart"),
-                Charts.addPieChart(table, "div6", "Narrow Chart")
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv4", "Country", "GDP", 300, 200, false),
+                        "Pie Chart"),
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv5", "Country", "GDP", 300, 200, false),
+                        "Pie Chart"),
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv6", "Country", "GDP", 300, 200, false),
+                        "Pie Chart")
         );
 
         body.doLayout();

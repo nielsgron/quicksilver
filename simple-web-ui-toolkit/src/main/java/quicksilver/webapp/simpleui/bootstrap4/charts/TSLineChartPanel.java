@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSLineChartPanel extends TSFigurePanel {
 
-    public TSLineChartPanel(Table table, String divName) {
-        this(table, divName, "Name", "Value");
-    }
-
-    public TSLineChartPanel(Table table, String divName, String xCol, String yCol) {
+    public TSLineChartPanel(Table table, String divName, String xCol, String yCol, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

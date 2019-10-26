@@ -26,15 +26,7 @@ import tech.tablesaw.plotly.traces.Trace;
 
 public class TSHorizontalBarChartPanel extends TSFigurePanel {
 
-    public TSHorizontalBarChartPanel(Table table, String divName) {
-        this(table, divName, 500, 200, false);
-    }
-
-    public TSHorizontalBarChartPanel(Table table, String divName, int width, int height, boolean enableLegend) {
-        this(table, "Name", "Value", divName, width, height, enableLegend);
-    }
-
-    public TSHorizontalBarChartPanel(Table table, String groupColName, String numberColName, String divName, int width, int height, boolean enableLegend) {
+    public TSHorizontalBarChartPanel(Table table, String divName, String groupColName, String numberColName, int width, int height, boolean enableLegend) {
         super(divName);
 
         setHeight(height);

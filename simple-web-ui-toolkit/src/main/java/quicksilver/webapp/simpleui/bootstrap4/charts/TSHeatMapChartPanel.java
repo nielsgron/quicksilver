@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSHeatMapChartPanel extends TSFigurePanel {
 
-    public TSHeatMapChartPanel(Table table, String divName) {
-        this(table, divName, "Sector", "Company");
-    }
-
-    public TSHeatMapChartPanel(Table table, String divName, String categoryCol1, String categoryCol2) {
+    public TSHeatMapChartPanel(Table table, String divName, String categoryCol1, String categoryCol2, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

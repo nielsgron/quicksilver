@@ -17,6 +17,8 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSScatterChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -34,21 +36,27 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
+        Table scatterTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addScatterChart(table, "div1", "Wide Chart", "Population", "GDP")
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv1", "Population", "GDP", 900, 200, false) ,
+                        "Scatter Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addScatterChart(table, "div2", "Half Width Chart", "Population", "GDP"),
-                Charts.addScatterChart(table, "div3", "Half Width Chart", "Population", "GDP")
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv2", "Population", "GDP", 450, 200, false) ,
+                        "Scatter Chart"),
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv3", "Population", "GDP", 450, 200, false) ,
+                        "Scatter Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addScatterChart(table, "div4", "Narrow Chart", "Population", "GDP"),
-                Charts.addScatterChart(table, "div5", "Narrow Chart", "Population", "GDP"),
-                Charts.addScatterChart(table, "div6", "Narrow Chart", "Population", "GDP")
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv4", "Population", "GDP", 300, 200, false) ,
+                        "Scatter Chart"),
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv5", "Population", "GDP", 300, 200, false) ,
+                        "Scatter Chart"),
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv6", "Population", "GDP", 300, 200, false) ,
+                        "Scatter Chart")
         );
 
         body.doLayout();

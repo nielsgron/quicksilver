@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSTreeMapChartPanel extends TSFigurePanel {
 
-    public TSTreeMapChartPanel(Table table, String divName) {
-        this(table, divName, "Name", "Value");
-    }
-
-    public TSTreeMapChartPanel(Table table, String divName, String col, String parentCol) {
+    public TSTreeMapChartPanel(Table table, String divName, String col, String parentCol, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

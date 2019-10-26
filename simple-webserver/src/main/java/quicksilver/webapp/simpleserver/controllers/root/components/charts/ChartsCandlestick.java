@@ -17,6 +17,8 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSCandlestickChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -34,21 +36,27 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addCandlestickChart(table, "div1", "Wide Chart")
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, false) ,
+                        "Candlestick Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addCandlestickChart(table, "div2", "Half Width Chart"),
-                Charts.addCandlestickChart(table, "div3", "Half Width Chart")
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv2", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                        "Candlestick Chart"),
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv3", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                        "Candlestick Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addCandlestickChart(table, "div4", "Narrow Chart"),
-                Charts.addCandlestickChart(table, "div5", "Narrow Chart"),
-                Charts.addCandlestickChart(table, "div6", "Narrow Chart")
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv4", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                        "Candlestick Chart"),
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv5", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                        "Candlestick Chart"),
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv6", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                        "Candlestick Chart")
         );
 
         body.doLayout();

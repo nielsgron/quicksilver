@@ -18,16 +18,11 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.AreaPlot;
-import tech.tablesaw.plotly.api.PiePlot;
 import tech.tablesaw.plotly.components.Figure;
 
 public class TSAreaChartPanel extends TSFigurePanel {
 
-    public TSAreaChartPanel(Table table, String divName) {
-        this(table, divName, "Name", "Value");
-    }
-
-    public TSAreaChartPanel(Table table, String divName, String xCol, String yCol) {
+    public TSAreaChartPanel(Table table, String divName, String xCol, String yCol, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

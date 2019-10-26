@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSCandlestickChartPanel extends TSFigurePanel {
 
-    public TSCandlestickChartPanel(Table table, String divName) {
-        this(table, divName, "Date", "Open", "High", "Low", "Close");
-    }
-
-    public TSCandlestickChartPanel(Table table, String divName, String xCol, String openCol, String highCol, String lowCol, String closeCol) {
+    public TSCandlestickChartPanel(Table table, String divName, String xCol, String openCol, String highCol, String lowCol, String closeCol, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

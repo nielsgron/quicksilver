@@ -22,11 +22,7 @@ import tech.tablesaw.plotly.components.Figure;
 
 public class TSTimeSeriesChartPanel extends TSFigurePanel {
 
-    public TSTimeSeriesChartPanel(Table table, String divName) {
-        this(table, divName, "Date", "Close");
-    }
-
-    public TSTimeSeriesChartPanel(Table table, String divName, String dateColXName, String yColName) {
+    public TSTimeSeriesChartPanel(Table table, String divName, String dateColXName, String yColName, int width, int height, boolean enableLegend) {
         super(divName);
 
         Figure figure = null;

@@ -17,6 +17,8 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSOHLCChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -34,21 +36,27 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addOHLCChart(table, "div1", "Wide Chart")
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, false) ,
+                        "OHLC Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addOHLCChart(table, "div2", "Half Width Chart"),
-                Charts.addOHLCChart(table, "div3", "Half Width Chart")
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv2", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                        "OHLC Chart"),
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv3", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                        "OHLC Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addOHLCChart(table, "div4", "Narrow Chart"),
-                Charts.addOHLCChart(table, "div5", "Narrow Chart"),
-                Charts.addOHLCChart(table, "div6", "Narrow Chart")
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv4", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                        "OHLC Chart"),
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv5", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                        "OHLC Chart"),
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv6", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                        "OHLC Chart")
         );
 
         body.doLayout();

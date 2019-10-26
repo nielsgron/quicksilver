@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -33,21 +36,27 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table table = Charts.createMarketDataSet();
+        Table treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         body.addRowOfColumns(
-                Charts.addTreemapChart(table, "div1", "Wide Chart", "Sector", "Company")
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", "Sector", "Company", 900, 200, false) ,
+                        "Treemap Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addTreemapChart(table, "div2", "Half Width Chart", "Sector", "Company"),
-                Charts.addTreemapChart(table, "div3", "Half Width Chart", "Sector", "Company")
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv2", "Sector", "Company", 450, 200, false) ,
+                        "Treemap Chart"),
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv3", "Sector", "Company", 450, 200, false) ,
+                        "Treemap Chart")
         );
 
         body.addRowOfColumns(
-                Charts.addTreemapChart(table, "div4", "Narrow Chart", "Sector", "Company"),
-                Charts.addTreemapChart(table, "div5", "Narrow Chart", "Sector", "Company"),
-                Charts.addTreemapChart(table, "div6", "Narrow Chart", "Sector", "Company")
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv4", "Sector", "Company", 300, 200, false) ,
+                        "Treemap Chart"),
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv5", "Sector", "Company", 300, 200, false) ,
+                        "Treemap Chart"),
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv6", "Sector", "Company", 300, 200, false) ,
+                        "Treemap Chart")
         );
 
         body.doLayout();
