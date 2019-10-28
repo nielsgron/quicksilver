@@ -205,6 +205,19 @@ public class TSDataSetFactory {
         return dataSet;
     }
 
+    public static TSDataSet createSampleFamilyTreeData() {
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Name", "Parent"},
+                new Class[]{String.class, String.class});
+        dataSet.addRow(new Object[] { "FreeBSD"         , "386BSD" });
+        dataSet.addRow(new Object[] { "OpenBSD"         , "NetBSD" });
+        dataSet.addRow(new Object[] { "NetBSD"          , "386BSD" });
+        dataSet.addRow(new Object[] { "DragonFly BSD"   , "FreeBSD" });
+        dataSet.addRow(new Object[] { "macOS"           , "Darwin" });
+        dataSet.addRow(new Object[] { "Darwin"          , "FreeBSD" });
+
+        return dataSet;
+    }
+
     public static TSDataSet createSampleCountryEconomicData() {
 
         // Country, GDP, Population
