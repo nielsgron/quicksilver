@@ -39,25 +39,25 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         Table treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", "Company", "Sector", 900, 200, true) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 900, 200, true, "Company", "Industry", "Sector") ,
                         "Treemap Chart")
         );
 
         Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", "Name", "Parent", 450, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", 450, 200, false, "Name", "Parent") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", "Name", "Parent", 450, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", 450, 200, false, "Name", "Parent") ,
                         "Treemap Chart")
         );
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv4", "Company", "Sector", 300, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv4", 300, 200, false, "Company", "Sector") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv5", "Company", "Sector", 300, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv5", 300, 200, false, "Company", "Sector") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv6", "Company", "Sector", 300, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv6", 300, 200, false, "Company", "Sector") ,
                         "Treemap Chart")
         );
 

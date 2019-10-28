@@ -95,7 +95,7 @@ public class Charts extends AbstractComponentsChartsPage {
         body.addRowOfColumns(
                 new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv", "Population", 500, 200, false) ,
                         "Histogram Chart"),
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv", "Sector", "Company", 500, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv", "Company", "Sector", 500, 200, false) ,
                         "Heatmap Chart")
         );
 
@@ -117,7 +117,7 @@ public class Charts extends AbstractComponentsChartsPage {
         Table sunburstTable = stockEquitiesTable;
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv", "Sector", "Company", 500, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv", 500, 200, false, "Company", "Sector") ,
                         "Treemap Chart"),
                 new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv", "Company", "MarketCap", 500, 200, false) ,
                         "Sunburst Chart")
