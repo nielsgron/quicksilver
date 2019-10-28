@@ -39,23 +39,25 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         Table treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", "Sector", "Company", 900, 200, true) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", "Company", "Sector", 900, 200, true) ,
+                        "Treemap Chart")
+        );
+
+        Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
+
+        body.addRowOfColumns(
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", "Name", "Parent", 450, 200, false) ,
+                        "Treemap Chart"),
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", "Name", "Parent", 450, 200, false) ,
                         "Treemap Chart")
         );
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv2", "Sector", "Company", 450, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv4", "Company", "Sector", 300, 200, false) ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv3", "Sector", "Company", 450, 200, false) ,
-                        "Treemap Chart")
-        );
-
-        body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv4", "Sector", "Company", 300, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv5", "Company", "Sector", 300, 200, false) ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv5", "Sector", "Company", 300, 200, false) ,
-                        "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv6", "Sector", "Company", 300, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv6", "Company", "Sector", 300, 200, false) ,
                         "Treemap Chart")
         );
 
