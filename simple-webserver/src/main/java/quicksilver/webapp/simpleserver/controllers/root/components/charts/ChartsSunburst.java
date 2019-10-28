@@ -39,7 +39,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         Table sunburstTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv1", "Company", "MarketCap", 900, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv1", "Company", "MarketCap", 900, 200, true) ,
                         "Sunburst Chart")
         );
 

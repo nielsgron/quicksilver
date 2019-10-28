@@ -39,7 +39,7 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
         Table ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, true) ,
                         "OHLC Chart")
         );
 

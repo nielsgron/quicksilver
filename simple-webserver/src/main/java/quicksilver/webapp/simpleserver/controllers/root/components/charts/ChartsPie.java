@@ -39,7 +39,7 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv1", "Country", "GDP", 900, 200, false),
+                new BSCard(new TSPieChartPanel(pieTable, "pieDiv1", "Country", "GDP", 900, 200, true),
                         "Pie Chart")
         );
 

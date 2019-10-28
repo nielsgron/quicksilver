@@ -39,7 +39,7 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(table, "div1", "Country", "GDP", 900, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(table, "div1", "Country", "GDP", 900, 200, true),
                         "Wide Chart")
         );
 

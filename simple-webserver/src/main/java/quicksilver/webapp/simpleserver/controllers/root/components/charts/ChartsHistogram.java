@@ -39,7 +39,7 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
         Table histogramTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv1", "Population", 900, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv1", "Population", 900, 200, true) ,
                         "Histogram Chart")
         );
 

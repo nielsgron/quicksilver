@@ -39,7 +39,7 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
         Table candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, true) ,
                         "Candlestick Chart")
         );
 

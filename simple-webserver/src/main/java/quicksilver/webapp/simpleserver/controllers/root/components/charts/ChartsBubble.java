@@ -39,7 +39,7 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         Table bubbleTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv1", "Population", "GDP", "GDP_Capita", 900, 200, false) ,
+                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv1", "Population", "GDP", "GDP_Capita", 900, 200, true) ,
                         "Bubble Chart")
         );
 

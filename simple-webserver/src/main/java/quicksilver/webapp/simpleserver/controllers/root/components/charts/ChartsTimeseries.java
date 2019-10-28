@@ -39,7 +39,7 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv1", "Date", "Close", 900, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv1", "Date", "Close", 900, 200, true),
                         "Timeseries Chart")
         );
 

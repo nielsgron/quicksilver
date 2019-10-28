@@ -39,7 +39,7 @@ public class ChartsLine extends AbstractComponentsChartsPage {
         Table lineTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSLineChartPanel(lineTable, "div1", "Country", "GDP", 900, 200, false),
+                new BSCard(new TSLineChartPanel(lineTable, "div1", "Country", "GDP", 900, 200, true),
                         "Wide Chart")
         );
 

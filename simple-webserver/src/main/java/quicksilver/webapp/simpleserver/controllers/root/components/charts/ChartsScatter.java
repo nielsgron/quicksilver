@@ -39,7 +39,7 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
         Table scatterTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv1", "Population", "GDP", 900, 200, false) ,
+                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv1", "Population", "GDP", 900, 200, true) ,
                         "Scatter Chart")
         );
 

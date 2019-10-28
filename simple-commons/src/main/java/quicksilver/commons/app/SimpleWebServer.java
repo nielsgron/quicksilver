@@ -52,8 +52,20 @@ public class SimpleWebServer {
 
     }
 
-    protected void initFilters() {
+    protected void initBeforeFilters() {
 
+    }
+
+    protected void initAfterFilters() {
+        if ( enableGzipResponses() ) {
+            webServer.after("*", (request, response) -> {
+                response.header("Content-Encoding", "gzip");
+            });
+        }
+    }
+
+    protected boolean enableGzipResponses() {
+        return false;
     }
 
     protected SimpleApplication getApplication() {
@@ -63,8 +75,9 @@ public class SimpleWebServer {
     public void startServer() {
 
         initServer();
-        initFilters();
+        initBeforeFilters();
         initRoutes();
+        initAfterFilters();
 
         webServer.init();
     }

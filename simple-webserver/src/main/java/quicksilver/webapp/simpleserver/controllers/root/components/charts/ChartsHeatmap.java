@@ -39,7 +39,7 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
         Table heatmapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv1", "Sector", "Company", 900, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv1", "Sector", "Company", 900, 200, true) ,
                         "Heatmap Chart")
         );
 

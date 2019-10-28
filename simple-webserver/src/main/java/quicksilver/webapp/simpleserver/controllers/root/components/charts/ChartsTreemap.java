@@ -39,7 +39,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         Table treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", "Sector", "Company", 900, 200, false) ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", "Sector", "Company", 900, 200, true) ,
                         "Treemap Chart")
         );
 

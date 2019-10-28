@@ -39,7 +39,7 @@ public class ChartsArea extends AbstractComponentsChartsPage {
         Table areaTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv1", "Country", "GDP", 900, 200, false),
+                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv1", "Country", "GDP", 900, 200, true),
                         "Wide Chart")
         );
 
