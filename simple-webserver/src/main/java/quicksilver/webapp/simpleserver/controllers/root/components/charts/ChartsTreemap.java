@@ -24,6 +24,10 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 public class ChartsTreemap extends AbstractComponentsChartsPage {
 
     public ChartsTreemap() {
@@ -36,28 +40,40 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
+        Table treemapTable;
+
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("stocks.csv");
+            treemapTable = Table.read().csv(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            treemapTable = treemapTable.sampleN(10);
+
+            //System.out.println(treemapTable.structure());
+
+        } catch ( Exception e ) {
+            treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
+            e.printStackTrace();
+        }
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 900, 200, true, "Company", "Industry", "Sector") ,
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 900, 200, true, "Company", "Industry", "Sector"),
                         "Treemap Chart")
         );
 
         Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", 450, 200, false, "Name", "Parent") ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", 450, 200, false, "Name", "Parent"),
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", 450, 200, false, "Name", "Parent") ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", 450, 200, false, "Name", "Parent"),
                         "Treemap Chart")
         );
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv4", 300, 200, false, "Company", "Sector") ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv4", 300, 200, false, "Name", "Parent") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv5", 300, 200, false, "Company", "Sector") ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv5", 300, 200, false, "Name", "Parent") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv6", 300, 200, false, "Company", "Sector") ,
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv6", 300, 200, false, "Name", "Parent") ,
                         "Treemap Chart")
         );
 
