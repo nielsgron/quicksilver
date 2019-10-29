@@ -13,11 +13,15 @@ import tech.tablesaw.plotly.traces.TreemapTrace;
 
 public class TreemapPlot {
 
+    public static Figure create(String title, Table table, String... cols) {
+        return create(Layout.builder(title).build(), table, cols);
+    }
+
     /**
      * @param cols the columns in hierarchy order (smallest element first,
      * parent last)
      */
-    public static Figure create(String title, Table table, String... cols) {
+    public static Figure create(Layout layout, Table table, String... cols) {
         if (cols.length < 2) {
             throw new IllegalStateException("At least two columns needed");
         }
@@ -39,15 +43,21 @@ public class TreemapPlot {
         //other labels are empty
         Arrays.fill(labelParents, parents.size(), labelParents.length, "");
 
-        return create(title, labels, labelParents);
+        return create(layout, labels, labelParents);
     }
 
     public static Figure create(String title, Object[] labels, Object[] labelParents) {
+        return create(Layout.builder(title).build(), labels, labelParents);
+    }
+
+    public static Figure create(Layout layout, Object[] labels, Object[] labelParents) {
+        sanitize(labels);
+        sanitize(labelParents);
         TreemapTrace trace = TreemapTrace.builder(
                 labels,
                 labelParents)
                 .build();
-        return new Figure(Layout.builder(title).build(), trace);
+        return new Figure(layout, trace);
     }
 
     private static TreeMap<String, String> pairs(Table table, String... cols) {
@@ -57,12 +67,25 @@ public class TreemapPlot {
             String child = row.getString(cols[0]);
             for (int i = 1; i < cols.length; i++) {
                 String parent = row.getString(cols[i]);
-                pairs.put(child, parent);
+                if(parent.equals(child)) {
+                    //Do nothing if eg. Conglomerates -> Conglomerates
+                } else {
+                    pairs.put(child, parent);
+                }
                 child = parent;
             }
         }
 
         return pairs;
+    }
+
+    //see https://github.com/jtablesaw/tablesaw/pull/699
+    private static void sanitize(Object[] list) {
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] instanceof String) {
+                list[i] = ((String) list[i]).replaceAll("\\'", "\\\\'");
+            }
+        }
     }
 
 }
