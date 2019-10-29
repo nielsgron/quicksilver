@@ -22,6 +22,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.Table;
 
 import java.io.InputStream;
@@ -45,8 +46,12 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         try {
             InputStream inputStream = getClass().getResourceAsStream("stocks.csv");
             treemapTable = Table.read().csv(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            treemapTable = treemapTable.sampleN(100);
+            //treemapTable = treemapTable.sampleN(100);
 
+            DoubleColumn marketCapColumn = (DoubleColumn)treemapTable.column("MarketCap");
+            treemapTable = treemapTable.where(marketCapColumn.isGreaterThan(75000)); // Greater then 75 Billion market cap (113 rows)
+
+            System.out.println("Stocks Table Row Count: " + treemapTable.rowCount());
             //System.out.println(treemapTable.structure());
 
         } catch ( Exception e ) {
