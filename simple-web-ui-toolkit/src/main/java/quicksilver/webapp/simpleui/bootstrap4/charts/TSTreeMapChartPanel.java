@@ -19,6 +19,8 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.plotly.components.Margin;
 
 public class TSTreeMapChartPanel extends TSFigurePanel {
 
@@ -28,7 +30,22 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
         Figure figure = null;
 
         try {
-            figure = TreemapPlot.create("", table, columns);
+            //default margins are huge for small dimensions. leave 10% each side but no more than 50px
+            int margin = Math.min(50, Math.min(width, height) / 10);
+
+            figure = TreemapPlot.create(
+                    Layout.builder("")
+                            .width(width)
+                            .height(height)
+                            .margin(Margin.builder()
+                                    .top(margin)
+                                    .bottom(margin)
+                                    .left(margin)
+                                    .right(margin)
+                                    .build())
+                            .showLegend(enableLegend)
+                            .build(),
+                    table, columns);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

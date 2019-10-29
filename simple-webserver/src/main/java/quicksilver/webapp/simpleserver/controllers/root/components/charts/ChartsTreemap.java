@@ -45,7 +45,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         try {
             InputStream inputStream = getClass().getResourceAsStream("stocks.csv");
             treemapTable = Table.read().csv(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            treemapTable = treemapTable.sampleN(10);
+            treemapTable = treemapTable.sampleN(100);
 
             //System.out.println(treemapTable.structure());
 
@@ -55,7 +55,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         }
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 900, 200, true, "Company", "Industry", "Sector"),
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 900, 400, true, "Company", "Industry", "Sector"),
                         "Treemap Chart")
         );
 
