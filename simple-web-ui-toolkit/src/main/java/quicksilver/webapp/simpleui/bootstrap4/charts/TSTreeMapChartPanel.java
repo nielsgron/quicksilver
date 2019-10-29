@@ -16,6 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
@@ -28,6 +29,10 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
         super(divName);
 
         Figure figure = null;
+        int marginLeft = 0; //40;
+        int marginRight = 0; //5;
+        int marginBottom = 0; //30;
+        int marginTop = 0; //5;
 
         try {
             //default margins are huge for small dimensions. leave 10% each side but no more than 50px
@@ -38,10 +43,10 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
                             .width(width)
                             .height(height)
                             .margin(Margin.builder()
-                                    .top(margin)
-                                    .bottom(margin)
-                                    .left(margin)
-                                    .right(margin)
+                                    .top(marginTop)
+                                    .bottom(marginBottom)
+                                    .left(marginLeft)
+                                    .right(marginRight)
                                     .build())
                             .showLegend(enableLegend)
                             .build(),
@@ -50,8 +55,11 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
     }
 
 }

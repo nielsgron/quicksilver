@@ -55,16 +55,16 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         }
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 900, 400, true, "Company", "Industry", "Sector"),
+                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv1", 1043, 500, false, "Company", "Industry", "Sector"),
                         "Treemap Chart")
         );
 
         Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", 450, 200, false, "Name", "Parent"),
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv2", 486, 200, false, "Name", "Parent"),
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", 450, 200, false, "Name", "Parent"),
+                new BSCard(new TSTreeMapChartPanel(bsdTable, "treemapDiv3", 486, 200, false, "Name", "Parent"),
                         "Treemap Chart")
         );
 
