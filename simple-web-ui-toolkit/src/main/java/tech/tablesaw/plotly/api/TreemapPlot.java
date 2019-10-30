@@ -17,11 +17,7 @@ public class TreemapPlot {
         return create(Layout.builder(title).build(), table, cols);
     }
 
-    /**
-     * @param cols the columns in hierarchy order (smallest element first,
-     * parent last)
-     */
-    public static Figure create(Layout layout, Table table, String... cols) {
+    static TableInfo createPairs(Table table, String... cols) {
         if (cols.length < 2) {
             throw new IllegalStateException("At least two columns needed");
         }
@@ -43,7 +39,33 @@ public class TreemapPlot {
         //other labels are empty
         Arrays.fill(labelParents, parents.size(), labelParents.length, "");
 
+        return new TableInfo(pairs, labels, labelParents);
+    }
+
+    /**
+     * @param cols the columns in hierarchy order (smallest element first,
+     * parent last)
+     */
+    public static Figure create(Layout layout, Table table, String... cols) {
+        TableInfo info = createPairs(table, cols);
+        Object[] labels = info.labels;
+        Object[] labelParents = info.labelParents;
+
         return create(layout, labels, labelParents);
+    }
+
+    static class TableInfo {
+
+        TreeMap<String, String> pairs;
+        Object[] labels;
+        Object[] labelParents;
+
+        public TableInfo(TreeMap<String, String> pairs, Object[] labels, Object[] labelParents) {
+            this.pairs = pairs;
+            this.labels = labels;
+            this.labelParents = labelParents;
+        }
+
     }
 
     public static Figure create(String title, Object[] labels, Object[] labelParents) {
@@ -60,7 +82,7 @@ public class TreemapPlot {
         return new Figure(layout, trace);
     }
 
-    private static TreeMap<String, String> pairs(Table table, String... cols) {
+    static TreeMap<String, String> pairs(Table table, String... cols) {
         TreeMap<String, String> pairs = new TreeMap<>();
 
         for (Row row : table) {
@@ -80,7 +102,7 @@ public class TreemapPlot {
     }
 
     //see https://github.com/jtablesaw/tablesaw/pull/699
-    private static void sanitize(Object[] list) {
+    static void sanitize(Object[] list) {
         for (int i = 0; i < list.length; i++) {
             if (list[i] instanceof String) {
                 list[i] = ((String) list[i]).replaceAll("\\'", "\\\\'");

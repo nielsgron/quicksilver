@@ -25,31 +25,34 @@ import tech.tablesaw.plotly.components.Margin;
 
 public class TSTreeMapChartPanel extends TSFigurePanel {
 
-    public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
-        super(divName);
-
-        Figure figure = null;
+    static Layout defaultLayout( int width, int height, boolean enableLegend) {
         int marginLeft = 0; //40;
         int marginRight = 0; //5;
         int marginBottom = 0; //30;
         int marginTop = 0; //5;
 
-        try {
-            //default margins are huge for small dimensions. leave 10% each side but no more than 50px
-            int margin = Math.min(50, Math.min(width, height) / 10);
+        //default margins are huge for small dimensions. leave 10% each side but no more than 50px
+        int margin = Math.min(50, Math.min(width, height) / 10);
+        return Layout.builder("")
+                .width(width)
+                .height(height)
+                .margin(Margin.builder()
+                        .top(marginTop)
+                        .bottom(marginBottom)
+                        .left(marginLeft)
+                        .right(marginRight)
+                        .build())
+                .showLegend(enableLegend)
+                .build();
+    }
 
+    public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
+        super(divName);
+
+        Figure figure = null;
+        try {
             figure = TreemapPlot.create(
-                    Layout.builder("")
-                            .width(width)
-                            .height(height)
-                            .margin(Margin.builder()
-                                    .top(marginTop)
-                                    .bottom(marginBottom)
-                                    .left(marginLeft)
-                                    .right(marginRight)
-                                    .build())
-                            .showLegend(enableLegend)
-                            .build(),
+                    defaultLayout(width, height, enableLegend),
                     table, columns);
         } catch ( Exception e ) {
             e.printStackTrace();

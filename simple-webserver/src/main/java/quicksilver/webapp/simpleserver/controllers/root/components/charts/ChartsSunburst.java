@@ -36,26 +36,32 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table sunburstTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
+        Table sunburstTable;
+
+        try {
+            sunburstTable = ChartsTreemap.loadLargeStocks();
+        } catch (Exception e) {
+            sunburstTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
+        }
 
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv1", "Company", "MarketCap", 900, 200, true) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv1", 900, 400, true, "Company", "Industry", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv2", "Company", "MarketCap", 450, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv2", 450, 200, false, "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv3", "Company", "MarketCap", 450, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv3", 450, 200, false, "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv4", "Company", "MarketCap", 300, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv4", 300, 200, false, "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv5", "Company", "MarketCap", 300, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv5", 300, 200, false, "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv6", "Company", "MarketCap", 300, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv6", 300, 200, false, "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 

@@ -88,6 +88,9 @@ labels: {{labels | raw}},
 {% if parents is not null %}
 parents: {{parents | raw}},
 {% endif %}
+{% if values is not null %}
+values: {{values | raw}},
+{% endif %}
 type: '{{type}}',
 name: '{{name}}',
 };

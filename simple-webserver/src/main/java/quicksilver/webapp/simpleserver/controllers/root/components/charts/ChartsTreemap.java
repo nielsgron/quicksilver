@@ -16,6 +16,7 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import java.io.IOException;
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
@@ -39,6 +40,45 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         toolbar.setActiveButton("Treemap");
     }
 
+    static Table loadLargeStocks() throws IOException {
+        Table treemapTable;
+
+        InputStream inputStream = ChartsTreemap.class.getResourceAsStream("stocks.csv");
+        treemapTable = Table.read().csv(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        //treemapTable = treemapTable.sampleN(100);
+
+        DoubleColumn marketCapColumn = (DoubleColumn)treemapTable.column("MarketCap");
+        treemapTable = treemapTable.where(marketCapColumn.isGreaterThan(75000)); // Greater then 75 Billion market cap (113 rows)
+
+        System.out.println("Stocks Table Row Count: " + treemapTable.rowCount());
+
+        //XXX: See https://github.com/jtablesaw/tablesaw/pull/703 ,until then convert % by hand to numbers
+        StringColumn change = (StringColumn) treemapTable.column("Change");
+        Column numericChange = DoubleColumn.create("Change");
+        //apparently mapInto doesn't append, but replace. Need to grow it to size()
+        numericChange = numericChange.emptyCopy(change.size());
+
+        change.mapInto((String p) -> {
+            double percFactor = 1.0;
+            if (p.endsWith("%")) {
+                percFactor = 100.0;
+                p = p.substring(0, p.length() - 1);
+            }
+            try {
+                return Double.parseDouble(p) / percFactor;
+            } catch (NumberFormatException nfe) {
+                return DoubleColumnType.missingValueIndicator();
+            }
+
+        }, numericChange);
+
+        treemapTable.replaceColumn(numericChange);
+
+        //System.out.println(treemapTable.structure());
+
+        return treemapTable;
+    }
+
     protected BSPanel createContentPanelCenter() {
 
         QuickBodyPanel body = new QuickBodyPanel();
@@ -47,39 +87,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         Table treemapTable;
 
         try {
-            InputStream inputStream = getClass().getResourceAsStream("stocks.csv");
-            treemapTable = Table.read().csv(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            //treemapTable = treemapTable.sampleN(100);
-
-            DoubleColumn marketCapColumn = (DoubleColumn)treemapTable.column("MarketCap");
-            treemapTable = treemapTable.where(marketCapColumn.isGreaterThan(75000)); // Greater then 75 Billion market cap (113 rows)
-
-            System.out.println("Stocks Table Row Count: " + treemapTable.rowCount());
-
-            //XXX: See https://github.com/jtablesaw/tablesaw/pull/703 ,until then convert % by hand to numbers
-            StringColumn change = (StringColumn) treemapTable.column("Change");
-            Column numericChange = DoubleColumn.create("Change");
-            //apparently mapInto doesn't append, but replace. Need to grow it to size()
-            numericChange = numericChange.emptyCopy(change.size());
-
-            change.mapInto((String p) -> {
-                double percFactor = 1.0;
-                if (p.endsWith("%")) {
-                    percFactor = 100.0;
-                    p = p.substring(0, p.length() - 1);
-                }
-                try {
-                    return Double.parseDouble(p) / percFactor;
-                } catch (NumberFormatException nfe) {
-                    return DoubleColumnType.missingValueIndicator();
-                }
-
-            }, numericChange);
-
-            treemapTable.replaceColumn(numericChange);
-
-            //System.out.println(treemapTable.structure());
-
+            treemapTable = loadLargeStocks();
         } catch ( Exception e ) {
             treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
             e.printStackTrace();
