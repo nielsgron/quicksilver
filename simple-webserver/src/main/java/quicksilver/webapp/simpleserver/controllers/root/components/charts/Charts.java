@@ -119,7 +119,7 @@ public class Charts extends AbstractComponentsChartsPage {
         body.addRowOfColumns(
                 new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv", 500, 200, false, "Company", "Sector") ,
                         "Treemap Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv", "Company", "MarketCap", 500, 200, false) ,
+                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv", 500, 200, false, "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 

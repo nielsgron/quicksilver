@@ -17,18 +17,18 @@
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.PiePlot;
+import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.components.Figure;
 
 public class TSSunburstChartPanel extends TSFigurePanel {
 
-    public TSSunburstChartPanel(Table table, String divName, String groupColName, String numberColName, int width, int height, boolean enableLegend) {
-        super(divName);
+    public TSSunburstChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
+        super(divName, width, height);
 
         Figure figure = null;
 
         try {
-            figure = PiePlot.create("", table, groupColName, numberColName);
+            figure = SunburstPlot.create(TSTreeMapChartPanel.defaultLayout(width, height, enableLegend), table, columns);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
