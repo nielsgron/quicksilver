@@ -23,7 +23,10 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.DoubleColumn;
+import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.columns.Column;
+import tech.tablesaw.columns.numbers.DoubleColumnType;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,6 +55,29 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
             treemapTable = treemapTable.where(marketCapColumn.isGreaterThan(75000)); // Greater then 75 Billion market cap (113 rows)
 
             System.out.println("Stocks Table Row Count: " + treemapTable.rowCount());
+
+            //XXX: See https://github.com/jtablesaw/tablesaw/pull/703 ,until then convert % by hand to numbers
+            StringColumn change = (StringColumn) treemapTable.column("Change");
+            Column numericChange = DoubleColumn.create("Change");
+            //apparently mapInto doesn't append, but replace. Need to grow it to size()
+            numericChange = numericChange.emptyCopy(change.size());
+
+            change.mapInto((String p) -> {
+                double percFactor = 1.0;
+                if (p.endsWith("%")) {
+                    percFactor = 100.0;
+                    p = p.substring(0, p.length() - 1);
+                }
+                try {
+                    return Double.parseDouble(p) / percFactor;
+                } catch (NumberFormatException nfe) {
+                    return DoubleColumnType.missingValueIndicator();
+                }
+
+            }, numericChange);
+
+            treemapTable.replaceColumn(numericChange);
+
             //System.out.println(treemapTable.structure());
 
         } catch ( Exception e ) {
