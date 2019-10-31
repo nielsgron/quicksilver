@@ -107,20 +107,20 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(486, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv2", "Name", "Parent"),
+                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv2", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent"),
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv3", "Name", "Parent"),
+                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv3", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent"),
                         "Treemap Chart")
         );
 
         layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv4", "Name", "Parent") ,
+                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv4", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv5", "Name", "Parent") ,
+                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv5", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent") ,
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv6", "Name", "Parent") ,
+                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv6", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent") ,
                         "Treemap Chart")
         );
 

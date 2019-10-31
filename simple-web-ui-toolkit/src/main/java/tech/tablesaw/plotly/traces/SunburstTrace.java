@@ -47,14 +47,19 @@ public class SunburstTrace extends AbstractTrace {
         context.remove("yAxis");
 
         context.put("variableName", "trace" + i);
+        //not sure how to get the template to write this array properly, re-add it as a single string
+        Object contextIds = context.get("ids");
+        if(contextIds != null) {
+            context.put("ids", dataAsString((Object[]) contextIds));
+        }
         context.put("labels", dataAsString(labels));
         context.put("parents", dataAsString(parents));
         context.put("values", dataAsString(values));
         return context;
     }
 
-    public static SunburstBuilder builder(Object[] labels, Object[] parents, double[] values) {
-        return new SunburstBuilder(labels, parents, values);
+    public static SunburstBuilder builder(String[] ids, Object[] labels, Object[] parents, double[] values) {
+        return new SunburstBuilder(ids, labels, parents, values);
     }
 
     public static class SunburstBuilder extends TraceBuilder {
@@ -64,13 +69,15 @@ public class SunburstTrace extends AbstractTrace {
         final Object[] parents;
         final double[] values;
 
-        SunburstBuilder(Object[] labels, Object[] parents, double[] values) {
+        SunburstBuilder(String[] ids, Object[] labels, Object[] parents, double[] values) {
+            this.ids = ids;
             this.labels = labels;
             this.parents = parents;
             this.values = values;
         }
 
         SunburstBuilder(Column<?> labels, Column<?> parents, DoubleColumn values) {
+            this.ids = null;
             this.labels = columnToStringArray(labels);
             this.parents = columnToStringArray(parents);
             this.values = values.asDoubleArray();

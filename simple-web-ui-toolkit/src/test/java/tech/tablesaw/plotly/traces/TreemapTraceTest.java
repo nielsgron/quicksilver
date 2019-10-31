@@ -7,7 +7,7 @@ public class TreemapTraceTest {
 
     @Test
     public void testMe() {
-        TreemapTrace trace = TreemapTrace.builder(new String[]{"a", "b", "c"}, new String[]{"b", "", ""}).build();
+        TreemapTrace trace = TreemapTrace.builder(null, new String[]{"a", "b", "c"}, new String[]{"b", "", ""}).build();
 
         String js = trace.asJavascript(0);
 

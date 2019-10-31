@@ -44,13 +44,18 @@ public class TreemapTrace extends AbstractTrace {
         context.remove("yAxis");
 
         context.put("variableName", "trace" + i);
+        //not sure how to get the template to write this array properly, re-add it as a single string
+        Object contextIds = context.get("ids");
+        if(contextIds != null) {
+            context.put("ids", dataAsString((Object[]) contextIds));
+        }
         context.put("labels", dataAsString(labels));
         context.put("parents", dataAsString(parents));
         return context;
     }
 
-    public static TreemapBuilder builder(Object[] labels, Object[] parents) {
-        return new TreemapBuilder(labels, parents);
+    public static TreemapBuilder builder(String[] ids, Object[] labels, Object[] parents) {
+        return new TreemapBuilder(ids, labels, parents);
     }
 
     public static class TreemapBuilder extends TraceBuilder {
@@ -59,7 +64,8 @@ public class TreemapTrace extends AbstractTrace {
         final Object[] labels;
         final Object[] parents;
 
-        TreemapBuilder(Object[] labels, Object[] parents) {
+        TreemapBuilder(String[] ids, Object[] labels, Object[] parents) {
+            this.ids = ids;
             this.labels = labels;
             this.parents = parents;
         }

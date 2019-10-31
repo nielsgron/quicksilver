@@ -39,7 +39,7 @@ public class SunburstPlot {
             }
         }
 
-        return create(layout, labels, labelParents, values);
+        return create(layout, info.ids, labels, labelParents, values);
     }
 
     static <K, V> TreeMap<K, V> pairs(Table table, Column<K> col1, Column<V> col2) {
@@ -51,14 +51,15 @@ public class SunburstPlot {
     }
 
 
-    public static Figure create(String title, Object[] labels, Object[] labelParents, double[] values) {
-        return create(Layout.builder(title).build(), labels, labelParents, values);
+    public static Figure create(String title, String[] ids, Object[] labels, Object[] labelParents, double[] values) {
+        return create(Layout.builder(title).build(), ids, labels, labelParents, values);
     }
 
-    public static Figure create(Layout layout, Object[] labels, Object[] labelParents, double[] values) {
+    public static Figure create(Layout layout, String[] ids, Object[] labels, Object[] labelParents, double[] values) {
         TreemapPlot.sanitize(labels);
         TreemapPlot.sanitize(labelParents);
         SunburstTrace trace = SunburstTrace.builder(
+                ids,
                 labels,
                 labelParents,
                 values)

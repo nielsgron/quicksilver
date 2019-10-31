@@ -25,6 +25,11 @@ import tech.tablesaw.plotly.components.Margin;
 
 public class TSTreeMapChartPanel extends TSFigurePanel {
 
+    public enum ColumnRelation {
+        FamilyTree,
+        SubCategories,
+    }
+
     static Layout defaultLayout( int width, int height, boolean enableLegend) {
         int marginLeft = 0; //40;
         int marginRight = 0; //5;
@@ -47,11 +52,15 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
     }
 
     public TSTreeMapChartPanel(Layout layout, Table table, String divName, String... columns) {
+        this(layout, table, divName, ColumnRelation.SubCategories, columns);
+    }
+
+    public TSTreeMapChartPanel(Layout layout, Table table, String divName, ColumnRelation relationship, String... columns) {
         super(divName);
 
         Figure figure = null;
         try {
-            figure = TreemapPlot.create(layout, table, columns);
+            figure = TreemapPlot.create(layout, table, relationship == ColumnRelation.FamilyTree, columns);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -64,22 +73,11 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
     }
 
     public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
-        super(divName);
+        this(table, divName, width, height, enableLegend, ColumnRelation.SubCategories, columns);
+    }
 
-        Figure figure = null;
-        try {
-            figure = TreemapPlot.create(
-                    defaultLayout(width, height, enableLegend),
-                    table, columns);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-
-        HTMLText divS = new HTMLText(figure.divString(divName));
-        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
-
-        this.add(divS);
-        this.add(divJS);
+    public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, ColumnRelation relationship, String... columns) {
+        this(defaultLayout(width, height, enableLegend), table, divName, relationship, columns);
     }
 
     public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
