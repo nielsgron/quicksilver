@@ -46,6 +46,23 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
                 .build();
     }
 
+    public TSTreeMapChartPanel(Layout layout, Table table, String divName, String... columns) {
+        super(divName);
+
+        Figure figure = null;
+        try {
+            figure = TreemapPlot.create(layout, table, columns);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
+
+        this.add(divS);
+        this.add(divJS);
+    }
+
     public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
         super(divName);
 
@@ -63,6 +80,10 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
 
         this.add(divS);
         this.add(divJS);
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 0, 0, 0, 0, enabledLegend);
     }
 
 }

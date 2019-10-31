@@ -18,11 +18,13 @@ package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSSunburstChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsSunburst extends AbstractComponentsChartsPage {
 
@@ -44,24 +46,30 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
             sunburstTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
         }
 
+        Layout.LayoutBuilder layoutBuilder = TSSunburstChartPanel.createLayoutBuilder(900, 400, true);
+
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv1", 900, 400, true, "Company", "Industry", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layoutBuilder.build(), sunburstTable, "sunburstDiv1", "Company", "Industry", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 
+        layoutBuilder = TSSunburstChartPanel.createLayoutBuilder(450, 200, false);
+
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv2", 450, 200, false, "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layoutBuilder.build(), sunburstTable, "sunburstDiv2", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv3", 450, 200, false, "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layoutBuilder.build(), sunburstTable, "sunburstDiv3", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 
+        layoutBuilder = TSSunburstChartPanel.createLayoutBuilder(300, 200, false);
+
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv4", 300, 200, false, "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layoutBuilder.build(), sunburstTable, "sunburstDiv4", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv5", 300, 200, false, "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layoutBuilder.build(), sunburstTable, "sunburstDiv5", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv6", 300, 200, false, "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layoutBuilder.build(), sunburstTable, "sunburstDiv6", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 

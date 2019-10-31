@@ -19,6 +19,8 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.plotly.components.Margin;
 
 public class TSFigurePanel extends BSPanel {
 
@@ -127,6 +129,25 @@ public class TSFigurePanel extends BSPanel {
             }
 
         }
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 0, 0, 0, 0, enabledLegend);
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, int marginTop, int marginBottom, int marginLeft, int marginRight, boolean enabledLegend) {
+
+        return Layout.builder("")
+                .width(width)
+                .height(height)
+                .margin(Margin.builder()
+                        .top(marginTop)
+                        .bottom(marginBottom)
+                        .left(marginLeft)
+                        .right(marginRight)
+                        .build())
+                .showLegend(enabledLegend);
 
     }
 

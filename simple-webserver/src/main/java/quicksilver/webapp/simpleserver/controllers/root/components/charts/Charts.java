@@ -26,6 +26,7 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.columns.Column;
+import tech.tablesaw.plotly.components.Layout;
 
 public class Charts extends AbstractComponentsChartsPage {
 
@@ -44,10 +45,14 @@ public class Charts extends AbstractComponentsChartsPage {
         // Add Horizontal Bar Chart
         Table hBarTable = economicTable;
 
+        // .margin(Margin.builder().left(40).right(5).bottom(30).top(5).build())
+
+        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(500, 200, false);
+
         body.addRowOfColumns(
                 new BSCard(new TSVerticalBarChartPanel(hBarTable, "vbarDiv", "Country", "GDP", 500, 200, false),
                         "Vertical Bar Chart"),
-                new BSCard(new TSHorizontalBarChartPanel(hBarTable, "hbarDiv", "Country", "GDP", 500, 200, false),
+                new BSCard(new TSHorizontalBarChartPanel(layoutBuilder.build(), hBarTable, "hbarDiv", "Country", "GDP"),
                         "Horizontal Bar Chart")
         );
 
@@ -116,10 +121,13 @@ public class Charts extends AbstractComponentsChartsPage {
         Table treemapTable = stockEquitiesTable;
         Table sunburstTable = stockEquitiesTable;
 
+        Layout.LayoutBuilder treeLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
+        Layout.LayoutBuilder sunburstLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
+
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treemapTable, "treemapDiv", 500, 200, false, "Company", "Sector") ,
+                new BSCard(new TSTreeMapChartPanel(treeLayoutBuilder.build(), treemapTable, "treemapDiv", "Company", "Sector") ,
                         "Treemap Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstTable, "sunburstDiv", 500, 200, false, "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(sunburstLayoutBuilder.build(), sunburstTable, "sunburstDiv", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 

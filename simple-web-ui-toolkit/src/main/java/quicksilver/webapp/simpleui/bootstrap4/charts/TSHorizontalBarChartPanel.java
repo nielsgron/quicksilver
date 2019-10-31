@@ -20,23 +20,18 @@ import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
-import tech.tablesaw.plotly.components.Margin;
 import tech.tablesaw.plotly.traces.BarTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
 public class TSHorizontalBarChartPanel extends TSFigurePanel {
 
-    public TSHorizontalBarChartPanel(Table table, String divName, String groupColName, String numberColName, int width, int height, boolean enableLegend) {
+    public TSHorizontalBarChartPanel(Layout layout, Table table, String divName, String groupColName, String numberColName) {
         super(divName);
-
-        setHeight(height);
-        setWidth(width);
-        enableLegend(enableLegend);
 
         Figure figure = null;
 
         try {
-            figure = createFigure( table, groupColName, numberColName, "");
+            figure = createFigure(layout, table, groupColName, numberColName);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -46,21 +41,15 @@ public class TSHorizontalBarChartPanel extends TSFigurePanel {
 
         this.add(divS);
         this.add(divJS);
-
     }
 
-    public Figure createFigure(Table table, String groupColName, String numberColName, String title) {
-
-        Layout layout = Layout.builder()
-                .title(title)
-                .height(height)
-                .width(width)
-                .showLegend(enabledLegend)
-                .margin(Margin.builder().left(40).right(5).bottom(30).top(5).build())
-                .build();
+    public Figure createFigure(Layout layout, Table table, String groupColName, String numberColName) {
         BarTrace trace = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(numberColName)).orientation(BarTrace.Orientation.HORIZONTAL).build();
         return new Figure(layout, new Trace[]{trace});
+    }
 
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 30, 55, 5, enabledLegend);
     }
 
 }

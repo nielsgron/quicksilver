@@ -16,11 +16,31 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSSunburstChartPanel extends TSFigurePanel {
+
+    public TSSunburstChartPanel(Layout layout, Table table, String divName, String... columns) {
+        super(divName);
+
+        Figure figure = null;
+
+        try {
+            figure = SunburstPlot.create(layout, table, columns);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
+
+        this.add(divS);
+        this.add(divJS);
+    }
 
     public TSSunburstChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
         super(divName, width, height);
@@ -33,8 +53,15 @@ public class TSSunburstChartPanel extends TSFigurePanel {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 0, 0, 0, 0, enabledLegend);
     }
 
 }
