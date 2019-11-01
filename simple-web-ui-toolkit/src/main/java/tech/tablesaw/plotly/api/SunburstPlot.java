@@ -24,7 +24,7 @@ public class SunburstPlot {
             throw new IllegalStateException("At least three columns needed");
         }
         String[] hierarchy = Arrays.copyOf(cols, cols.length - 1);
-        TreemapPlot.TableInfo info = TreemapPlot.createPairs(table, hierarchy,
+        Extract.TableInfo info = Extract.createPairs(table, hierarchy,
                 Collections.singletonMap("values", cols[cols.length - 1]),
                 Collections.singletonMap("values", 0d));
 
