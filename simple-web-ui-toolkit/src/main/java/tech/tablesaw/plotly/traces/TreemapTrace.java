@@ -13,12 +13,14 @@ public class TreemapTrace extends AbstractTrace {
 
     private final Object[] labels;
     private final Object[] parents;
+    private final Map<String, Object[]> extra;
 
     public TreemapTrace(TreemapBuilder builder) {
         super(builder);
 
         this.labels = builder.labels;
         this.parents = builder.parents;
+        this.extra = builder.extra;
     }
 
     @Override
@@ -44,13 +46,21 @@ public class TreemapTrace extends AbstractTrace {
         context.remove("yAxis");
 
         context.put("variableName", "trace" + i);
+        //not sure how to get the template to write this array properly, re-add it as a single string
+        Object contextIds = context.get("ids");
+        if(contextIds != null) {
+            context.put("ids", dataAsString((Object[]) contextIds));
+        }
         context.put("labels", dataAsString(labels));
         context.put("parents", dataAsString(parents));
+        if(extra!=null) {
+            extra.forEach((k, array) -> context.put(k, dataAsString(array)));
+        }
         return context;
     }
 
-    public static TreemapBuilder builder(Object[] labels, Object[] parents) {
-        return new TreemapBuilder(labels, parents);
+    public static TreemapBuilder builder(String[] ids, Object[] labels, Object[] parents, Map<String, Object[]> extra) {
+        return new TreemapBuilder(ids, labels, parents, extra);
     }
 
     public static class TreemapBuilder extends TraceBuilder {
@@ -58,15 +68,19 @@ public class TreemapTrace extends AbstractTrace {
         private static final String type = "treemap";
         final Object[] labels;
         final Object[] parents;
+        final Map<String, Object[]> extra;
 
-        TreemapBuilder(Object[] labels, Object[] parents) {
+        TreemapBuilder(String[] ids, Object[] labels, Object[] parents, Map<String, Object[]> extra) {
+            this.ids = ids;
             this.labels = labels;
             this.parents = parents;
+            this.extra = extra;
         }
 
         TreemapBuilder(Column<?> labels, Column<?> parents) {
             this.labels = columnToStringArray(labels);
             this.parents = columnToStringArray(parents);
+            this.extra = null;
         }
 
         public TreemapTrace build() {
