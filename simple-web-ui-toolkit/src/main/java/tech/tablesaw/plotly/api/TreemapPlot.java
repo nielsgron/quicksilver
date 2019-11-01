@@ -94,7 +94,7 @@ public class TreemapPlot {
         Map<String, Object[]> attributeArrays = new HashMap<>();
         attributeLists.forEach((name, list) -> attributeArrays.put(name, list.toArray()));
 
-        return new TableInfo(ids.toArray(String[]::new), labels.toArray(), parents.toArray(), attributeArrays);
+        return new TableInfo(ids.stream().toArray(String[]::new), labels.toArray(), parents.toArray(), attributeArrays);
     }
 
     /**
