@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.TreemapPlot;
@@ -51,16 +54,22 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
                 .build();
     }
 
-    public TSTreeMapChartPanel(Layout layout, Table table, String divName, String... columns) {
-        this(layout, table, divName, ColumnRelation.SubCategories, columns);
+    private TSTreeMapChartPanel(Builder builder) {
+        this(builder.layout, builder.table, builder.divName,
+                builder.familyTree ? ColumnRelation.FamilyTree : ColumnRelation.SubCategories,
+                builder.columns, new HashMap<>(builder.attributes), new HashMap<>(builder.attributeDefaults));
     }
 
-    public TSTreeMapChartPanel(Layout layout, Table table, String divName, ColumnRelation relationship, String... columns) {
+    public TSTreeMapChartPanel(Layout layout, Table table, String divName, String... columns) {
+        this(layout, table, divName, ColumnRelation.SubCategories, columns, Collections.EMPTY_MAP,  Collections.EMPTY_MAP);
+    }
+
+    private TSTreeMapChartPanel(Layout layout, Table table, String divName, ColumnRelation relationship, String[] columns, Map<String, String> attColumns, Map<String, Object> attDefaults) {
         super(divName);
 
         Figure figure = null;
         try {
-            figure = TreemapPlot.create(layout, table, relationship == ColumnRelation.FamilyTree, columns);
+            figure = TreemapPlot.create(layout, table, relationship == ColumnRelation.FamilyTree, columns, attColumns, attDefaults);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -73,15 +82,53 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
     }
 
     public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
-        this(table, divName, width, height, enableLegend, ColumnRelation.SubCategories, columns);
-    }
-
-    public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, ColumnRelation relationship, String... columns) {
-        this(defaultLayout(width, height, enableLegend), table, divName, relationship, columns);
+        this(defaultLayout(width, height, enableLegend), table, divName, ColumnRelation.SubCategories, columns, Collections.EMPTY_MAP, Collections.EMPTY_MAP);
     }
 
     public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
         return createLayoutBuilder(width, height, 0, 0, 0, 0, enabledLegend);
+    }
+
+    public static Builder builder(Table table, String divName, String... columns) {
+        return new Builder(table, divName, columns);
+    }
+
+    public static class Builder {
+
+        private final Table table;
+        private final String divName;
+        private final String[] columns;
+        private Layout layout;
+        private boolean familyTree;
+        private final Map<String, String> attributes = new HashMap<>();
+        private final Map<String, Object> attributeDefaults = new HashMap<>();
+
+        private Builder(Table table, String divName, String[] columns) {
+            this.table = table;
+            this.divName = divName;
+            this.columns = columns;
+        }
+
+        public Builder layout(Layout layout) {
+            this.layout = layout;
+            return this;
+        }
+
+        public Builder familyTree(boolean familyTree) {
+            this.familyTree = familyTree;
+            return this;
+        }
+
+        public Builder addAttribute(String attribute, String column, Object defaultValue) {
+            attributes.put(attribute, column);
+            attributeDefaults.put(attribute, defaultValue);
+            return this;
+        }
+
+        public TSTreeMapChartPanel build() {
+            return new TSTreeMapChartPanel(this);
+        }
+
     }
 
 }

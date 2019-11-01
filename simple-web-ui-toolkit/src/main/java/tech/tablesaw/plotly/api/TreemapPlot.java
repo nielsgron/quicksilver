@@ -1,6 +1,7 @@
 package tech.tablesaw.plotly.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -12,17 +13,20 @@ import tech.tablesaw.plotly.traces.TreemapTrace;
 
 public class TreemapPlot {
 
-    public static Figure create(String title, Table table, boolean familyTree, String... cols) {
-        return create(Layout.builder(title).build(), table, familyTree, cols);
+    public static Figure create(String title, Table table, boolean familyTree, String[] cols, Map<String, String> attCols, Map<String, Object> attDefaults) {
+        return create(Layout.builder(title).build(), table, familyTree, cols, attCols, attDefaults);
     }
 
-    static TableInfo createPairs(Table table, String... cols) {
-        return createPairs(table, false, cols);
+    static TableInfo createPairs(Table table, String[] cols, Map<String, String> attCols, Map<String, Object> attDefaults) {
+        return createPairs(table, false, cols, attCols, attDefaults);
     }
 
-    static TableInfo createPairs(Table table, boolean familyTree, String... cols) {
+    static TableInfo createPairs(Table table, boolean familyTree, String[] cols, Map<String, String> attCols, Map<String, Object> attDefaults) {
         if (cols.length < 2) {
             throw new IllegalStateException("At least two columns needed");
+        }
+        if (attCols == null) {
+            attCols = new HashMap<>();
         }
         //it's important the (child, parent) pairs map is sorted to build the list more easily later on
         TreeMap<String, String> pairs = new TreeMap<>();
@@ -33,7 +37,8 @@ public class TreemapPlot {
             idPairs[i] = familyTree ? globalIds : new TreeMap<>();
         }
 
-        pairs(table, cols, new IdGenerator() {
+        Map<String, Map<String, Object>> attributes = new HashMap<>();
+        pairs(table, cols, attCols, new IdGenerator() {
             int[] colCounter = new int[cols.length];
 
             @Override
@@ -47,11 +52,15 @@ public class TreemapPlot {
                     return colSubIndex + "-" + v;
                 }
             }
-        }, pairs, idPairs);
+        }, pairs, idPairs, attributes);
 
         List<String> ids = new ArrayList<>();
         List<String> labels = new ArrayList<>();
         List<String> parents = new ArrayList<>();
+        Map<String, List<Object>> attributeLists = new HashMap<>();
+        attCols.forEach((name, colName) -> {
+            attributeLists.put(name, new ArrayList<>());
+        });
 
         for (TreeMap<String, String> id : idPairs) {
             for (Map.Entry<String, String> e : id.entrySet()) {
@@ -68,24 +77,36 @@ public class TreemapPlot {
                     }
 
                     parents.add(parentId);
+
+                    Map<String, Object> attrs = attributes.get(labelId);
+                    attCols.forEach((name, colName) -> {
+                        if(attrs != null && attrs.containsKey(name)) {
+                            attributeLists.get(name).add(attrs.get(name));
+                        } else {
+                            attributeLists.get(name).add(attDefaults.get(name));
+                        }
+                    });
                 }
 
             }
         }
 
-        return new TableInfo(ids.toArray(String[]::new), labels.toArray(), parents.toArray());
+        Map<String, Object[]> attributeArrays = new HashMap<>();
+        attributeLists.forEach((name, list) -> attributeArrays.put(name, list.toArray()));
+
+        return new TableInfo(ids.toArray(String[]::new), labels.toArray(), parents.toArray(), attributeArrays);
     }
 
     /**
      * @param cols the columns in hierarchy order (smallest element first,
      * parent last)
      */
-    public static Figure create(Layout layout, Table table, boolean familyTree, String... cols) {
-        TableInfo info = createPairs(table, familyTree, cols);
+    public static Figure create(Layout layout, Table table, boolean familyTree, String[] cols, Map<String, String> attCols, Map<String, Object> attDefaults) {
+        TableInfo info = createPairs(table, familyTree, cols, attCols, attDefaults);
         Object[] labels = info.labels;
         Object[] labelParents = info.labelParents;
 
-        return create(layout, info.ids, labels, labelParents);
+        return create(layout, info.ids, labels, labelParents, info.attributeLists);
     }
 
     static class TableInfo {
@@ -93,26 +114,29 @@ public class TreemapPlot {
         String[] ids;
         Object[] labels;
         Object[] labelParents;
+        Map<String, Object[]> attributeLists;
 
-        public TableInfo(String[] ids, Object[] labels, Object[] labelParents) {
+        public TableInfo(String[] ids, Object[] labels, Object[] labelParents, Map<String, Object[]> attributeLists) {
             this.ids = ids;
             this.labels = labels;
             this.labelParents = labelParents;
+            this.attributeLists = attributeLists;
         }
 
     }
 
     public static Figure create(String title, String[] ids, Object[] labels, Object[] labelParents) {
-        return create(Layout.builder(title).build(), ids, labels, labelParents);
+        return create(Layout.builder(title).build(), ids, labels, labelParents, null);
     }
 
-    public static Figure create(Layout layout, String[] ids, Object[] labels, Object[] labelParents) {
+    public static Figure create(Layout layout, String[] ids, Object[] labels, Object[] labelParents, Map<String, Object[]> extra) {
         sanitize(labels);
         sanitize(labelParents);
         TreemapTrace trace = TreemapTrace.builder(
                 ids,
                 labels,
-                labelParents)
+                labelParents,
+                extra)
                 .build();
         return new Figure(layout, trace);
     }
@@ -130,7 +154,8 @@ public class TreemapPlot {
         String id(Row row, int colSubIndex, String column);
     }
 
-    private static void pairs(Table table, String[] cols, IdGenerator idGen, TreeMap<String, String> pairs, TreeMap<String, String>[] ids) {
+    private static void pairs(Table table, String[] cols, Map<String, String> attCols, IdGenerator idGen,
+            TreeMap<String, String> pairs, TreeMap<String, String>[] ids, Map<String, Map<String, Object>> attributes) {
         for (Row row : table) {
             String child = row.getString(cols[0]);
 
@@ -139,6 +164,17 @@ public class TreemapPlot {
             if (childId == null) {
                 childId = idGen.id(row, 0, cols[0]);
                 ids[0].put(child, childId);
+
+                if (attCols != null && !attCols.isEmpty()) {
+                    Map<String, Object> att = attributes.get(childId);
+                    if (att == null) {
+                        att = new HashMap<>();
+                        attributes.put(childId, att);
+                    }
+                    for (Map.Entry<String, String> attribute : attCols.entrySet()) {
+                        att.put(attribute.getKey(), row.getObject(attribute.getValue()));
+                    }
+                }
             }
 
             for (int i = 1; i < cols.length; i++) {

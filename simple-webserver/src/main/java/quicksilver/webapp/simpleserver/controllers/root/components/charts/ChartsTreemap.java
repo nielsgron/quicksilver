@@ -18,7 +18,6 @@ package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import java.io.IOException;
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSHorizontalBarChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
@@ -74,7 +73,8 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         }, numericChange);
 
-        treemapTable.replaceColumn(numericChange);
+        //XXX: Keep the column as String so it already has the '%' and can be easily added as 'text:'. Maybe add numericChange with a different name?
+        //treemapTable.replaceColumn(numericChange);
 
         //System.out.println(treemapTable.structure());
 
@@ -98,7 +98,12 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         Layout.LayoutBuilder layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(1043, 500, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), treemapTable, "treemapDiv1", "Company", "Industry", "Sector"),
+                new BSCard(
+                        TSTreeMapChartPanel.builder(treemapTable, "treemapDiv1", "Ticker", "Industry", "Sector")
+                                .layout(layoutBuilder.build())
+                                .addAttribute("text", "Change", "")
+                                .addAttribute("values", "MarketCap", 0d)
+                                .build(),
                         "Treemap Chart")
         );
 
@@ -107,20 +112,35 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(486, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv2", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent"),
+                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv2", "Name", "Parent")
+                        .layout(layoutBuilder.build())
+                        .familyTree(true)
+                        .build(),
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv3", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent"),
+                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv3", "Name", "Parent")
+                        .layout(layoutBuilder.build())
+                        .familyTree(true)
+                        .build(),
                         "Treemap Chart")
         );
 
         layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv4", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent") ,
+                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv4", "Name", "Parent")
+                        .layout(layoutBuilder.build())
+                        .familyTree(true)
+                        .build(),
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv5", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent") ,
+                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv5", "Name", "Parent")
+                        .layout(layoutBuilder.build())
+                        .familyTree(true)
+                        .build(),
                         "Treemap Chart"),
-                new BSCard(new TSTreeMapChartPanel(layoutBuilder.build(), bsdTable, "treemapDiv6", TSTreeMapChartPanel.ColumnRelation.FamilyTree, "Name", "Parent") ,
+                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv6", "Name", "Parent")
+                        .layout(layoutBuilder.build())
+                        .familyTree(true)
+                        .build(),
                         "Treemap Chart")
         );
 
