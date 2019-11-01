@@ -41,7 +41,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         toolbar.setActiveButton("Treemap");
     }
 
-    static Table loadLargeStocks() throws IOException {
+    public static Table loadLargeStocks() throws IOException {
         Table treemapTable;
 
         InputStream inputStream = ChartsTreemap.class.getResourceAsStream("stocks.csv");

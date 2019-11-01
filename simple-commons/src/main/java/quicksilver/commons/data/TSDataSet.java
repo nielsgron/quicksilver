@@ -18,17 +18,65 @@ package quicksilver.commons.data;
 
 import tech.tablesaw.api.*;
 import tech.tablesaw.columns.Column;
+import tech.tablesaw.columns.booleans.BooleanColumnType;
+import tech.tablesaw.columns.dates.DateColumnType;
+import tech.tablesaw.columns.datetimes.DateTimeColumnType;
+import tech.tablesaw.columns.numbers.*;
+import tech.tablesaw.columns.strings.StringColumnType;
+import tech.tablesaw.columns.times.TimeColumnType;
+
+import java.sql.Time;
 
 public class TSDataSet implements DataSet {
 
     private Table table;
     private TSDataSetMeta metaData;
 
+    public TSDataSet(Table table) {
+        this.table = table;
+
+        ColumnType[] types = table.columnTypes();
+        Class[] classTypes = new Class[types.length];
+        for ( int i = 0; i < types.length; i++ ) {
+            classTypes[i] = getClassByColumnType(types[i]);
+        }
+
+        this.metaData = new TSDataSetMeta(table.columnArray(), (String[])table.columnNames().toArray(new String[table.columnNames().size()]), classTypes);
+    }
+
     public TSDataSet(TSDataSetMeta metaData) {
         this.metaData = metaData;
 
         this.table = Table.create("name");
         this.table.addColumns(metaData.getColumns());
+    }
+
+    private Class getClassByColumnType(ColumnType type) {
+
+        if ( type instanceof StringColumnType ) {
+            return String.class;
+        } else if ( type instanceof BooleanColumnType ) {
+            return Boolean.class;
+        } else if ( type instanceof DoubleColumnType) {
+            return Double.class;
+        } else if ( type instanceof FloatColumnType) {
+            return Float.class;
+        } else if ( type instanceof LongColumnType) {
+            return Long.class;
+        } else if ( type instanceof IntColumnType) {
+            return Integer.class;
+        } else if ( type instanceof ShortColumnType) {
+            return Short.class;
+        } else if ( type instanceof DateColumnType) {
+            return java.sql.Timestamp.class;
+        } else if ( type instanceof DateTimeColumnType) {
+            return java.sql.Timestamp.class;
+        } else if ( type instanceof TimeColumnType) {
+            return Time.class;
+        } else {
+            return String.class;
+        }
+
     }
 
     // Methods for Getting Column Names and Types

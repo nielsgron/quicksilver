@@ -21,6 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -44,6 +45,10 @@ public class ExcelExporter {
 
     private ArrayList<HashMap.SimpleEntry<DataSet, String>> dataSetList = new ArrayList<HashMap.SimpleEntry<DataSet, String>>();
 
+    public ExcelExporter() {
+        this("", TimeZone.getTimeZone("UTC"));
+    }
+
     public ExcelExporter(String filePath) {
         this(filePath, TimeZone.getTimeZone("UTC"));
     }
@@ -64,6 +69,14 @@ public class ExcelExporter {
     }
 
     public void export() throws IOException {
+        export(new FileOutputStream(filePath));
+    }
+
+    public void export(String filePath) throws IOException {
+        export(new FileOutputStream(filePath));
+    }
+
+    public void export(OutputStream stream) throws IOException {
 
         // Create new workbook
         Workbook workbook = new XSSFWorkbook();
@@ -85,7 +98,7 @@ public class ExcelExporter {
 
         // Write workbook to the file
         try {
-            workbook.write(new FileOutputStream(filePath));
+            workbook.write(stream);
         } finally {
             workbook.close();
         }

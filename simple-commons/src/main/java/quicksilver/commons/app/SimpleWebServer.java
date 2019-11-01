@@ -16,9 +16,16 @@
 
 package quicksilver.commons.app;
 
-import quicksilver.commons.app.SimpleApplication;
 import quicksilver.commons.config.ConfigWebServer;
+import spark.Response;
 import spark.Service;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class SimpleWebServer {
 
@@ -80,6 +87,37 @@ public class SimpleWebServer {
         initAfterFilters();
 
         webServer.init();
+    }
+
+    public static void writeBinaryToResponse(byte[] byteArray, String acceptType, String fileName, Response response, boolean bCompressed)
+        throws IOException {
+
+        response.raw().setContentType(acceptType);
+
+        if ( bCompressed ) {
+            response.raw().setHeader("Content-Disposition", "attachment; filename=" + fileName + ".zip");
+
+            ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(response.raw().getOutputStream()));
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(new ByteArrayInputStream(byteArray));
+
+            ZipEntry zipEntry = new ZipEntry(fileName);
+
+            zipOutputStream.putNextEntry(zipEntry);
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = bufferedInputStream.read(buffer)) > 0) {
+                zipOutputStream.write(buffer, 0, len);
+            }
+
+            zipOutputStream.flush();
+            zipOutputStream.close();
+        } else {
+            response.raw().setHeader("Content-Disposition", "attachment; filename=" + fileName);
+
+            response.raw().getOutputStream().write(byteArray);
+            response.raw().flushBuffer();
+        }
+
     }
 
 }

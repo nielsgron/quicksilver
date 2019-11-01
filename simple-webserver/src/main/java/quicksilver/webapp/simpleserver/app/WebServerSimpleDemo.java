@@ -29,6 +29,7 @@ import quicksilver.webapp.simpleserver.controllers.root.components.charts.*;
 import quicksilver.webapp.simpleserver.controllers.root.components.customforms.CustomForms;
 import quicksilver.webapp.simpleserver.controllers.root.components.extras.Extras;
 import quicksilver.webapp.simpleserver.controllers.root.components.bootstrap.*;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.HtmlPage;
 import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.HtmlStreamStringBuffer;
@@ -238,6 +239,14 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             return stream.getText();
         });
 
+        webServer.get("/components/tables", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Tables(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
+        webServer.get("/components/tables/export", (request, response) -> {
+            return Tables.returnExportFile(request, response, true);
+        });
 
     }
 
