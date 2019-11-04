@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
+import java.util.stream.Stream;
 import tech.tablesaw.columns.Column;
 import static tech.tablesaw.plotly.Utils.dataAsString;
+import tech.tablesaw.plotly.components.ColorBar;
+import tech.tablesaw.plotly.components.Marker;
+import tech.tablesaw.plotly.components.TickSettings;
 
 public class TreemapTrace extends AbstractTrace {
 
@@ -62,11 +66,26 @@ public class TreemapTrace extends AbstractTrace {
             extra.forEach((k, array) -> {
                 if (k.equals("marker.colors")) {
                     //Marker.color generates color: not colors: so we manually generate the JS
-                    context.put("marker", "{\ncolors : " + dataAsString(array) + "\n}");
-//                    context.put("marker", Marker.builder()
-//                            .color(
-//                                    Stream.of((Object[]) array).map(x -> String.valueOf(x)).toArray(String[]::new))
-//                            .build());
+//                    context.put("marker", "{\ncolors : " + dataAsString(array) + "\n}");
+                    Marker m = Marker.builder()
+                            .colorScale(Marker.Palette.YL_OR_RD)
+                            .color(
+                                    Stream.of((Object[]) array).map(x -> String.valueOf(x)).toArray(String[]::new))
+                            .colorBar(ColorBar.builder()
+                                    .tickSettings(TickSettings.builder()
+                                            .dTick("1")
+                                            .tick0("0")
+                                            .build())
+                                    .build())
+                            .build();
+                    String markerJS = m.asJavascript();
+                    //XXX: The colorscale: here might be too specific
+                    markerJS = markerJS.replace("color:", "colors:");
+                    markerJS = markerJS.replace("colorscale: 'YlOrRd'", "colorscale: [\n"
+                            + "        ['0.0', 'rgb(255,0,0)'],\n"
+                            + "        ['1.0', 'rgb(0,255,0)']\n"
+                            + "    ]");
+                    context.put("marker", markerJS);
                 }
             });
         }
