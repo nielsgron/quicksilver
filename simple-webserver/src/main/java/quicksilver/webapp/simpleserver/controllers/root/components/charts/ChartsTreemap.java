@@ -33,6 +33,7 @@ import tech.tablesaw.plotly.components.Layout;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.function.Function;
 
 public class ChartsTreemap extends AbstractComponentsChartsPage {
 
@@ -55,7 +56,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         //XXX: See https://github.com/jtablesaw/tablesaw/pull/703 ,until then convert % by hand to numbers
         StringColumn change = (StringColumn) treemapTable.column("Change");
-        Column numericChange = DoubleColumn.create("Change");
+        Column numericChange = DoubleColumn.create("ChangeAsNumber");
         //apparently mapInto doesn't append, but replace. Need to grow it to size()
         numericChange = numericChange.emptyCopy(change.size());
 
@@ -73,12 +74,42 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         }, numericChange);
 
-        //XXX: Keep the column as String so it already has the '%' and can be easily added as 'text:'. Maybe add numericChange with a different name?
-        //treemapTable.replaceColumn(numericChange);
+        treemapTable.addColumns(numericChange);
 
         //System.out.println(treemapTable.structure());
 
         return treemapTable;
+    }
+
+    static String color(double minRange, double maxRange, Double d) {
+        if (d == null) {
+            return "grey";
+        }
+
+        //limit boundary between -10% to +10%
+        if (d > maxRange) {
+            d = maxRange;
+        } else if (d < minRange) {
+            d = minRange;
+        }
+
+        double[] red = new double[]{255, 0, 0};
+        double[] green = new double[]{0, 255, 0};
+
+        double value = (d - minRange) / (maxRange - minRange);
+
+        int[] c = new int[3];
+        StringBuilder sb = new StringBuilder("#");
+        for (int i = 0; i < 3; i++) {
+            c[i] = (int) (value * green[i] + (1 - value) * red[i]);
+            String hex = Integer.toHexString(c[i]);
+            if (hex.length() == 1) {
+                sb.append("0");
+            }
+            sb.append(hex);
+        }
+
+        return sb.toString();
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -88,11 +119,37 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         // Add Chart
         Table treemapTable;
 
+        double boundary;
         try {
             treemapTable = loadLargeStocks();
-        } catch ( Exception e ) {
+            DoubleColumn numericChange = (DoubleColumn) treemapTable.column("ChangeAsNumber");
+            final double minChange = numericChange.min();
+            final double maxChange = numericChange.max();
+
+            //limit boundary between -10% to +10% or less
+            final double minRange = Math.max(minChange, -10);
+            final double maxRange = Math.min(maxChange, 10);
+
+            //boundary (-range,+range)
+            boundary = Math.max(Math.abs(minRange), Math.abs(maxRange));
+
+            final double fBoundary = boundary;
+            StringColumn color = numericChange.mapInto((Double t) -> {
+                if (t == null) {
+                    return "#7f7f7f";
+                } else {
+                    return color(-fBoundary, +fBoundary, t);
+                }
+            }, StringColumn.create("Color", numericChange.size()));
+
+            treemapTable.addColumns(color);
+
+        } catch ( Throwable e ) {
             treemapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
             e.printStackTrace();
+
+            //-10% to +10%
+            boundary = 10d;
         }
 
         Layout.LayoutBuilder layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(1043, 500, false);
@@ -103,6 +160,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                                 .layout(layoutBuilder.build())
                                 .addAttribute("text", "Change", "")
                                 .addAttribute("values", "MarketCap", 0d)
+                                .addAttribute("marker.colors", "Color", "#7f7f7f")
                                 .build(),
                         "Treemap Chart")
         );
