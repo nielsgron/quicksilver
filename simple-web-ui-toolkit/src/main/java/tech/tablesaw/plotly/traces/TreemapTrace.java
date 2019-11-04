@@ -53,8 +53,22 @@ public class TreemapTrace extends AbstractTrace {
         }
         context.put("labels", dataAsString(labels));
         context.put("parents", dataAsString(parents));
-        if(extra!=null) {
-            extra.forEach((k, array) -> context.put(k, dataAsString(array)));
+        if (extra != null) {
+            extra.forEach((k, array) -> {
+                if (!k.contains(".")) {
+                    context.put(k, dataAsString(array));
+                }
+            });
+            extra.forEach((k, array) -> {
+                if (k.equals("marker.colors")) {
+                    //Marker.color generates color: not colors: so we manually generate the JS
+                    context.put("marker", "{\ncolors : " + dataAsString(array) + "\n}");
+//                    context.put("marker", Marker.builder()
+//                            .color(
+//                                    Stream.of((Object[]) array).map(x -> String.valueOf(x)).toArray(String[]::new))
+//                            .build());
+                }
+            });
         }
         return context;
     }
