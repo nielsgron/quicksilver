@@ -160,7 +160,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                                 .layout(layoutBuilder.build())
                                 .addAttribute("text", "Change", "")
                                 .addAttribute("values", "MarketCap", 0d)
-                                .addAttribute("marker.colors", "Color", "#7f7f7f")
+                                .addAttribute("marker.colors", "ChangeAsNumber", 0d)
                                 .build(),
                         "Treemap Chart")
         );
