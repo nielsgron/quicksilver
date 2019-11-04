@@ -18,6 +18,7 @@ package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import java.io.IOException;
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
@@ -45,7 +46,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
     public static Table loadLargeStocks() throws IOException {
         Table treemapTable;
 
-        InputStream inputStream = ChartsTreemap.class.getResourceAsStream("stocks.csv");
+        InputStream inputStream = TableData.class.getResourceAsStream("company-stocks.csv");
         treemapTable = Table.read().csv(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
         //treemapTable = treemapTable.sampleN(100);
 

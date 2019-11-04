@@ -17,12 +17,16 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSCandlestickChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+
+import java.time.LocalDate;
 
 public class ChartsCandlestick extends AbstractComponentsChartsPage {
 
@@ -36,7 +40,14 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table candleStickTable = null;
+
+        try {
+            candleStickTable = TableData.loadStockPrices(LocalDate.of(2019, 9, 10), LocalDate.of(2019, 9, 24));
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, true) ,

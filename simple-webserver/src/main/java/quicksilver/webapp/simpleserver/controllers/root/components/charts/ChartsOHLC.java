@@ -17,12 +17,16 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSOHLCChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+
+import java.time.LocalDate;
 
 public class ChartsOHLC extends AbstractComponentsChartsPage {
 
@@ -36,7 +40,14 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         // Add Chart
-        Table ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table ohlcTable = null;
+
+        try {
+            ohlcTable = TableData.loadStockPrices(LocalDate.of(2019, 9, 10), LocalDate.of(2019, 9, 24));
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, true) ,

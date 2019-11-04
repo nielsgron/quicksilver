@@ -58,6 +58,7 @@ public class BSTable extends BSComponentContainer {
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "table");
 
         addTagAttribute("class", "table table-sm");
+        addTagAttribute("style", getStyle());
 
     }
 
@@ -67,6 +68,10 @@ public class BSTable extends BSComponentContainer {
 
     public void setRowLimit(int rowLimit) {
         this.rowLimit = rowLimit;
+    }
+
+    protected String getStyle() {
+        return "margin-bottom: 0rem;";
     }
 
     public void renderBody(HtmlStream stream) {

@@ -58,7 +58,7 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
 
         body.addRowOfColumns(
             new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div4", "Country", "GDP"), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div5", "Country", "GDP_PPP"), "Country GDP (PPP)"),
+            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div5", "Country", "GDP_Capita"), "Country GDP (Per Capita)"),
             new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div6", "Country", "Population"), "Country Population")
         );
 

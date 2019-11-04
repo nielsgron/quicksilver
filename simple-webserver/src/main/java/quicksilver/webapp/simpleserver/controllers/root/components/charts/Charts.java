@@ -19,14 +19,26 @@ package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 import quicksilver.commons.data.TSDataSet;
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.commons.data.TSDataSetMeta;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
+import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.*;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import tech.tablesaw.api.DateColumn;
+import tech.tablesaw.api.DoubleColumn;
+import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.columns.Column;
+import tech.tablesaw.columns.numbers.DoubleColumnType;
 import tech.tablesaw.plotly.components.Layout;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 
 public class Charts extends AbstractComponentsChartsPage {
 
@@ -39,7 +51,13 @@ public class Charts extends AbstractComponentsChartsPage {
 
         Table economicTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
         Table stockEquitiesTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
-        Table stockPricesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        Table stockPricesTable = null;
+
+        try {
+            stockPricesTable = TableData.loadStockPrices(LocalDate.of(2019, 9, 10), LocalDate.of(2019, 9, 24));
+        } catch ( Exception e ) {
+            stockEquitiesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+        }
 
         // Add Vertical Bar Chart
         // Add Horizontal Bar Chart
@@ -140,5 +158,6 @@ public class Charts extends AbstractComponentsChartsPage {
 
         return panel;
     }
+
 
 }

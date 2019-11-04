@@ -222,20 +222,20 @@ public class TSDataSetFactory {
 
         // Country, GDP, Population
 
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_PPP", "GDP_Capita", "Population"},
-                new Class[]{String.class, Double.class, Double.class, Double.class, Double.class});
-        dataSet.addRow(new Object[] { "US"          , 20.58D    , 20.58D        , 62869D    , 327167434D });
-        dataSet.addRow(new Object[] { "China"       , 14.216D   , 27.331D       , 10153D    , 1403500365D });
-        dataSet.addRow(new Object[] { "Japan"       , 5.176D    , 5.749D        , 41021D    , 126317000D });
-        dataSet.addRow(new Object[] { "Germany"     , 4.117D    , 4.555D        , 49692D    , 83019200D });
-        dataSet.addRow(new Object[] { "India"       , 2.972D    , 11.468D       , 2199D    , 1324171354D });
-        dataSet.addRow(new Object[] { "France"      , 2.845D    , 3.081D        , 43500D    , 67022000D });
-        dataSet.addRow(new Object[] { "UK"          , 2.829D    , 3.039D        , 42580D    , 67545757D });
-        dataSet.addRow(new Object[] { "Canada"      , 1.820D    , 1.930D        , 48601D    , 37602103D });
-        dataSet.addRow(new Object[] { "Spain"       , 1.583D    , 1.946D        , 34281D    , 46733038D });
-        dataSet.addRow(new Object[] { "Australia"   , 1.376D    , 1.365D        , 53825D    , 25546800D });
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_Capita", "Population"},
+                new Class[]{String.class, Double.class, Double.class, Double.class});
+        dataSet.addRow(new Object[] { "US"          , 20580000000000D    , 62869D    , 327167434D });
+        dataSet.addRow(new Object[] { "China"       , 14216000000000D    , 10153D    , 1403500365D });
+        dataSet.addRow(new Object[] { "Japan"       ,  5176000000000D    , 41021D    , 126317000D });
+        dataSet.addRow(new Object[] { "Germany"     ,  4117000000000D    , 49692D    , 83019200D });
+        dataSet.addRow(new Object[] { "India"       ,  2972000000000D    , 2199D     , 1324171354D });
+        dataSet.addRow(new Object[] { "France"      ,  2845000000000D    , 43500D    , 67022000D });
+        dataSet.addRow(new Object[] { "UK"          ,  2829000000000D    , 42580D    , 67545757D });
+        dataSet.addRow(new Object[] { "Canada"      ,  1820000000000D    , 48601D    , 37602103D });
+        dataSet.addRow(new Object[] { "Spain"       ,  1583000000000D    , 34281D    , 46733038D });
+        dataSet.addRow(new Object[] { "Australia"   ,  1376000000000D    , 53825D    , 25546800D });
 
-        dataSet.sort("GDP");
+        dataSet.sort("-GDP");
 
         return dataSet;
     }
@@ -244,16 +244,16 @@ public class TSDataSetFactory {
 
         // Exchange, Ticker, Company, Sector, Industry, MarketCap, Price
 
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Exchange", "Ticker", "Company", "Sector", "Industry", "MarketCap", "Price"},
-                new Class[]{String.class, String.class, String.class, String.class, String.class , Double.class, Double.class});
-        dataSet.addRow(new Object[] { "NYSE", "SQ", "Square, Inc", "Technology", "Internet Software & Services", 27.65D, 61.72D });
-        dataSet.addRow(new Object[] { "NYSE", "FB", "Facebook, Inc.", "Technology", "Internet Information Providers", 544.72D, 186.38D });
-        dataSet.addRow(new Object[] { "NYSE", "CRM", "salesforce.com, inc.", "Technology", "Application Software", 131.78D, 148.12D });
-        dataSet.addRow(new Object[] { "NYSE", "DBX", "Dropbox, Inc.", "Technology", "Application Software", 8.31D, 19.55D });
-        dataSet.addRow(new Object[] { "NYSE", "DOCU", "DocuSign, Inc.", "Technology", "Business Software & Services", 11.81D, 64.91D });
-        dataSet.addRow(new Object[] { "NYSE", "APLT", "Applied Therapeutics, Inc.", "Healthcare", "Biotechnology", 0.25226D, 17.01D });
-        dataSet.addRow(new Object[] { "NYSE", "ABMD", "Abiomed, Inc.", "Healthcare", "Medical Appliances & Equipment", 8.22D, 179.96D });
-        dataSet.addRow(new Object[] { "NYSE", "ACM", "AECOM", "Services", "Technical Services", 6.41D, 40.59D });
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Ticker", "Company", "Sector", "Industry", "Country", "MarketCap", "Price", "Change"},
+                new Class[]{String.class, String.class, String.class, String.class, String.class, Double.class, Double.class, Double.class});
+        dataSet.addRow(new Object[] { "SQ", "Square, Inc", "Technology", "Internet Software & Services", "USA", 27.65D, 61.72D, 1.1D });
+        dataSet.addRow(new Object[] { "FB", "Facebook, Inc.", "Technology", "Internet Information Providers", "USA", 544.72D, 186.38D, 1.1D });
+        dataSet.addRow(new Object[] { "CRM", "salesforce.com, inc.", "Technology", "Application Software", "USA", 131.78D, 148.12D, 1.1D });
+        dataSet.addRow(new Object[] { "DBX", "Dropbox, Inc.", "Technology", "Application Software", "USA", 8.31D, 19.55D, 1.1D });
+        dataSet.addRow(new Object[] { "DOCU", "DocuSign, Inc.", "Technology", "Business Software & Services", "USA", 11.81D, 64.91D, 1.1D });
+        dataSet.addRow(new Object[] { "APLT", "Applied Therapeutics, Inc.", "Healthcare", "Biotechnology", "USA", 0.25226D, 17.01D, 1.1D });
+        dataSet.addRow(new Object[] { "ABMD", "Abiomed, Inc.", "Healthcare", "Medical Appliances & Equipment", "USA", 8.22D, 179.96D, 1.1D });
+        dataSet.addRow(new Object[] { "ACM", "AECOM", "Services", "Technical Services", "USA", 6.41D, 40.59D, 1.1D });
 
         dataSet.sort("MarketCap");
 
@@ -264,20 +264,20 @@ public class TSDataSetFactory {
 
         // Stock, Date, Open, High, Low, Close
 
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Stock", "Date", "Open", "High", "Low", "Close"},
-                new Class[]{String.class, LocalDate.class, Double.class, Double.class, Double.class, Double.class});
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 1), 120D, 121D, 118D, 119D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 2), 119D, 119D, 110D, 112D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 3), 112D, 112D, 103D, 103D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 4), 103D, 115D, 103D, 114D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 5), 114D, 131D, 112D, 130D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 6), 130D, 142D, 129D, 141D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 7), 141D, 147D, 137D, 145D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 8), 145D, 165D, 143D, 165D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 9), 165D, 165D, 153D, 154D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 10), 154D, 154D, 130D, 130D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 11), 130D, 130D, 128D, 130D });
-        dataSet.addRow(new Object[] { "DATA", LocalDate.of(2019, 5, 12), 130D, 145D, 129D, 144D });
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Date", "Open", "High", "Low", "Close", "Adj Close", "Volume"},
+                new Class[]{LocalDate.class, Double.class, Double.class, Double.class, Double.class, Double.class, Long.class});
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 1), 120D, 121D, 118D, 119D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 2), 119D, 119D, 110D, 112D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 3), 112D, 112D, 103D, 103D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 4), 103D, 115D, 103D, 114D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 5), 114D, 131D, 112D, 130D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 6), 130D, 142D, 129D, 141D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 7), 141D, 147D, 137D, 145D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 8), 145D, 165D, 143D, 165D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 9), 165D, 165D, 153D, 154D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 10), 154D, 154D, 130D, 130D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 11), 130D, 130D, 128D, 130D, 119D, 1000L });
+        dataSet.addRow(new Object[] { LocalDate.of(2019, 5, 12), 130D, 145D, 129D, 144D, 119D, 1000L });
 
         dataSet.sort("Date");
 
