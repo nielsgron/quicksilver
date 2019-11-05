@@ -151,7 +151,7 @@ public class SimpleApplication {
         System.out.print("Initializing logger ...");
         Logger LOG = LogManager.getLogger();
         long endM = System.currentTimeMillis();
-        System.out.println(" completed in (" + (endM-startM) + ") seconds");
+        System.out.println(" completed in (" + (endM-startM) + ") milliseconds");
 
         String fullPath = configLogger.getConfigFile().getAbsolutePath();
         System.out.println("Logger service started and configured with : " + fullPath);
