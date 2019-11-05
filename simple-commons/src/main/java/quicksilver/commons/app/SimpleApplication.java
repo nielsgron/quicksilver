@@ -146,8 +146,12 @@ public class SimpleApplication {
         //System.setProperty("log4j2.debug", "true");
 
         // This is the first call to get a Log4j-2 logger, which will initialize it
-        System.out.println("Initializing logger ...");
+        long startM = System.currentTimeMillis();
+        System.out.println("Java version: "  + System.getProperty("java.version"));
+        System.out.print("Initializing logger ...");
         Logger LOG = LogManager.getLogger();
+        long endM = System.currentTimeMillis();
+        System.out.println(" completed in (" + (endM-startM) + ") seconds");
 
         String fullPath = configLogger.getConfigFile().getAbsolutePath();
         System.out.println("Logger service started and configured with : " + fullPath);
