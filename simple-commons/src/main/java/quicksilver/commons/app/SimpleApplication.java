@@ -25,6 +25,7 @@ import quicksilver.commons.email.EmailService;
 import quicksilver.commons.i18n.I18N;
 import quicksilver.commons.scheduler.SchedulerService;
 
+import javax.script.ScriptEngineManager;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -144,6 +145,11 @@ public class SimpleApplication {
 
         // Enable debug of log4j2 configuration setup before initialization
         //System.setProperty("log4j2.debug", "true");
+        //System.setProperty("log4j2.disableJmx", "true");
+
+        // Make all loggers asynchronous
+        // log4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
         System.out.println("Java version: "  + System.getProperty("java.version"));
 
