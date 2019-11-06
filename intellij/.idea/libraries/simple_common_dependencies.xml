@@ -1,30 +1,7 @@
 <component name="libraryTable">
   <library name="simple-common-dependencies">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/activejdbc" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/apache" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/hikari" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/jgit" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/jna" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/log4j" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/mysql" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/slf4j" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/spark" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/svnkit" />
-      <root url="file://$PROJECT_DIR$/../simple-commons/depend/tablesaw-core" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/activejdbc" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/apache" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/hikari" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/jgit" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/jna" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/log4j" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/mysql" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/slf4j" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/spark" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/svnkit" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../simple-commons/depend/tablesaw-core" recursive="false" />
   </library>
 </component>
