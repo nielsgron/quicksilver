@@ -16,8 +16,10 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
@@ -25,6 +27,7 @@ import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
+import tech.tablesaw.plotly.event.EventHandler;
 
 public class TSTreeMapChartPanel extends TSFigurePanel {
 
@@ -57,19 +60,20 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
     private TSTreeMapChartPanel(Builder builder) {
         this(builder.layout, builder.table, builder.divName,
                 builder.familyTree ? ColumnRelation.FamilyTree : ColumnRelation.SubCategories,
-                builder.columns, new HashMap<>(builder.attributes), new HashMap<>(builder.attributeDefaults));
+                builder.columns, new HashMap<>(builder.attributes), new HashMap<>(builder.attributeDefaults),
+                builder.eventHandlers.toArray(new EventHandler[0]));
     }
 
     public TSTreeMapChartPanel(Layout layout, Table table, String divName, String... columns) {
-        this(layout, table, divName, ColumnRelation.SubCategories, columns, Collections.EMPTY_MAP,  Collections.EMPTY_MAP);
+        this(layout, table, divName, ColumnRelation.SubCategories, columns, Collections.EMPTY_MAP,  Collections.EMPTY_MAP, new EventHandler[0]);
     }
 
-    private TSTreeMapChartPanel(Layout layout, Table table, String divName, ColumnRelation relationship, String[] columns, Map<String, String> attColumns, Map<String, Object> attDefaults) {
+    private TSTreeMapChartPanel(Layout layout, Table table, String divName, ColumnRelation relationship, String[] columns, Map<String, String> attColumns, Map<String, Object> attDefaults, EventHandler[] handlers) {
         super(divName);
 
         Figure figure = null;
         try {
-            figure = TreemapPlot.create(layout, table, relationship == ColumnRelation.FamilyTree, columns, attColumns, attDefaults);
+            figure = TreemapPlot.create(layout, table, relationship == ColumnRelation.FamilyTree, columns, attColumns, attDefaults, handlers);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -82,7 +86,7 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
     }
 
     public TSTreeMapChartPanel(Table table, String divName, int width, int height, boolean enableLegend, String... columns) {
-        this(defaultLayout(width, height, enableLegend), table, divName, ColumnRelation.SubCategories, columns, Collections.EMPTY_MAP, Collections.EMPTY_MAP);
+        this(defaultLayout(width, height, enableLegend), table, divName, ColumnRelation.SubCategories, columns, Collections.EMPTY_MAP, Collections.EMPTY_MAP, new EventHandler[0]);
     }
 
     public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
@@ -102,6 +106,7 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
         private boolean familyTree;
         private final Map<String, String> attributes = new HashMap<>();
         private final Map<String, Object> attributeDefaults = new HashMap<>();
+        private List<EventHandler> eventHandlers = new ArrayList<>();
 
         private Builder(Table table, String divName, String[] columns) {
             this.table = table;
@@ -122,6 +127,11 @@ public class TSTreeMapChartPanel extends TSFigurePanel {
         public Builder addAttribute(String attribute, String column, Object defaultValue) {
             attributes.put(attribute, column);
             attributeDefaults.put(attribute, defaultValue);
+            return this;
+        }
+
+        public Builder addEventHandler(EventHandler e) {
+            eventHandlers.add(e);
             return this;
         }
 

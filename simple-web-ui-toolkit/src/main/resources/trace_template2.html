@@ -94,6 +94,9 @@ parents: {{parents | raw}},
 {% if values is not null %}
 values: {{values | raw}},
 {% endif %}
+{% if urls is not null %}
+urls: {{urls | raw}},
+{% endif %}
 type: '{{type}}',
 name: '{{name}}',
 };

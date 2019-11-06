@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
+import tech.tablesaw.plotly.event.EventHandler;
 
 public class ChartsTreemap extends AbstractComponentsChartsPage {
 
@@ -162,6 +163,47 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                                 .addAttribute("text", "Change", "")
                                 .addAttribute("values", "MarketCap", 0d)
                                 .addAttribute("marker.colors", "ChangeAsNumber", 0d)
+                                //XXX: urls: is not a proper field... Not sure how to add extra data which will be available to the handler
+                                .addAttribute("urls", "Ticker", "")
+                                .addEventHandler(new EventHandler() {
+                                    @Override
+                                    public String asJavascript(String targetName, String divName) {
+                                        return "var clickCounter = 0;\n"
+                                                + "var timer = null;\n"
+                                                + "var timerURL = null;\n"
+                                                + targetName + ".on('plotly_treemapclick', function(data) {\n"
+                                                + "  var key = data.points[0].id;\n"
+                                                + "  var data = data.points[0].data;\n"
+                                                + "  var index = data.ids.indexOf(key);\n"
+                                                + "  var targetURL = data.urls[index];\n"
+                                                + "  //console.log(key + \"-\" + data.urls[index]);\n"
+                                                + "  //console.log(data);\n"
+                                                + "  clickCounter++;\n"
+                                                + "  if(clickCounter == 2) {\n"
+                                                + "    if(targetURL != timerURL) {\n"
+                                                + "      //restart counter for this url/cell which will also clear previous timer out\n"
+                                                + "      clickCounter = 1;\n"
+                                                + "    }\n"
+                                                + "  }\n"
+                                                + "  timerURL = targetURL;\n"
+                                                + "  if(clickCounter == 1) {\n"
+                                                + "   if(timer != null) {\n"
+                                                + "     clearTimeout(timer);\n"
+                                                + "   }\n"
+                                                + "   if (timerURL === undefined || timerURL=='') {\n"
+                                                + "     clickCounter = 0;\n"
+                                                + "     return;\n"
+                                                + "   }\n"
+                                                + "   timer = setTimeout(function() {\n"
+                                                + "     if(clickCounter == 2) {\n"
+                                                + "       window.location = 'quote?ticker='+timerURL;\n"
+                                                + "     }\n"
+                                                + "     clickCounter=0;\n"
+                                                + "   }, 500 /*ms*/);\n"
+                                                + "  }\n"
+                                                + "});";
+                                    }
+                                })
                                 .build(),
                         "Treemap Chart")
         );
