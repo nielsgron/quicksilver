@@ -18,13 +18,13 @@ package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
-import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSCandlestickChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 import java.time.LocalDate;
 
@@ -49,24 +49,33 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
             candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
         }
 
+        Layout.LayoutBuilder layoutBuilder = TSCandlestickChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, true) ,
+                new BSCard(new TSCandlestickChartPanel(layout, candleStickTable, "candlestickDiv1", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart")
         );
 
+        layoutBuilder = TSCandlestickChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv2", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(layout, candleStickTable, "candlestickDiv2", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart"),
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv3", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(layout, candleStickTable, "candlestickDiv3", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart")
         );
 
+        layoutBuilder = TSCandlestickChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv4", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(layout, candleStickTable, "candlestickDiv4", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart"),
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv5", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(layout, candleStickTable, "candlestickDiv5", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart"),
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv6", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(layout, candleStickTable, "candlestickDiv6", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart")
         );
 

@@ -63,14 +63,16 @@ public class Charts extends AbstractComponentsChartsPage {
         // Add Horizontal Bar Chart
         Table hBarTable = economicTable;
 
-        // .margin(Margin.builder().left(40).right(5).bottom(30).top(5).build())
+        Layout.LayoutBuilder horBarLayoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(500, 200, false);
+        Layout horBarLayout = horBarLayoutBuilder.build();
 
-        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(500, 200, false);
+        Layout.LayoutBuilder verBarLayoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(500, 200, false);
+        Layout verBarLayout = verBarLayoutBuilder.build();
 
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(hBarTable, "vbarDiv", "Country", "GDP", 500, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(verBarLayout, hBarTable, "vbarDiv", "Country", "GDP"),
                         "Vertical Bar Chart"),
-                new BSCard(new TSHorizontalBarChartPanel(layoutBuilder.build(), hBarTable, "hbarDiv", "Country", "GDP"),
+                new BSCard(new TSHorizontalBarChartPanel(horBarLayout, hBarTable, "hbarDiv", "Country", "GDP"),
                         "Horizontal Bar Chart")
         );
 
@@ -79,10 +81,16 @@ public class Charts extends AbstractComponentsChartsPage {
         Table lineTable = economicTable;
         Table areaTable = economicTable;
 
+        Layout.LayoutBuilder lineLayoutBuilder = TSLineChartPanel.createLayoutBuilder(500, 200, false);
+        Layout lineLayout = lineLayoutBuilder.build();
+
+        Layout.LayoutBuilder areaLayoutBuilder = TSAreaChartPanel.createLayoutBuilder(500, 200, false);
+        Layout areaLayout = areaLayoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSLineChartPanel(lineTable, "lineDiv", "Country", "GDP", 500, 200, false),
+                new BSCard(new TSLineChartPanel(lineLayout, lineTable, "lineDiv", "Country", "GDP"),
                         "Line Chart"),
-                new BSCard(new TSAreaChartPanel(areaTable, "areaDiv", "Country", "GDP", 500, 200, false),
+                new BSCard(new TSAreaChartPanel(areaLayout, areaTable, "areaDiv", "Country", "GDP"),
                         "Area Chart")
         );
 
@@ -91,10 +99,16 @@ public class Charts extends AbstractComponentsChartsPage {
         Table pieTable = economicTable;
         Table timeSeriesTable = stockPricesTable;
 
+        Layout.LayoutBuilder pieLayoutBuilder = TSPieChartPanel.createLayoutBuilder(500, 200, false);
+        Layout pieLayout = pieLayoutBuilder.build();
+
+        Layout.LayoutBuilder timeSeriesLayoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(500, 200, false);
+        Layout timeSeriesLayout = timeSeriesLayoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv", "Country", "GDP", 500, 200, false),
+                new BSCard(new TSPieChartPanel(pieLayout, pieTable, "pieDiv", "Country", "GDP"),
                         "Pie Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv", "Date", "Close", 500, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(timeSeriesLayout, timeSeriesTable, "timeseriesDiv", "Date", "Close"),
                         "Timeseries Chart")
         );
 
@@ -103,10 +117,16 @@ public class Charts extends AbstractComponentsChartsPage {
         Table scatterTable = economicTable;
         Table bubbleTable = economicTable;
 
+        Layout.LayoutBuilder scatterLayoutBuilder = TSScatterChartPanel.createLayoutBuilder(500, 200, false);
+        Layout scatterLayout = scatterLayoutBuilder.build();
+
+        Layout.LayoutBuilder bubbleLayoutBuilder = TSBubbleChartPanel.createLayoutBuilder(500, 200, false);
+        Layout bubbleLayout = bubbleLayoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSScatterChartPanel(scatterTable, "scatterDiv", "Population", "GDP", 500, 200, false) ,
+                new BSCard(new TSScatterChartPanel(scatterLayout, scatterTable, "scatterDiv", "Population", "GDP") ,
                         "Scatter Chart"),
-                new BSCard(new TSBubbleChartPanel(bubbleTable, "bubbleDiv", "Population", "GDP", "GDP_Capita", 500, 200, false) ,
+                new BSCard(new TSBubbleChartPanel(bubbleLayout, bubbleTable, "bubbleDiv", "Population", "GDP", "GDP_Capita") ,
                         "Bubble Chart")
         );
 
@@ -115,10 +135,16 @@ public class Charts extends AbstractComponentsChartsPage {
         Table histogramTable = economicTable;
         Table heatmapTable = stockEquitiesTable;
 
+        Layout.LayoutBuilder histoLayoutBuilder = TSHistogramChartPanel.createLayoutBuilder(500, 200, false);
+        Layout histoLayout = histoLayoutBuilder.build();
+
+        Layout.LayoutBuilder heatLayoutBuilder = TSHeatMapChartPanel.createLayoutBuilder(500, 200, false);
+        Layout heatLayout = heatLayoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv", "Population", 500, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(histoLayout, histogramTable, "histogramDiv", "Population") ,
                         "Histogram Chart"),
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv", "Company", "Sector", 500, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(heatLayout, heatmapTable, "heatmapDiv", "Company", "Sector") ,
                         "Heatmap Chart")
         );
 
@@ -127,10 +153,16 @@ public class Charts extends AbstractComponentsChartsPage {
         Table candleStickTable = stockPricesTable;
         Table ohlcTable = stockPricesTable;
 
+        Layout.LayoutBuilder candleLayoutBuilder = TSCandlestickChartPanel.createLayoutBuilder(500, 200, false);
+        Layout candleLayout = candleLayoutBuilder.build();
+
+        Layout.LayoutBuilder ohlcLayoutBuilder = TSOHLCChartPanel.createLayoutBuilder(500, 200, false);
+        Layout ohlcLayout = ohlcLayoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSCandlestickChartPanel(candleStickTable, "candlestickDiv", "Date", "Open", "High", "Low", "Close", 500, 200, false) ,
+                new BSCard(new TSCandlestickChartPanel(candleLayout, candleStickTable, "candlestickDiv", "Date", "Open", "High", "Low", "Close") ,
                         "Candlestick Chart"),
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv", "Date", "Open", "High", "Low", "Close", 500, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(ohlcLayout, ohlcTable, "ohlcDiv", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart")
         );
 
@@ -140,12 +172,15 @@ public class Charts extends AbstractComponentsChartsPage {
         Table sunburstTable = stockEquitiesTable;
 
         Layout.LayoutBuilder treeLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
+        Layout treeLayout = treeLayoutBuilder.build();
+
         Layout.LayoutBuilder sunburstLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
+        Layout sunburstLayout = sunburstLayoutBuilder.build();
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treeLayoutBuilder.build(), treemapTable, "treemapDiv", "Company", "Sector") ,
+                new BSCard(new TSTreeMapChartPanel(treeLayout, treemapTable, "treemapDiv", "Company", "Sector") ,
                         "Treemap Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstLayoutBuilder.build(), sunburstTable, "sunburstDiv", "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(sunburstLayout, sunburstTable, "sunburstDiv", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")
         );
 

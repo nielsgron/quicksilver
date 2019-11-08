@@ -16,12 +16,11 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSHorizontalBarPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
-import tech.tablesaw.plotly.traces.BarTrace;
-import tech.tablesaw.plotly.traces.Trace;
 
 public class TSHorizontalBarChartPanel extends TSFigurePanel {
 
@@ -31,7 +30,9 @@ public class TSHorizontalBarChartPanel extends TSFigurePanel {
         Figure figure = null;
 
         try {
-            figure = createFigure(layout, table, groupColName, numberColName);
+            //figure = createFigure(layout, table, groupColName, numberColName);
+            TSHorizontalBarPlot plot = new TSHorizontalBarPlot(layout, table, groupColName, numberColName);
+            figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -43,13 +44,8 @@ public class TSHorizontalBarChartPanel extends TSFigurePanel {
         this.add(divJS);
     }
 
-    public Figure createFigure(Layout layout, Table table, String groupColName, String numberColName) {
-        BarTrace trace = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(numberColName)).orientation(BarTrace.Orientation.HORIZONTAL).build();
-        return new Figure(layout, new Trace[]{trace});
-    }
-
     public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
-        return createLayoutBuilder(width, height, 5, 30, 55, 5, enabledLegend);
+        return createLayoutBuilder(width, height, 5, 20, 55, 5, enabledLegend);
     }
 
 }

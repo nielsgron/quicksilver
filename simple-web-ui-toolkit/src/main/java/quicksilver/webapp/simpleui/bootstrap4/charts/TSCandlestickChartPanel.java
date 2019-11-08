@@ -16,25 +16,38 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSCandlestickPlot;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.CandlestickPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSCandlestickChartPanel extends TSFigurePanel {
 
-    public TSCandlestickChartPanel(Table table, String divName, String xCol, String openCol, String highCol, String lowCol, String closeCol, int width, int height, boolean enableLegend) {
+    public TSCandlestickChartPanel(Layout layout, Table table, String divName, String xCol, String openCol, String highCol, String lowCol, String closeCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = CandlestickPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
+            //figure = CandlestickPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
+            TSCandlestickPlot plot = new TSCandlestickPlot(layout, table, xCol, openCol, highCol, lowCol, closeCol);
+            figure = plot.getFigure();
+
         } catch ( Exception e ) {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 5, 5, 5, enabledLegend);
     }
 
 }

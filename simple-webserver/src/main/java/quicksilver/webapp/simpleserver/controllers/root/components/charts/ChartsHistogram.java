@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsHistogram extends AbstractComponentsChartsPage {
 
@@ -38,24 +39,33 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
         // Add Chart
         Table histogramTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
+        Layout.LayoutBuilder layoutBuilder = TSHistogramChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv1", "Population", 900, 200, true) ,
+                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv1", "Population") ,
                         "Histogram Chart")
         );
 
+        layoutBuilder = TSHistogramChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv2", "Population", 450, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv2", "Population") ,
                         "Histogram Chart"),
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv3", "Population", 450, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv3", "Population") ,
                         "Histogram Chart")
         );
 
+        layoutBuilder = TSHistogramChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv4", "Population", 300, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv4", "Population") ,
                         "Histogram Chart"),
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv5", "Population", 300, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv5", "Population") ,
                         "Histogram Chart"),
-                new BSCard(new TSHistogramChartPanel(histogramTable, "histogramDiv6", "Population", 300, 200, false) ,
+                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv6", "Population") ,
                         "Histogram Chart")
         );
 

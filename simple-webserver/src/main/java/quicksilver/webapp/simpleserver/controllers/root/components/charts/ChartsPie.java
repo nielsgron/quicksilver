@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsPie extends AbstractComponentsChartsPage {
 
@@ -38,24 +39,33 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         // Add Chart
         Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
+        Layout.LayoutBuilder layoutBuilder = TSPieChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv1", "Country", "GDP", 900, 200, true),
+                new BSCard(new TSPieChartPanel(layout, pieTable, "pieDiv1", "Country", "GDP"),
                         "Pie Chart")
         );
 
+        layoutBuilder = TSPieChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv2", "Country", "GDP", 450, 200, false),
+                new BSCard(new TSPieChartPanel(layout, pieTable, "pieDiv2", "Country", "GDP"),
                         "Pie Chart"),
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv3", "Country", "GDP", 450, 200, false),
+                new BSCard(new TSPieChartPanel(layout, pieTable, "pieDiv3", "Country", "GDP"),
                         "Pie Chart")
         );
 
+        layoutBuilder = TSPieChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv4", "Country", "GDP", 300, 200, false),
+                new BSCard(new TSPieChartPanel(layout, pieTable, "pieDiv4", "Country", "GDP"),
                         "Pie Chart"),
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv5", "Country", "GDP", 300, 200, false),
+                new BSCard(new TSPieChartPanel(layout, pieTable, "pieDiv5", "Country", "GDP"),
                         "Pie Chart"),
-                new BSCard(new TSPieChartPanel(pieTable, "pieDiv6", "Country", "GDP", 300, 200, false),
+                new BSCard(new TSPieChartPanel(layout, pieTable, "pieDiv6", "Country", "GDP"),
                         "Pie Chart")
         );
 

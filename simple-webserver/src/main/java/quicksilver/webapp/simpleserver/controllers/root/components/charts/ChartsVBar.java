@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsVBar extends AbstractComponentsChartsPage {
 
@@ -38,24 +39,33 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
         // Add Chart
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
+        Layout.LayoutBuilder layoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(table, "div1", "Country", "GDP", 900, 200, true),
+                new BSCard(new TSVerticalBarChartPanel(layout, table, "div1", "Country", "GDP"),
                         "Wide Chart")
         );
 
+        layoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(table, "div2", "Country", "GDP", 450, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(layout, table, "div2", "Country", "GDP"),
                         "Half Width Chart"),
-                new BSCard(new TSVerticalBarChartPanel(table, "div3", "Country", "GDP", 450, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(layout, table, "div3", "Country", "GDP"),
                         "Half Width Chart")
         );
 
+        layoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(table, "div4", "Country", "GDP", 300, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(layout, table, "div4", "Country", "GDP"),
                         "Narrow Chart"),
-                new BSCard(new TSVerticalBarChartPanel(table, "div5", "Country", "GDP", 300, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(layout, table, "div5", "Country", "GDP"),
                         "Narrow Chart"),
-                new BSCard(new TSVerticalBarChartPanel(table, "div6", "Country", "GDP", 300, 200, false),
+                new BSCard(new TSVerticalBarChartPanel(layout, table, "div6", "Country", "GDP"),
                         "Narrow Chart")
         );
 

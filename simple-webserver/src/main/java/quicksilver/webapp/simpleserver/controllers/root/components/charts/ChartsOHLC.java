@@ -18,13 +18,13 @@ package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
-import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSOHLCChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 import java.time.LocalDate;
 
@@ -49,24 +49,33 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
             ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
         }
 
+        Layout.LayoutBuilder layoutBuilder = TSOHLCChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv1", "Date", "Open", "High", "Low", "Close", 900, 200, true) ,
+                new BSCard(new TSOHLCChartPanel(layout, ohlcTable, "ohlcDiv1", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart")
         );
 
+        layoutBuilder = TSOHLCChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv2", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(layout, ohlcTable, "ohlcDiv2", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart"),
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv3", "Date", "Open", "High", "Low", "Close", 450, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(layout, ohlcTable, "ohlcDiv3", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart")
         );
 
+        layoutBuilder = TSOHLCChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv4", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(layout, ohlcTable, "ohlcDiv4", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart"),
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv5", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(layout, ohlcTable, "ohlcDiv5", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart"),
-                new BSCard(new TSOHLCChartPanel(ohlcTable, "ohlcDiv6", "Date", "Open", "High", "Low", "Close", 300, 200, false) ,
+                new BSCard(new TSOHLCChartPanel(layout, ohlcTable, "ohlcDiv6", "Date", "Open", "High", "Low", "Close") ,
                         "OHLC Chart")
         );
 

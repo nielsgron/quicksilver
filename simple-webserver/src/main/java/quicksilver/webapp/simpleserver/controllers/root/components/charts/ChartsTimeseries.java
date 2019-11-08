@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsTimeseries extends AbstractComponentsChartsPage {
 
@@ -38,24 +39,33 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
         // Add Chart
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
+        Layout.LayoutBuilder layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv1", "Date", "Close", 900, 200, true),
+                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv1", "Date", "Close"),
                         "Timeseries Chart")
         );
 
+        layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv2", "Date", "Close", 450, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv2", "Date", "Close"),
                         "Timeseries Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv3", "Date", "Close", 450, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv3", "Date", "Close"),
                         "Timeseries Chart")
         );
 
+        layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv4", "Date", "Close", 300, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv4", "Date", "Close"),
                         "Timeseries Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv5", "Date", "Close", 300, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv5", "Date", "Close"),
                         "Timeseries Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesTable, "timeseriesDiv6", "Date", "Close", 300, 200, false),
+                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv6", "Date", "Close"),
                         "Timeseries Chart")
         );
 

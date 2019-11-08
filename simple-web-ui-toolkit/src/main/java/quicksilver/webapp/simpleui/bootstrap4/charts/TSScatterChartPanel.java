@@ -18,25 +18,37 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 
 // 2D & 3D Scatterplot Chart
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSScatterPlot;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.ScatterPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSScatterChartPanel extends TSFigurePanel {
 
-    public TSScatterChartPanel(Table table, String divName, String xCol, String yCol, int width, int height, boolean enableLegend) {
+    public TSScatterChartPanel(Layout layout, Table table, String divName, String xCol, String yCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = ScatterPlot.create("", table, xCol, yCol);
+            //figure = ScatterPlot.create("", table, xCol, yCol);
+            TSScatterPlot plot = new TSScatterPlot(layout, table, xCol, yCol);
+            figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 20, 35, 5, enabledLegend);
     }
 
 }

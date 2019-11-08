@@ -17,7 +17,6 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSHorizontalBarChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
@@ -41,25 +40,28 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         //Table table = Charts.createPieDataSet(true);
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(900, 200, false);
+        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div1", "Country", "GDP"), "Country GDP (Nominal)")
+            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div1", "Country", "GDP"), "Country GDP (Nominal)")
         );
 
         layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div2", "Country", "GDP"), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div3", "Country", "Population"), "Country Population")
+            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div2", "Country", "GDP"), "Country GDP (Nominal)"),
+            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div3", "Country", "Population"), "Country Population")
         );
 
         layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div4", "Country", "GDP"), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div5", "Country", "GDP_Capita"), "Country GDP (Per Capita)"),
-            new BSCard( new TSHorizontalBarChartPanel(layoutBuilder.build(), table, "div6", "Country", "Population"), "Country Population")
+            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div4", "Country", "GDP"), "Country GDP (Nominal)"),
+            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div5", "Country", "GDP_Capita"), "Country GDP (Per Capita)"),
+            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div6", "Country", "Population"), "Country Population")
         );
 
         body.doLayout();

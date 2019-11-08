@@ -16,25 +16,37 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSPiePlot;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.PiePlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSPieChartPanel extends TSFigurePanel {
 
-    public TSPieChartPanel(Table table, String divName, String groupColName, String numberColName, int width, int height, boolean enableLegend) {
+    public TSPieChartPanel(Layout layout, Table table, String divName, String groupColName, String numberColName) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = PiePlot.create("", table, groupColName, numberColName);
+            //figure = PiePlot.create("", table, groupColName, numberColName);
+            TSPiePlot plot = new TSPiePlot(layout, table, groupColName, numberColName);
+            figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 40, 5, 5, enabledLegend);
     }
 
 }

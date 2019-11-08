@@ -16,25 +16,38 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSAreaPlot;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.AreaPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSAreaChartPanel extends TSFigurePanel {
 
-    public TSAreaChartPanel(Table table, String divName, String xCol, String yCol, int width, int height, boolean enableLegend) {
+    public TSAreaChartPanel(Layout layout, Table table, String divName, String xCol, String yCol) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = AreaPlot.create("", table, xCol, yCol);
+            //figure = AreaPlot.create("", table, xCol, yCol);
+            TSAreaPlot plot = new TSAreaPlot(layout, table, xCol, yCol);
+            figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 20, 35, 5, enabledLegend);
     }
 
 }

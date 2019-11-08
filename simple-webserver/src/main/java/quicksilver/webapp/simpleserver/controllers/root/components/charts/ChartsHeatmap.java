@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsHeatmap extends AbstractComponentsChartsPage {
 
@@ -38,24 +39,33 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
         // Add Chart
         Table heatmapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
+        Layout.LayoutBuilder layoutBuilder = TSHeatMapChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv1", "Sector", "Company", 900, 200, true) ,
+                new BSCard(new TSHeatMapChartPanel(layout, heatmapTable, "heatmapDiv1", "Sector", "Company") ,
                         "Heatmap Chart")
         );
 
+        layoutBuilder = TSHeatMapChartPanel.createLayoutBuilder(450, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv2", "Sector", "Company", 450, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(layout, heatmapTable, "heatmapDiv2", "Sector", "Company") ,
                         "Heatmap Chart"),
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv3", "Sector", "Company", 450, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(layout, heatmapTable, "heatmapDiv3", "Sector", "Company") ,
                         "Heatmap Chart")
         );
 
+        layoutBuilder = TSHeatMapChartPanel.createLayoutBuilder(300, 200, false);
+        layout = layoutBuilder.build();
+
         body.addRowOfColumns(
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv4", "Sector", "Company", 300, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(layout, heatmapTable, "heatmapDiv4", "Sector", "Company") ,
                         "Heatmap Chart"),
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv5", "Sector", "Company", 300, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(layout, heatmapTable, "heatmapDiv5", "Sector", "Company") ,
                         "Heatmap Chart"),
-                new BSCard(new TSHeatMapChartPanel(heatmapTable, "heatmapDiv6", "Sector", "Company", 300, 200, false) ,
+                new BSCard(new TSHeatMapChartPanel(layout, heatmapTable, "heatmapDiv6", "Sector", "Company") ,
                         "Heatmap Chart")
         );
 

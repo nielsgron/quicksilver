@@ -16,25 +16,37 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSHeatMapPlot;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.Heatmap;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSHeatMapChartPanel extends TSFigurePanel {
 
-    public TSHeatMapChartPanel(Table table, String divName, String categoryCol1, String categoryCol2, int width, int height, boolean enableLegend) {
+    public TSHeatMapChartPanel(Layout layout, Table table, String divName, String categoryCol1, String categoryCol2) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = Heatmap.create("", table, categoryCol1, categoryCol2);
+            //figure = Heatmap.create("", table, categoryCol1, categoryCol2);
+            TSHeatMapPlot plot = new TSHeatMapPlot(layout, table, categoryCol1, categoryCol2);
+            figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 20, 80, 5, enabledLegend);
     }
 
 }

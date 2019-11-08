@@ -16,25 +16,38 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
+import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSTimeSeriesPlot;
+import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.TimeSeriesPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 
 public class TSTimeSeriesChartPanel extends TSFigurePanel {
 
-    public TSTimeSeriesChartPanel(Table table, String divName, String dateColXName, String yColName, int width, int height, boolean enableLegend) {
+    public TSTimeSeriesChartPanel(Layout layout, Table table, String divName, String dateColXName, String yColName) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = TimeSeriesPlot.create("", table, dateColXName, yColName);
+            //figure = TimeSeriesPlot.create("", table, dateColXName, yColName);
+            TSTimeSeriesPlot plot = new TSTimeSeriesPlot(layout, table, dateColXName, yColName);
+            figure = plot.getFigure();
+
         } catch ( Exception e ) {
             e.printStackTrace();
         }
 
-        addFigure(figure);
+        HTMLText divS = new HTMLText(figure.divString(divName));
+        HTMLText divJS = new HTMLText(figure.asJavascript(divName));
 
+        this.add(divS);
+        this.add(divJS);
+
+    }
+
+    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
+        return createLayoutBuilder(width, height, 5, 20, 35, 5, enabledLegend);
     }
 
 }
