@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import org.apache.commons.io.IOUtils;
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSSunburstChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
@@ -30,6 +33,14 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
     public ChartsSunburst() {
         super();
         toolbar.setActiveButton("Sunburst");
+    }
+
+    private static String resource(String name, String def) {
+        try {
+            return IOUtils.toString(ChartsSunburst.class.getResourceAsStream(name), StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            return def;
+        }
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -49,7 +60,12 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         Layout layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-                new BSCard(new TSSunburstChartPanel(layout, sunburstTable, "sunburstDiv1", "Company", "Industry", "Sector", "MarketCap") ,
+                new BSCard(new TSSunburstChartPanel(layout, sunburstTable, "sunburstDiv1",
+                        (String targetName, String divName) -> {
+                            return resource("sunburst-doubleclick-handler.js", "")
+                                    .replaceAll("targetName", targetName);
+                        },
+                        "Company", "Industry", "Sector", "MarketCap"),
                         "Sunburst Chart")
         );
 
