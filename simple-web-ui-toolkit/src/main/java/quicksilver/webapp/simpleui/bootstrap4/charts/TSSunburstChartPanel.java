@@ -21,16 +21,22 @@ import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.plotly.event.EventHandler;
 
 public class TSSunburstChartPanel extends TSFigurePanel {
 
     public TSSunburstChartPanel(Layout layout, Table table, String divName, String... columns) {
+        this(layout, table, divName, null, columns);
+    }
+
+    public TSSunburstChartPanel(Layout layout, Table table, String divName, EventHandler handler, String... columns) {
         super(divName);
 
         Figure figure = null;
 
         try {
-            figure = SunburstPlot.create(layout, table, columns);
+            EventHandler[] handlers = (handler == null) ? new EventHandler[0] : new EventHandler[]{handler};
+            figure = SunburstPlot.create(layout, table, handlers, columns);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
@@ -48,7 +54,7 @@ public class TSSunburstChartPanel extends TSFigurePanel {
         Figure figure = null;
 
         try {
-            figure = SunburstPlot.create(TSTreeMapChartPanel.defaultLayout(width, height, enableLegend), table, columns);
+            figure = SunburstPlot.create(TSTreeMapChartPanel.defaultLayout(width, height, enableLegend), table, new EventHandler[0], columns);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
