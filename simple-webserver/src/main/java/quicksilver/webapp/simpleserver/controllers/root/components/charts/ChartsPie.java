@@ -39,7 +39,7 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         // Add Chart
         Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSPieChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout.LayoutBuilder layoutBuilder = TSPieChartPanel.createLayoutBuilder(1000, 200, true);
         Layout layout = layoutBuilder.build();
 
         body.addRowOfColumns(

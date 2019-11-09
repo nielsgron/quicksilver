@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Axis;
 import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsTimeseries extends AbstractComponentsChartsPage {
@@ -39,7 +40,8 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
         // Add Chart
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout.LayoutBuilder layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(1000, 200, 5, 20, 50, 5, false);
+        layoutBuilder.yAxis(Axis.builder().title("Close Price").build());
         Layout layout = layoutBuilder.build();
 
         body.addRowOfColumns(

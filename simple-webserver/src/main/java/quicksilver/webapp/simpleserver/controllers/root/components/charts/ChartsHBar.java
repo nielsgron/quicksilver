@@ -23,6 +23,7 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.plotly.components.Axis;
 import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsHBar extends AbstractComponentsChartsPage {
@@ -40,7 +41,9 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         //Table table = Charts.createPieDataSet(true);
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(1000, 200, false);
+        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(1000, 200, 5, 35, 80, 5, false);
+        layoutBuilder.xAxis(Axis.builder().title("GDP").build());
+        layoutBuilder.yAxis(Axis.builder().title("Country").build());
         Layout layout = layoutBuilder.build();
 
         body.addRowOfColumns(
