@@ -22,7 +22,12 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import tech.tablesaw.api.DoubleColumn;
+import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.columns.numbers.DoubleColumnType;
+import tech.tablesaw.plotly.components.Axis;
+import tech.tablesaw.plotly.components.Grid;
 import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsBubble extends AbstractComponentsChartsPage {
@@ -39,11 +44,21 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         // Add Chart
         Table bubbleTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSBubbleChartPanel.createLayoutBuilder(1000, 200, false);
+        DoubleColumn oldColumn = (DoubleColumn) bubbleTable.column("GDP_Capita");
+        DoubleColumn newColumn = DoubleColumn.create("GDP_Capita_Ratio");
+        newColumn = newColumn.emptyCopy(oldColumn.size());
+        oldColumn.mapInto((Double p) -> { return p / 1000; }, newColumn);
+        bubbleTable.addColumns(newColumn);
+
+        Layout.LayoutBuilder layoutBuilder = TSBubbleChartPanel.createLayoutBuilder(1000, 200, 5, 35, 45, 5, false);
+        layoutBuilder.xAxis(Axis.builder().title("Population").build());
+        layoutBuilder.yAxis(Axis.builder().title("GDP").build());
+        //layoutBuilder.grid(Grid.builder().build());
+        //layoutBuilder.hoverMode(Layout.HoverMode.FALSE);
         Layout layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv1", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv1", "Population", "GDP", "GDP_Capita_Ratio") ,
                         "Bubble Chart")
         );
 
@@ -51,9 +66,9 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv2", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv2", "Population", "GDP", "GDP_Capita_Ratio") ,
                         "Bubble Chart"),
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv3", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv3", "Population", "GDP", "GDP_Capita_Ratio") ,
                         "Bubble Chart")
         );
 
@@ -61,11 +76,11 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         layout = layoutBuilder.build();
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv4", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv4", "Population", "GDP", "GDP_Capita_Ratio") ,
                         "Bubble Chart"),
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv5", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv5", "Population", "GDP", "GDP_Capita_Ratio") ,
                         "Bubble Chart"),
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv6", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv6", "Population", "GDP", "GDP_Capita_Ratio") ,
                         "Bubble Chart")
         );
 

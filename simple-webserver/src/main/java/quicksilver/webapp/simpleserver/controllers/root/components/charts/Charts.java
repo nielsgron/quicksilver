@@ -117,6 +117,13 @@ public class Charts extends AbstractComponentsChartsPage {
         Table scatterTable = economicTable;
         Table bubbleTable = economicTable;
 
+        DoubleColumn oldColumn = (DoubleColumn) bubbleTable.column("GDP_Capita");
+        DoubleColumn newColumn = DoubleColumn.create("GDP_Capita");
+        newColumn = newColumn.emptyCopy(oldColumn.size());
+
+        oldColumn.mapInto((Double p) -> { return p / 1000; }, newColumn);
+        bubbleTable.replaceColumn(newColumn);
+
         Layout.LayoutBuilder scatterLayoutBuilder = TSScatterChartPanel.createLayoutBuilder(500, 200, false);
         Layout scatterLayout = scatterLayoutBuilder.build();
 
