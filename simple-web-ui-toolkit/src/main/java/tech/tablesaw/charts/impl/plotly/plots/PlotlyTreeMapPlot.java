@@ -1,9 +1,9 @@
-package quicksilver.webapp.simpleui.bootstrap4.charts.plots;
+package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
 
-public class TSTreeMapPlot extends TreemapPlot {
+public class PlotlyTreeMapPlot extends TreemapPlot {
 
     private Figure figure;
 

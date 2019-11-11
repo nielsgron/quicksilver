@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSHorizontalBarPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyHorizontalBarPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSHorizontalBarChartPanel extends TSFigurePanel {
 
         try {
             //figure = createFigure(layout, table, groupColName, numberColName);
-            TSHorizontalBarPlot plot = new TSHorizontalBarPlot(layout, table, groupColName, numberColName);
+            PlotlyHorizontalBarPlot plot = new PlotlyHorizontalBarPlot(layout, table, groupColName, numberColName);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

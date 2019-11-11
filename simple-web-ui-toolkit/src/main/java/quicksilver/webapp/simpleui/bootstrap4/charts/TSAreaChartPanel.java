@@ -16,10 +16,9 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSAreaPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyAreaPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.AreaPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 
@@ -32,7 +31,7 @@ public class TSAreaChartPanel extends TSFigurePanel {
 
         try {
             //figure = AreaPlot.create("", table, xCol, yCol);
-            TSAreaPlot plot = new TSAreaPlot(layout, table, xCol, yCol);
+            PlotlyAreaPlot plot = new PlotlyAreaPlot(layout, table, xCol, yCol);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

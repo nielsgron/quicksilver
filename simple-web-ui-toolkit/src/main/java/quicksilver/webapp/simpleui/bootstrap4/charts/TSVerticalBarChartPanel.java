@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSVerticalBarPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyVerticalBarPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSVerticalBarChartPanel extends TSFigurePanel {
 
         try {
             //figure = VerticalBarPlot.create("", table, groupColName, numberColName);
-            TSVerticalBarPlot plot = new TSVerticalBarPlot(layout, table, groupColName, numberColName);
+            PlotlyVerticalBarPlot plot = new PlotlyVerticalBarPlot(layout, table, groupColName, numberColName);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

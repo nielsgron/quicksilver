@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSCandlestickPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyCandlestickPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSCandlestickChartPanel extends TSFigurePanel {
 
         try {
             //figure = CandlestickPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
-            TSCandlestickPlot plot = new TSCandlestickPlot(layout, table, xCol, openCol, highCol, lowCol, closeCol);
+            PlotlyCandlestickPlot plot = new PlotlyCandlestickPlot(layout, table, xCol, openCol, highCol, lowCol, closeCol);
             figure = plot.getFigure();
 
         } catch ( Exception e ) {

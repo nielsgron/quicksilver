@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSTimeSeriesPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyTimeSeriesPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSTimeSeriesChartPanel extends TSFigurePanel {
 
         try {
             //figure = TimeSeriesPlot.create("", table, dateColXName, yColName);
-            TSTimeSeriesPlot plot = new TSTimeSeriesPlot(layout, table, dateColXName, yColName);
+            PlotlyTimeSeriesPlot plot = new PlotlyTimeSeriesPlot(layout, table, dateColXName, yColName);
             figure = plot.getFigure();
 
         } catch ( Exception e ) {

@@ -1,4 +1,4 @@
-package quicksilver.webapp.simpleui.bootstrap4.charts.plots;
+package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.api.CategoricalColumn;
 import tech.tablesaw.api.Table;
@@ -12,11 +12,11 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.List;
 
-public class TSBubblePlot extends BubblePlot {
+public class PlotlyBubblePlot extends BubblePlot {
 
     private Figure figure;
 
-    public TSBubblePlot(Layout layout, Table table, String xCol, String yCol, String sizeColumn, String groupCol) {
+    public PlotlyBubblePlot(Layout layout, Table table, String xCol, String yCol, String sizeColumn, String groupCol) {
         TableSliceGroup tables = table.splitOn(new CategoricalColumn[]{table.categoricalColumn(groupCol)});
         ScatterTrace[] traces = new ScatterTrace[tables.size()];
 
@@ -29,13 +29,13 @@ public class TSBubblePlot extends BubblePlot {
         figure = new Figure(layout, traces);
     }
 
-    public TSBubblePlot(Layout layout, Table table, String xCol, String yCol, String sizeColumn) {
+    public PlotlyBubblePlot(Layout layout, Table table, String xCol, String yCol, String sizeColumn) {
         Marker marker = Marker.builder().size(table.numberColumn(sizeColumn)).build();
         ScatterTrace trace = ScatterTrace.builder(table.numberColumn(xCol), table.numberColumn(yCol)).marker(marker).build();
         figure = new Figure(layout, new Trace[]{trace});
     }
 
-    public TSBubblePlot(Layout layout, double[] xCol, double[] yCol) {
+    public PlotlyBubblePlot(Layout layout, double[] xCol, double[] yCol) {
         ScatterTrace trace = ScatterTrace.builder(xCol, yCol).build();
         figure = new Figure(layout, new Trace[]{trace});
     }

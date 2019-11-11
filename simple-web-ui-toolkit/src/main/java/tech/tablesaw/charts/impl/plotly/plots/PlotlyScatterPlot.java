@@ -1,4 +1,4 @@
-package quicksilver.webapp.simpleui.bootstrap4.charts.plots;
+package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.api.CategoricalColumn;
 import tech.tablesaw.api.Table;
@@ -12,11 +12,11 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.List;
 
-public class TSScatterPlot extends ScatterPlot {
+public class PlotlyScatterPlot extends ScatterPlot {
 
     private Figure figure;
 
-    public TSScatterPlot(Layout layout, Table table, String xCol, String yCol, String groupCol) {
+    public PlotlyScatterPlot(Layout layout, Table table, String xCol, String yCol, String groupCol) {
         TableSliceGroup tables = table.splitOn(new CategoricalColumn[]{table.categoricalColumn(groupCol)});
         ScatterTrace[] traces = new ScatterTrace[tables.size()];
         Marker marker = Marker.builder().opacity(0.75D).build();
@@ -29,12 +29,12 @@ public class TSScatterPlot extends ScatterPlot {
         figure = new Figure(layout, traces);
     }
 
-    public TSScatterPlot(Layout layout, Table table, String xCol, String yCol) {
+    public PlotlyScatterPlot(Layout layout, Table table, String xCol, String yCol) {
         ScatterTrace trace = ScatterTrace.builder(table.numberColumn(xCol), table.numberColumn(yCol)).build();
         figure = new Figure(layout, new Trace[]{trace});
     }
 
-    public TSScatterPlot(Layout layout, String xTitle, double[] xCol, String yTitle, double[] yCol) {
+    public PlotlyScatterPlot(Layout layout, String xTitle, double[] xCol, String yTitle, double[] yCol) {
         ScatterTrace trace = ScatterTrace.builder(xCol, yCol).build();
         figure = new Figure(layout, new Trace[]{trace});
     }

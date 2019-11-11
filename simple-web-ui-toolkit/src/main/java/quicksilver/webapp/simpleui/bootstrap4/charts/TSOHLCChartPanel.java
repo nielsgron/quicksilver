@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSOHLCPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyOHLCPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSOHLCChartPanel extends TSFigurePanel {
 
         try {
             //figure = OHLCPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
-            TSOHLCPlot plot = new TSOHLCPlot(layout, table, xCol, openCol, highCol, lowCol, closeCol);
+            PlotlyOHLCPlot plot = new PlotlyOHLCPlot(layout, table, xCol, openCol, highCol, lowCol, closeCol);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

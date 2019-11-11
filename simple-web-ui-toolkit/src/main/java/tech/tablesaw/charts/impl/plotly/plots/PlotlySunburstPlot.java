@@ -1,9 +1,9 @@
-package quicksilver.webapp.simpleui.bootstrap4.charts.plots;
+package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.components.Figure;
 
-public class TSSunburstPlot extends SunburstPlot {
+public class PlotlySunburstPlot extends SunburstPlot {
 
     private Figure figure;
 

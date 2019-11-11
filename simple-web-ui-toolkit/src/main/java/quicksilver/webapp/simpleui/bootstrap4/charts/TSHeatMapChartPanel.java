@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSHeatMapPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyHeatMapPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSHeatMapChartPanel extends TSFigurePanel {
 
         try {
             //figure = Heatmap.create("", table, categoryCol1, categoryCol2);
-            TSHeatMapPlot plot = new TSHeatMapPlot(layout, table, categoryCol1, categoryCol2);
+            PlotlyHeatMapPlot plot = new PlotlyHeatMapPlot(layout, table, categoryCol1, categoryCol2);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

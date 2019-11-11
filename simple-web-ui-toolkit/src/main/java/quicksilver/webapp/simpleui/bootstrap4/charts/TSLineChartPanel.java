@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSLinePlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyLinePlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSLineChartPanel extends TSFigurePanel {
 
         try {
             //figure = LinePlot.create("", table, xCol, yCol);
-            TSLinePlot plot = new TSLinePlot(layout, table, xCol, yCol);
+            PlotlyLinePlot plot = new PlotlyLinePlot(layout, table, xCol, yCol);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

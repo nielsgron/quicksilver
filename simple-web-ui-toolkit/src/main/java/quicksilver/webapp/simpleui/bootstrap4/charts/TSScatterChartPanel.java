@@ -18,7 +18,7 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 
 // 2D & 3D Scatterplot Chart
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSScatterPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyScatterPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -33,7 +33,7 @@ public class TSScatterChartPanel extends TSFigurePanel {
 
         try {
             //figure = ScatterPlot.create("", table, xCol, yCol);
-            TSScatterPlot plot = new TSScatterPlot(layout, table, xCol, yCol);
+            PlotlyScatterPlot plot = new PlotlyScatterPlot(layout, table, xCol, yCol);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package quicksilver.webapp.simpleui.bootstrap4.charts.plots;
+package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.HorizontalBarPlot;
@@ -7,16 +7,16 @@ import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.BarTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
-public class TSHorizontalBarPlot extends HorizontalBarPlot {
+public class PlotlyHorizontalBarPlot extends HorizontalBarPlot {
 
     private Figure figure;
 
-    public TSHorizontalBarPlot(Layout layout, Table table, String groupColName, String numberColName) {
+    public PlotlyHorizontalBarPlot(Layout layout, Table table, String groupColName, String numberColName) {
         BarTrace trace = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(numberColName)).orientation(BarTrace.Orientation.HORIZONTAL).build();
         figure = new Figure(layout, new Trace[]{trace});
     }
 
-    public TSHorizontalBarPlot(Layout layout, Table table, String groupColName, Layout.BarMode barMode, String... numberColNames) {
+    public PlotlyHorizontalBarPlot(Layout layout, Table table, String groupColName, Layout.BarMode barMode, String... numberColNames) {
         Trace[] traces = new Trace[numberColNames.length];
 
         for(int i = 0; i < numberColNames.length; ++i) {

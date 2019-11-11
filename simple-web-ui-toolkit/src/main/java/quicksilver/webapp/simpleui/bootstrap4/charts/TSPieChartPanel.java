@@ -16,7 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSPiePlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyPiePlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.components.Figure;
@@ -31,7 +31,7 @@ public class TSPieChartPanel extends TSFigurePanel {
 
         try {
             //figure = PiePlot.create("", table, groupColName, numberColName);
-            TSPiePlot plot = new TSPiePlot(layout, table, groupColName, numberColName);
+            PlotlyPiePlot plot = new PlotlyPiePlot(layout, table, groupColName, numberColName);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();

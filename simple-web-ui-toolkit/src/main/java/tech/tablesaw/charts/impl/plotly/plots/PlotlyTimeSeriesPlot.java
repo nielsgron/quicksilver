@@ -1,4 +1,4 @@
-package quicksilver.webapp.simpleui.bootstrap4.charts.plots;
+package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.api.*;
 import tech.tablesaw.plotly.api.TimeSeriesPlot;
@@ -10,11 +10,11 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.List;
 
-public class TSTimeSeriesPlot extends TimeSeriesPlot {
+public class PlotlyTimeSeriesPlot extends TimeSeriesPlot {
 
     private Figure figure;
 
-    public TSTimeSeriesPlot(Layout layout, Table table, String dateColX, String yCol, String groupCol) {
+    public PlotlyTimeSeriesPlot(Layout layout, Table table, String dateColX, String yCol, String groupCol) {
         TableSliceGroup tables = table.splitOn(new CategoricalColumn[]{table.categoricalColumn(groupCol)});
         ScatterTrace[] traces = new ScatterTrace[tables.size()];
 
@@ -27,22 +27,22 @@ public class TSTimeSeriesPlot extends TimeSeriesPlot {
         figure = new Figure(layout, traces);
     }
 
-    public TSTimeSeriesPlot(Layout layout, Table table, String dateColXName, String yColName) {
+    public PlotlyTimeSeriesPlot(Layout layout, Table table, String dateColXName, String yColName) {
         ScatterTrace trace = ScatterTrace.builder(table.column(dateColXName), table.numberColumn(yColName)).mode(ScatterTrace.Mode.LINE).build();
         figure = new Figure(layout, new Trace[]{trace});
     }
 
-    public TSTimeSeriesPlot(Layout layout, String xTitle, DateColumn xCol, String yTitle, NumericColumn<?> yCol) {
+    public PlotlyTimeSeriesPlot(Layout layout, String xTitle, DateColumn xCol, String yTitle, NumericColumn<?> yCol) {
         ScatterTrace trace = ScatterTrace.builder(xCol, yCol).mode(ScatterTrace.Mode.LINE).build();
         figure = new Figure(layout, new Trace[]{trace});
     }
 
-    public TSTimeSeriesPlot(Layout layout, String xTitle, DateTimeColumn xCol, String yTitle, NumericColumn<?> yCol) {
+    public PlotlyTimeSeriesPlot(Layout layout, String xTitle, DateTimeColumn xCol, String yTitle, NumericColumn<?> yCol) {
         ScatterTrace trace = ScatterTrace.builder(xCol, yCol).mode(ScatterTrace.Mode.LINE).build();
         figure = new Figure(layout, new Trace[]{trace});
     }
 
-    public TSTimeSeriesPlot(Layout layout, Table table, String dateTimeColumnName, String numberColumnName, boolean bDateTime) {
+    public PlotlyTimeSeriesPlot(Layout layout, Table table, String dateTimeColumnName, String numberColumnName, boolean bDateTime) {
         DateTimeColumn xCol = table.dateTimeColumn(dateTimeColumnName);
         NumericColumn<?> yCol = table.numberColumn(numberColumnName);
         ScatterTrace trace = ScatterTrace.builder(xCol, yCol).mode(ScatterTrace.Mode.LINE).build();

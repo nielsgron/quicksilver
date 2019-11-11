@@ -16,8 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.charts;
 
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSHeatMapPlot;
-import quicksilver.webapp.simpleui.bootstrap4.charts.plots.TSHistogramPlot;
+import tech.tablesaw.charts.impl.plotly.plots.PlotlyHistogramPlot;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.api.Histogram;
@@ -33,7 +32,7 @@ public class TSHistogramChartPanel extends TSFigurePanel {
 
         try {
             figure = Histogram.create("", table, numericColumnName);
-            TSHistogramPlot plot = new TSHistogramPlot(layout, table, numericColumnName);
+            PlotlyHistogramPlot plot = new PlotlyHistogramPlot(layout, table, numericColumnName);
             figure = plot.getFigure();
         } catch ( Exception e ) {
             e.printStackTrace();
