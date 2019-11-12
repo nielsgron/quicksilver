@@ -6,12 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ModuleQuicksawCharts" />
         <module name="ModuleSimpleCommons" />
         <module name="ModuleSimpleWebServer" />
         <module name="ModuleSimpleWebUIToolkit" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ModuleQuicksawCharts" target="1.8" />
       <module name="ModuleSimpleCommons" target="1.8" />
       <module name="ModuleSimpleWebServer" target="1.8" />
       <module name="ModuleSimpleWebUIToolkit" target="1.8" />

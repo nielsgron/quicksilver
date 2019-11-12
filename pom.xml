@@ -10,6 +10,7 @@
     <name>Quicksilver</name>
 
     <modules>
+	<module>quicksaw-charts</module>
         <module>simple-commons</module>
         <module>simple-web-ui-toolkit</module>
         <module>simple-webserver</module>

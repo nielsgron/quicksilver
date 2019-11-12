@@ -4,6 +4,7 @@ nb-configuration.xml
 .settings
 out
 .DS_Store
+quicksaw-charts/target
 simple-commons/target
 simple-webserver/target
 simple-web-ui-toolkit/target

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ModuleQuicksawCharts.iml" filepath="$PROJECT_DIR$/ModuleQuicksawCharts.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleSimpleCommons.iml" filepath="$PROJECT_DIR$/ModuleSimpleCommons.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleSimpleWebServer.iml" filepath="$PROJECT_DIR$/ModuleSimpleWebServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleSimpleWebUIToolkit.iml" filepath="$PROJECT_DIR$/ModuleSimpleWebUIToolkit.iml" />

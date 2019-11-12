@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/../simple-commons/pom.xml" />
         <option value="$PROJECT_DIR$/../simple-web-ui-toolkit/pom.xml" />
         <option value="$PROJECT_DIR$/../simple-webserver/pom.xml" />
+        <option value="$PROJECT_DIR$/../quicksaw-charts/pom.xml" />
       </list>
     </option>
   </component>
