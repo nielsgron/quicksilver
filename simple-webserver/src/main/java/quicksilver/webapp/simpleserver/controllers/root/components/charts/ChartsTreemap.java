@@ -17,8 +17,12 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
@@ -27,13 +31,10 @@ import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.columns.numbers.DoubleColumnType;
 import tech.tablesaw.plotly.components.Layout;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import tech.tablesaw.plotly.event.EventHandler;
 
 public class ChartsTreemap extends AbstractComponentsChartsPage {
@@ -177,38 +178,29 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
 
-        layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(486, 200, false);
+
+        ChartBuilder builder = ChartBuilder.createBuilder()
+                        .dataTable(bsdTable)
+                        .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
+                        .rowColumns("Name")
+                        .dataColumns("Parent");
+        builder.layout(486, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv2", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv2").build(), "treemapDiv2"),
                         "Treemap Chart"),
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv3", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv3").build(), "treemapDiv3"),
                         "Treemap Chart")
         );
 
-        layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(300, 200, false);
+        builder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv4", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv4").build(), "treemapDiv4"),
                         "Treemap Chart"),
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv5", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv5").build(), "treemapDiv5"),
                         "Treemap Chart"),
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv6", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv6").build(), "treemapDiv6"),
                         "Treemap Chart")
         );
 

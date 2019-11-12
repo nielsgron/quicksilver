@@ -1,9 +1,15 @@
 package tech.tablesaw.charts.impl.plotly;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
 import tech.tablesaw.plotly.api.Histogram;
 import tech.tablesaw.plotly.api.SunburstPlot;
+import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.event.EventHandler;
 
@@ -241,6 +247,14 @@ public class PlotlyChartBuilder extends ChartBuilder {
     @Override
     protected Figure buildTreemap() {
         Figure figure =null;
+        try {
+            List<String> cols = new ArrayList<>();
+            cols.addAll(Arrays.asList(rowColumns));
+            cols.addAll(Arrays.asList(dataColumns));
+            figure = TreemapPlot.create(layout, dataTable, true /* ? */, cols.toArray(String[]::new), Collections.EMPTY_MAP, Collections.EMPTY_MAP, new EventHandler[0]);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
         return figure;
     }
 
