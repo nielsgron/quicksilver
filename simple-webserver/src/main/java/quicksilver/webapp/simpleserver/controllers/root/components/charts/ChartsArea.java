@@ -17,13 +17,13 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSAreaChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsArea extends AbstractComponentsChartsPage {
 
@@ -36,36 +36,42 @@ public class ChartsArea extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "areaDiv";
+
         // Add Chart
         Table areaTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSAreaChartPanel.createLayoutBuilder(1000, 200, false);
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(areaTable)
+                .chartType(ChartBuilder.CHART_TYPE.AREA)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                ;
+
+        chartBuilder.layout(1000, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSAreaChartPanel(layout, areaTable, "areaDiv1", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Wide Chart")
         );
 
-        layoutBuilder = TSAreaChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSAreaChartPanel(layout, areaTable, "areaDiv2", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                         "Half Width Chart"),
-                new BSCard(new TSAreaChartPanel(layout, areaTable, "areaDiv3", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "3").build(), divName + "3"),
                 "Half Width Chart")
         );
 
-        layoutBuilder = TSAreaChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSAreaChartPanel(layout, areaTable, "areaDiv4", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                         "Narrow Chart"),
-                new BSCard(new TSAreaChartPanel(layout, areaTable, "areaDiv5", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Narrow Chart"),
-                new BSCard(new TSAreaChartPanel(layout, areaTable, "areaDiv6", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
                         "Narrow Chart")
         );
 

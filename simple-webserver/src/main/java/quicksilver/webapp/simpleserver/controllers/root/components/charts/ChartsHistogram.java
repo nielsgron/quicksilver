@@ -17,13 +17,13 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSHistogramChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsHistogram extends AbstractComponentsChartsPage {
 
@@ -36,36 +36,42 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "histogramDiv";
+
         // Add Chart
         Table histogramTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSHistogramChartPanel.createLayoutBuilder(1000, 200, false);
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(histogramTable)
+                .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
+                //.rowColumns("Country")
+                .dataColumns("Population")
+                ;
+
+        chartBuilder.layout(1000, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv1", "Population") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Histogram Chart")
         );
 
-        layoutBuilder = TSHistogramChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv2", "Population") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                         "Histogram Chart"),
-                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv3", "Population") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "3").build(), divName + "3"),
                         "Histogram Chart")
         );
 
-        layoutBuilder = TSHistogramChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv4", "Population") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                         "Histogram Chart"),
-                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv5", "Population") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Histogram Chart"),
-                new BSCard(new TSHistogramChartPanel(layout, histogramTable, "histogramDiv6", "Population") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
                         "Histogram Chart")
         );
 

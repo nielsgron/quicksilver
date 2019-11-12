@@ -17,14 +17,13 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSVerticalBarChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsVBar extends AbstractComponentsChartsPage {
 
@@ -37,38 +36,44 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "vbarDiv";
+
         // Add Chart
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(1000, 200, 5, 40, 45, 5, false);
-        layoutBuilder.xAxis(Axis.builder().title("Country").build());
-        layoutBuilder.yAxis(Axis.builder().title("GDP").build());
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                .axisTitles("Country", "GDP")
+                ;
+
+        chartBuilder.layout(1000, 200, 5, 40, 45, 5, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(layout, table, "div1", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Wide Chart")
         );
 
-        layoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(layout, table, "div2", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                         "Half Width Chart"),
-                new BSCard(new TSVerticalBarChartPanel(layout, table, "div3", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "3").build(), divName + "3"),
                         "Half Width Chart")
         );
 
-        layoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(layout, table, "div4", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                         "Narrow Chart"),
-                new BSCard(new TSVerticalBarChartPanel(layout, table, "div5", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Narrow Chart"),
-                new BSCard(new TSVerticalBarChartPanel(layout, table, "div6", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
                         "Narrow Chart")
         );
 

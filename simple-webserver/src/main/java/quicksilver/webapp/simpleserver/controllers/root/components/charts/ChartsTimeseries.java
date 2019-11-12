@@ -17,14 +17,13 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSTimeSeriesChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsTimeseries extends AbstractComponentsChartsPage {
 
@@ -37,37 +36,43 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "timeseriesDiv";
+
         // Add Chart
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(1000, 200, 5, 20, 50, 5, false);
-        layoutBuilder.yAxis(Axis.builder().title("Close Price").build());
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(timeSeriesTable)
+                .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
+                .rowColumns("Date")
+                .dataColumns("Close")
+                .axisTitles("", "Close Price")
+                ;
+
+        chartBuilder.layout(1000, 200, 5, 20, 50, 5, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv1", "Date", "Close"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Timeseries Chart")
         );
 
-        layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv2", "Date", "Close"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                         "Timeseries Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv3", "Date", "Close"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "3").build(), divName + "3"),
                         "Timeseries Chart")
         );
 
-        layoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv4", "Date", "Close"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                         "Timeseries Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv5", "Date", "Close"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Timeseries Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(layout, timeSeriesTable, "timeseriesDiv6", "Date", "Close"),
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
                         "Timeseries Chart")
         );
 

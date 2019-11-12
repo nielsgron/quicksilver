@@ -30,6 +30,7 @@ import tech.tablesaw.api.DateColumn;
 import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.columns.numbers.DoubleColumnType;
 import tech.tablesaw.plotly.components.Layout;
@@ -63,16 +64,25 @@ public class Charts extends AbstractComponentsChartsPage {
         // Add Horizontal Bar Chart
         Table hBarTable = economicTable;
 
-        Layout.LayoutBuilder horBarLayoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(500, 200, false);
-        Layout horBarLayout = horBarLayoutBuilder.build();
-
-        Layout.LayoutBuilder verBarLayoutBuilder = TSVerticalBarChartPanel.createLayoutBuilder(500, 200, false);
-        Layout verBarLayout = verBarLayoutBuilder.build();
+        ChartBuilder vbarChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(hBarTable)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                ;
+        ChartBuilder hbarChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(hBarTable)
+                .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                ;
 
         body.addRowOfColumns(
-                new BSCard(new TSVerticalBarChartPanel(verBarLayout, hBarTable, "vbarDiv", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(vbarChartBuilder.divName("vbarDiv").build(), "vbarDiv"),
                         "Vertical Bar Chart"),
-                new BSCard(new TSHorizontalBarChartPanel(horBarLayout, hBarTable, "hbarDiv", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(hbarChartBuilder.divName("hbarDiv").build(), "hbarDiv"),
                         "Horizontal Bar Chart")
         );
 
@@ -81,16 +91,25 @@ public class Charts extends AbstractComponentsChartsPage {
         Table lineTable = economicTable;
         Table areaTable = economicTable;
 
-        Layout.LayoutBuilder lineLayoutBuilder = TSLineChartPanel.createLayoutBuilder(500, 200, false);
-        Layout lineLayout = lineLayoutBuilder.build();
-
-        Layout.LayoutBuilder areaLayoutBuilder = TSAreaChartPanel.createLayoutBuilder(500, 200, false);
-        Layout areaLayout = areaLayoutBuilder.build();
+        ChartBuilder lineChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(lineTable)
+                .chartType(ChartBuilder.CHART_TYPE.LINE)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                ;
+        ChartBuilder areaChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(areaTable)
+                .chartType(ChartBuilder.CHART_TYPE.AREA)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                ;
 
         body.addRowOfColumns(
-                new BSCard(new TSLineChartPanel(lineLayout, lineTable, "lineDiv", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(lineChartBuilder.divName("lineDiv").build(), "lineDiv"),
                         "Line Chart"),
-                new BSCard(new TSAreaChartPanel(areaLayout, areaTable, "areaDiv", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(areaChartBuilder.divName("areaDiv").build(), "areaDiv"),
                         "Area Chart")
         );
 
@@ -99,16 +118,25 @@ public class Charts extends AbstractComponentsChartsPage {
         Table pieTable = economicTable;
         Table timeSeriesTable = stockPricesTable;
 
-        Layout.LayoutBuilder pieLayoutBuilder = TSPieChartPanel.createLayoutBuilder(500, 200, false);
-        Layout pieLayout = pieLayoutBuilder.build();
-
-        Layout.LayoutBuilder timeSeriesLayoutBuilder = TSTimeSeriesChartPanel.createLayoutBuilder(500, 200, false);
-        Layout timeSeriesLayout = timeSeriesLayoutBuilder.build();
+        ChartBuilder pieChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(pieTable)
+                .chartType(ChartBuilder.CHART_TYPE.PIE)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                ;
+        ChartBuilder timeseriesChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(timeSeriesTable)
+                .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
+                .layout(500, 200, false)
+                .rowColumns("Date")
+                .dataColumns("Close")
+                ;
 
         body.addRowOfColumns(
-                new BSCard(new TSPieChartPanel(pieLayout, pieTable, "pieDiv", "Country", "GDP"),
+                new BSCard(new TSFigurePanel(pieChartBuilder.divName("pieDiv").build(), "pieDiv"),
                         "Pie Chart"),
-                new BSCard(new TSTimeSeriesChartPanel(timeSeriesLayout, timeSeriesTable, "timeseriesDiv", "Date", "Close"),
+                new BSCard(new TSFigurePanel(timeseriesChartBuilder.divName("timeseriesDiv").build(), "timeseriesDiv"),
                         "Timeseries Chart")
         );
 
@@ -124,16 +152,28 @@ public class Charts extends AbstractComponentsChartsPage {
         oldColumn.mapInto((Double p) -> { return p / 1000; }, newColumn);
         bubbleTable.replaceColumn(newColumn);
 
-        Layout.LayoutBuilder scatterLayoutBuilder = TSScatterChartPanel.createLayoutBuilder(500, 200, false);
-        Layout scatterLayout = scatterLayoutBuilder.build();
-
-        Layout.LayoutBuilder bubbleLayoutBuilder = TSBubbleChartPanel.createLayoutBuilder(500, 200, false);
-        Layout bubbleLayout = bubbleLayoutBuilder.build();
+        ChartBuilder scatterChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(scatterTable)
+                .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
+                .rowColumns("Population")
+                .dataColumns("GDP")
+                .layout(500, 200, false)
+                .axisTitles("Population", "GDP")
+                ;
+        ChartBuilder bubbleChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(bubbleTable)
+                .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
+                .rowColumns("Population")
+                .dataColumns("GDP")
+                .sizeColumn("GDP_Capita")
+                .layout(500, 200, false)
+                .axisTitles("Population", "GDP")
+                ;
 
         body.addRowOfColumns(
-                new BSCard(new TSScatterChartPanel(scatterLayout, scatterTable, "scatterDiv", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(scatterChartBuilder.divName("scatterDiv").build(), "scatterDiv"),
                         "Scatter Chart"),
-                new BSCard(new TSBubbleChartPanel(bubbleLayout, bubbleTable, "bubbleDiv", "Population", "GDP", "GDP_Capita") ,
+                new BSCard(new TSFigurePanel(bubbleChartBuilder.divName("bubbleDiv").build(), "bubbleDiv"),
                         "Bubble Chart")
         );
 
@@ -142,16 +182,25 @@ public class Charts extends AbstractComponentsChartsPage {
         Table histogramTable = economicTable;
         Table heatmapTable = stockEquitiesTable;
 
-        Layout.LayoutBuilder histoLayoutBuilder = TSHistogramChartPanel.createLayoutBuilder(500, 200, false);
-        Layout histoLayout = histoLayoutBuilder.build();
-
-        Layout.LayoutBuilder heatLayoutBuilder = TSHeatMapChartPanel.createLayoutBuilder(500, 200, false);
-        Layout heatLayout = heatLayoutBuilder.build();
+        ChartBuilder histogramChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(histogramTable)
+                .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
+                .layout(500, 200, false)
+                //.rowColumns("Country")
+                .dataColumns("Population")
+                ;
+        ChartBuilder heatmapChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(heatmapTable)
+                .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
+                .layout(500, 200, false)
+                .rowColumns("Company", "Sector")
+                //.dataColumns("Close")
+                ;
 
         body.addRowOfColumns(
-                new BSCard(new TSHistogramChartPanel(histoLayout, histogramTable, "histogramDiv", "Population") ,
+                new BSCard(new TSFigurePanel(histogramChartBuilder.divName("histogramDiv").build(), "histogramDiv"),
                         "Histogram Chart"),
-                new BSCard(new TSHeatMapChartPanel(heatLayout, heatmapTable, "heatmapDiv", "Company", "Sector") ,
+                new BSCard(new TSFigurePanel(heatmapChartBuilder.divName("heatmapDiv").build(), "heatmapDiv"),
                         "Heatmap Chart")
         );
 
@@ -160,16 +209,25 @@ public class Charts extends AbstractComponentsChartsPage {
         Table candleStickTable = stockPricesTable;
         Table ohlcTable = stockPricesTable;
 
-        Layout.LayoutBuilder candleLayoutBuilder = TSCandlestickChartPanel.createLayoutBuilder(500, 200, false);
-        Layout candleLayout = candleLayoutBuilder.build();
-
-        Layout.LayoutBuilder ohlcLayoutBuilder = TSOHLCChartPanel.createLayoutBuilder(500, 200, false);
-        Layout ohlcLayout = ohlcLayoutBuilder.build();
+        ChartBuilder candlestickChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(candleStickTable)
+                .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
+                .layout(500, 200, false)
+                .rowColumns("Date")
+                .dataColumns("Open", "High", "Low", "Close")
+                ;
+        ChartBuilder ohlcChartBuilder = ChartBuilder.createBuilder()
+                .dataTable(ohlcTable)
+                .chartType(ChartBuilder.CHART_TYPE.OHLC)
+                .layout(500, 200, false)
+                .rowColumns("Date")
+                .dataColumns("Open", "High", "Low", "Close")
+                ;
 
         body.addRowOfColumns(
-                new BSCard(new TSCandlestickChartPanel(candleLayout, candleStickTable, "candlestickDiv", "Date", "Open", "High", "Low", "Close") ,
+                new BSCard(new TSFigurePanel(candlestickChartBuilder.divName("candlestickDiv").build(), "candlestickDiv"),
                         "Candlestick Chart"),
-                new BSCard(new TSOHLCChartPanel(ohlcLayout, ohlcTable, "ohlcDiv", "Date", "Open", "High", "Low", "Close") ,
+                new BSCard(new TSFigurePanel(ohlcChartBuilder.divName("ohlcDiv").build(), "ohlcDiv"),
                         "OHLC Chart")
         );
 

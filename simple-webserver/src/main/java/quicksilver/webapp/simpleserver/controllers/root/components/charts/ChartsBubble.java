@@ -17,18 +17,14 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSBubbleChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.DoubleColumn;
-import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.columns.numbers.DoubleColumnType;
-import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Grid;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsBubble extends AbstractComponentsChartsPage {
 
@@ -41,6 +37,8 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "bubbleDiv";
+
         // Add Chart
         Table bubbleTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
@@ -50,37 +48,39 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         oldColumn.mapInto((Double p) -> { return p / 1000; }, newColumn);
         bubbleTable.addColumns(newColumn);
 
-        Layout.LayoutBuilder layoutBuilder = TSBubbleChartPanel.createLayoutBuilder(1000, 200, 5, 35, 45, 5, false);
-        layoutBuilder.xAxis(Axis.builder().title("Population").build());
-        layoutBuilder.yAxis(Axis.builder().title("GDP").build());
-        //layoutBuilder.grid(Grid.builder().build());
-        //layoutBuilder.hoverMode(Layout.HoverMode.FALSE);
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(bubbleTable)
+                .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
+                .rowColumns("Population")
+                .dataColumns("GDP")
+                .sizeColumn("GDP_Capita_Ratio")
+                .axisTitles("Population", "GDP")
+                ;
+
+        chartBuilder.layout(1000, 200, 5, 35, 45, 5, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv1", "Population", "GDP", "GDP_Capita_Ratio") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Bubble Chart")
         );
 
-        layoutBuilder = TSBubbleChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv2", "Population", "GDP", "GDP_Capita_Ratio") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                         "Bubble Chart"),
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv3", "Population", "GDP", "GDP_Capita_Ratio") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "3").build(), divName + "3"),
                         "Bubble Chart")
         );
 
-        layoutBuilder = TSBubbleChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv4", "Population", "GDP", "GDP_Capita_Ratio") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                         "Bubble Chart"),
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv5", "Population", "GDP", "GDP_Capita_Ratio") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Bubble Chart"),
-                new BSCard(new TSBubbleChartPanel(layout, bubbleTable, "bubbleDiv6", "Population", "GDP", "GDP_Capita_Ratio") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
                         "Bubble Chart")
         );
 

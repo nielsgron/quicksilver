@@ -17,14 +17,13 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSHorizontalBarChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsHBar extends AbstractComponentsChartsPage {
 
@@ -37,34 +36,46 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "hbarDiv";
+
         // Add Chart
         //Table table = Charts.createPieDataSet(true);
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(1000, 200, 5, 35, 80, 5, false);
-        layoutBuilder.xAxis(Axis.builder().title("GDP").build());
-        layoutBuilder.yAxis(Axis.builder().title("Country").build());
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
+                .layout(500, 200, false)
+                .rowColumns("Country")
+                .dataColumns("GDP")
+                .axisTitles("GDP", "Country")
+                ;
+
+        chartBuilder.layout(1000, 200, 5, 35, 80, 5, false);
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div1", "Country", "GDP"), "Country GDP (Nominal)")
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
+                    "Country GDP (Nominal)")
         );
 
-        layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div2", "Country", "GDP"), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div3", "Country", "Population"), "Country Population")
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
+                    "Country GDP (Nominal)"),
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "3").dataColumns("Population").build(), divName + "3"),
+                    "Country Population")
         );
 
-        layoutBuilder = TSHorizontalBarChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div4", "Country", "GDP"), "Country GDP (Nominal)"),
-            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div5", "Country", "GDP_Capita"), "Country GDP (Per Capita)"),
-            new BSCard( new TSHorizontalBarChartPanel(layout, table, "div6", "Country", "Population"), "Country Population")
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
+                    "Country GDP (Nominal)"),
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "5").dataColumns("GDP_Capita").build(), divName + "5"),
+                    "Country GDP (Per Capita)"),
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "6").dataColumns("Population").build(), divName + "6"),
+                    "Country Population")
         );
 
         body.doLayout();

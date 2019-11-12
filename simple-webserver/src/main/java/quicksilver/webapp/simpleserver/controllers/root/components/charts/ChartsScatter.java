@@ -17,14 +17,13 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSScatterChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.ChartBuilder;
 
 public class ChartsScatter extends AbstractComponentsChartsPage {
 
@@ -37,38 +36,43 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        String divName = "scatterDiv";
+
         // Add Chart
         Table scatterTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        Layout.LayoutBuilder layoutBuilder = TSScatterChartPanel.createLayoutBuilder(1000, 200, 5, 35, 45, 5, false);
-        layoutBuilder.xAxis(Axis.builder().title("Population").build());
-        layoutBuilder.yAxis(Axis.builder().title("GDP").build());
-        Layout layout = layoutBuilder.build();
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+                .dataTable(scatterTable)
+                .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
+                .rowColumns("Population")
+                .dataColumns("GDP")
+                .axisTitles("Population", "GDP")
+                ;
+
+        chartBuilder.layout(1000, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSScatterChartPanel(layout, scatterTable, "scatterDiv1", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Scatter Chart")
         );
 
-        layoutBuilder = TSScatterChartPanel.createLayoutBuilder(450, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSScatterChartPanel(layout, scatterTable, "scatterDiv2", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                         "Scatter Chart"),
-                new BSCard(new TSScatterChartPanel(layout, scatterTable, "scatterDiv3", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "3").build(), divName + "3"),
                         "Scatter Chart")
         );
 
-        layoutBuilder = TSScatterChartPanel.createLayoutBuilder(300, 200, false);
-        layout = layoutBuilder.build();
+        chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSScatterChartPanel(layout, scatterTable, "scatterDiv4", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                         "Scatter Chart"),
-                new BSCard(new TSScatterChartPanel(layout, scatterTable, "scatterDiv5", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Scatter Chart"),
-                new BSCard(new TSScatterChartPanel(layout, scatterTable, "scatterDiv6", "Population", "GDP") ,
+                new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
                         "Scatter Chart")
         );
 

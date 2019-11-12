@@ -3,49 +3,76 @@ package tech.tablesaw.charts;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.impl.chartjs.ChartjsChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChartBuilder;
+import tech.tablesaw.charts.impl.vega.VegaChartBuilder;
+import tech.tablesaw.plotly.components.Axis;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.plotly.components.Margin;
 
 public abstract class ChartBuilder {
 
     static {
 
-        // Example Usage :
+        DEFAULT_CHART_RENDERER = CHART_RENDERER.PLOTLY; // Plotly is the default chart renderer
 
+        /*
+        // Example Usage :
         Table table = Table.create();
-        Figure figure = ChartBuilder.createBuilder().dataTable(table).chartType("treemap")
+        Figure figure = ChartBuilder.createBuilder().dataTable(table).chartType(CHART_TYPE.TREEMAP)
                 .rowColumns("Sector", "Industry")
                 .dataColumns("MarketCap")
                 .colorColumn("ChangeAsNumber")
                 .build();
+        */
 
     }
 
-    private Table dataTable;
-    private String chartType;
-    private String[] rowColumns;
-    private String[] dataColumns;
-    private String[] labelColumns;
-    private String[] detailColumns;
-    private String colorColumn;
-    private String sizeColumn;
+    public enum CHART_RENDERER {
+        PLOTLY, CHARTJS, VEGA
+    }
+
+    public enum CHART_TYPE {
+        AREA, BUBBLE, CANDLESTICK, HEATMAP, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
+    }
+
+    protected Layout.LayoutBuilder layoutBuilder = Layout.builder();
+
+    protected Table dataTable;
+    protected CHART_TYPE chartType;
+    protected Layout layout;
+    protected String divName;
+    protected String[] rowColumns;
+    protected String[] dataColumns;
+    protected String[] labelColumns;
+    protected String[] detailColumns;
+    protected String colorColumn;
+    protected String sizeColumn;
 
     public ChartBuilder() {
 
     }
 
+    public static CHART_RENDERER DEFAULT_CHART_RENDERER;
+
     public static ChartBuilder createBuilder() {
-        return createBuilder("plotly"); // Plotly is the default chart renderer
+        return createBuilder(DEFAULT_CHART_RENDERER);
     }
 
-    public static ChartBuilder createBuilder(String chartRenderer) {
-        if ( "plotly".equals(chartRenderer)) {
-            return new PlotlyChartBuilder();
-        } else if ( "chartjs".equals(chartRenderer)) {
-            return new ChartjsChartBuilder();
-        } else if ( "vega".equals(chartRenderer)) {
-            return new ChartjsChartBuilder();
-        } else {
-            return new PlotlyChartBuilder();
+    public static ChartBuilder createBuilder(CHART_RENDERER chartRenderer) {
+
+        switch (chartRenderer) {
+
+            case PLOTLY:
+                return new PlotlyChartBuilder();
+
+            case CHARTJS:
+                return new ChartjsChartBuilder();
+
+            case VEGA:
+                return new VegaChartBuilder();
+
+            default:
+                return new PlotlyChartBuilder();
         }
     }
 
@@ -54,8 +81,47 @@ public abstract class ChartBuilder {
         return this;
     }
 
-    public ChartBuilder chartType(String chartType) {
+    public ChartBuilder chartType(CHART_TYPE chartType) {
         this.chartType = chartType;
+        return this;
+    }
+
+    public ChartBuilder layout(Layout layout) {
+        this.layout = layout;
+        return this;
+    }
+
+    public ChartBuilder layout(int width, int height, boolean enabledLegend) {
+        layout(width, height, 0, 0, 0, 0, enabledLegend);
+        return this;
+    }
+
+    public ChartBuilder layout(int width, int height, int marginTop, int marginBottom, int marginLeft, int marginRight, boolean enabledLegend) {
+
+        layoutBuilder
+                .width(width)
+                .height(height)
+                .margin(Margin.builder()
+                        .top(marginTop)
+                        .bottom(marginBottom)
+                        .left(marginLeft)
+                        .right(marginRight)
+                        .build())
+                .showLegend(enabledLegend).build();
+
+        return this;
+    }
+
+    public ChartBuilder axisTitles(String xTitle, String yTitle) {
+
+        layoutBuilder.xAxis(Axis.builder().title(xTitle).build());
+        layoutBuilder.yAxis(Axis.builder().title(yTitle).build());
+
+        return this;
+    }
+
+    public ChartBuilder divName(String divName) {
+        this.divName = divName;
         return this;
     }
 
@@ -89,23 +155,76 @@ public abstract class ChartBuilder {
         return this;
     }
 
+    // Getter methods
+    public String getDivName() {
+        return divName;
+    }
+
     public Figure build() {
 
-        Figure figure;
+        layout = layoutBuilder.build();
 
-        if ( "horizontalbar".equals(chartType) ) {
-            figure = new Figure();
-        } else if ( "verticalbar".equals(chartType) ) {
-            figure = new Figure();
-        } else if ( "treemap".equals(chartType) ) {
-            figure = new Figure();
-        } else if ( "sunburst".equals(chartType) ) {
-            figure = new Figure();
-        } else {
-            figure = new Figure();
+        switch (chartType) {
+            case AREA:
+                return buildArea();
+            case BUBBLE:
+                return buildBubble();
+            case CANDLESTICK:
+                return buildCandlestick();
+            case HEATMAP:
+                return buildHeatmap();
+            case HISTOGRAM:
+                return buildHistogram();
+            case HORIZONTAL_BAR:
+                return buildHorizontalBar();
+            case LINE:
+                return buildLine();
+            case OHLC:
+                return buildOHLC();
+            case PIE:
+                return buildPie();
+            case SCATTERPLOT:
+                return buildScatterplot();
+            case SUNBURST:
+                return buildSunburst();
+            case TIMESERIES:
+                return buildTimeseries();
+            case TREEMAP:
+                return buildTreemap();
+            case VERTICAL_BAR:
+                return buildVerticalBar();
+            default:
+                return null;
+
         }
-
-        return figure;
     }
+
+    protected abstract Figure buildArea();
+
+    protected abstract Figure buildBubble();
+
+    protected abstract Figure buildCandlestick();
+
+    protected abstract Figure buildHeatmap();
+
+    protected abstract Figure buildHistogram();
+
+    protected abstract Figure buildHorizontalBar();
+
+    protected abstract Figure buildLine();
+
+    protected abstract Figure buildOHLC();
+
+    protected abstract Figure buildPie();
+
+    protected abstract Figure buildScatterplot();
+
+    protected abstract Figure buildSunburst();
+
+    protected abstract Figure buildTimeseries();
+
+    protected abstract Figure buildTreemap();
+
+    protected abstract Figure buildVerticalBar();
 
 }
