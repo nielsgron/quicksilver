@@ -225,7 +225,7 @@ public class Charts extends AbstractComponentsChartsPage {
         Table treemapTable = stockEquitiesTable;
         Table sunburstTable = stockEquitiesTable;
 
-        Layout.LayoutBuilder sunburstLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
+        Layout.LayoutBuilder sunburstLayoutBuilder = TSFigurePanel.createLayoutBuilder(500, 200, false);
         Layout sunburstLayout = sunburstLayoutBuilder.build();
 
         //add dummy parent entries
