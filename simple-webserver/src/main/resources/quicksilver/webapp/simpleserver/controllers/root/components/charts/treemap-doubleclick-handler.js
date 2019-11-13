@@ -6,8 +6,8 @@ targetName.on('plotly_treemapclick', function (data) {
     var key = data.points[0].id;
     var data = data.points[0].data;
     var index = data.ids.indexOf(key);
-    var targetURL = data.urls[index];
-    //console.log(key + "-" + data.urls[index]);
+    var targetURL = data.ids[index];
+    //console.log(key + "-" + targetURL);
     //console.log(data);
     clickCounter++;
     if (clickCounter == 2) {

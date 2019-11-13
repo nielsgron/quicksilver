@@ -33,6 +33,15 @@ public class TreemapPlot {
         return create(layout, ids, labels, labelParents, extra, new EventHandler[0]);
     }
 
+    public static Figure create(Layout layout, Table table, String idColumn, String labelsColumn, String parentsColumn, Map<String, Object[]> extra, EventHandler[] handlers) {
+        return create(layout,
+                table.stringColumn(idColumn).asObjectArray(),
+                table.stringColumn(labelsColumn).asObjectArray(),
+                table.stringColumn(parentsColumn).asObjectArray(),
+                extra,
+                handlers);
+    }
+
     public static Figure create(Layout layout, String[] ids, Object[] labels, Object[] labelParents, Map<String, Object[]> extra,
             EventHandler[] handlers) {
         sanitize(labels);

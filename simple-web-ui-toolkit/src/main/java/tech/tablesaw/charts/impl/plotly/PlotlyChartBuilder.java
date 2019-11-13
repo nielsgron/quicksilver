@@ -1,14 +1,9 @@
 package tech.tablesaw.charts.impl.plotly;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
+import java.util.HashMap;
+import java.util.Map;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
-import tech.tablesaw.plotly.api.Histogram;
-import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.event.EventHandler;
@@ -248,10 +243,26 @@ public class PlotlyChartBuilder extends ChartBuilder {
     protected Figure buildTreemap() {
         Figure figure =null;
         try {
-            List<String> cols = new ArrayList<>();
-            cols.addAll(Arrays.asList(rowColumns));
-            cols.addAll(Arrays.asList(dataColumns));
-            figure = TreemapPlot.create(layout, dataTable, true /* ? */, cols.toArray(String[]::new), Collections.EMPTY_MAP, Collections.EMPTY_MAP, new EventHandler[0]);
+            Map<String, Object[]> extra = new HashMap<>();
+            if (sizeColumn != null) {
+                extra.put("values", dataTable.column(sizeColumn).asObjectArray());
+            }
+            if (detailColumns != null && detailColumns.length > 0) {
+                //TODO: log if detailColumns has more then 1 item?
+                extra.put("text", dataTable.column(detailColumns[0]).asObjectArray());
+            }
+            if (colorColumn != null) {
+                extra.put("marker.colors", dataTable.column(colorColumn).asObjectArray());
+            }
+
+            figure = TreemapPlot.create(layout, dataTable,
+                    rowColumns[0],
+                    //if label not explicit, use row column
+                    (labelColumns != null && labelColumns.length > 0) ? labelColumns[0] : rowColumns[0],
+                    //parents
+                    dataColumns[0],
+                    extra,
+                    new EventHandler[0]);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
