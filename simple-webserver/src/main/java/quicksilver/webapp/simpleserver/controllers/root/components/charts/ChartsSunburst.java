@@ -35,7 +35,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         toolbar.setActiveButton("Sunburst");
     }
 
-    private static String resource(String name, String def) {
+    static String resource(String name, String def) {
         try {
             return IOUtils.toString(ChartsSunburst.class.getResourceAsStream(name), StandardCharsets.UTF_8);
         } catch (IOException ex) {

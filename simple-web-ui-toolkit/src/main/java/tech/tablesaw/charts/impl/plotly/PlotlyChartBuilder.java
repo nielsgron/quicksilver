@@ -1,9 +1,14 @@
 package tech.tablesaw.charts.impl.plotly;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
-import tech.tablesaw.plotly.api.Histogram;
-import tech.tablesaw.plotly.api.SunburstPlot;
+import tech.tablesaw.plotly.api.TableExtract;
+import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.event.EventHandler;
 
@@ -241,6 +246,40 @@ public class PlotlyChartBuilder extends ChartBuilder {
     @Override
     protected Figure buildTreemap() {
         Figure figure =null;
+        try {
+            
+            List<String> extraCols = new ArrayList<>();
+            if(sizeColumn != null) {
+                extraCols.add(sizeColumn);
+            }
+            if (labelColumns != null && labelColumns.length > 0) {
+                extraCols.add(labelColumns[0]);
+            }
+            if(colorColumn!=null){
+                extraCols.add(colorColumn);
+            }
+            
+            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, extraCols.stream().toArray(String[]::new)), "ids");
+            
+            Map<String, Object[]> extra = new HashMap<>();
+            if (sizeColumn != null) {
+                extra.put("values", table.column(TableExtract.measure(sizeColumn)).asObjectArray());
+            }
+            if (labelColumns != null && labelColumns.length > 0) {
+                //TODO: log if detailColumns has more then 1 item?
+                extra.put("text", table.column(TableExtract.measure(labelColumns[0])).asObjectArray());
+            }
+            if (colorColumn != null) {
+                extra.put("marker.colors", table.column(TableExtract.measure(colorColumn)).asObjectArray());
+            }
+
+            figure = TreemapPlot.create(layout, table,
+                    "ids", "Label", "Parent",
+                    extra,
+                    new EventHandler[0]);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
         return figure;
     }
 

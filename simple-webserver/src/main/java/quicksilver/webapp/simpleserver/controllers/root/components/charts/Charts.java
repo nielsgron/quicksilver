@@ -16,30 +16,19 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
-import quicksilver.commons.data.TSDataSet;
+import java.time.LocalDate;
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.commons.data.TSDataSetMeta;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
-import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.*;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
-import tech.tablesaw.api.DateColumn;
 import tech.tablesaw.api.DoubleColumn;
-import tech.tablesaw.api.StringColumn;
+import tech.tablesaw.api.Row;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
-import tech.tablesaw.columns.Column;
-import tech.tablesaw.columns.numbers.DoubleColumnType;
 import tech.tablesaw.plotly.components.Layout;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 
 public class Charts extends AbstractComponentsChartsPage {
 
@@ -236,14 +225,17 @@ public class Charts extends AbstractComponentsChartsPage {
         Table treemapTable = stockEquitiesTable;
         Table sunburstTable = stockEquitiesTable;
 
-        Layout.LayoutBuilder treeLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
-        Layout treeLayout = treeLayoutBuilder.build();
-
-        Layout.LayoutBuilder sunburstLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
+        Layout.LayoutBuilder sunburstLayoutBuilder = TSFigurePanel.createLayoutBuilder(500, 200, false);
         Layout sunburstLayout = sunburstLayoutBuilder.build();
 
+        ChartBuilder treemapBuilder = ChartBuilder.createBuilder()
+                .dataTable(treemapTable)
+                .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
+                .rowColumns("Company", "Sector")
+                .layout(500, 200, false);
+
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treeLayout, treemapTable, "treemapDiv", "Company", "Sector") ,
+                new BSCard(new TSFigurePanel(treemapBuilder.divName("treemapDiv").build(), "treemapDiv"),
                         "Treemap Chart"),
                 new BSCard(new TSSunburstChartPanel(sunburstLayout, sunburstTable, "sunburstDiv", "Company", "Sector", "MarketCap") ,
                         "Sunburst Chart")

@@ -17,9 +17,12 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
-import quicksilver.webapp.simpleui.bootstrap4.charts.TSTreeMapChartPanel;
+import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
@@ -27,14 +30,9 @@ import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.columns.numbers.DoubleColumnType;
-import tech.tablesaw.plotly.components.Layout;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.function.Function;
 import tech.tablesaw.plotly.event.EventHandler;
 
 public class ChartsTreemap extends AbstractComponentsChartsPage {
@@ -79,7 +77,6 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         treemapTable.addColumns(numericChange);
 
         //System.out.println(treemapTable.structure());
-
         return treemapTable;
     }
 
@@ -154,97 +151,55 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
             boundary = 10d;
         }
 
-        Layout.LayoutBuilder layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(1043, 500, false);
+        ChartBuilder stockBuilder = ChartBuilder.createBuilder()
+                .dataTable(treemapTable)
+                .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
+                .rowColumns("Ticker", "Industry", "Sector")
+                .sizeColumn(/* values: */ "ZERO [MarketCap]")
+                //TODO: how to aggregate Change?
+//                .labelColumns(/* text: */ "Change")
+                .colorColumn(/* marker.colors: */ "MEAN [ChangeAsNumber]")
+                .layout(1043, 500, false);
+
+        //TODO: Event handler
+        EventHandler clickHandler = new EventHandler() {
+            @Override
+            public String asJavascript(String targetName, String divName) {
+                return ChartsSunburst.resource("treemap-doubleclick-handler.js", "")
+                        .replaceAll("targetName", targetName);
+            }
+        };
 
         body.addRowOfColumns(
-                new BSCard(
-                        TSTreeMapChartPanel.builder(treemapTable, "treemapDiv1", "Ticker", "Industry", "Sector")
-                                .layout(layoutBuilder.build())
-                                .addAttribute("text", "Change", "")
-                                .addAttribute("values", "MarketCap", 0d)
-                                .addAttribute("marker.colors", "ChangeAsNumber", 0d)
-                                //XXX: urls: is not a proper field... Not sure how to add extra data which will be available to the handler
-                                .addAttribute("urls", "Ticker", "")
-                                .addEventHandler(new EventHandler() {
-                                    @Override
-                                    public String asJavascript(String targetName, String divName) {
-                                        return "var clickCounter = 0;\n"
-                                                + "var timer = null;\n"
-                                                + "var timerURL = null;\n"
-                                                + targetName + ".on('plotly_treemapclick', function(data) {\n"
-                                                + "  var key = data.points[0].id;\n"
-                                                + "  var data = data.points[0].data;\n"
-                                                + "  var index = data.ids.indexOf(key);\n"
-                                                + "  var targetURL = data.urls[index];\n"
-                                                + "  //console.log(key + \"-\" + data.urls[index]);\n"
-                                                + "  //console.log(data);\n"
-                                                + "  clickCounter++;\n"
-                                                + "  if(clickCounter == 2) {\n"
-                                                + "    if(targetURL != timerURL) {\n"
-                                                + "      //restart counter for this url/cell which will also clear previous timer out\n"
-                                                + "      clickCounter = 1;\n"
-                                                + "    }\n"
-                                                + "  }\n"
-                                                + "  timerURL = targetURL;\n"
-                                                + "  if(clickCounter == 1) {\n"
-                                                + "   if(timer != null) {\n"
-                                                + "     clearTimeout(timer);\n"
-                                                + "   }\n"
-                                                + "   if (timerURL === undefined || timerURL=='') {\n"
-                                                + "     clickCounter = 0;\n"
-                                                + "     return;\n"
-                                                + "   }\n"
-                                                + "   timer = setTimeout(function() {\n"
-                                                + "     if(clickCounter == 1) {\n"
-                                                + "       window.location = 'quote?ticker='+timerURL;\n"
-//                                                + "       window.open('quote?ticker='+timerURL, '_blank');\n"
-//                                                + "       window.event.preventDefault();\n"
-//                                                + "       window.event.stopPropagation();\n"
-                                                + "     }\n"
-                                                + "     clickCounter=0;\n"
-                                                + "   }, 500 /*ms*/);\n"
-                                                + "  }\n"
-                                                + "});";
-                                    }
-                                })
-                                .build(),
+                new BSCard(new TSFigurePanel(stockBuilder.divName("treemapDiv1").build(), "treemapDiv1"),
                         "Treemap Chart")
         );
 
         Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
 
-        layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(486, 200, false);
+
+        ChartBuilder builder = ChartBuilder.createBuilder()
+                        .dataTable(bsdTable)
+                        .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
+                        //TODO: there's no way to signal this is a family tree not a category
+                        .rowColumns("Name", "Parent");
+        builder.layout(486, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv2", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv2").build(), "treemapDiv2"),
                         "Treemap Chart"),
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv3", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv3").build(), "treemapDiv3"),
                         "Treemap Chart")
         );
 
-        layoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(300, 200, false);
+        builder.layout(300, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv4", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv4").build(), "treemapDiv4"),
                         "Treemap Chart"),
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv5", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv5").build(), "treemapDiv5"),
                         "Treemap Chart"),
-                new BSCard(TSTreeMapChartPanel.builder(bsdTable, "treemapDiv6", "Name", "Parent")
-                        .layout(layoutBuilder.build())
-                        .familyTree(true)
-                        .build(),
+                new BSCard(new TSFigurePanel(builder.divName("treemapDiv6").build(), "treemapDiv6"),
                         "Treemap Chart")
         );
 

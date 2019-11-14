@@ -54,7 +54,7 @@ public class TSSunburstChartPanel extends TSFigurePanel {
         Figure figure = null;
 
         try {
-            figure = SunburstPlot.create(TSTreeMapChartPanel.defaultLayout(width, height, enableLegend), table, new EventHandler[0], columns);
+            figure = SunburstPlot.create(TSFigurePanel.createLayoutBuilder(width, height, enableLegend).build(), table, new EventHandler[0], columns);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
