@@ -228,18 +228,10 @@ public class Charts extends AbstractComponentsChartsPage {
         Layout.LayoutBuilder sunburstLayoutBuilder = TSFigurePanel.createLayoutBuilder(500, 200, false);
         Layout sunburstLayout = sunburstLayoutBuilder.build();
 
-        //add dummy parent entries
-        //TODO: perhaps this could be simplified and have the chart do this?
-        treemapTable.stringColumn("Sector").unique().forEach(s -> {
-            Row r = treemapTable.appendRow();
-            r.setString("Company", s);
-            r.setString("Sector", "");
-        });
         ChartBuilder treemapBuilder = ChartBuilder.createBuilder()
                 .dataTable(treemapTable)
                 .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                .rowColumns("Company")
-                .dataColumns("Sector")
+                .rowColumns("Company", "Sector")
                 .layout(500, 200, false);
 
         body.addRowOfColumns(

@@ -1,9 +1,13 @@
 package tech.tablesaw.charts.impl.plotly;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
+import tech.tablesaw.plotly.api.TableExtract;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.event.EventHandler;
@@ -243,24 +247,34 @@ public class PlotlyChartBuilder extends ChartBuilder {
     protected Figure buildTreemap() {
         Figure figure =null;
         try {
+            
+            List<String> extraCols = new ArrayList<>();
+            if(sizeColumn != null) {
+                extraCols.add(sizeColumn);
+            }
+            if (labelColumns != null && labelColumns.length > 0) {
+                extraCols.add(labelColumns[0]);
+            }
+            if(colorColumn!=null){
+                extraCols.add(colorColumn);
+            }
+            
+            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, extraCols.toArray(String[]::new)), "ids");
+            
             Map<String, Object[]> extra = new HashMap<>();
             if (sizeColumn != null) {
-                extra.put("values", dataTable.column(sizeColumn).asObjectArray());
+                extra.put("values", table.column(TableExtract.measure(sizeColumn)).asObjectArray());
             }
-            if (detailColumns != null && detailColumns.length > 0) {
+            if (labelColumns != null && labelColumns.length > 0) {
                 //TODO: log if detailColumns has more then 1 item?
-                extra.put("text", dataTable.column(detailColumns[0]).asObjectArray());
+                extra.put("text", table.column(TableExtract.measure(labelColumns[0])).asObjectArray());
             }
             if (colorColumn != null) {
-                extra.put("marker.colors", dataTable.column(colorColumn).asObjectArray());
+                extra.put("marker.colors", table.column(TableExtract.measure(colorColumn)).asObjectArray());
             }
 
-            figure = TreemapPlot.create(layout, dataTable,
-                    rowColumns[0],
-                    //if label not explicit, use row column
-                    (labelColumns != null && labelColumns.length > 0) ? labelColumns[0] : rowColumns[0],
-                    //parents
-                    dataColumns[0],
+            figure = TreemapPlot.create(layout, table,
+                    "ids", "Label", "Parent",
                     extra,
                     new EventHandler[0]);
         } catch ( Exception e ) {

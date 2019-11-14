@@ -20,10 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.DoubleFunction;
-import java.util.stream.Collectors;
 import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
@@ -31,16 +27,12 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
-import tech.tablesaw.aggregate.AggregateFunction;
-import tech.tablesaw.aggregate.AggregateFunctions;
-import tech.tablesaw.api.ColumnType;
 import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.columns.numbers.DoubleColumnType;
-import tech.tablesaw.columns.strings.StringColumnType;
 import tech.tablesaw.plotly.event.EventHandler;
 
 public class ChartsTreemap extends AbstractComponentsChartsPage {
@@ -85,142 +77,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         treemapTable.addColumns(numericChange);
 
         //System.out.println(treemapTable.structure());
-        return unique(aggregate(treemapTable), "ids");
-    }
-
-    static AggregateFunction<StringColumn, String> firstString = new AggregateFunction<StringColumn, String>("First") {
-        @Override
-        public String summarize(StringColumn v) {
-            return v.isEmpty() ? StringColumnType.missingValueIndicator() : v.get(0);
-        }
-
-        @Override
-        public boolean isCompatibleColumn(ColumnType type) {
-            return type == returnType();
-        }
-
-        @Override
-        public ColumnType returnType() {
-            return ColumnType.STRING;
-        }
-    };
-
-    public static Table unique(Table treemapTable, String idCol) {
-        List<Column<?>> columns = treemapTable.columns().stream().filter(c -> !idCol.equals(c.name())).collect(Collectors.toList());
-        List<String> columnNames = columns.stream().map(Column::name).collect(Collectors.toList());
-        //System.out.println(columnNames);
-        treemapTable = treemapTable.summarize(columnNames, AggregateFunctions.first, firstString).by(idCol);
-        treemapTable.columns().forEach(c -> {
-            if (c.name().startsWith("First [")) {
-                String newName = c.name().substring("First [".length());
-                if (newName.endsWith("]")) {
-                    newName = newName.substring(0, newName.length() - 1);
-                }
-                c.setName(newName);
-            }
-        });
-
         return treemapTable;
-    }
-
-    public static Table aggregate(Table treemapTable) {
-
-        Table view = treemapTable.select("Ticker", "Industry", "Sector", "Change", "ChangeAsNumber", "MarketCap");
-
-        //create IDs for each ticker/industry/sector
-        StringColumn tickerIdColumn = view.stringColumn("Ticker").map((t) -> {
-            return "t-" + t;
-        });
-        tickerIdColumn.setName("ids");
-        StringColumn industryIdColumn = view.stringColumn("Industry").map((t) -> {
-            return "i-" + t;
-        });
-        industryIdColumn.setName("ids");
-        StringColumn sectorIdColumn = view.stringColumn("Sector").map((t) -> {
-            return "s-" + t;
-        });
-        sectorIdColumn.setName("ids");
-
-        //create views
-        Table tickerIndustryView = view.select("Ticker", "Change", "ChangeAsNumber", "MarketCap");
-        tickerIndustryView.addColumns(tickerIdColumn,
-                industryIdColumn.copy().setName("Parent"));
-        tickerIndustryView.stringColumn("Ticker").setName("Label");
-        // --> [ids, Label (ie. Ticker), Parent (ie. Industry ids), Change, ChangeAsNumber, MarketCap]
-
-        //aggregate Industry MarketCap and ChangeAsNumber
-        Table industryAggregation = tickerIndustryView.summarize(Arrays.asList("MarketCap", "ChangeAsNumber"),
-                AggregateFunctions.sum, AggregateFunctions.mean).by("Parent");
-        industryAggregation.column("Parent").setName("ids");
-        industryAggregation.column("MEAN [ChangeAsNumber]").setName("ChangeAsNumber");
-//        industryAggregation.column("SUM [MarketCap]").setName("MarketCap");
-        //XXX: here I set MarketCap to 0 since branchvalues = remainder by default. TODO: Set branchvalues=total
-        industryAggregation.addColumns(industryAggregation.doubleColumn("ChangeAsNumber").map((t) -> {
-            return 0d;
-        }).setName("MarketCap"));
-        industryAggregation = industryAggregation.select("ids", "MarketCap", "ChangeAsNumber");
-        // --> [ids (ie. Industry ids), ChangeAsNumber, MarketCap]
-
-        //System.out.println(industryAggregation);
-
-        Table industryView = view.select("Industry" /*, "Change", "ChangeAsNumber", "MarketCap" */);
-        industryView.addColumns(industryIdColumn,
-                sectorIdColumn.copy().setName("Parent"));
-        industryView.stringColumn("Industry").setName("Label");
-        // [ids (. ie Industry ids), Label (ie. Industry), Parent (ie. Sector ids)]
-
-        Table industrySectorView = industryView.joinOn("ids").inner(industryAggregation);
-        // [ids (. ie Industry ids), Label (ie. Industry), Parent (ie. Sector ids), ChangeAsNumber, MarketCap]
-        industrySectorView.addColumns(industrySectorView.doubleColumn("ChangeAsNumber").mapInto(new DoubleFunction<String>() {
-            @Override
-            public String apply(double value) {
-                return String.format("%.2f%%", value);
-            }
-        }, StringColumn.create("Change")));
-        // [ids (. ie Industry ids), Label (ie. Industry), Parent (ie. Sector ids), ChangeAsNumber, MarketCap, Change (ie. with %)]
-        //System.out.println(industrySectorView);
-
-        //aggregate Sector MarketCap and ChangeAsNumber
-        Table sectorAggregation = industrySectorView.summarize(Arrays.asList("MarketCap", "ChangeAsNumber"),
-                AggregateFunctions.sum, AggregateFunctions.mean).by("Parent");
-        sectorAggregation.column("Parent").setName("ids");
-        sectorAggregation.column("MEAN [ChangeAsNumber]").setName("ChangeAsNumber");
-//        sectorAggregation.column("SUM [MarketCap]").setName("MarketCap");
-        //XXX: here I set MarketCap to 0 since branchvalues = remainder by default. TODO: Set branchvalues=total
-        sectorAggregation.addColumns(sectorAggregation.doubleColumn("ChangeAsNumber").map((t) -> {
-            return 0d;
-        }).setName("MarketCap"));
-        sectorAggregation = sectorAggregation.select("ids", "MarketCap", "ChangeAsNumber");
-        // --> [ids (ie. Sector ids), ChangeAsNumber, MarketCap]
-
-        //System.out.println(sectorAggregation);
-
-        Table sectorView = view.select("Sector" /*, "Change", "ChangeAsNumber", "MarketCap"*/);
-        sectorView.addColumns(sectorIdColumn);
-        sectorView.addColumns(view.stringColumn("Sector").map((t) -> {
-            //no parent
-            return "";
-        }).setName("Parent"));
-        sectorView.stringColumn("Sector").setName("Label");
-        // [ids (. ie Sector ids), Label (ie. Sector), Parent (ie. nothing/empty string)]
-
-        Table sectorFinalView = sectorView.joinOn("ids").inner(sectorAggregation);
-        // [ids (. ie Sector ids), Label (ie. Sector), Parent (ie. nothing/empty string), ChangeAsNumber, MarketCap]
-        sectorFinalView.addColumns(sectorFinalView.doubleColumn("ChangeAsNumber").mapInto(new DoubleFunction<String>() {
-            @Override
-            public String apply(double value) {
-                return String.format("%.2f%%", value);
-            }
-        }, StringColumn.create("Change")));
-        // [ids (. ie Sector ids), Label (ie. Sector), Parent (ie. nothing/empty string), ChangeAsNumber, MarketCap, Change (ie. with %)]
-        //System.out.println(sectorFinalView);
-
-        //append views into one
-        //now they are all: ids, Label, Parent(with IDS), Change, ChangeAsNumber, MarketCap
-        Table all = tickerIndustryView.emptyCopy().append(tickerIndustryView).append(industrySectorView).append(sectorFinalView);
-        //System.out.println(all.toString());
-
-        return all;
     }
 
     static String color(double minRange, double maxRange, Double d) {
@@ -297,12 +154,11 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         ChartBuilder stockBuilder = ChartBuilder.createBuilder()
                 .dataTable(treemapTable)
                 .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                .rowColumns("ids")
-                .labelColumns("Label")
-                .dataColumns(/* parent: */ "Parent")
-                .sizeColumn(/* values: */ "MarketCap")
-                .detailColumns(/* text: */ "Change")
-                .colorColumn(/* marker.colors: */ "ChangeAsNumber")
+                .rowColumns("Ticker", "Industry", "Sector")
+                .sizeColumn(/* values: */ "ZERO [MarketCap]")
+                //TODO: how to aggregate Change?
+//                .labelColumns(/* text: */ "Change")
+                .colorColumn(/* marker.colors: */ "MEAN [ChangeAsNumber]")
                 .layout(1043, 500, false);
 
         //TODO: Event handler
@@ -325,8 +181,8 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         ChartBuilder builder = ChartBuilder.createBuilder()
                         .dataTable(bsdTable)
                         .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                        .rowColumns("Name")
-                        .dataColumns("Parent");
+                        //TODO: there's no way to signal this is a family tree not a category
+                        .rowColumns("Name", "Parent");
         builder.layout(486, 200, false);
 
         body.addRowOfColumns(
