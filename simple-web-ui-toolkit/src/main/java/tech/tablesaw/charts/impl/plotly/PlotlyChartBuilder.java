@@ -259,7 +259,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 extraCols.add(colorColumn);
             }
             
-            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, extraCols.toArray(String[]::new)), "ids");
+            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, extraCols.stream().toArray(String[]::new)), "ids");
             
             Map<String, Object[]> extra = new HashMap<>();
             if (sizeColumn != null) {
