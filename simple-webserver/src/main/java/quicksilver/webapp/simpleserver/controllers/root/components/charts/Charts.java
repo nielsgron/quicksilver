@@ -25,10 +25,8 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.DoubleColumn;
-import tech.tablesaw.api.Row;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
-import tech.tablesaw.plotly.components.Layout;
 
 public class Charts extends AbstractComponentsChartsPage {
 
@@ -225,19 +223,23 @@ public class Charts extends AbstractComponentsChartsPage {
         Table treemapTable = stockEquitiesTable;
         Table sunburstTable = stockEquitiesTable;
 
-        Layout.LayoutBuilder sunburstLayoutBuilder = TSFigurePanel.createLayoutBuilder(500, 200, false);
-        Layout sunburstLayout = sunburstLayoutBuilder.build();
-
         ChartBuilder treemapBuilder = ChartBuilder.createBuilder()
                 .dataTable(treemapTable)
                 .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
                 .rowColumns("Company", "Sector")
                 .layout(500, 200, false);
 
+        ChartBuilder sunburstBuilder = ChartBuilder.createBuilder()
+                .dataTable(sunburstTable)
+                .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
+                .rowColumns("Company", "Sector")
+                .sizeColumn("MarketCap")
+                .layout(500, 200, false);
+
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(treemapBuilder.divName("treemapDiv").build(), "treemapDiv"),
                         "Treemap Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstLayout, sunburstTable, "sunburstDiv", "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSFigurePanel(sunburstBuilder.divName("sunburstDiv").build(), "sunburstDiv") ,
                         "Sunburst Chart")
         );
 

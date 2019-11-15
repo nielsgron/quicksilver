@@ -7,6 +7,7 @@ import java.util.Map;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
+import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.api.TableExtract;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
@@ -224,6 +225,22 @@ public class PlotlyChartBuilder extends ChartBuilder {
     @Override
     protected Figure buildSunburst() {
         Figure figure =null;
+        try {
+            if (sizeColumn == null) {
+                throw new IllegalStateException("Missing size column");
+            }
+
+            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, new String[]{"ZERO [" +sizeColumn + "]"}), "ids");
+
+            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
+                    
+            figure = SunburstPlot.create(layout, table,
+                    "ids", "Label", "Parent",
+                    sizeColumn,
+                    eventHandlers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return figure;
     }
 
@@ -273,10 +290,12 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 extra.put("marker.colors", table.column(TableExtract.measure(colorColumn)).asObjectArray());
             }
 
+            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
+
             figure = TreemapPlot.create(layout, table,
                     "ids", "Label", "Parent",
                     extra,
-                    new EventHandler[0]);
+                    eventHandlers);
         } catch ( Exception e ) {
             e.printStackTrace();
         }
