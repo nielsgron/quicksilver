@@ -7,6 +7,7 @@ import java.util.Map;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
+import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.api.TableExtract;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
@@ -224,6 +225,20 @@ public class PlotlyChartBuilder extends ChartBuilder {
     @Override
     protected Figure buildSunburst() {
         Figure figure =null;
+        try {
+            if (sizeColumn == null) {
+                throw new IllegalStateException("Missing size column");
+            }
+
+            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, new String[]{"ZERO [" +sizeColumn + "]"}), "ids");
+
+            figure = SunburstPlot.create(layout, table,
+                    "ids", "Label", "Parent",
+                    sizeColumn,
+                    new EventHandler[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return figure;
     }
 
