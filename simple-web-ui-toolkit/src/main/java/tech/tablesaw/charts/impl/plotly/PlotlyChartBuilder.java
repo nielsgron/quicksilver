@@ -232,10 +232,12 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
             Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, new String[]{"ZERO [" +sizeColumn + "]"}), "ids");
 
+            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
+                    
             figure = SunburstPlot.create(layout, table,
                     "ids", "Label", "Parent",
                     sizeColumn,
-                    new EventHandler[0]);
+                    eventHandlers);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -288,10 +290,12 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 extra.put("marker.colors", table.column(TableExtract.measure(colorColumn)).asObjectArray());
             }
 
+            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
+
             figure = TreemapPlot.create(layout, table,
                     "ids", "Label", "Parent",
                     extra,
-                    new EventHandler[0]);
+                    eventHandlers);
         } catch ( Exception e ) {
             e.printStackTrace();
         }

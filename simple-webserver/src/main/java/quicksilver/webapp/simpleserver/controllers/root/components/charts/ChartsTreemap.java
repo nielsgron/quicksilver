@@ -33,7 +33,6 @@ import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.columns.numbers.DoubleColumnType;
-import tech.tablesaw.plotly.event.EventHandler;
 
 public class ChartsTreemap extends AbstractComponentsChartsPage {
 
@@ -161,14 +160,10 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                 .colorColumn(/* marker.colors: */ "MEAN [ChangeAsNumber]")
                 .layout(1043, 500, false);
 
-        //TODO: Event handler
-        EventHandler clickHandler = new EventHandler() {
-            @Override
-            public String asJavascript(String targetName, String divName) {
-                return ChartsSunburst.resource("treemap-doubleclick-handler.js", "")
-                        .replaceAll("targetName", targetName);
-            }
-        };
+        stockBuilder.eventHandler((String targetName, String divName) -> {
+            return ChartsSunburst.resource("treemap-doubleclick-handler.js", "")
+                    .replaceAll("targetName", targetName);
+        });
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(stockBuilder.divName("treemapDiv1").build(), "treemapDiv1"),

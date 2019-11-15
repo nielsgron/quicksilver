@@ -26,7 +26,7 @@ targetName.on('plotly_treemapclick', function (data) {
             return;
         }
         timer = setTimeout(function () {
-            if (clickCounter == 1) {
+            if (clickCounter == 2) {
                 window.location = 'quote?ticker=' + timerURL;
                 //window.open('quote?ticker='+timerURL, '_blank');
                 //window.event.preventDefault();

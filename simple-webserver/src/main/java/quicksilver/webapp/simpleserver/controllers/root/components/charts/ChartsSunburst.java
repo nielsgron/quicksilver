@@ -27,7 +27,6 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
-import tech.tablesaw.plotly.event.EventHandler;
 
 public class ChartsSunburst extends AbstractComponentsChartsPage {
 
@@ -64,11 +63,10 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
                 .sizeColumn("MarketCap")
                 .layout(1000, 400, true);
 
-        //TODO: register handler
-        EventHandler handler = (String targetName, String divName) -> {
-                            return resource("sunburst-doubleclick-handler.js", "")
-                                    .replaceAll("targetName", targetName);
-                        };
+        sunburstBuilderBig.eventHandler((String targetName, String divName) -> {
+            return resource("sunburst-doubleclick-handler.js", "")
+                    .replaceAll("targetName", targetName);
+        });
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(sunburstBuilderBig.divName("sunburstDiv1").build(), "sunburstDiv1"),

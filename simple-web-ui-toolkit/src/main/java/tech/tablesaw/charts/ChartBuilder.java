@@ -8,6 +8,7 @@ import tech.tablesaw.plotly.components.Axis;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
+import tech.tablesaw.plotly.event.EventHandler;
 
 public abstract class ChartBuilder {
 
@@ -47,6 +48,7 @@ public abstract class ChartBuilder {
     protected String[] detailColumns;
     protected String colorColumn;
     protected String sizeColumn;
+    protected EventHandler eventHandler;
 
     public ChartBuilder() {
 
@@ -152,6 +154,11 @@ public abstract class ChartBuilder {
 
     public ChartBuilder sizeColumn(String column) {
         this.sizeColumn = column;
+        return this;
+    }
+
+    public ChartBuilder eventHandler(EventHandler handler) {
+        this.eventHandler = handler;
         return this;
     }
 
