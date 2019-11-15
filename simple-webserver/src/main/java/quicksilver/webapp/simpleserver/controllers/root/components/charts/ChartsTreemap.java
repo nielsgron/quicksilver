@@ -170,14 +170,10 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                         "Treemap Chart")
         );
 
-        Table bsdTable = TSDataSetFactory.createSampleFamilyTreeData().getTSTable();
-
-
         ChartBuilder builder = ChartBuilder.createBuilder()
-                        .dataTable(bsdTable)
+                        .dataTable(treemapTable.sampleN(20))
                         .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                        //TODO: there's no way to signal this is a family tree not a category
-                        .rowColumns("Name", "Parent");
+                        .rowColumns("Ticker", "Industry");
         builder.layout(486, 200, false);
 
         body.addRowOfColumns(
