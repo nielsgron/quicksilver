@@ -21,7 +21,6 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import tech.tablesaw.api.*;
 import tech.tablesaw.columns.Column;
-import tech.tablesaw.io.jdbc.SqlResultSetReader;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -201,19 +200,6 @@ public class TSDataSetFactory {
 
         // Populate rows
         // ?
-
-        return dataSet;
-    }
-
-    public static TSDataSet createSampleFamilyTreeData() {
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Name", "Parent"},
-                new Class[]{String.class, String.class});
-        dataSet.addRow(new Object[] { "FreeBSD"         , "386BSD" });
-        dataSet.addRow(new Object[] { "OpenBSD"         , "NetBSD" });
-        dataSet.addRow(new Object[] { "NetBSD"          , "386BSD" });
-        dataSet.addRow(new Object[] { "DragonFly BSD"   , "FreeBSD" });
-        dataSet.addRow(new Object[] { "macOS"           , "Darwin" });
-        dataSet.addRow(new Object[] { "Darwin"          , "FreeBSD" });
 
         return dataSet;
     }
