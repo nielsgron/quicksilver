@@ -87,7 +87,7 @@ public class DatabaseConnection {
     }
 
     private String getURL() {
-        return "jdbc:mysql://" + _host + ":" + _port + "/" + _database + "?verifyServerCertificate=false&useSSL=true&requireSSL=true&serverTimezone=UTC";
+        return "jdbc:mysql://" + _host + ":" + _port + "/" + _database + "?verifyServerCertificate=false&useSSL=true&requireSSL=true&serverTimezone=UTC&useServerPrepStmts=false&rewriteBatchedStatements=true";
     }
 
     public Connection testDirectJDBCConnection() throws SQLException {
