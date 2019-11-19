@@ -101,12 +101,7 @@ public class TableExtract {
     }
 
     static int indexOf(String n, String[] list) {
-        for (int i = 0; i < list.length; i++) {
-            if (n.equals(list[i])) {
-                return i;
-            }
-        }
-        return -1;
+        return Arrays.asList(list).indexOf(n);
     }
 
     public static Table aggregate(Table treemapTable, String[] hierarchy, String[] extraCols) {
