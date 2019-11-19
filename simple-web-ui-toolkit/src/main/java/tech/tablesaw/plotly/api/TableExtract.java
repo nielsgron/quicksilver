@@ -222,13 +222,7 @@ public class TableExtract {
         //System.out.println(columnNames);
         treemapTable = treemapTable.summarize(columnNames, AggregateFunctions.first, firstString).by(idCol);
         treemapTable.columns().forEach(c -> {
-            if (c.name().startsWith("First [")) {
-                String newName = c.name().substring("First [".length());
-                if (newName.endsWith("]")) {
-                    newName = newName.substring(0, newName.length() - 1);
-                }
-                c.setName(newName);
-            }
+            c.setName(measure(c.name()));
         });
 
         return treemapTable;
