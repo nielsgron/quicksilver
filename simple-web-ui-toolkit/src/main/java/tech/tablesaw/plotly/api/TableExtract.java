@@ -57,22 +57,7 @@ public class TableExtract {
             String n = matcher.group(1);
 
             if ("ZERO".equals(n)) {
-                return new AggregateFunction<DoubleColumn, Double>("Zero") {
-                    @Override
-                    public Double summarize(DoubleColumn column) {
-                        return 0d;
-                    }
-
-                    @Override
-                    public boolean isCompatibleColumn(ColumnType type) {
-                        return type == ColumnType.DOUBLE;
-                    }
-
-                    @Override
-                    public ColumnType returnType() {
-                        return ColumnType.DOUBLE;
-                    }
-                };
+                return zero;
             }
 
             for (Field f : AggregateFunctions.class.getDeclaredFields()) {
@@ -198,6 +183,23 @@ public class TableExtract {
         //System.out.println(all.toString());
         return all;
     }
+
+    static AggregateFunction<DoubleColumn, Double> zero = new AggregateFunction<DoubleColumn, Double>("Zero") {
+        @Override
+        public Double summarize(DoubleColumn column) {
+            return 0d;
+        }
+
+        @Override
+        public boolean isCompatibleColumn(ColumnType type) {
+            return type == ColumnType.DOUBLE;
+        }
+
+        @Override
+        public ColumnType returnType() {
+            return ColumnType.DOUBLE;
+        }
+    };
 
     static AggregateFunction<StringColumn, String> firstString = new AggregateFunction<StringColumn, String>("First") {
         @Override
