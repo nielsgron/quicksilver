@@ -230,7 +230,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 throw new IllegalStateException("Missing size column");
             }
 
-            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, new String[]{"ZERO [" +sizeColumn + "]"}), "ids");
+            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, new String[]{getWithDefaultAggregation(sizeColumn, "ZERO")}), "ids");
 
             EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
                     
@@ -260,6 +260,13 @@ public class PlotlyChartBuilder extends ChartBuilder {
         return figure;
     }
 
+    static String getWithDefaultAggregation(String measure, String defaultAgg) {
+        if (TableExtract.agg(measure) == null) {
+            return defaultAgg + " [" + measure + "]";
+        }
+        return measure;
+    }
+
     @Override
     protected Figure buildTreemap() {
         Figure figure =null;
@@ -267,13 +274,17 @@ public class PlotlyChartBuilder extends ChartBuilder {
             
             List<String> extraCols = new ArrayList<>();
             if(sizeColumn != null) {
-                extraCols.add(sizeColumn);
+                //For sizeColumn(), we default to SUM()
+                String sizeWithAgg = getWithDefaultAggregation(sizeColumn, "SUM");
+                extraCols.add(sizeWithAgg);
             }
             if (labelColumns != null && labelColumns.length > 0) {
                 extraCols.add(labelColumns[0]);
             }
             if(colorColumn!=null){
-                extraCols.add(colorColumn);
+                //For colorColumn(), we default to MEAN (aka average)
+                String colorWithAgg = getWithDefaultAggregation(colorColumn, "MEAN");
+                extraCols.add(colorWithAgg);
             }
             
             Table table = TableExtract.unique(TableExtract.aggregate(dataTable, rowColumns, extraCols.stream().toArray(String[]::new)), "ids");

@@ -157,7 +157,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                 .sizeColumn(/* values: */ "ZERO [MarketCap]")
                 //TODO: how to aggregate Change?
 //                .labelColumns(/* text: */ "Change")
-                .colorColumn(/* marker.colors: */ "MEAN [ChangeAsNumber]")
+                .colorColumn(/* marker.colors: */ "ChangeAsNumber")
                 .layout(1043, 500, false);
 
         stockBuilder.eventHandler((String targetName, String divName) -> {

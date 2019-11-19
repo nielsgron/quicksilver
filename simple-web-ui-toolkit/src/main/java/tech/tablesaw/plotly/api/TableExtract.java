@@ -51,7 +51,7 @@ public class TableExtract {
                 .toArray(String[]::new);
     }
 
-    static AggregateFunction _agg(String m) {
+    public static AggregateFunction agg(String m) {
         Matcher matcher = Pattern.compile("([^\\[]+) \\[([^\\]]+)\\]").matcher(m);
         if (matcher.matches()) {
             String n = matcher.group(1);
@@ -80,7 +80,7 @@ public class TableExtract {
 
     static AggregateFunction[] _agg(String[] m) {
         return Stream.of(m)
-                .map(TableExtract::_agg)
+                .map(TableExtract::agg)
                 .filter(x -> x != null)
                 .toArray(AggregateFunction[]::new);
     }
@@ -222,6 +222,7 @@ public class TableExtract {
         List<Column<?>> columns = treemapTable.columns().stream().filter(c -> !idCol.equals(c.name())).collect(Collectors.toList());
         List<String> columnNames = columns.stream().map(Column::name).collect(Collectors.toList());
         //System.out.println(columnNames);
+        //TODO: what about date columns?
         treemapTable = treemapTable.summarize(columnNames, AggregateFunctions.first, firstString).by(idCol);
         treemapTable.columns().forEach(c -> {
             c.setName(measure(c.name()));
