@@ -51,28 +51,15 @@ public class TableExtract {
                 .toArray(String[]::new);
     }
 
-    static AggregateFunction _agg(String m) {
+    public static AggregateFunction agg(String m) {
         Matcher matcher = Pattern.compile("([^\\[]+) \\[([^\\]]+)\\]").matcher(m);
         if (matcher.matches()) {
             String n = matcher.group(1);
 
             if ("ZERO".equals(n)) {
-                return new AggregateFunction<DoubleColumn, Double>("Zero") {
-                    @Override
-                    public Double summarize(DoubleColumn column) {
-                        return 0d;
-                    }
-
-                    @Override
-                    public boolean isCompatibleColumn(ColumnType type) {
-                        return type == ColumnType.DOUBLE;
-                    }
-
-                    @Override
-                    public ColumnType returnType() {
-                        return ColumnType.DOUBLE;
-                    }
-                };
+                return zero;
+            } else if ("EMPTY".equals(n)) {
+                return empty;
             }
 
             for (Field f : AggregateFunctions.class.getDeclaredFields()) {
@@ -95,18 +82,13 @@ public class TableExtract {
 
     static AggregateFunction[] _agg(String[] m) {
         return Stream.of(m)
-                .map(TableExtract::_agg)
+                .map(TableExtract::agg)
                 .filter(x -> x != null)
                 .toArray(AggregateFunction[]::new);
     }
 
     static int indexOf(String n, String[] list) {
-        for (int i = 0; i < list.length; i++) {
-            if (n.equals(list[i])) {
-                return i;
-            }
-        }
-        return -1;
+        return Arrays.asList(list).indexOf(n);
     }
 
     public static Table aggregate(Table treemapTable, String[] hierarchy, String[] extraCols) {
@@ -204,6 +186,23 @@ public class TableExtract {
         return all;
     }
 
+    static AggregateFunction<DoubleColumn, Double> zero = new AggregateFunction<DoubleColumn, Double>("Zero") {
+        @Override
+        public Double summarize(DoubleColumn column) {
+            return 0d;
+        }
+
+        @Override
+        public boolean isCompatibleColumn(ColumnType type) {
+            return type == ColumnType.DOUBLE;
+        }
+
+        @Override
+        public ColumnType returnType() {
+            return ColumnType.DOUBLE;
+        }
+    };
+
     static AggregateFunction<StringColumn, String> firstString = new AggregateFunction<StringColumn, String>("First") {
         @Override
         public String summarize(StringColumn v) {
@@ -221,19 +220,31 @@ public class TableExtract {
         }
     };
 
+    static AggregateFunction<StringColumn, String> empty = new AggregateFunction<StringColumn, String>("Empty") {
+        @Override
+        public String summarize(StringColumn v) {
+            return "";
+        }
+
+        @Override
+        public boolean isCompatibleColumn(ColumnType type) {
+            return type == returnType();
+        }
+
+        @Override
+        public ColumnType returnType() {
+            return ColumnType.STRING;
+        }
+    };
+
     public static Table unique(Table treemapTable, String idCol) {
         List<Column<?>> columns = treemapTable.columns().stream().filter(c -> !idCol.equals(c.name())).collect(Collectors.toList());
         List<String> columnNames = columns.stream().map(Column::name).collect(Collectors.toList());
         //System.out.println(columnNames);
+        //TODO: what about date columns?
         treemapTable = treemapTable.summarize(columnNames, AggregateFunctions.first, firstString).by(idCol);
         treemapTable.columns().forEach(c -> {
-            if (c.name().startsWith("First [")) {
-                String newName = c.name().substring("First [".length());
-                if (newName.endsWith("]")) {
-                    newName = newName.substring(0, newName.length() - 1);
-                }
-                c.setName(newName);
-            }
+            c.setName(measure(c.name()));
         });
 
         return treemapTable;
