@@ -279,7 +279,8 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 extraCols.add(sizeWithAgg);
             }
             if (labelColumns != null && labelColumns.length > 0) {
-                extraCols.add(labelColumns[0]);
+                String labelWithAgg = getWithDefaultAggregation(labelColumns[0], "EMPTY");
+                extraCols.add(labelWithAgg);
             }
             if(colorColumn!=null){
                 //For colorColumn(), we default to MEAN (aka average)

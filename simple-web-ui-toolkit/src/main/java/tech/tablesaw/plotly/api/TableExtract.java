@@ -58,6 +58,8 @@ public class TableExtract {
 
             if ("ZERO".equals(n)) {
                 return zero;
+            } else if ("EMPTY".equals(n)) {
+                return empty;
             }
 
             for (Field f : AggregateFunctions.class.getDeclaredFields()) {
@@ -205,6 +207,23 @@ public class TableExtract {
         @Override
         public String summarize(StringColumn v) {
             return v.isEmpty() ? StringColumnType.missingValueIndicator() : v.get(0);
+        }
+
+        @Override
+        public boolean isCompatibleColumn(ColumnType type) {
+            return type == returnType();
+        }
+
+        @Override
+        public ColumnType returnType() {
+            return ColumnType.STRING;
+        }
+    };
+
+    static AggregateFunction<StringColumn, String> empty = new AggregateFunction<StringColumn, String>("Empty") {
+        @Override
+        public String summarize(StringColumn v) {
+            return "";
         }
 
         @Override
