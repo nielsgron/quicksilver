@@ -1,6 +1,8 @@
 package tech.tablesaw.charts;
 
+import org.apache.commons.lang3.NotImplementedException;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.charts.impl.calheatmap.CalHeatmapChartBuilder;
 import tech.tablesaw.charts.impl.chartjs.ChartjsChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChartBuilder;
 import tech.tablesaw.charts.impl.vega.VegaChartBuilder;
@@ -29,11 +31,11 @@ public abstract class ChartBuilder {
     }
 
     public enum CHART_RENDERER {
-        PLOTLY, CHARTJS, VEGA
+        PLOTLY, CHARTJS, VEGA, CALHEATMAP
     }
 
     public enum CHART_TYPE {
-        AREA, BUBBLE, CANDLESTICK, HEATMAP, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
+        AREA, BUBBLE, CANDLESTICK, HEATMAP, HEATMAP_CALENDAR, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
     }
 
     protected Layout.LayoutBuilder layoutBuilder = Layout.builder();
@@ -72,6 +74,9 @@ public abstract class ChartBuilder {
 
             case VEGA:
                 return new VegaChartBuilder();
+
+            case CALHEATMAP:
+                return new CalHeatmapChartBuilder();
 
             default:
                 return new PlotlyChartBuilder();
@@ -180,6 +185,8 @@ public abstract class ChartBuilder {
                 return buildCandlestick();
             case HEATMAP:
                 return buildHeatmap();
+            case HEATMAP_CALENDAR:
+                return buildHeatmapCalendar();
             case HISTOGRAM:
                 return buildHistogram();
             case HORIZONTAL_BAR:
@@ -201,37 +208,69 @@ public abstract class ChartBuilder {
             case VERTICAL_BAR:
                 return buildVerticalBar();
             default:
-                return null;
+                throw new NotImplementedException("Not Implemented");
 
         }
     }
 
-    protected abstract Figure buildArea();
+    protected Figure buildArea() {
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildBubble();
+    protected Figure buildBubble(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildCandlestick();
+    protected Figure buildCandlestick(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildHeatmap();
+    protected Figure buildHeatmap(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildHistogram();
+    protected Figure buildHeatmapCalendar(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildHorizontalBar();
+    protected Figure buildHistogram(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildLine();
+    protected Figure buildHorizontalBar(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildOHLC();
+    protected Figure buildLine(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildPie();
+    protected Figure buildOHLC(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildScatterplot();
+    protected Figure buildPie(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildSunburst();
+    protected Figure buildScatterplot(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildTimeseries();
+    protected Figure buildSunburst(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildTreemap();
+    protected Figure buildTimeseries(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildVerticalBar();
+    protected Figure buildTreemap(){
+        throw new NotImplementedException("Not Implemented");
+    }
+
+    protected Figure buildVerticalBar(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
 }
