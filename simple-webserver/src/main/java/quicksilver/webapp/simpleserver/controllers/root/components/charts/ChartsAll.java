@@ -28,9 +28,9 @@ import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 
-public class Charts extends AbstractComponentsChartsPage {
+public class ChartsAll extends AbstractComponentsChartsPage {
 
-    public Charts() {
+    public ChartsAll() {
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -55,15 +55,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(hBarTable)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
         ChartBuilder hbarChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(hBarTable)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         body.addRowOfColumns(
@@ -82,15 +82,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(lineTable)
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
         ChartBuilder areaChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(areaTable)
                 .chartType(ChartBuilder.CHART_TYPE.AREA)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         body.addRowOfColumns(
@@ -109,15 +109,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(pieTable)
                 .chartType(ChartBuilder.CHART_TYPE.PIE)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
         ChartBuilder timeseriesChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(timeSeriesTable)
                 .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
                 .layout(500, 200, false)
-                .rowColumns("Date")
-                .dataColumns("Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Close")
                 ;
 
         body.addRowOfColumns(
@@ -142,17 +142,17 @@ public class Charts extends AbstractComponentsChartsPage {
         ChartBuilder scatterChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(scatterTable)
                 .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
-                .rowColumns("Population")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
                 .layout(500, 200, false)
                 .axisTitles("Population", "GDP")
                 ;
         ChartBuilder bubbleChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(bubbleTable)
                 .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
-                .rowColumns("Population")
-                .dataColumns("GDP")
-                .sizeColumn("GDP_Capita")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
+                .columnForSize("GDP_Capita")
                 .layout(500, 200, false)
                 .axisTitles("Population", "GDP")
                 ;
@@ -173,15 +173,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(histogramTable)
                 .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
                 .layout(500, 200, false)
-                //.rowColumns("Country")
-                .dataColumns("Population")
+                //.columnsForViewColumns("Country")
+                .columnsForViewRows("Population")
                 ;
         ChartBuilder heatmapChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(heatmapTable)
                 .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
                 .layout(500, 200, false)
-                .rowColumns("Company", "Sector")
-                //.dataColumns("Close")
+                .columnsForViewColumns("Company", "Sector")
+                //.columnsForViewRows("Close")
                 ;
 
         body.addRowOfColumns(
@@ -200,15 +200,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(candleStickTable)
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
                 .layout(500, 200, false)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
         ChartBuilder ohlcChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(ohlcTable)
                 .chartType(ChartBuilder.CHART_TYPE.OHLC)
                 .layout(500, 200, false)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
 
         body.addRowOfColumns(
@@ -226,14 +226,14 @@ public class Charts extends AbstractComponentsChartsPage {
         ChartBuilder treemapBuilder = ChartBuilder.createBuilder()
                 .dataTable(treemapTable)
                 .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                .rowColumns("Company", "Sector")
+                .columnsForViewColumns("Company", "Sector")
                 .layout(500, 200, false);
 
         ChartBuilder sunburstBuilder = ChartBuilder.createBuilder()
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
-                .rowColumns("Company", "Sector")
-                .sizeColumn("MarketCap")
+                .columnsForViewColumns("Company", "Sector")
+                .columnForSize("MarketCap")
                 .layout(500, 200, false);
 
         body.addRowOfColumns(

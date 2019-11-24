@@ -44,8 +44,8 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(histogramTable)
                 .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
-                //.rowColumns("Country")
-                .dataColumns("Population")
+                //.columnsForViewColumns("Country")
+                .columnsForViewRows("Population")
                 ;
 
         chartBuilder.layout(1000, 200, false);

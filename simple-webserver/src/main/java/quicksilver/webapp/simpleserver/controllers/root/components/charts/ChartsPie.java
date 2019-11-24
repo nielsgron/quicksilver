@@ -44,8 +44,8 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(pieTable)
                 .chartType(ChartBuilder.CHART_TYPE.PIE)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         chartBuilder.layout(1000, 200, false);

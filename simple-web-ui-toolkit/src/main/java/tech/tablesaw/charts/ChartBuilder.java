@@ -22,9 +22,9 @@ public abstract class ChartBuilder {
         // Example Usage :
         Table table = Table.create();
         Figure figure = ChartBuilder.createBuilder().dataTable(table).chartType(CHART_TYPE.TREEMAP)
-                .rowColumns("Sector", "Industry")
-                .dataColumns("MarketCap")
-                .colorColumn("ChangeAsNumber")
+                .columnsForViewColumns("Sector", "Industry")
+                .columnsForViewRows("MarketCap")
+                .columnForColor("ChangeAsNumber")
                 .build();
         */
 
@@ -44,12 +44,12 @@ public abstract class ChartBuilder {
     protected CHART_TYPE chartType;
     protected Layout layout;
     protected String divName;
-    protected String[] rowColumns;
-    protected String[] dataColumns;
-    protected String[] labelColumns;
-    protected String[] detailColumns;
-    protected String colorColumn;
-    protected String sizeColumn;
+    protected String[] columnsForViewColumns;
+    protected String[] columnsForViewRows;
+    protected String[] columnsForLabels;
+    protected String[] columnsForDetails;
+    protected String columnForColor;
+    protected String columnForSize;
     protected EventHandler eventHandler;
 
     public ChartBuilder() {
@@ -132,33 +132,33 @@ public abstract class ChartBuilder {
         return this;
     }
 
-    public ChartBuilder rowColumns(String... columns) {
-        this.rowColumns = columns;
+    public ChartBuilder columnsForViewColumns(String... columns) {
+        this.columnsForViewColumns = columns;
         return this;
     }
 
-    public ChartBuilder dataColumns(String... columns) {
-        this.dataColumns = columns;
+    public ChartBuilder columnsForViewRows(String... columns) {
+        this.columnsForViewRows = columns;
         return this;
     }
 
-    public ChartBuilder labelColumns(String... columns) {
-        this.labelColumns = columns;
+    public ChartBuilder columnsForLabels(String... columns) {
+        this.columnsForLabels = columns;
         return this;
     }
 
-    public ChartBuilder detailColumns(String... columns) {
-        this.detailColumns = columns;
+    public ChartBuilder columnsForDetails(String... columns) {
+        this.columnsForDetails = columns;
         return this;
     }
 
-    public ChartBuilder colorColumn(String column) {
-        this.colorColumn = column;
+    public ChartBuilder columnForColor(String column) {
+        this.columnForColor = column;
         return this;
     }
 
-    public ChartBuilder sizeColumn(String column) {
-        this.sizeColumn = column;
+    public ChartBuilder columnForSize(String column) {
+        this.columnForSize = column;
         return this;
     }
 

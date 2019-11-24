@@ -54,8 +54,8 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(ohlcTable)
                 .chartType(ChartBuilder.CHART_TYPE.OHLC)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
 
         chartBuilder.layout(1000, 200, false);

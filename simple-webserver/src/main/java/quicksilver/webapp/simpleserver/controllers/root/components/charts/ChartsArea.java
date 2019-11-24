@@ -44,8 +44,8 @@ public class ChartsArea extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(areaTable)
                 .chartType(ChartBuilder.CHART_TYPE.AREA)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         chartBuilder.layout(1000, 200, false);

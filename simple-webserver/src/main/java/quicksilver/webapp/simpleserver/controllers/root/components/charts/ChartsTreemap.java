@@ -153,11 +153,11 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         ChartBuilder stockBuilder = ChartBuilder.createBuilder()
                 .dataTable(treemapTable)
                 .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                .rowColumns("Ticker", "Industry", "Sector")
-                .sizeColumn(/* values: */ "ZERO [MarketCap]")
+                .columnsForViewColumns("Ticker", "Industry", "Sector")
+                .columnForSize(/* values: */ "ZERO [MarketCap]")
                 //TODO: how to aggregate Change?
-                .labelColumns(/* text: */ "Change")
-                .colorColumn(/* marker.colors: */ "ChangeAsNumber")
+                .columnsForLabels(/* text: */ "Change")
+                .columnForColor(/* marker.colors: */ "ChangeAsNumber")
                 .layout(1043, 500, false);
 
         stockBuilder.eventHandler((String targetName, String divName) -> {
@@ -173,7 +173,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         ChartBuilder builder = ChartBuilder.createBuilder()
                         .dataTable(treemapTable.sampleN(20))
                         .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
-                        .rowColumns("Ticker", "Industry");
+                        .columnsForViewColumns("Ticker", "Industry");
         builder.layout(486, 200, false);
 
         body.addRowOfColumns(

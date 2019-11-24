@@ -44,8 +44,8 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(heatmapTable)
                 .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
-                .rowColumns("Company", "Sector")
-                //.dataColumns("Close")
+                .columnsForViewColumns("Company", "Sector")
+                //.columnsForViewRows("Close")
                 ;
 
         chartBuilder.layout(1000, 200, false);

@@ -44,8 +44,8 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(scatterTable)
                 .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
-                .rowColumns("Population")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
                 .axisTitles("Population", "GDP")
                 ;
 

@@ -44,8 +44,8 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(timeSeriesTable)
                 .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
-                .rowColumns("Date")
-                .dataColumns("Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Close")
                 .axisTitles("", "Close Price")
                 ;
 

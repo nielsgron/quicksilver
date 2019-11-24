@@ -178,7 +178,7 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
 
 
         webServer.get("/components/charts", (request, response) -> {
-            HtmlStream stream = renderPageAndReturnStream(new Charts(), new HtmlStreamStringBuffer());
+            HtmlStream stream = renderPageAndReturnStream(new ChartsAll(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
 

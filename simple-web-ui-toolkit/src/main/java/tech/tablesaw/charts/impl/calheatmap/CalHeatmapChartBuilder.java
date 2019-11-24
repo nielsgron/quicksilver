@@ -11,7 +11,7 @@ public class CalHeatmapChartBuilder extends ChartBuilder {
         Figure figure =null;
 
         try {
-            CalHeatmapPlot plot = new CalHeatmapPlot(layout, dataTable, rowColumns[0], dataColumns[0]);
+            CalHeatmapPlot plot = new CalHeatmapPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
             figure = plot.getFigure();
 
         } catch ( Exception e ) {

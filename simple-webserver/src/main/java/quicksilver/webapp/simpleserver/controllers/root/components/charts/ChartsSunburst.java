@@ -59,8 +59,8 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         ChartBuilder sunburstBuilderBig = ChartBuilder.createBuilder()
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
-                .rowColumns("Company", "Industry", "Sector")
-                .sizeColumn("MarketCap")
+                .columnsForViewColumns("Company", "Industry", "Sector")
+                .columnForSize("MarketCap")
                 .layout(1000, 400, true);
 
         sunburstBuilderBig.eventHandler((String targetName, String divName) -> {
@@ -76,8 +76,8 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         ChartBuilder sunburstBuilder = ChartBuilder.createBuilder()
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
-                .rowColumns("Company", "Sector")
-                .sizeColumn("MarketCap")
+                .columnsForViewColumns("Company", "Sector")
+                .columnForSize("MarketCap")
                 .layout(450, 200, false);
 
         body.addRowOfColumns(

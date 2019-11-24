@@ -46,8 +46,8 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 .axisTitles("GDP", "Country")
                 ;
 
@@ -63,7 +63,7 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
                     "Country GDP (Nominal)"),
-            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "3").dataColumns("Population").build(), divName + "3"),
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "3").columnsForViewRows("Population").build(), divName + "3"),
                     "Country Population")
         );
 
@@ -72,9 +72,9 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
                     "Country GDP (Nominal)"),
-            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "5").dataColumns("GDP_Capita").build(), divName + "5"),
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "5").columnsForViewRows("GDP_Capita").build(), divName + "5"),
                     "Country GDP (Per Capita)"),
-            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "6").dataColumns("Population").build(), divName + "6"),
+            new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "6").columnsForViewRows("Population").build(), divName + "6"),
                     "Country Population")
         );
 
