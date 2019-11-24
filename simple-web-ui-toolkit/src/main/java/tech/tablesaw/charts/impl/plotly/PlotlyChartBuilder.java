@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.charts.Chart;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
 import tech.tablesaw.plotly.api.SunburstPlot;
@@ -71,7 +72,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
     }
 
     @Override
-    protected Figure buildArea() {
+    protected Chart buildArea() {
         Figure figure =null;
 
         try {
@@ -82,11 +83,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildBubble() {
+    protected Chart buildBubble() {
         Figure figure =null;
 
         try {
@@ -98,11 +99,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildCandlestick() {
+    protected Chart buildCandlestick() {
         Figure figure =null;
 
         try {
@@ -114,11 +115,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildHeatmap() {
+    protected Chart buildHeatmap() {
         Figure figure =null;
 
         try {
@@ -129,11 +130,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildHistogram() {
+    protected Chart buildHistogram() {
         Figure figure =null;
 
         try {
@@ -144,11 +145,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildHorizontalBar() {
+    protected Chart buildHorizontalBar() {
         Figure figure =null;
 
         try {
@@ -159,11 +160,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildLine() {
+    protected Chart buildLine() {
         Figure figure =null;
 
         try {
@@ -174,11 +175,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildOHLC() {
+    protected Chart buildOHLC() {
         Figure figure =null;
 
         try {
@@ -189,11 +190,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildPie() {
+    protected Chart buildPie() {
         Figure figure =null;
 
         try {
@@ -204,11 +205,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildScatterplot() {
+    protected Chart buildScatterplot() {
         Figure figure =null;
 
         try {
@@ -219,11 +220,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildSunburst() {
+    protected Chart buildSunburst() {
         Figure figure =null;
         try {
             if (columnForSize == null) {
@@ -241,11 +242,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildTimeseries() {
+    protected Chart buildTimeseries() {
         Figure figure =null;
 
         try {
@@ -257,7 +258,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     static String getWithDefaultAggregation(String measure, String defaultAgg) {
@@ -268,7 +269,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
     }
 
     @Override
-    protected Figure buildTreemap() {
+    protected Chart buildTreemap() {
         Figure figure =null;
         try {
             
@@ -311,11 +312,11 @@ public class PlotlyChartBuilder extends ChartBuilder {
         } catch ( Exception e ) {
             e.printStackTrace();
         }
-        return figure;
+        return new PlotlyChart(figure);
     }
 
     @Override
-    protected Figure buildVerticalBar() {
+    protected Chart buildVerticalBar() {
         Figure figure =null;
 
         try {
@@ -326,7 +327,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
         }
 
-        return figure;
+        return new PlotlyChart(figure);
     }
 
 }

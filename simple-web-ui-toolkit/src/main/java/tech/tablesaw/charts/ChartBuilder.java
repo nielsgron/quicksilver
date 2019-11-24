@@ -172,7 +172,7 @@ public abstract class ChartBuilder {
         return divName;
     }
 
-    public Figure build() {
+    public Chart build() {
 
         layout = layoutBuilder.build();
 
@@ -213,63 +213,63 @@ public abstract class ChartBuilder {
         }
     }
 
-    protected Figure buildArea() {
+    protected Chart buildArea() {
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildBubble(){
+    protected Chart buildBubble(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildCandlestick(){
+    protected Chart buildCandlestick(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildHeatmap(){
+    protected Chart buildHeatmap(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildHeatmapCalendar(){
+    protected Chart buildHeatmapCalendar(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildHistogram(){
+    protected Chart buildHistogram(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildHorizontalBar(){
+    protected Chart buildHorizontalBar(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildLine(){
+    protected Chart buildLine(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildOHLC(){
+    protected Chart buildOHLC(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildPie(){
+    protected Chart buildPie(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildScatterplot(){
+    protected Chart buildScatterplot(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildSunburst(){
+    protected Chart buildSunburst(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildTimeseries(){
+    protected Chart buildTimeseries(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildTreemap(){
+    protected Chart buildTreemap(){
         throw new NotImplementedException("Not Implemented");
     }
 
-    protected Figure buildVerticalBar(){
+    protected Chart buildVerticalBar(){
         throw new NotImplementedException("Not Implemented");
     }
 

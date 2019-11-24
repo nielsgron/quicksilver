@@ -18,6 +18,7 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
+import tech.tablesaw.charts.Chart;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
@@ -51,12 +52,12 @@ public class TSFigurePanel extends BSPanel {
 
     protected String divName;
 
-    public TSFigurePanel(Figure figure, String divName) {
+    public TSFigurePanel(Chart figure, String divName) {
         this.divName = divName;
         addFigure(figure);
     }
 
-    public void addFigure(Figure figure) {
+    public void addFigure(Chart figure) {
 
         if ( figure == null ) {
             this.add(new HTMLText("To be implemented"));

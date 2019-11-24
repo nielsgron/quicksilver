@@ -1,24 +1,23 @@
 package tech.tablesaw.charts.impl.calheatmap;
 
+import tech.tablesaw.charts.Chart;
 import tech.tablesaw.charts.ChartBuilder;
-import tech.tablesaw.charts.impl.calheatmap.plots.CalHeatmapPlot;
-import tech.tablesaw.plotly.components.Figure;
 
 public class CalHeatmapChartBuilder extends ChartBuilder {
 
-    protected Figure buildHeatmapCalendar(){
+    protected Chart buildHeatmapCalendar(){
 
-        Figure figure =null;
+        CalHeatmapChart chart = new CalHeatmapChart();
 
-        try {
-            CalHeatmapPlot plot = new CalHeatmapPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+//        try {
+//            CalHeatmapPlot plot = new CalHeatmapPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
+//            figure = plot.getFigure();
+//
+//        } catch ( Exception e ) {
+//            e.printStackTrace();
+//        }
 
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-
-        return figure;
+        return chart;
 
     }
 
