@@ -44,7 +44,7 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         try {
             stockPricesTable = TableData.loadStockPrices(LocalDate.of(2019, 9, 10), LocalDate.of(2019, 9, 24));
         } catch ( Exception e ) {
-            stockEquitiesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+            stockPricesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
         }
 
         // Add Vertical Bar Chart
@@ -242,6 +242,25 @@ public class ChartsAll extends AbstractComponentsChartsPage {
                 new BSCard(new TSFigurePanel(sunburstBuilder.divName("sunburstDiv").build(), "sunburstDiv") ,
                         "Sunburst Chart")
         );
+
+        // Add Calendar Heatmap
+        Table calendarHeatmapTable = stockPricesTable;
+
+        ChartBuilder calendarHeatmapChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.CALHEATMAP)
+                .dataTable(calendarHeatmapTable)
+                .chartType(ChartBuilder.CHART_TYPE.HEATMAP_CALENDAR)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Volume")
+                ;
+
+        body.addRowOfColumns(
+                new BSCard(new TSFigurePanel(calendarHeatmapChartBuilder.divName("calHeat1Div").build(), "calHeat1Div"),
+                        "Calendar Heatmap Chart"),
+                new BSCard(new TSFigurePanel(calendarHeatmapChartBuilder.divName("calHeat2Div").build(), "calHeat2Div"),
+                        "Calendar Heatmap Chart")
+        );
+
 
         body.doLayout();
 

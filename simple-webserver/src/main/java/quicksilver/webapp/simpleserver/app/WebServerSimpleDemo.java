@@ -238,6 +238,11 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             HtmlStream stream = renderPageAndReturnStream(new ChartsVBar(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
+        webServer.get("/components/charts/calheatmap", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsCalHeatmap(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
 
         webServer.get("/components/tables", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Tables(), new HtmlStreamStringBuffer());

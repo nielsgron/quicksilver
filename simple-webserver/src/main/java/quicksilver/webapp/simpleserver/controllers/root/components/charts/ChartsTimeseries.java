@@ -29,7 +29,7 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
 
     public ChartsTimeseries() {
         super();
-        toolbar.setActiveButton("Timeseries");
+        toolbar.setActiveButton("T-series");
     }
 
     protected BSPanel createContentPanelCenter() {

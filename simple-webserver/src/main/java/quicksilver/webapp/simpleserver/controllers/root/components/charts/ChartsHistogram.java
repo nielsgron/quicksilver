@@ -29,7 +29,7 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
 
     public ChartsHistogram() {
         super();
-        toolbar.setActiveButton("Histogram");
+        toolbar.setActiveButton("Histo");
     }
 
     protected BSPanel createContentPanelCenter() {
