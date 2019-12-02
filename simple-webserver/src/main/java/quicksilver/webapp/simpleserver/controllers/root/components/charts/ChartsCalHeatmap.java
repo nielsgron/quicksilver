@@ -9,6 +9,7 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.charts.impl.calheatmap.CalHeatmapLayout;
 
 import java.time.LocalDate;
 
@@ -45,14 +46,16 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
                 .columnsForViewRows("Volume")
                 ;
 
-//        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
-//                .dataTable(areaTable)
-//                .chartType(ChartBuilder.CHART_TYPE.AREA)
-//                .columnsForViewColumns("Country")
-//                .columnsForViewRows("GDP")
-//                ;
+        CalHeatmapLayout.LayoutBuilder layoutBuilder = (CalHeatmapLayout.LayoutBuilder)chartBuilder.getLayoutBuilder();
 
         chartBuilder.layout(1000, 200, false);
+        layoutBuilder.domain("month")
+                .subDomain("x_day")
+                .cellSize(21)
+                .domainGutter(14)
+                .range(6)
+                .highlight(LocalDate.of(2019,10, 15))
+                .subDomainTextFormat("%d");
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
@@ -60,6 +63,13 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
         );
 
         chartBuilder.layout(450, 200, false);
+        layoutBuilder.domain("month")
+                .subDomain("x_day")
+                .cellSize(20)
+                .domainGutter(12)
+                .range(3)
+                .highlight(null)
+                .subDomainTextFormat("%d");
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -69,6 +79,13 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
         );
 
         chartBuilder.layout(300, 200, false);
+        layoutBuilder.domain("month")
+                .subDomain("x_day")
+                .cellSize(19)
+                .domainGutter(8)
+                .range(2)
+                .highlight(null)
+                .subDomainTextFormat("%d");
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

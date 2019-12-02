@@ -27,6 +27,7 @@ import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.charts.impl.calheatmap.CalHeatmapLayout;
 
 public class ChartsAll extends AbstractComponentsChartsPage {
 
@@ -253,6 +254,17 @@ public class ChartsAll extends AbstractComponentsChartsPage {
                 .columnsForViewColumns("Date")
                 .columnsForViewRows("Volume")
                 ;
+
+        CalHeatmapLayout.LayoutBuilder layoutBuilder = (CalHeatmapLayout.LayoutBuilder)calendarHeatmapChartBuilder.getLayoutBuilder();
+
+        layoutBuilder.domain("month")
+                .subDomain("x_day")
+                .cellSize(20)
+                .domainGutter(14)
+                .range(3)
+                .highlight(LocalDate.of(2019,10, 15))
+                .subDomainTextFormat("%d");
+
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(calendarHeatmapChartBuilder.divName("calHeat1Div").build(), "calHeat1Div"),

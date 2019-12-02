@@ -10,12 +10,12 @@ import java.time.ZoneOffset;
 
 public class CalHeatmapChart extends Chart {
 
-    private Layout layout;
+    private CalHeatmapLayout layout;
     private Table table;
     private String timestampCol;
     private String valueCol;
 
-    public CalHeatmapChart(Layout layout, Table table, String timestampCol, String valueCol) {
+    public CalHeatmapChart(CalHeatmapLayout layout, Table table, String timestampCol, String valueCol) {
         this.layout = layout;
         this.table = table;
         this.timestampCol = timestampCol;
@@ -115,16 +115,29 @@ public class CalHeatmapChart extends Chart {
         //js.append("start: new Date(2017, 3),\n");
         js.append("start: new Date(2019, 8),\n");
         js.append("itemSelector: \"#" + divName+ "\",\n");
-        js.append("itemName: [\"ppb\", \"ppb\"],\n");
-        js.append("domain: \"month\",\n");
-        js.append("subDomain: \"x_day\",\n");
-        js.append("cellSize: 19,\n");
-        js.append("domainGutter: 12,\n");
-        js.append("subDomainTextFormat: \"%d\",\n");
-        js.append("range: 2,\n");
-        js.append("highlight: new Date(2017, 3, 6),\n");
+        //js.append("itemName: [\"ppb\", \"ppb\"],\n");
 
-        js.append("displayLegend: true\n");
+        js.append("domain: \"" + layout.getDomain() + "\",\n");
+        js.append("subDomain: \"" + layout.getSubDomain() + "\",\n");
+        js.append("cellSize: " + layout.getCellSize() + ",\n");
+        js.append("domainGutter: " + layout.getDomainGutter() + ",\n");
+        js.append("subDomainTextFormat: \"" + layout.getSubDomainTextFormat() + "\",\n");
+        js.append("range: " + layout.getRange() + ",\n");
+        //js.append("highlight: new Date(2017, 3, 6),\n");
+
+        if ( layout.getHighlight() != null ) {
+            js.append("highlight: new Date(");
+            js.append(layout.getHighlight().getYear() + ", ");
+            js.append(layout.getHighlight().getMonthValue() + ", ");
+            js.append(layout.getHighlight().getDayOfMonth());
+            js.append("),\n");
+        }
+
+        if ( layout.getShowLegend() ) {
+            js.append("displayLegend: true\n");
+        } else {
+            js.append("displayLegend: false\n");
+        }
 
         js.append("});\n");
 

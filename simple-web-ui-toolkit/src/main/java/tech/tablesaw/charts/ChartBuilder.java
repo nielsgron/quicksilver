@@ -7,7 +7,6 @@ import tech.tablesaw.charts.impl.chartjs.ChartjsChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChartBuilder;
 import tech.tablesaw.charts.impl.vega.VegaChartBuilder;
 import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
 import tech.tablesaw.plotly.event.EventHandler;
@@ -38,7 +37,7 @@ public abstract class ChartBuilder {
         AREA, BUBBLE, CANDLESTICK, HEATMAP, HEATMAP_CALENDAR, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
     }
 
-    protected Layout.LayoutBuilder layoutBuilder = Layout.builder();
+    protected Layout.LayoutBuilder layoutBuilder;
 
     protected Table dataTable;
     protected CHART_TYPE chartType;
@@ -54,6 +53,15 @@ public abstract class ChartBuilder {
 
     public ChartBuilder() {
 
+        initLayoutBuilder();
+    }
+
+    protected void initLayoutBuilder() {
+        layoutBuilder = Layout.builder();
+    }
+
+    public Layout.LayoutBuilder getLayoutBuilder() {
+        return layoutBuilder;
     }
 
     public static CHART_RENDERER DEFAULT_CHART_RENDERER;
@@ -93,11 +101,6 @@ public abstract class ChartBuilder {
         return this;
     }
 
-    public ChartBuilder layout(Layout layout) {
-        this.layout = layout;
-        return this;
-    }
-
     public ChartBuilder layout(int width, int height, boolean enabledLegend) {
         layout(width, height, 0, 0, 0, 0, enabledLegend);
         return this;
@@ -114,7 +117,7 @@ public abstract class ChartBuilder {
                         .left(marginLeft)
                         .right(marginRight)
                         .build())
-                .showLegend(enabledLegend).build();
+                .showLegend(enabledLegend);
 
         return this;
     }
