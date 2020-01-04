@@ -276,4 +276,22 @@ public abstract class ChartBuilder {
         throw new NotImplementedException("Not Implemented");
     }
 
+
+    public Table getDataTable() {
+        return dataTable;
+    }
+    public CHART_TYPE getChartType() { return chartType; }
+    public Layout getLayout() { return layout; }
+
+    public String[] getColumnsForViewColumns() { return columnsForViewColumns; }
+    public String[] getColumnsForViewRows() { return columnsForViewRows; }
+    public String[] getColumnsForLabels() { return columnsForLabels; }
+    public String[] getColumnsForDetails() { return columnsForDetails; }
+
+    public String getColumnsForColor() { return columnForColor; }
+    public String getColumnsForSize() { return columnForSize; }
+
+    public EventHandler getEventHandler() { return eventHandler; }
+
+
 }

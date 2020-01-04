@@ -54,6 +54,16 @@ public class CalHeatmapChart extends Chart {
         return js.toString();
     }
 
+    @Override
+    public String divString(String divName, int figureIndex) {
+        return divString(divName);
+    }
+
+    @Override
+    public String asJavascript(String divName, int figureIndex) {
+        return asJavascript(divName);
+    }
+
     private void JavascriptForVarData(StringBuilder js) {
 
         //DateTimeColumn dtColumn = (DateTimeColumn)table.column(timestampCol);

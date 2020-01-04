@@ -1,35 +1,36 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
-import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.VerticalBarPlot;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
-import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.BarTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
-public class PlotlyVerticalBarPlot extends VerticalBarPlot {
+public class PlotlyVerticalBarPlot extends PlotlyAbstractPlot {
 
-    private Figure figure;
+    public PlotlyVerticalBarPlot(ChartBuilder chartBuilder) {
+        setChartBuilder(chartBuilder);
+        String groupColName = columnsForViewColumns[0];
+        String[] numberColNames = columnsForViewRows;
 
-    public PlotlyVerticalBarPlot(Layout layout, Table table, String groupColName, String numberColName) {
-        BarTrace trace = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(numberColName)).orientation(BarTrace.Orientation.VERTICAL).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
+        // TODO : columnForLabels -
+        // TODO : columnForDetails -
+        // TODO : columnForColor -
+        // TODO : columnForSize -
 
-    public PlotlyVerticalBarPlot(Layout layout, Table table, String groupColName, Layout.BarMode barMode, String... numberColNames) {
+        BarTrace.Orientation orientation = BarTrace.Orientation.VERTICAL;
         Trace[] traces = new Trace[numberColNames.length];
-
-        for(int i = 0; i < numberColNames.length; ++i) {
+        for (int i = 0; i < numberColNames.length; i++) {
             String name = numberColNames[i];
-            BarTrace trace = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(name)).orientation(BarTrace.Orientation.VERTICAL).showLegend(true).name(name).build();
+            BarTrace trace =
+                    BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(name))
+                            .orientation(orientation)
+                            .showLegend(true)
+                            .name(name)
+                            .build();
             traces[i] = trace;
         }
 
-        figure = new Figure(layout, traces);
-    }
-
-    public Figure getFigure() {
-        return figure;
+        setFigure( new Figure(layout, traces) );
     }
 
 }

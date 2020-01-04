@@ -73,154 +73,112 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
     @Override
     protected Chart buildArea() {
-        Figure figure =null;
-
         try {
-            //figure = AreaPlot.create("", table, xCol, yCol);
-            PlotlyAreaPlot plot = new PlotlyAreaPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyAreaPlot plot = new PlotlyAreaPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildBubble() {
-        Figure figure =null;
-
         try {
-            //figure = BubblePlot.create("", table, xCol, yCol, columnForSize);
-            PlotlyBubblePlot plot = new PlotlyBubblePlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0], columnForSize);
-            figure = plot.getFigure();
-
+            PlotlyBubblePlot plot = new PlotlyBubblePlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildCandlestick() {
-        Figure figure =null;
-
         try {
-            //figure = CandlestickPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
-            PlotlyCandlestickPlot plot = new PlotlyCandlestickPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0], columnsForViewRows[1], columnsForViewRows[2], columnsForViewRows[3]);
-            figure = plot.getFigure();
-
+            PlotlyCandlestickPlot plot = new PlotlyCandlestickPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildHeatmap() {
-        Figure figure =null;
-
         try {
-            //figure = Heatmap.create("", table, categoryCol1, categoryCol2);
-            PlotlyHeatMapPlot plot = new PlotlyHeatMapPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewColumns[1]);
-            figure = plot.getFigure();
+            PlotlyHeatMapPlot plot = new PlotlyHeatMapPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildHistogram() {
-        Figure figure =null;
-
         try {
-            //figure = Histogram.create("", table, numericColumnName);
-            PlotlyHistogramPlot plot = new PlotlyHistogramPlot(layout, dataTable, columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyHistogramPlot plot = new PlotlyHistogramPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildHorizontalBar() {
-        Figure figure =null;
-
         try {
-            //figure = createFigure(layout, table, groupColName, numberColName);
-            PlotlyHorizontalBarPlot plot = new PlotlyHorizontalBarPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyHorizontalBarPlot plot = new PlotlyHorizontalBarPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildLine() {
-        Figure figure =null;
-
         try {
-            //figure = LinePlot.create("", table, xCol, yCol);
-            PlotlyLinePlot plot = new PlotlyLinePlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyLinePlot plot = new PlotlyLinePlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildOHLC() {
-        Figure figure =null;
-
         try {
-            //figure = OHLCPlot.create("", table, xCol, openCol, highCol, lowCol, closeCol);
-            PlotlyOHLCPlot plot = new PlotlyOHLCPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0], columnsForViewRows[1], columnsForViewRows[2], columnsForViewRows[3]);
-            figure = plot.getFigure();
+            PlotlyOHLCPlot plot = new PlotlyOHLCPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildPie() {
-        Figure figure =null;
-
         try {
-            //figure = PiePlot.create("", table, groupColName, numberColName);
-            PlotlyPiePlot plot = new PlotlyPiePlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyPiePlot plot = new PlotlyPiePlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
     protected Chart buildScatterplot() {
-        Figure figure =null;
-
         try {
-            //figure = ScatterPlot.create("", table, xCol, yCol);
-            PlotlyScatterPlot plot = new PlotlyScatterPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyScatterPlot plot = new PlotlyScatterPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     @Override
@@ -247,18 +205,13 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
     @Override
     protected Chart buildTimeseries() {
-        Figure figure =null;
-
         try {
-            //figure = TimeSeriesPlot.create("", table, dateColXName, yColName);
-            PlotlyTimeSeriesPlot plot = new PlotlyTimeSeriesPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
-
+            PlotlyTimeSeriesPlot plot = new PlotlyTimeSeriesPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
     static String getWithDefaultAggregation(String measure, String defaultAgg) {
@@ -317,17 +270,13 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
     @Override
     protected Chart buildVerticalBar() {
-        Figure figure =null;
-
         try {
-            //figure = VerticalBarPlot.create("", table, groupColName, numberColName);
-            PlotlyVerticalBarPlot plot = new PlotlyVerticalBarPlot(layout, dataTable, columnsForViewColumns[0], columnsForViewRows[0]);
-            figure = plot.getFigure();
+            PlotlyVerticalBarPlot plot = new PlotlyVerticalBarPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-
-        return new PlotlyChart(figure);
     }
 
 }

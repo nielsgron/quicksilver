@@ -1,56 +1,52 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.api.*;
-import tech.tablesaw.plotly.api.TimeSeriesPlot;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
-import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.ScatterTrace;
-import tech.tablesaw.plotly.traces.Trace;
 import tech.tablesaw.table.TableSliceGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PlotlyTimeSeriesPlot extends TimeSeriesPlot {
+public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
 
-    private Figure figure;
+    public PlotlyTimeSeriesPlot(ChartBuilder chartBuilder, String groupCol) {
+        setChartBuilder(chartBuilder);
+        String dateColX = columnsForViewColumns[0];
+        String yCol = columnsForViewRows[0];
 
-    public PlotlyTimeSeriesPlot(Layout layout, Table table, String dateColX, String yCol, String groupCol) {
-        TableSliceGroup tables = table.splitOn(new CategoricalColumn[]{table.categoricalColumn(groupCol)});
-        ScatterTrace[] traces = new ScatterTrace[tables.size()];
+        // TODO : columnForLabels -
+        // TODO : columnForDetails -
+        // TODO : columnForColor -
+        // TODO : columnForSize -
 
-        for(int i = 0; i < tables.size(); ++i) {
-            List<Table> tableList = tables.asTableList();
-            Table t = ((Table)tableList.get(i)).sortOn(new String[]{dateColX});
-            traces[i] = ScatterTrace.builder(t.dateColumn(dateColX), t.numberColumn(yCol)).showLegend(true).name(((Table)tableList.get(i)).name()).mode(ScatterTrace.Mode.LINE).build();
+        List<Table> tableList;
+
+        if ( groupCol != null ) {
+            TableSliceGroup tables = table.splitOn(table.categoricalColumn(groupCol));
+            tableList = tables.asTableList();
+        } else {
+            tableList = new ArrayList<Table>();
+            tableList.add(table);
         }
 
-        figure = new Figure(layout, traces);
+        ScatterTrace[] traces = new ScatterTrace[tableList.size()];
+        for (int i = 0; i < tableList.size(); i++) {
+            Table t = tableList.get(i).sortOn(dateColX);
+            traces[i] =
+                    ScatterTrace.builder(t.dateColumn(dateColX), t.numberColumn(yCol))
+                            .showLegend(true)
+                            .name(tableList.get(i).name())
+                            .mode(ScatterTrace.Mode.LINE)
+                            .build();
+        }
+
+        setFigure( new Figure(layout, traces) );
     }
 
-    public PlotlyTimeSeriesPlot(Layout layout, Table table, String dateColXName, String yColName) {
-        ScatterTrace trace = ScatterTrace.builder(table.column(dateColXName), table.numberColumn(yColName)).mode(ScatterTrace.Mode.LINE).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
-
-    public PlotlyTimeSeriesPlot(Layout layout, String xTitle, DateColumn xCol, String yTitle, NumericColumn<?> yCol) {
-        ScatterTrace trace = ScatterTrace.builder(xCol, yCol).mode(ScatterTrace.Mode.LINE).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
-
-    public PlotlyTimeSeriesPlot(Layout layout, String xTitle, DateTimeColumn xCol, String yTitle, NumericColumn<?> yCol) {
-        ScatterTrace trace = ScatterTrace.builder(xCol, yCol).mode(ScatterTrace.Mode.LINE).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
-
-    public PlotlyTimeSeriesPlot(Layout layout, Table table, String dateTimeColumnName, String numberColumnName, boolean bDateTime) {
-        DateTimeColumn xCol = table.dateTimeColumn(dateTimeColumnName);
-        NumericColumn<?> yCol = table.numberColumn(numberColumnName);
-        ScatterTrace trace = ScatterTrace.builder(xCol, yCol).mode(ScatterTrace.Mode.LINE).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
-
-    public Figure getFigure() {
-        return figure;
+    public PlotlyTimeSeriesPlot(ChartBuilder chartBuilder) {
+        this(chartBuilder, null);
     }
 
 }
