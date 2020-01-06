@@ -1,13 +1,15 @@
 package tech.tablesaw.charts;
 
+import org.apache.commons.lang3.NotImplementedException;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.charts.impl.calheatmap.CalHeatmapChartBuilder;
 import tech.tablesaw.charts.impl.chartjs.ChartjsChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChartBuilder;
 import tech.tablesaw.charts.impl.vega.VegaChartBuilder;
 import tech.tablesaw.plotly.components.Axis;
-import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
+import tech.tablesaw.plotly.event.EventHandler;
 
 public abstract class ChartBuilder {
 
@@ -19,37 +21,47 @@ public abstract class ChartBuilder {
         // Example Usage :
         Table table = Table.create();
         Figure figure = ChartBuilder.createBuilder().dataTable(table).chartType(CHART_TYPE.TREEMAP)
-                .rowColumns("Sector", "Industry")
-                .dataColumns("MarketCap")
-                .colorColumn("ChangeAsNumber")
+                .columnsForViewColumns("Sector", "Industry")
+                .columnsForViewRows("MarketCap")
+                .columnForColor("ChangeAsNumber")
                 .build();
         */
 
     }
 
     public enum CHART_RENDERER {
-        PLOTLY, CHARTJS, VEGA
+        PLOTLY, CHARTJS, VEGA, CALHEATMAP
     }
 
     public enum CHART_TYPE {
-        AREA, BUBBLE, CANDLESTICK, HEATMAP, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
+        AREA, BUBBLE, CANDLESTICK, HEATMAP, HEATMAP_CALENDAR, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
     }
 
-    protected Layout.LayoutBuilder layoutBuilder = Layout.builder();
+    protected Layout.LayoutBuilder layoutBuilder;
 
     protected Table dataTable;
     protected CHART_TYPE chartType;
     protected Layout layout;
     protected String divName;
-    protected String[] rowColumns;
-    protected String[] dataColumns;
-    protected String[] labelColumns;
-    protected String[] detailColumns;
-    protected String colorColumn;
-    protected String sizeColumn;
+    protected String[] columnsForViewColumns;
+    protected String[] columnsForViewRows;
+    protected String[] columnsForLabels;
+    protected String[] columnsForDetails;
+    protected String columnForColor;
+    protected String columnForSize;
+    protected EventHandler eventHandler;
 
     public ChartBuilder() {
 
+        initLayoutBuilder();
+    }
+
+    protected void initLayoutBuilder() {
+        layoutBuilder = Layout.builder();
+    }
+
+    public Layout.LayoutBuilder getLayoutBuilder() {
+        return layoutBuilder;
     }
 
     public static CHART_RENDERER DEFAULT_CHART_RENDERER;
@@ -71,6 +83,9 @@ public abstract class ChartBuilder {
             case VEGA:
                 return new VegaChartBuilder();
 
+            case CALHEATMAP:
+                return new CalHeatmapChartBuilder();
+
             default:
                 return new PlotlyChartBuilder();
         }
@@ -83,11 +98,6 @@ public abstract class ChartBuilder {
 
     public ChartBuilder chartType(CHART_TYPE chartType) {
         this.chartType = chartType;
-        return this;
-    }
-
-    public ChartBuilder layout(Layout layout) {
-        this.layout = layout;
         return this;
     }
 
@@ -107,7 +117,7 @@ public abstract class ChartBuilder {
                         .left(marginLeft)
                         .right(marginRight)
                         .build())
-                .showLegend(enabledLegend).build();
+                .showLegend(enabledLegend);
 
         return this;
     }
@@ -125,33 +135,38 @@ public abstract class ChartBuilder {
         return this;
     }
 
-    public ChartBuilder rowColumns(String... columns) {
-        this.rowColumns = columns;
+    public ChartBuilder columnsForViewColumns(String... columns) {
+        this.columnsForViewColumns = columns;
         return this;
     }
 
-    public ChartBuilder dataColumns(String... columns) {
-        this.dataColumns = columns;
+    public ChartBuilder columnsForViewRows(String... columns) {
+        this.columnsForViewRows = columns;
         return this;
     }
 
-    public ChartBuilder labelColumns(String... columns) {
-        this.labelColumns = columns;
+    public ChartBuilder columnsForLabels(String... columns) {
+        this.columnsForLabels = columns;
         return this;
     }
 
-    public ChartBuilder detailColumns(String... columns) {
-        this.detailColumns = columns;
+    public ChartBuilder columnsForDetails(String... columns) {
+        this.columnsForDetails = columns;
         return this;
     }
 
-    public ChartBuilder colorColumn(String column) {
-        this.colorColumn = column;
+    public ChartBuilder columnForColor(String column) {
+        this.columnForColor = column;
         return this;
     }
 
-    public ChartBuilder sizeColumn(String column) {
-        this.sizeColumn = column;
+    public ChartBuilder columnForSize(String column) {
+        this.columnForSize = column;
+        return this;
+    }
+
+    public ChartBuilder eventHandler(EventHandler handler) {
+        this.eventHandler = handler;
         return this;
     }
 
@@ -160,7 +175,7 @@ public abstract class ChartBuilder {
         return divName;
     }
 
-    public Figure build() {
+    public Chart build() {
 
         layout = layoutBuilder.build();
 
@@ -173,6 +188,8 @@ public abstract class ChartBuilder {
                 return buildCandlestick();
             case HEATMAP:
                 return buildHeatmap();
+            case HEATMAP_CALENDAR:
+                return buildHeatmapCalendar();
             case HISTOGRAM:
                 return buildHistogram();
             case HORIZONTAL_BAR:
@@ -194,37 +211,87 @@ public abstract class ChartBuilder {
             case VERTICAL_BAR:
                 return buildVerticalBar();
             default:
-                return null;
+                throw new NotImplementedException("Not Implemented");
 
         }
     }
 
-    protected abstract Figure buildArea();
+    protected Chart buildArea() {
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildBubble();
+    protected Chart buildBubble(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildCandlestick();
+    protected Chart buildCandlestick(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildHeatmap();
+    protected Chart buildHeatmap(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildHistogram();
+    protected Chart buildHeatmapCalendar(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildHorizontalBar();
+    protected Chart buildHistogram(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildLine();
+    protected Chart buildHorizontalBar(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildOHLC();
+    protected Chart buildLine(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildPie();
+    protected Chart buildOHLC(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildScatterplot();
+    protected Chart buildPie(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildSunburst();
+    protected Chart buildScatterplot(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildTimeseries();
+    protected Chart buildSunburst(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildTreemap();
+    protected Chart buildTimeseries(){
+        throw new NotImplementedException("Not Implemented");
+    }
 
-    protected abstract Figure buildVerticalBar();
+    protected Chart buildTreemap(){
+        throw new NotImplementedException("Not Implemented");
+    }
+
+    protected Chart buildVerticalBar(){
+        throw new NotImplementedException("Not Implemented");
+    }
+
+
+    public Table getDataTable() {
+        return dataTable;
+    }
+    public CHART_TYPE getChartType() { return chartType; }
+    public Layout getLayout() { return layout; }
+
+    public String[] getColumnsForViewColumns() { return columnsForViewColumns; }
+    public String[] getColumnsForViewRows() { return columnsForViewRows; }
+    public String[] getColumnsForLabels() { return columnsForLabels; }
+    public String[] getColumnsForDetails() { return columnsForDetails; }
+
+    public String getColumnsForColor() { return columnForColor; }
+    public String getColumnsForSize() { return columnForSize; }
+
+    public EventHandler getEventHandler() { return eventHandler; }
+
 
 }

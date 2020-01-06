@@ -178,7 +178,7 @@ public class Layout {
 
   private final BarMode barMode;
 
-  private Layout(LayoutBuilder builder) {
+  public Layout(LayoutBuilder builder) {
     this.title = builder.title;
     this.autoSize = builder.autoSize;
     this.widthSet = builder.widthSet;
@@ -210,6 +210,8 @@ public class Layout {
   public String getTitle() {
     return title;
   }
+
+  public boolean getShowLegend() { return showLegend; }
 
   public String asJavascript() {
     Writer writer = new StringWriter();
@@ -384,7 +386,7 @@ public class Layout {
       return new Layout(this);
     }
 
-    private LayoutBuilder() {}
+    public LayoutBuilder() {}
 
     public LayoutBuilder title(String title) {
       this.title = title;

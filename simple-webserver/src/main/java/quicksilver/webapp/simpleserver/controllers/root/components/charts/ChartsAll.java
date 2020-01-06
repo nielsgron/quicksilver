@@ -16,34 +16,22 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.charts;
 
-import quicksilver.commons.data.TSDataSet;
+import java.time.LocalDate;
 import quicksilver.commons.data.TSDataSetFactory;
-import quicksilver.commons.data.TSDataSetMeta;
 import quicksilver.webapp.simpleserver.controllers.root.components.tables.TableData;
-import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables;
 import quicksilver.webapp.simpleui.bootstrap4.charts.*;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
-import tech.tablesaw.api.DateColumn;
 import tech.tablesaw.api.DoubleColumn;
-import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
-import tech.tablesaw.columns.Column;
-import tech.tablesaw.columns.numbers.DoubleColumnType;
-import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.charts.impl.calheatmap.CalHeatmapLayout;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
+public class ChartsAll extends AbstractComponentsChartsPage {
 
-public class Charts extends AbstractComponentsChartsPage {
-
-    public Charts() {
+    public ChartsAll() {
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -57,7 +45,7 @@ public class Charts extends AbstractComponentsChartsPage {
         try {
             stockPricesTable = TableData.loadStockPrices(LocalDate.of(2019, 9, 10), LocalDate.of(2019, 9, 24));
         } catch ( Exception e ) {
-            stockEquitiesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
+            stockPricesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
         }
 
         // Add Vertical Bar Chart
@@ -68,15 +56,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(hBarTable)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
         ChartBuilder hbarChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(hBarTable)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         body.addRowOfColumns(
@@ -95,15 +83,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(lineTable)
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
         ChartBuilder areaChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(areaTable)
                 .chartType(ChartBuilder.CHART_TYPE.AREA)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         body.addRowOfColumns(
@@ -122,15 +110,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(pieTable)
                 .chartType(ChartBuilder.CHART_TYPE.PIE)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
         ChartBuilder timeseriesChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(timeSeriesTable)
                 .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
                 .layout(500, 200, false)
-                .rowColumns("Date")
-                .dataColumns("Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Close")
                 ;
 
         body.addRowOfColumns(
@@ -155,17 +143,17 @@ public class Charts extends AbstractComponentsChartsPage {
         ChartBuilder scatterChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(scatterTable)
                 .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
-                .rowColumns("Population")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
                 .layout(500, 200, false)
                 .axisTitles("Population", "GDP")
                 ;
         ChartBuilder bubbleChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(bubbleTable)
                 .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
-                .rowColumns("Population")
-                .dataColumns("GDP")
-                .sizeColumn("GDP_Capita")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
+                .columnForSize("GDP_Capita")
                 .layout(500, 200, false)
                 .axisTitles("Population", "GDP")
                 ;
@@ -186,15 +174,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(histogramTable)
                 .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
                 .layout(500, 200, false)
-                //.rowColumns("Country")
-                .dataColumns("Population")
+                //.columnsForViewColumns("Country")
+                .columnsForViewRows("Population")
                 ;
         ChartBuilder heatmapChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(heatmapTable)
                 .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
                 .layout(500, 200, false)
-                .rowColumns("Company", "Sector")
-                //.dataColumns("Close")
+                .columnsForViewColumns("Company", "Sector")
+                //.columnsForViewRows("Close")
                 ;
 
         body.addRowOfColumns(
@@ -213,15 +201,15 @@ public class Charts extends AbstractComponentsChartsPage {
                 .dataTable(candleStickTable)
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
                 .layout(500, 200, false)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
         ChartBuilder ohlcChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(ohlcTable)
                 .chartType(ChartBuilder.CHART_TYPE.OHLC)
                 .layout(500, 200, false)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
 
         body.addRowOfColumns(
@@ -236,18 +224,55 @@ public class Charts extends AbstractComponentsChartsPage {
         Table treemapTable = stockEquitiesTable;
         Table sunburstTable = stockEquitiesTable;
 
-        Layout.LayoutBuilder treeLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
-        Layout treeLayout = treeLayoutBuilder.build();
+        ChartBuilder treemapBuilder = ChartBuilder.createBuilder()
+                .dataTable(treemapTable)
+                .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
+                .columnsForViewColumns("Company", "Sector")
+                .layout(500, 200, false);
 
-        Layout.LayoutBuilder sunburstLayoutBuilder = TSTreeMapChartPanel.createLayoutBuilder(500, 200, false);
-        Layout sunburstLayout = sunburstLayoutBuilder.build();
+        ChartBuilder sunburstBuilder = ChartBuilder.createBuilder()
+                .dataTable(sunburstTable)
+                .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
+                .columnsForViewColumns("Company", "Sector")
+                .columnForSize("MarketCap")
+                .layout(500, 200, false);
 
         body.addRowOfColumns(
-                new BSCard(new TSTreeMapChartPanel(treeLayout, treemapTable, "treemapDiv", "Company", "Sector") ,
+                new BSCard(new TSFigurePanel(treemapBuilder.divName("treemapDiv").build(), "treemapDiv"),
                         "Treemap Chart"),
-                new BSCard(new TSSunburstChartPanel(sunburstLayout, sunburstTable, "sunburstDiv", "Company", "Sector", "MarketCap") ,
+                new BSCard(new TSFigurePanel(sunburstBuilder.divName("sunburstDiv").build(), "sunburstDiv") ,
                         "Sunburst Chart")
         );
+
+        // Add Calendar Heatmap
+        Table calendarHeatmapTable = stockPricesTable;
+
+        ChartBuilder calendarHeatmapChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.CALHEATMAP)
+                .dataTable(calendarHeatmapTable)
+                .chartType(ChartBuilder.CHART_TYPE.HEATMAP_CALENDAR)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Volume")
+                ;
+
+        CalHeatmapLayout.LayoutBuilder layoutBuilder = (CalHeatmapLayout.LayoutBuilder)calendarHeatmapChartBuilder.getLayoutBuilder();
+
+        layoutBuilder.domain("month")
+                .subDomain("x_day")
+                .cellSize(20)
+                .domainGutter(14)
+                .range(3)
+                .highlight(LocalDate.of(2019,10, 15))
+                .subDomainTextFormat("%d");
+
+
+        body.addRowOfColumns(
+                new BSCard(new TSFigurePanel(calendarHeatmapChartBuilder.divName("calHeat1Div").build(), "calHeat1Div"),
+                        "Calendar Heatmap Chart"),
+                new BSCard(new TSFigurePanel(calendarHeatmapChartBuilder.divName("calHeat2Div").build(), "calHeat2Div"),
+                        "Calendar Heatmap Chart")
+        );
+
 
         body.doLayout();
 

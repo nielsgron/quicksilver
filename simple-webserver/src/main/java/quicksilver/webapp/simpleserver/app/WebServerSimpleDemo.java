@@ -178,7 +178,7 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
 
 
         webServer.get("/components/charts", (request, response) -> {
-            HtmlStream stream = renderPageAndReturnStream(new Charts(), new HtmlStreamStringBuffer());
+            HtmlStream stream = renderPageAndReturnStream(new ChartsAll(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
 
@@ -238,6 +238,11 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             HtmlStream stream = renderPageAndReturnStream(new ChartsVBar(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
+        webServer.get("/components/charts/calheatmap", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsCalHeatmap(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
 
         webServer.get("/components/tables", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Tables(), new HtmlStreamStringBuffer());

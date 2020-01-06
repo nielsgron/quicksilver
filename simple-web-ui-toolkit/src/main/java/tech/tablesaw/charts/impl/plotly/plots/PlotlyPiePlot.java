@@ -1,23 +1,28 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
-import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.PiePlot;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
-import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.PieTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
-public class PlotlyPiePlot extends PiePlot {
+public class PlotlyPiePlot extends PlotlyAbstractPlot {
 
-    private Figure figure;
+    public PlotlyPiePlot(ChartBuilder chartBuilder) {
+        setChartBuilder(chartBuilder);
+        String groupColName = columnsForViewColumns[0];
+        String numberColName = columnsForViewRows[0];
 
-    public PlotlyPiePlot(Layout layout, Table table, String groupColName, String numberColName) {
-        PieTrace trace = PieTrace.builder(table.column(groupColName), table.numberColumn(numberColName)).showLegend(true).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
+        // TODO : columnForLabels -
+        // TODO : columnForDetails -
+        // TODO : columnForColor -
+        // TODO : columnForSize -
 
-    public Figure getFigure() {
-        return figure;
+        PieTrace trace =
+                PieTrace.builder(table.column(groupColName), table.numberColumn(numberColName))
+                        .showLegend(true)
+                        .build();
+
+        setFigure( new Figure(layout, new Trace[]{trace}) );
     }
 
 }

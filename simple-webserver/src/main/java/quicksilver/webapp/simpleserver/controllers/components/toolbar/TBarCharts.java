@@ -32,7 +32,7 @@ public class TBarCharts  extends BSButtonToolbar {
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
-        b = new QuickButton("Timeseries", "/components/charts/timeseries", false);
+        b = new QuickButton("T-series", "/components/charts/timeseries", false);
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
@@ -44,7 +44,7 @@ public class TBarCharts  extends BSButtonToolbar {
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
-        b = new QuickButton("Histogram", "/components/charts/histogram", false);
+        b = new QuickButton("Histo", "/components/charts/histogram", false);
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
@@ -52,7 +52,7 @@ public class TBarCharts  extends BSButtonToolbar {
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
-        b = new QuickButton("Candlestick", "/components/charts/candlestick", false);
+        b = new QuickButton("C-stick", "/components/charts/candlestick", false);
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
@@ -65,6 +65,10 @@ public class TBarCharts  extends BSButtonToolbar {
         addAsGroup(b);
 
         b = new QuickButton("Sunburst", "/components/charts/sunburst", false);
+        b.setSize(Size.SMALL);
+        addAsGroup(b);
+
+        b = new QuickButton("Cal-Heatmap", "/components/charts/calheatmap", false);
         b.setSize(Size.SMALL);
         addAsGroup(b);
 

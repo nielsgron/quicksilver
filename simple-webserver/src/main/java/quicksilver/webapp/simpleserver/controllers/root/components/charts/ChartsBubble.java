@@ -51,9 +51,9 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(bubbleTable)
                 .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
-                .rowColumns("Population")
-                .dataColumns("GDP")
-                .sizeColumn("GDP_Capita_Ratio")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
+                .columnForSize("GDP_Capita_Ratio")
                 .axisTitles("Population", "GDP")
                 ;
 

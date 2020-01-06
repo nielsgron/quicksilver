@@ -32,7 +32,7 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
 
     public ChartsCandlestick() {
         super();
-        toolbar.setActiveButton("Candlestick");
+        toolbar.setActiveButton("C-stick");
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -54,8 +54,8 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(candleStickTable)
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
 
         chartBuilder.layout(1000, 200, false);

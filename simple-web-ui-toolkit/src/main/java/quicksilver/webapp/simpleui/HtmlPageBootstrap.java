@@ -92,6 +92,7 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
 
         stream.writeln("<!-- Bootstrap core CSS -->");
         stream.writeln("<link href=\" " + getBootstrapBaseURI() + "/css/bootstrap.min.css\" rel=\"stylesheet\">");
+        stream.writeln("<link rel=\"stylesheet\" href=\"//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css\" />");
 
         stream.writeln("<!-- Font Awesome Icons -->");
         stream.writeln(FontAwesomeIcon.getScriptCDN());
@@ -109,6 +110,11 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         stream.writeln("<!-- Plotly JavaScript");
         stream.writeln("================================================== -->");
         stream.writeln("<script src=\"https://cdn.plot.ly/plotly-latest.min.js\"></script>");
+
+        stream.writeln("<!-- Heatmap Calendar JavaScript");
+        stream.writeln("================================================== -->");
+        stream.writeln("<script type=\"text/javascript\" src=\"//d3js.org/d3.v3.min.js\"></script>");
+        stream.writeln("<script type=\"text/javascript\" src=\"//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js\"></script>");
 
         // Render Navbar if one is set
         BSNavbar navBar = getViewport().getNavbar();

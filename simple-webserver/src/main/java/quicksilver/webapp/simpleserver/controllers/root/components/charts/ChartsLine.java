@@ -44,8 +44,8 @@ public class ChartsLine extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(lineTable)
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 ;
 
         chartBuilder.layout(1000, 200, false);

@@ -45,8 +45,8 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
                 .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 .axisTitles("Country", "GDP")
                 ;
 
