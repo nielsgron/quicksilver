@@ -106,6 +106,20 @@ public abstract class ChartBuilder {
         return this;
     }
 
+    public ChartBuilder layout(int marginTop, int marginBottom, int marginLeft, int marginRight, boolean enabledLegend) {
+
+        layoutBuilder
+                .margin(Margin.builder()
+                        .top(marginTop)
+                        .bottom(marginBottom)
+                        .left(marginLeft)
+                        .right(marginRight)
+                        .build())
+                .showLegend(enabledLegend);
+
+        return this;
+    }
+
     public ChartBuilder layout(int width, int height, int marginTop, int marginBottom, int marginLeft, int marginRight, boolean enabledLegend) {
 
         layoutBuilder

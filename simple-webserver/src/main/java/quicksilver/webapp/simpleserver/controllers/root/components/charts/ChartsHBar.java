@@ -24,6 +24,7 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.plotly.components.Margin;
 
 public class ChartsHBar extends AbstractComponentsChartsPage {
 
@@ -45,20 +46,25 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
-                .layout(500, 200, false)
+                //.layout(500, 200, false)
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
                 .axisTitles("GDP", "Country")
                 ;
 
-        chartBuilder.layout(1000, 200, 5, 35, 80, 5, false);
+        //chartBuilder.layout( 1000, 200, 5, 35, 80, 5, false);
+        chartBuilder.layout(5, 35, 80, 5, false);
+        chartBuilder.getLayoutBuilder()
+                .autosize(true)
+                .height(250)
+                .build();
 
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                     "Country GDP (Nominal)")
         );
 
-        chartBuilder.layout(450, 200, false);
+        //chartBuilder.layout(450, 200, false);
 
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -67,7 +73,7 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                     "Country Population")
         );
 
-        chartBuilder.layout(300, 200, false);
+        //chartBuilder.layout(300, 200, false);
 
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

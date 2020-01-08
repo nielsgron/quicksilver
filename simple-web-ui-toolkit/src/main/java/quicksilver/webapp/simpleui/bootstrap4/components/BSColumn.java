@@ -37,21 +37,16 @@ public class BSColumn extends BSComponentContainer {
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
-        addTagAttribute("class", "column");
+        if ( prop_columnWeight <= 0 || prop_columnWeight > 12 ) {
+            addTagAttribute("class", "column");
+        } else {
+            addTagAttribute("class", "col-md-" + prop_columnWeight);
+        }
 
     }
 
     public void setColumnWeight(int columnWeight) {
         prop_columnWeight = columnWeight;
-
-        if ( prop_columnWeight <= 0 || prop_columnWeight > 12 ) {
-            removeTagAttribute("class");
-            addTagAttribute("class", "column");
-        } else {
-            removeTagAttribute("class");
-            addTagAttribute("class", "col-md-" + prop_columnWeight);
-        }
-
     }
 
 }
