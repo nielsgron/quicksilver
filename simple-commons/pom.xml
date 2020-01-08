@@ -53,12 +53,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.8.1</version>
+            <version>3.9</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>4.0.1</version>
+            <version>4.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.simplejavamail</groupId>
@@ -68,32 +68,32 @@
         <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-core</artifactId>
-            <version>0.36.0</version>
+            <version>0.37.0</version>
         </dependency>
         <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-beakerx</artifactId>
-            <version>0.36.0</version>
+            <version>0.37.0</version>
         </dependency>
         <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-aggregate</artifactId>
-            <version>0.36.0</version>
+            <version>0.37.0</version>
         </dependency>
         <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-html</artifactId>
-            <version>0.36.0</version>
+            <version>0.37.0</version>
         </dependency>
         <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-json</artifactId>
-            <version>0.36.0</version>
+            <version>0.37.0</version>
         </dependency>
         <dependency>
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-excel</artifactId>
-            <version>0.36.0</version>
+            <version>0.37.0</version>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
