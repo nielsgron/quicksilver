@@ -41,6 +41,7 @@ public abstract class ChartBuilder {
 
     protected Table dataTable;
     protected CHART_TYPE chartType;
+    protected Object[] chartTypeOptions;
     protected Layout layout;
     protected String divName;
     protected String[] columnsForViewColumns;
@@ -96,8 +97,9 @@ public abstract class ChartBuilder {
         return this;
     }
 
-    public ChartBuilder chartType(CHART_TYPE chartType) {
+    public ChartBuilder chartType(CHART_TYPE chartType, Object... chartTypeOptions) {
         this.chartType = chartType;
+        this.chartTypeOptions = chartTypeOptions;
         return this;
     }
 
