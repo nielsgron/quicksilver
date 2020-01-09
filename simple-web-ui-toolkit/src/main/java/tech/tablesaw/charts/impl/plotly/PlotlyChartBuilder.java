@@ -12,6 +12,7 @@ import tech.tablesaw.plotly.api.SunburstPlot;
 import tech.tablesaw.plotly.api.TableExtract;
 import tech.tablesaw.plotly.api.TreemapPlot;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.event.EventHandler;
 
 public class PlotlyChartBuilder extends ChartBuilder {
@@ -36,7 +37,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 layout(width, height, 5, 20, 35, 20, enabledLegend);
                 break;
             case HORIZONTAL_BAR:
-                layout(width, height, 5, 20, 55, 5, enabledLegend);
+                layoutHorizontalBar(width, height, enabledLegend);
                 break;
             case LINE:
                 layout(width, height, 5, 20, 35, 5, enabledLegend);
@@ -60,7 +61,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 layout(width, height, 0, 0, 0, 0, enabledLegend);
                 break;
             case VERTICAL_BAR:
-                layout(width, height, 5, 40, 35, 5, enabledLegend);
+                layoutVerticalBar(width, height, enabledLegend);
                 break;
             default:
                 layout(width, height, 0, 0, 0, 0, enabledLegend);
@@ -276,6 +277,24 @@ public class PlotlyChartBuilder extends ChartBuilder {
         } catch ( Exception e ) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private void layoutHorizontalBar(int width, int height, boolean enabledLegend) {
+        layout(width, height, 5, 20, 55, 5, enabledLegend);
+        configureLayoutBuilderBarMode();
+    }
+
+    private void layoutVerticalBar(int width, int height, boolean enabledLegend) {
+        layout(width, height, 5, 40, 35, 5, enabledLegend);
+        configureLayoutBuilderBarMode();
+    }
+
+    private void configureLayoutBuilderBarMode() {
+        for (Object o : chartTypeOptions) {
+            if (o instanceof Layout.BarMode) {
+                layoutBuilder.barMode((Layout.BarMode) o);
+            }
         }
     }
 
