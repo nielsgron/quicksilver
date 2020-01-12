@@ -28,6 +28,7 @@ import tech.tablesaw.api.DoubleColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.calheatmap.CalHeatmapLayout;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsAll extends AbstractComponentsChartsPage {
 
@@ -54,10 +55,11 @@ public class ChartsAll extends AbstractComponentsChartsPage {
 
         ChartBuilder vbarChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(hBarTable)
-                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR, Layout.BarMode.STACK)
                 .layout(500, 200, false)
-                .columnsForViewColumns("Country")
+                .columnsForViewColumns("Continent")
                 .columnsForViewRows("GDP")
+                .columnForColor("Country")
                 ;
         ChartBuilder hbarChartBuilder = ChartBuilder.createBuilder()
                 .dataTable(hBarTable)
