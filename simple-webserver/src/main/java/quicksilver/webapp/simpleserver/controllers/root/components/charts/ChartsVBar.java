@@ -24,6 +24,7 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsVBar extends AbstractComponentsChartsPage {
 
@@ -74,6 +75,31 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Narrow Chart"),
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
+                        "Narrow Chart")
+        );
+
+        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Continent")
+                .columnsForViewRows("GDP")
+                .axisTitles("Continent", "GDP")
+                .columnForColor("Country");
+
+        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR, Layout.BarMode.STACK)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Continent")
+                .columnsForViewRows("GDP")
+                .axisTitles("Continent", "GDP")
+                .columnForColor("Country");
+
+        body.addRowOfColumns(
+                new BSCard(new TSFigurePanel(chartBuilderPerContinent.divName(divName + "7").build(), divName + "7"),
+                        "Narrow Chart"),
+                new BSCard(new TSFigurePanel(chartBuilderPerContinentStacked.divName(divName + "9").build(), divName + "9"),
                         "Narrow Chart")
         );
 

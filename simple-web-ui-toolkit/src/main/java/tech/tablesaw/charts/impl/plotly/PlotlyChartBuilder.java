@@ -293,6 +293,8 @@ public class PlotlyChartBuilder extends ChartBuilder {
     private void configureLayoutBuilderBarMode() {
         for (Object o : chartTypeOptions) {
             if (o instanceof Layout.BarMode) {
+                //EMI: XXX: Normally this should be called on bar charts only if a color column is set
+                // (but seems harmless since otherwise each row column gets a separate figure so there's nothing to stack anyhow)
                 layoutBuilder.barMode((Layout.BarMode) o);
             }
         }

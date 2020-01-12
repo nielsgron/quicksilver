@@ -20,10 +20,10 @@ public class PlotlyChart extends Chart {
     }
 
     public void setFigure(Figure fig) {
-        this.figures = new Figure[] { fig };
+        setFigures(fig);
     }
 
-    public void setFigures(Figure[] fig) {
+    public void setFigures(Figure... fig) {
         this.figures = fig;
     }
 
