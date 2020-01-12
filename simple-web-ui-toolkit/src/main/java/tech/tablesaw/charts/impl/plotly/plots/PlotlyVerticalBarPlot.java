@@ -48,7 +48,7 @@ public class PlotlyVerticalBarPlot extends PlotlyAbstractPlot {
                 measureFigures.add(new Figure(layout, traces));
             }
 
-            setFigures(measureFigures.toArray(Figure[]::new));
+            setFigures(measureFigures.toArray(new Figure[0]));
             return;
         }
         String[] numberColNames = columnsForViewRows;
