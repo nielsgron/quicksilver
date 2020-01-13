@@ -24,6 +24,7 @@ import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
 
 public class ChartsHBar extends AbstractComponentsChartsPage {
@@ -82,6 +83,31 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                     "Country GDP (Per Capita)"),
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "6").columnsForViewRows("Population").build(), divName + "6"),
                     "Country Population")
+        );
+
+        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Continent")
+                .columnsForViewRows("GDP")
+                .axisTitles("GDP", "Continent")
+                .columnForColor("Country");
+
+        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR, Layout.BarMode.STACK)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Continent")
+                .columnsForViewRows("GDP")
+                .axisTitles("GDP", "Continent")
+                .columnForColor("Country");
+
+        body.addRowOfColumns(
+                new BSCard(new TSFigurePanel(chartBuilderPerContinent.divName(divName + "7").build(), divName + "7"),
+                        "Country GDP (Nominal)"),
+                new BSCard(new TSFigurePanel(chartBuilderPerContinentStacked.divName(divName + "9").build(), divName + "9"),
+                        "Country GDP (Nominal)")
         );
 
         body.doLayout();
