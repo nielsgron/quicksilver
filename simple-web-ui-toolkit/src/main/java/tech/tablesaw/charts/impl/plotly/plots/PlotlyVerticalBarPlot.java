@@ -2,9 +2,9 @@ package tech.tablesaw.charts.impl.plotly.plots;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Stream;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
@@ -13,7 +13,7 @@ import tech.tablesaw.plotly.traces.Trace;
 
 public class PlotlyVerticalBarPlot extends PlotlyAbstractPlot {
 
-    private static final Logger LOG = Logger.getLogger(PlotlyVerticalBarPlot.class.getName());
+    private final static Logger LOG = LogManager.getLogger();
 
     BarTrace.Orientation orientation = BarTrace.Orientation.VERTICAL;
 
@@ -21,7 +21,7 @@ public class PlotlyVerticalBarPlot extends PlotlyAbstractPlot {
         setChartBuilder(chartBuilder);
         String groupColName = columnsForViewColumns[0];
         if (columnsForViewColumns.length > 1) {
-            LOG.log(Level.WARNING, "Vertical bar plot will only take into account the 1st view colum ({0} received)", columnsForViewColumns.length);
+            LOG.warn("Vertical bar plot will only take into account the 1st view colum ({} received)", columnsForViewColumns.length);
         }
 
         if (columnForColor != null && !groupColName.equals(columnForColor)) {
