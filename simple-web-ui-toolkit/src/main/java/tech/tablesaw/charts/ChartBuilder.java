@@ -7,6 +7,7 @@ import tech.tablesaw.charts.impl.chartjs.ChartjsChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChartBuilder;
 import tech.tablesaw.charts.impl.vega.VegaChartBuilder;
 import tech.tablesaw.plotly.components.Axis;
+import tech.tablesaw.plotly.components.Config;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
 import tech.tablesaw.plotly.event.EventHandler;
@@ -38,11 +39,13 @@ public abstract class ChartBuilder {
     }
 
     protected Layout.LayoutBuilder layoutBuilder;
+    protected Config.Builder configBuilder;
 
     protected Table dataTable;
     protected CHART_TYPE chartType;
     protected Object[] chartTypeOptions;
     protected Layout layout;
+    protected Config config;
     protected String divName;
     protected String[] columnsForViewColumns;
     protected String[] columnsForViewRows;
@@ -55,6 +58,8 @@ public abstract class ChartBuilder {
     public ChartBuilder() {
 
         initLayoutBuilder();
+        configBuilder = Config.builder();
+        configBuilder.displayModeBar(false);
     }
 
     protected void initLayoutBuilder() {
@@ -186,7 +191,16 @@ public abstract class ChartBuilder {
         return this;
     }
 
+    public ChartBuilder displayModeBar(boolean b) {
+        configBuilder.displayModeBar(b);
+        return this;
+    }
+
     // Getter methods
+    public Config getConfig() {
+        return config;
+    }
+
     public String getDivName() {
         return divName;
     }
@@ -194,6 +208,7 @@ public abstract class ChartBuilder {
     public Chart build() {
 
         layout = layoutBuilder.build();
+        config = configBuilder.build();
 
         switch (chartType) {
             case AREA:

@@ -30,7 +30,7 @@ public class PlotlyOHLCPlot extends PlotlyAbstractPlot {
                         .type("ohlc")
                         .build();
 
-        setFigure( new Figure(layout, new Trace[]{trace}) );
+        setFigure( new Figure(layout, config, new Trace[]{trace}) );
     }
 
 }

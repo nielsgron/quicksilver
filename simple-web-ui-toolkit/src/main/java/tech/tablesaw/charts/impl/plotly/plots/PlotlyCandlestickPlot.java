@@ -30,7 +30,7 @@ public class PlotlyCandlestickPlot extends PlotlyAbstractPlot {
                         .type("candlestick")
                         .build();
 
-        setFigure( new Figure(layout, new Trace[]{trace}) );
+        setFigure( new Figure(layout, config, new Trace[]{trace}) );
     }
 
 }

@@ -22,7 +22,7 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
                         .showLegend(true)
                         .build();
 
-        setFigure( new Figure(layout, new Trace[]{trace}) );
+        setFigure( new Figure(layout, config, new Trace[]{trace}) );
     }
 
 }
