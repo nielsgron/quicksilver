@@ -33,7 +33,7 @@ public class PlotlyHeatMapPlot extends PlotlyAbstractPlot {
         Object[] y = yColumn.asObjectArray();
         HeatmapTrace trace = HeatmapTrace.builder(x, y, z).build();
 
-        setFigure( new Figure(layout, new Trace[]{trace}) );
+        setFigure( new Figure(layout, config, new Trace[]{trace}) );
     }
 
 }

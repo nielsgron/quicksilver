@@ -19,7 +19,7 @@ public class PlotlyHistogramPlot extends PlotlyAbstractPlot {
 
         NumericColumn<?> column = table.numberColumn(numericColumnName);
         HistogramTrace trace = HistogramTrace.builder(column.asDoubleArray()).build();
-        setFigure( new Figure(layout, new Trace[]{trace}) );
+        setFigure( new Figure(layout, config, new Trace[]{trace}) );
     }
 
 }

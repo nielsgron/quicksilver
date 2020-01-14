@@ -194,7 +194,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
             EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
                     
-            figure = SunburstPlot.create(layout, table,
+            figure = SunburstPlot.create(layout, config, table,
                     "ids", "Label", "Parent",
                     columnForSize,
                     eventHandlers);
@@ -259,7 +259,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
             EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
 
-            figure = TreemapPlot.create(layout, table,
+            figure = TreemapPlot.create(layout, config, table,
                     "ids", "Label", "Parent",
                     extra,
                     eventHandlers);

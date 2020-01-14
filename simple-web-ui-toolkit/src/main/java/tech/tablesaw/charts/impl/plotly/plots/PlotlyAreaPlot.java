@@ -43,7 +43,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
                             .build();
         }
 
-        setFigure( new Figure(layout, traces) );
+        setFigure( new Figure(layout, config, traces) );
     }
 
     public PlotlyAreaPlot(ChartBuilder chartBuilder) {

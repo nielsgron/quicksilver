@@ -42,7 +42,7 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
                             .build();
         }
 
-        setFigure( new Figure(layout, traces) );
+        setFigure( new Figure(layout, config, traces) );
     }
 
     public PlotlyLinePlot(ChartBuilder chartBuilder) {

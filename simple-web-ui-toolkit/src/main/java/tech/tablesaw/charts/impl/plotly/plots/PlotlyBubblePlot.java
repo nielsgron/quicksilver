@@ -50,7 +50,7 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
                             .build();
         }
 
-        setFigure( new Figure(layout, traces) );
+        setFigure( new Figure(layout, config, traces) );
     }
 
     public PlotlyBubblePlot(ChartBuilder chartBuilder) {

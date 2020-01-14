@@ -43,7 +43,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                         })
                         .toArray(Trace[]::new);
 
-                measureFigures.add(new Figure(layout, traces));
+                measureFigures.add(new Figure(layout, config, traces));
             }
 
             setFigures(measureFigures.toArray(new Figure[0]));
@@ -72,12 +72,12 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         if (columnForColor == null) {
             //create one figure for each viewRows column
             setFigures(Stream.of(traces)
-                    .map(t -> new Figure(layout, new Trace[]{t}))
+                    .map(t -> new Figure(layout, config, new Trace[]{t}))
                     .toArray(Figure[]::new));
         } else {
             assert groupColName.equals(columnForColor);
 
-            setFigure(new Figure(layout, traces));
+            setFigure(new Figure(layout, config, traces));
         }
 
     }
