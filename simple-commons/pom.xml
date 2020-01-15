@@ -79,6 +79,12 @@
             <groupId>tech.tablesaw</groupId>
             <artifactId>tablesaw-aggregate</artifactId>
             <version>0.37.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>tech.tablesaw</groupId>
+                    <artifactId>tablesaw-jsplot</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>tech.tablesaw</groupId>
