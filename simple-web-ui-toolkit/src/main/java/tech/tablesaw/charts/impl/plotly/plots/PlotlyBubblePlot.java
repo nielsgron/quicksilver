@@ -9,8 +9,12 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PlotlyBubblePlot extends PlotlyAbstractPlot {
+
+    private final static Logger LOG = LogManager.getLogger();
 
     public PlotlyBubblePlot(ChartBuilder chartBuilder, String groupCol) {
         setChartBuilder(chartBuilder);
@@ -18,7 +22,10 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
         String yCol = columnsForViewRows[0];
         String sizeColumn = columnForSize;
 
-        // TODO : columnForLabels -
+        if (columnsForLabels != null && columnsForLabels.length > 1) {
+            LOG.warn("Only one labels column is supported but {} received", columnsForLabels.length);
+        }
+
         // TODO : columnForDetails -
         // TODO : columnForColor -
         // TODO : columnForSize -
@@ -41,12 +48,18 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
                             // .opacity(.75)
                             .build();
 
-            traces[i] =
+            ScatterTrace.ScatterBuilder builder =
                     ScatterTrace.builder(
                             tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
                             .showLegend(true)
                             .marker(marker)
-                            .name(tableList.get(i).name())
+                            .name(tableList.get(i).name());
+            if (columnsForLabels != null && columnsForLabels.length > 0) {
+                builder = builder
+                        .mode(ScatterTrace.Mode.TEXT_AND_MARKERS)
+                        .text(tableList.get(i).stringColumn(columnsForLabels[0]).asObjectArray());
+            }
+            traces[i] = builder
                             .build();
         }
 

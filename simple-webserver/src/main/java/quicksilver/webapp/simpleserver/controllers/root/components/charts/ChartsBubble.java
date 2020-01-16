@@ -54,6 +54,7 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
                 .columnsForViewColumns("Population")
                 .columnsForViewRows("GDP")
                 .columnForSize("GDP_Capita_Ratio")
+                .columnsForLabels("Country")
                 .axisTitles("Population", "GDP")
                 ;
 
