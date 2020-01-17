@@ -53,7 +53,6 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         String[] numberColNames = columnsForViewRows;
 
         // TODO : columnForDetails -
-        // TODO : columnForSize -
         final Optional<String> columnForLabel;
         if (columnsForLabels != null && columnsForLabels.length > 0) {
             columnForLabel = Optional.of(columnsForLabels[0]);
@@ -63,6 +62,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         } else {
             columnForLabel = Optional.empty();
         }
+        final Optional<String> size = Optional.ofNullable(this.columnForSize);
 
         // TODO : Support Clustered & Area display type. Research BarTrace.builder.mode(ScatterTrace.Mode.LINE) & BarTrace.builder.fill(ScatterTrace.Fill.TO_NEXT_Y) as in PlotlyAreaPlot
 
@@ -76,6 +76,9 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                             .name(name);
             if(columnForLabel.isPresent()) {
                 builder.text(table.stringColumn(columnForLabel.get()));
+            }
+            if(size.isPresent()) {
+                builder.width(table.numberColumn(size.get()));
             }
             BarTrace trace = builder
                             .build();

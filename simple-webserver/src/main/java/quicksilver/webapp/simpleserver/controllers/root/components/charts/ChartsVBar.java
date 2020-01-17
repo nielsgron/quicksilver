@@ -22,6 +22,8 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import tech.tablesaw.api.DoubleColumn;
+import tech.tablesaw.api.NumericColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Layout;
@@ -42,6 +44,15 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
         // Add Chart
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
+        NumericColumn<?> population = table.numberColumn("Population");
+        double minPopulation = population.min();
+        double maxPopulation = population.max();
+        table.addColumns(
+                population.mapInto(
+                        //this computes roughly a bar width (in position axis units)
+                        (double p) -> 0.1 + (p - minPopulation) / (maxPopulation - minPopulation),
+                        DoubleColumn.create("Width")));
+
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
@@ -50,6 +61,7 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                 .columnsForViewRows("GDP")
                 .axisTitles("Country", "GDP")
                 .columnsForLabels("Country")
+                .columnForSize("Width")
                 ;
 
         chartBuilder.layout(1000, 200, 5, 40, 45, 5, false);

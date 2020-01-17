@@ -17,6 +17,7 @@ public class BarTrace extends AbstractTrace {
 
   private final Object[] x;
   private final double[] y;
+  private final double[] width;
   private final Orientation orientation;
   private final Marker marker;
   private final String[] text;
@@ -26,6 +27,7 @@ public class BarTrace extends AbstractTrace {
     this.orientation = builder.orientation;
     this.x = builder.x;
     this.y = builder.y;
+    this.width = builder.width;
     this.text = builder.text;
     this.marker = builder.marker;
   }
@@ -67,6 +69,9 @@ public class BarTrace extends AbstractTrace {
       context.put("text", dataAsString(text));
       context.put("textposition", "'auto'");
     }
+    if(width != null) {
+      context.put("width", dataAsString(width));
+    }
     context.put("orientation", orientation.value);
     if (marker != null) {
       context.put("marker", marker);
@@ -95,6 +100,7 @@ public class BarTrace extends AbstractTrace {
     private final String type = "bar";
     private final Object[] x;
     private final double[] y;
+    private double[] width = null;
     private String[] text = null;
     private Orientation orientation = Orientation.VERTICAL;
     private Marker marker;
@@ -162,5 +168,8 @@ public class BarTrace extends AbstractTrace {
       this.text = s.asObjectArray();
     }
 
+    public void width(NumericColumn n) {
+      this.width = n.asDoubleArray();
+    }
   }
 }
