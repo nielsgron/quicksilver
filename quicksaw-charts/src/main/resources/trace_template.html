@@ -39,6 +39,12 @@ marker: {{marker | raw }},
 {% if text is not null %}
 text: {{text | raw }},
 {% endif %}
+{% if textposition is not null %}
+textposition: {{textposition | raw }},
+{% endif %}
+{% if width is not null %}
+width: {{width | raw }},
+{% endif %}
 {% if mode is not null %}
 mode: '{{mode}}',
 {% endif %}
