@@ -49,6 +49,7 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
                 .axisTitles("Country", "GDP")
+                .columnsForLabels("Country")
                 ;
 
         chartBuilder.layout(1000, 200, 5, 40, 45, 5, false);

@@ -10,6 +10,7 @@ import java.io.Writer;
 import java.util.Map;
 import tech.tablesaw.api.CategoricalColumn;
 import tech.tablesaw.api.NumericColumn;
+import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.plotly.components.Marker;
 
 public class BarTrace extends AbstractTrace {
@@ -18,12 +19,14 @@ public class BarTrace extends AbstractTrace {
   private final double[] y;
   private final Orientation orientation;
   private final Marker marker;
+  private final String[] text;
 
   private BarTrace(BarBuilder builder) {
     super(builder);
     this.orientation = builder.orientation;
     this.x = builder.x;
     this.y = builder.y;
+    this.text = builder.text;
     this.marker = builder.marker;
   }
 
@@ -60,6 +63,10 @@ public class BarTrace extends AbstractTrace {
       context.put("y", dataAsString(y));
       context.put("x", dataAsString(x));
     }
+    if(text != null) {
+      context.put("text", dataAsString(text));
+      context.put("textposition", "'auto'");
+    }
     context.put("orientation", orientation.value);
     if (marker != null) {
       context.put("marker", marker);
@@ -88,6 +95,7 @@ public class BarTrace extends AbstractTrace {
     private final String type = "bar";
     private final Object[] x;
     private final double[] y;
+    private String[] text = null;
     private Orientation orientation = Orientation.VERTICAL;
     private Marker marker;
 
@@ -149,5 +157,10 @@ public class BarTrace extends AbstractTrace {
     protected String getType() {
       return type;
     }
+
+    public void text(StringColumn s) {
+      this.text = s.asObjectArray();
+    }
+
   }
 }
