@@ -63,10 +63,12 @@ public class TSFigurePanel extends BSPanel {
             this.add(new HTMLText("To be implemented"));
         } else {
 
+            for(int i = 0; i< figure.figureCount(); i++) {
             try {
+                String perFigureDivName = figure.figureCount() > 1 ? (divName+"_"+i) : divName;
 
-                HTMLText divS = new HTMLText(figure.divString(divName));
-                String js = figure.asJavascript(divName);
+                HTMLText divS = new HTMLText(figure.divString(perFigureDivName, i));
+                String js = figure.asJavascript(perFigureDivName, i);
 
                 HTMLText divJS = new HTMLText(js);
                 //Plot.show( tsPlot );
@@ -76,6 +78,7 @@ public class TSFigurePanel extends BSPanel {
 
             } catch (Exception e) {
                 e.printStackTrace();
+            }
             }
 
         }

@@ -41,6 +41,8 @@ public class BSInputSelect extends BSComponent {
         }
         addTagAttribute("class", getClassNames());
         addTagAttribute("id", id);
+        //TODO: perhaps allow user to set another name?
+        addTagAttribute("name", id);
 
     }
 

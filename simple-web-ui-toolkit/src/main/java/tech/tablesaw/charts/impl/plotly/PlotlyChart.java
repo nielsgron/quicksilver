@@ -55,4 +55,8 @@ public class PlotlyChart extends Chart {
         return figures[figureIndex].asJavascript(divName);
     }
 
+    @Override
+    public int figureCount() {
+        return figures.length;
+    }
 }
