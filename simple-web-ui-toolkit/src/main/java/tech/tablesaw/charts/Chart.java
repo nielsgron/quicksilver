@@ -10,4 +10,8 @@ public abstract class Chart {
 
     public abstract String asJavascript(String divName, int figureIndex);
 
+    public int figureCount() {
+        return 1;
+    }
+
 }
