@@ -68,8 +68,14 @@ public abstract class BSInput extends BSComponent {
         }
         if(input_id != null && input_id.length() > 0) {
             addTagAttribute("id", input_id);
+            //TODO: perhaps allow user to set another name?
+            addTagAttribute("name", input_id);
         }
 
+    }
+
+    public void setValue(String v) {
+        addTagAttribute("value", v);
     }
 
     protected String getClassNames() {
