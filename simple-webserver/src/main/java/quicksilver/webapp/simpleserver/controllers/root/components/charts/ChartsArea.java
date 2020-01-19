@@ -38,6 +38,8 @@ public class ChartsArea extends AbstractComponentsChartsPage {
 
         String divName = "areaDiv";
 
+        boolean autoSize = false;
+
         // Add Chart
         Table areaTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
@@ -48,14 +50,22 @@ public class ChartsArea extends AbstractComponentsChartsPage {
                 .columnsForViewRows("GDP")
                 ;
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Wide Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -64,7 +74,9 @@ public class ChartsArea extends AbstractComponentsChartsPage {
                 "Half Width Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

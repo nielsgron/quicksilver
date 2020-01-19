@@ -47,6 +47,10 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        // TODO : autoSize : Does Sunburst need and/or have an autoSize option?
+        // TODO : If it is supported by Plotly, then we should added it
+        boolean autoSize = false;
+
         // Add Chart
         Table sunburstTable;
 
@@ -63,6 +67,14 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
                 .columnForSize("MarketCap")
                 .layout(1000, 400, true);
 
+        if ( !autoSize ) {
+            sunburstBuilderBig.layout(1000, 400, true);
+        } else {
+            sunburstBuilderBig.getLayoutBuilder()
+                    .autosize(true)
+                    .height(400);
+        }
+
         sunburstBuilderBig.eventHandler((String targetName, String divName) -> {
             return resource("sunburst-doubleclick-handler.js", "")
                     .replaceAll("targetName", targetName);
@@ -77,8 +89,15 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
                 .columnsForViewColumns("Company", "Sector")
-                .columnForSize("MarketCap")
-                .layout(450, 200, false);
+                .columnForSize("MarketCap");
+
+        if ( !autoSize ) {
+            sunburstBuilder.layout(450, 200, true);
+        } else {
+            sunburstBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(200);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(sunburstBuilder.divName("sunburstDiv2").build(), "sunburstDiv2"),
@@ -87,7 +106,13 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
                         "Sunburst Chart")
         );
 
-        sunburstBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            sunburstBuilder.layout(300, 200, true);
+        } else {
+            sunburstBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(200);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(sunburstBuilder.divName("sunburstDiv4").build(), "sunburstDiv4"),

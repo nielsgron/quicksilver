@@ -26,6 +26,8 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
 
         String divName = "calheatmapDiv";
 
+        boolean autoSize = false;
+
         Table stockPricesTable = null;
 
         try {
@@ -48,7 +50,14 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
 
         CalHeatmapLayout.LayoutBuilder layoutBuilder = (CalHeatmapLayout.LayoutBuilder)chartBuilder.getLayoutBuilder();
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
+
         layoutBuilder.domain("month")
                 .subDomain("x_day")
                 .cellSize(21)
@@ -62,7 +71,10 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
                         "Wide Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
+
         layoutBuilder.domain("month")
                 .subDomain("x_day")
                 .cellSize(20)
@@ -78,7 +90,10 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
                         "Half Width Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
+
         layoutBuilder.domain("month")
                 .subDomain("x_day")
                 .cellSize(19)

@@ -41,6 +41,8 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
 
         String divName = "candlestickDiv";
 
+        boolean autoSize = false;
+
         // Add Chart
         Table candleStickTable = null;
 
@@ -58,14 +60,22 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
                 .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Candlestick Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -74,7 +84,9 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
                         "Candlestick Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

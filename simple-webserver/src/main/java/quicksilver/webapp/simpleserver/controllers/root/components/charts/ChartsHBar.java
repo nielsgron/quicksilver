@@ -40,6 +40,8 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
 
         String divName = "hbarDiv";
 
+        boolean autoSize = true;
+
         // Add Chart
         //Table table = Charts.createPieDataSet(true);
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
@@ -47,25 +49,28 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
-                //.layout(500, 200, false)
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
                 .axisTitles("GDP", "Country")
                 ;
 
-        //chartBuilder.layout( 1000, 200, 5, 35, 80, 5, false);
-        chartBuilder.layout(5, 35, 80, 5, false);
-        chartBuilder.getLayoutBuilder()
-                .autosize(true)
-                .height(250)
-                .build();
+        if ( !autoSize ) {
+            chartBuilder.layout( 1000, 200, 5, 35, 80, 5, false);
+        } else {
+            chartBuilder.layout(5, 35, 80, 5, false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                     "Country GDP (Nominal)")
         );
 
-        //chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -74,7 +79,9 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                     "Country Population")
         );
 
-        //chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
             new BSCard( new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

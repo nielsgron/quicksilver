@@ -38,6 +38,8 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
 
         String divName = "timeseriesDiv";
 
+        boolean autoSize = false;
+
         // Add Chart
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
@@ -49,14 +51,23 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
                 .axisTitles("", "Close Price")
                 ;
 
-        chartBuilder.layout(1000, 200, 5, 20, 50, 5, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, 5, 20, 50, 5, false);
+        } else {
+            chartBuilder.layout(5, 20, 50, 5, false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Timeseries Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -65,7 +76,9 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
                         "Timeseries Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

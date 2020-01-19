@@ -51,7 +51,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         DoubleColumn marketCapColumn = (DoubleColumn)treemapTable.column("MarketCap");
         treemapTable = treemapTable.where(marketCapColumn.isGreaterThan(75000)); // Greater then 75 Billion market cap (113 rows)
 
-        System.out.println("Stocks Table Row Count: " + treemapTable.rowCount());
+        //System.out.println("Stocks Table Row Count: " + treemapTable.rowCount());
 
         //XXX: See https://github.com/jtablesaw/tablesaw/pull/703 ,until then convert % by hand to numbers
         StringColumn change = (StringColumn) treemapTable.column("Change");
@@ -114,6 +114,8 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
+        boolean autoSize = false;
+
         // Add Chart
         Table treemapTable;
 
@@ -160,6 +162,14 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                 .columnForColor(/* marker.colors: */ "ChangeAsNumber")
                 .layout(1043, 500, false);
 
+        if ( !autoSize ) {
+            stockBuilder.layout(1043, 500, true);
+        } else {
+            stockBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(500);
+        }
+
         stockBuilder.eventHandler((String targetName, String divName) -> {
             return ChartsSunburst.resource("treemap-doubleclick-handler.js", "")
                     .replaceAll("targetName", targetName);
@@ -176,6 +186,14 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                         .columnsForViewColumns("Ticker", "Industry");
         builder.layout(486, 200, false);
 
+        if ( !autoSize ) {
+            builder.layout(486, 200, true);
+        } else {
+            builder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(200);
+        }
+
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(builder.divName("treemapDiv2").build(), "treemapDiv2"),
                         "Treemap Chart"),
@@ -183,7 +201,13 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
                         "Treemap Chart")
         );
 
-        builder.layout(300, 200, false);
+        if ( !autoSize ) {
+            builder.layout(300, 200, true);
+        } else {
+            builder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(200);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(builder.divName("treemapDiv4").build(), "treemapDiv4"),

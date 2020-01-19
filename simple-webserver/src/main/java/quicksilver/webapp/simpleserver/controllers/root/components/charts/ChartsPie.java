@@ -38,6 +38,8 @@ public class ChartsPie extends AbstractComponentsChartsPage {
 
         String divName = "pieDiv";
 
+        boolean autoSize = false;
+
         // Add Chart
         Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
@@ -48,14 +50,22 @@ public class ChartsPie extends AbstractComponentsChartsPage {
                 .columnsForViewRows("GDP")
                 ;
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Pie Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -64,7 +74,9 @@ public class ChartsPie extends AbstractComponentsChartsPage {
                         "Pie Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

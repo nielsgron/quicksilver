@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fdaf11b-dbed-4dfb-bc27-c90e073b3cf0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/ModuleQuicksawCharts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleQuicksawCharts.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModuleSimpleCommons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleSimpleCommons.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModuleSimpleWebServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleSimpleWebServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModuleSimpleWebUIToolkit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleSimpleWebUIToolkit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsHBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsHBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsVBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../simple-webserver/src/main/java/quicksilver/webapp/simpleserver/controllers/root/components/charts/ChartsVBar.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/../simple-commons/target/" />
@@ -22,9 +22,9 @@
     <session id="114876584">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.0" value="7" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.0" value="8" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -54,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/quicksilver/commons/email/EmailService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="690">
-              <caret line="60" column="37" lean-forward="true" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+              <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,7 +143,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -249,6 +248,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -343,7 +343,7 @@
     <frame x="239" y="-1308" width="1876" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34950927" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.35332605" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -434,7 +434,7 @@
     <entry file="file://$PROJECT_DIR$/../simple-commons/src/main/java/quicksilver/commons/email/EmailService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
-          <caret line="60" column="37" lean-forward="true" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
