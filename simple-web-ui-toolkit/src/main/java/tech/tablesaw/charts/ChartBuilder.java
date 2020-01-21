@@ -108,8 +108,13 @@ public abstract class ChartBuilder {
         return this;
     }
 
+    public ChartBuilder layout(boolean enabledLegend) {
+        layout(15, 40, 50, 15, enabledLegend);
+        return this;
+    }
+
     public ChartBuilder layout(int width, int height, boolean enabledLegend) {
-        layout(width, height, 0, 0, 0, 0, enabledLegend);
+        layout(width, height, 100, 80, 80, 80, enabledLegend);
         return this;
     }
 

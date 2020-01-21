@@ -38,7 +38,7 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
 
         String divName = "timeseriesDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();

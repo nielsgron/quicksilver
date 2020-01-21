@@ -38,7 +38,7 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
 
         String divName = "histogramDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table histogramTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
@@ -48,11 +48,13 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
                 .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
                 //.columnsForViewColumns("Country")
                 .columnsForViewRows("Population")
+                .axisTitles("Population", "")
                 ;
 
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

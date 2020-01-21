@@ -38,7 +38,7 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
 
         String divName = "heatmapDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table heatmapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
@@ -53,6 +53,7 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(15, 40, 130, 15, false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

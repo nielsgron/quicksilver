@@ -38,7 +38,7 @@ public class ChartsArea extends AbstractComponentsChartsPage {
 
         String divName = "areaDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table areaTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
@@ -48,11 +48,13 @@ public class ChartsArea extends AbstractComponentsChartsPage {
                 .chartType(ChartBuilder.CHART_TYPE.AREA)
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
+                .axisTitles("Country", "GDP")
                 ;
 
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

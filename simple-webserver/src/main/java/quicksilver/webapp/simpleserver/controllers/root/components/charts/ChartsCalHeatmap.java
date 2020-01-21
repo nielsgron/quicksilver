@@ -26,7 +26,7 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
 
         String divName = "calheatmapDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         Table stockPricesTable = null;
 
@@ -53,6 +53,7 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

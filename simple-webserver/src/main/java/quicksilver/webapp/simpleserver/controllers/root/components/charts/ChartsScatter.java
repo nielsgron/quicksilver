@@ -38,7 +38,7 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
 
         String divName = "scatterDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table scatterTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
@@ -54,6 +54,7 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

@@ -47,9 +47,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
-        // TODO : autoSize : Does Sunburst need and/or have an autoSize option?
-        // TODO : If it is supported by Plotly, then we should added it
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table sunburstTable;
@@ -70,6 +68,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             sunburstBuilderBig.layout(1000, 400, true);
         } else {
+            sunburstBuilderBig.layout(false);
             sunburstBuilderBig.getLayoutBuilder()
                     .autosize(true)
                     .height(400);
@@ -94,6 +93,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             sunburstBuilder.layout(450, 200, true);
         } else {
+            sunburstBuilder.layout(false);
             sunburstBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(200);
@@ -109,6 +109,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             sunburstBuilder.layout(300, 200, true);
         } else {
+            sunburstBuilder.layout(false);
             sunburstBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(200);

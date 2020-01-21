@@ -41,7 +41,7 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
 
         String divName = "ohlcDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table ohlcTable = null;
@@ -58,11 +58,13 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
                 .chartType(ChartBuilder.CHART_TYPE.OHLC)
                 .columnsForViewColumns("Date")
                 .columnsForViewRows("Open", "High", "Low", "Close")
+                .axisTitles("", "Stock Price")
                 ;
 
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(15, 10, 50, 15, false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

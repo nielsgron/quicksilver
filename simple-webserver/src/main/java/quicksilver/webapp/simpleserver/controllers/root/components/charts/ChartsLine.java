@@ -38,7 +38,7 @@ public class ChartsLine extends AbstractComponentsChartsPage {
 
         String divName = "lineDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table lineTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
@@ -48,11 +48,13 @@ public class ChartsLine extends AbstractComponentsChartsPage {
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
+                .axisTitles("Country", "GDP")
                 ;
 
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

@@ -114,7 +114,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
 
         QuickBodyPanel body = new QuickBodyPanel();
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table treemapTable;
@@ -165,6 +165,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             stockBuilder.layout(1043, 500, true);
         } else {
+            stockBuilder.layout(false);
             stockBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(500);
@@ -189,6 +190,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             builder.layout(486, 200, true);
         } else {
+            builder.layout(false);
             builder.getLayoutBuilder()
                     .autosize(true)
                     .height(200);
@@ -204,6 +206,7 @@ public class ChartsTreemap extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             builder.layout(300, 200, true);
         } else {
+            builder.layout(false);
             builder.getLayoutBuilder()
                     .autosize(true)
                     .height(200);

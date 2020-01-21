@@ -38,7 +38,7 @@ public class ChartsPie extends AbstractComponentsChartsPage {
 
         String divName = "pieDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
@@ -53,6 +53,7 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);

@@ -39,7 +39,7 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
 
         String divName = "bubbleDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table bubbleTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();

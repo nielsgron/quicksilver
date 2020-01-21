@@ -41,7 +41,7 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
 
         String divName = "candlestickDiv";
 
-        boolean autoSize = false;
+        boolean autoSize = true;
 
         // Add Chart
         Table candleStickTable = null;
@@ -58,11 +58,13 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
                 .columnsForViewColumns("Date")
                 .columnsForViewRows("Open", "High", "Low", "Close")
+                .axisTitles("", "Stock Price")
                 ;
 
         if ( !autoSize ) {
             chartBuilder.layout(1000, 200, false);
         } else {
+            chartBuilder.layout(15, 10, 50, 15, false);
             chartBuilder.getLayoutBuilder()
                     .autosize(true)
                     .height(250);
