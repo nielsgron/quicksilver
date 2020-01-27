@@ -6,6 +6,7 @@ import com.mitchellbosecke.pebble.error.PebbleException;
 import com.mitchellbosecke.pebble.template.PebbleTemplate;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.Map;
 import tech.tablesaw.api.CategoricalColumn;
@@ -43,8 +44,10 @@ public class BarTrace extends AbstractTrace {
     try {
       compiledTemplate = engine.getTemplate("trace_template.html");
       compiledTemplate.evaluate(writer, getContext(i));
-    } catch (PebbleException | IOException e) {
-      e.printStackTrace();
+    } catch (PebbleException e) {
+      throw new IllegalStateException(e);
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
     }
     return writer.toString();
   }
@@ -115,16 +118,19 @@ public class BarTrace extends AbstractTrace {
       return this;
     }
 
+    @Override
     public BarBuilder opacity(double opacity) {
       super.opacity(opacity);
       return this;
     }
 
+    @Override
     public BarBuilder name(String name) {
       super.name(name);
       return this;
     }
 
+    @Override
     public BarBuilder showLegend(boolean b) {
       super.showLegend(b);
       return this;
@@ -135,11 +141,13 @@ public class BarTrace extends AbstractTrace {
       return this;
     }
 
+    @Override
     public BarBuilder xAxis(String xAxis) {
       super.xAxis(xAxis);
       return this;
     }
 
+    @Override
     public BarBuilder yAxis(String yAxis) {
       super.yAxis(yAxis);
       return this;

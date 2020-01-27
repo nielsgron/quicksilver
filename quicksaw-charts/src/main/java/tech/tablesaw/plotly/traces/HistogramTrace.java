@@ -4,6 +4,7 @@ import com.mitchellbosecke.pebble.error.PebbleException;
 import com.mitchellbosecke.pebble.template.PebbleTemplate;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.util.Map;
 import tech.tablesaw.api.NumericColumn;
@@ -70,7 +71,8 @@ public class HistogramTrace extends AbstractTrace {
     return new HistogramBuilder(values.asDoubleArray());
   }
 
-  public static HistogramBuilder builder(Column<?> xValues, NumericColumn<? extends Number> values) {
+  public static HistogramBuilder builder(
+      Column<?> xValues, NumericColumn<? extends Number> values) {
     return new HistogramBuilder(xValues.asObjectArray(), values.asDoubleArray());
   }
 
@@ -101,8 +103,10 @@ public class HistogramTrace extends AbstractTrace {
     try {
       compiledTemplate = engine.getTemplate("trace_template.html");
       compiledTemplate.evaluate(writer, getContext(i));
-    } catch (PebbleException | IOException e) {
-      e.printStackTrace();
+    } catch (PebbleException e) {
+      throw new IllegalStateException(e);
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
     }
     return writer.toString();
   }
@@ -191,6 +195,7 @@ public class HistogramTrace extends AbstractTrace {
       return this;
     }
 
+    @Override
     public HistogramBuilder opacity(double opacity) {
       super.opacity(opacity);
       return this;
@@ -201,6 +206,7 @@ public class HistogramTrace extends AbstractTrace {
       return this;
     }
 
+    @Override
     public HistogramBuilder showLegend(boolean b) {
       super.showLegend(b);
       return this;
@@ -217,8 +223,8 @@ public class HistogramTrace extends AbstractTrace {
      * each bar corresponds to the probability that an event will fall into the corresponding bin
      * (here, the sum of all bin AREAS equals 1).
      *
-     * @param histNorm  The normalization type for the histogram
-     * @return          This HistogramBuilder
+     * @param histNorm The normalization type for the histogram
+     * @return This HistogramBuilder
      */
     public HistogramBuilder histNorm(HistNorm histNorm) {
       this.histNorm = histNorm;
@@ -231,24 +237,27 @@ public class HistogramTrace extends AbstractTrace {
      * "min", "max", the histogram values are computed using the sum, the average, the minimum or
      * the maximum of the values lying inside each bin respectively.
      *
-     * @param histFunc  The function type
-     * @return          This HistogramBuilder
+     * @param histFunc The function type
+     * @return This HistogramBuilder
      */
     public HistogramBuilder histFunc(HistFunc histFunc) {
       this.histFunc = histFunc;
       return this;
     }
 
+    @Override
     public HistogramBuilder name(String name) {
       super.name(name);
       return this;
     }
 
+    @Override
     public HistogramBuilder xAxis(String xAxis) {
       super.xAxis(xAxis);
       return this;
     }
 
+    @Override
     public HistogramBuilder yAxis(String yAxis) {
       super.yAxis(yAxis);
       return this;
