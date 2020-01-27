@@ -1,11 +1,6 @@
 package tech.tablesaw.plotly.components;
 
 import com.google.common.base.Preconditions;
-import com.mitchellbosecke.pebble.error.PebbleException;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -56,21 +51,13 @@ public class Font extends Component {
     return new FontBuilder();
   }
 
+  @Override
   public String asJavascript() {
-    Writer writer = new StringWriter();
-    PebbleTemplate compiledTemplate;
-
-    try {
-      compiledTemplate = engine.getTemplate("font_template.html");
-
-      compiledTemplate.evaluate(writer, getContext());
-    } catch (PebbleException | IOException e) {
-      e.printStackTrace();
-    }
-    return writer.toString();
+    return asJavascript("font_template.html");
   }
 
-  private Map<String, Object> getContext() {
+  @Override
+  protected Map<String, Object> getContext() {
     Map<String, Object> context = new HashMap<>();
     context.put("size", size);
     context.put("family", fontFamily);
