@@ -1,47 +1,72 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
-import tech.tablesaw.api.CategoricalColumn;
 import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.BubblePlot;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
-import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Marker;
 import tech.tablesaw.plotly.traces.ScatterTrace;
-import tech.tablesaw.plotly.traces.Trace;
 import tech.tablesaw.table.TableSliceGroup;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class PlotlyBubblePlot extends BubblePlot {
+public class PlotlyBubblePlot extends PlotlyAbstractPlot {
 
-    private Figure figure;
+    private final static Logger LOG = LogManager.getLogger();
 
-    public PlotlyBubblePlot(Layout layout, Table table, String xCol, String yCol, String sizeColumn, String groupCol) {
-        TableSliceGroup tables = table.splitOn(new CategoricalColumn[]{table.categoricalColumn(groupCol)});
-        ScatterTrace[] traces = new ScatterTrace[tables.size()];
+    public PlotlyBubblePlot(ChartBuilder chartBuilder, String groupCol) {
+        setChartBuilder(chartBuilder);
+        String xCol = columnsForViewColumns[0];
+        String yCol = columnsForViewRows[0];
+        String sizeColumn = columnForSize;
 
-        for(int i = 0; i < tables.size(); ++i) {
-            List<Table> tableList = tables.asTableList();
-            Marker marker = Marker.builder().size(((Table)tableList.get(i)).numberColumn(sizeColumn)).build();
-            traces[i] = ScatterTrace.builder(((Table)tableList.get(i)).numberColumn(xCol), ((Table)tableList.get(i)).numberColumn(yCol)).showLegend(true).marker(marker).name(((Table)tableList.get(i)).name()).build();
+        if (columnsForLabels != null && columnsForLabels.length > 1) {
+            LOG.warn("Only one labels column is supported but {} received", columnsForLabels.length);
         }
 
-        figure = new Figure(layout, traces);
+        // TODO : columnForDetails -
+        // TODO : columnForColor -
+
+        List<Table> tableList;
+
+        if ( groupCol != null ) {
+            TableSliceGroup tables = table.splitOn(table.categoricalColumn(groupCol));
+            tableList = tables.asTableList();
+        } else {
+            tableList = new ArrayList<Table>();
+            tableList.add(table);
+        }
+
+        ScatterTrace[] traces = new ScatterTrace[tableList.size()];
+        for (int i = 0; i < tableList.size(); i++) {
+            Marker marker =
+                    Marker.builder()
+                            .size(tableList.get(i).numberColumn(sizeColumn))
+                            // .opacity(.75)
+                            .build();
+
+            ScatterTrace.ScatterBuilder builder =
+                    ScatterTrace.builder(
+                            tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
+                            .showLegend(true)
+                            .marker(marker)
+                            .name(tableList.get(i).name());
+            if (columnsForLabels != null && columnsForLabels.length > 0) {
+                builder = builder
+                        .mode(ScatterTrace.Mode.TEXT_AND_MARKERS)
+                        .text(tableList.get(i).stringColumn(columnsForLabels[0]).asObjectArray());
+            }
+            traces[i] = builder
+                            .build();
+        }
+
+        setFigure( new Figure(layout, config, traces) );
     }
 
-    public PlotlyBubblePlot(Layout layout, Table table, String xCol, String yCol, String sizeColumn) {
-        Marker marker = Marker.builder().size(table.numberColumn(sizeColumn)).build();
-        ScatterTrace trace = ScatterTrace.builder(table.numberColumn(xCol), table.numberColumn(yCol)).marker(marker).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
-
-    public PlotlyBubblePlot(Layout layout, double[] xCol, double[] yCol) {
-        ScatterTrace trace = ScatterTrace.builder(xCol, yCol).build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
-
-    public Figure getFigure() {
-        return figure;
+    public PlotlyBubblePlot(ChartBuilder chartBuilder) {
+        this(chartBuilder, null);
     }
 
 }

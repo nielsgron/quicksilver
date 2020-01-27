@@ -1,23 +1,36 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
-import tech.tablesaw.api.Table;
-import tech.tablesaw.plotly.api.CandlestickPlot;
+import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
-import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
-public class PlotlyCandlestickPlot extends CandlestickPlot {
+public class PlotlyCandlestickPlot extends PlotlyAbstractPlot {
 
-    private Figure figure;
+    public PlotlyCandlestickPlot(ChartBuilder chartBuilder) {
+        setChartBuilder(chartBuilder);
+        String xCol = columnsForViewColumns[0];
+        String openCol = columnsForViewRows[0];
+        String highCol = columnsForViewRows[1];
+        String lowCol = columnsForViewRows[2];
+        String closeCol = columnsForViewRows[3];
 
-    public PlotlyCandlestickPlot(Layout layout, Table table, String xCol, String openCol, String highCol, String lowCol, String closeCol) {
-        ScatterTrace trace = ScatterTrace.builder(table.dateColumn(xCol), table.numberColumn(openCol), table.numberColumn(highCol), table.numberColumn(lowCol), table.numberColumn(closeCol)).type("candlestick").build();
-        figure = new Figure(layout, new Trace[]{trace});
-    }
+        // TODO : columnForLabels -
+        // TODO : columnForDetails -
+        // TODO : columnForColor -
+        // TODO : columnForSize -
 
-    public Figure getFigure() {
-        return figure;
+        ScatterTrace trace =
+                ScatterTrace.builder(
+                        table.dateColumn(xCol),
+                        table.numberColumn(openCol),
+                        table.numberColumn(highCol),
+                        table.numberColumn(lowCol),
+                        table.numberColumn(closeCol))
+                        .type("candlestick")
+                        .build();
+
+        setFigure( new Figure(layout, config, new Trace[]{trace}) );
     }
 
 }

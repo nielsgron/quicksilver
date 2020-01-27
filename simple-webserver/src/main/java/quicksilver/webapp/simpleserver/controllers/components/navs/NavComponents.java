@@ -28,6 +28,7 @@ public class NavComponents extends BSNavTab {
         this.add(bootstrap);
         this.add(new BSNavItem("Tables", "/components/tables"));
         this.add(new BSNavItem("Charts", "/components/charts"));
+        this.add(new BSNavItem("Data Explorer", "/components/explorer"));
         //this.add(new BSNavItem("Custom Forms", "/components/customforms"));
         //this.add(new BSNavItem("Extras", "/components/extras"));
 

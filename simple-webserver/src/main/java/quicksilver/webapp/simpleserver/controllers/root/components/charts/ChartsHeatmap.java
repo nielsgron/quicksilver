@@ -38,24 +38,35 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
 
         String divName = "heatmapDiv";
 
+        boolean autoSize = true;
+
         // Add Chart
         Table heatmapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(heatmapTable)
                 .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
-                .rowColumns("Company", "Sector")
-                //.dataColumns("Close")
+                .columnsForViewColumns("Company", "Sector")
+                //.columnsForViewRows("Close")
                 ;
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.layout(15, 40, 130, 15, false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Heatmap Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -64,7 +75,9 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
                         "Heatmap Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

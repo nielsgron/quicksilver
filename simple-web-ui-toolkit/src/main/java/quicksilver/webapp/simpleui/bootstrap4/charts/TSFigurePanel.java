@@ -18,6 +18,7 @@ package quicksilver.webapp.simpleui.bootstrap4.charts;
 
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
+import tech.tablesaw.charts.Chart;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.components.Margin;
@@ -50,74 +51,25 @@ public class TSFigurePanel extends BSPanel {
     */
 
     protected String divName;
-    protected int width;
-    protected int height;
-    protected boolean enabledLegend = false;
 
-    public TSFigurePanel(String divName) {
-        this(divName, 500, 200);
-    }
-
-    public TSFigurePanel(String divName, int width, int height) {
+    public TSFigurePanel(Chart figure, String divName) {
         this.divName = divName;
-        this.width = width;
-        this.height = height;
-    }
-
-    public TSFigurePanel(Figure figure, String divName) {
-        this(figure, divName, 500, 200);
-    }
-
-    public TSFigurePanel(Figure figure, String divName, int width, int height) {
-        this.divName = divName;
-        this.width = width;
-        this.height = height;
         addFigure(figure);
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void enableLegend(boolean enabled) {
-        this.enabledLegend = enabled;
-    }
-
-    public void addFigure(Figure figure) {
+    public void addFigure(Chart figure) {
 
         if ( figure == null ) {
             this.add(new HTMLText("To be implemented"));
         } else {
 
+            for(int i = 0; i< figure.figureCount(); i++) {
             try {
+                String perFigureDivName = figure.figureCount() > 1 ? (divName+"_"+i) : divName;
 
-                HTMLText divS = new HTMLText(figure.divString(divName));
-                String js = figure.asJavascript(divName);
+                HTMLText divS = new HTMLText(figure.divString(perFigureDivName, i));
+                String js = figure.asJavascript(perFigureDivName, i);
 
-                int rHeight = 600;
-                int rWidth = 800;
-
-                if (js.contains("height: 700")) {
-                    rHeight = 700;
-                }
-
-                if (js.contains("width: 900")) {
-                    rWidth = 900;
-                }
-
-                js = js.replace("height: " + rHeight + "", "height: " + height + ", margin: {\n" +
-                        "    autoexpand: false,\n" +
-                        "    l: 40,\n" +
-                        "    r: 5,\n" +
-                        "    b: 30,\n" +
-                        "    t: 5\n" +
-                        "  }");
-                js = js.replace("width: " + rWidth + "", "width: " + width + "");
-                js = js.replace("data, layout);", "data, layout, {displayModeBar: false});");
                 HTMLText divJS = new HTMLText(js);
                 //Plot.show( tsPlot );
 
@@ -127,27 +79,9 @@ public class TSFigurePanel extends BSPanel {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            }
 
         }
-
-    }
-
-    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, boolean enabledLegend) {
-        return createLayoutBuilder(width, height, 0, 0, 0, 0, enabledLegend);
-    }
-
-    public static Layout.LayoutBuilder createLayoutBuilder(int width, int height, int marginTop, int marginBottom, int marginLeft, int marginRight, boolean enabledLegend) {
-
-        return Layout.builder("")
-                .width(width)
-                .height(height)
-                .margin(Margin.builder()
-                        .top(marginTop)
-                        .bottom(marginBottom)
-                        .left(marginLeft)
-                        .right(marginRight)
-                        .build())
-                .showLegend(enabledLegend);
 
     }
 

@@ -39,6 +39,8 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
 
         String divName = "bubbleDiv";
 
+        boolean autoSize = true;
+
         // Add Chart
         Table bubbleTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
@@ -51,20 +53,31 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(bubbleTable)
                 .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
-                .rowColumns("Population")
-                .dataColumns("GDP")
-                .sizeColumn("GDP_Capita_Ratio")
+                .columnsForViewColumns("Population")
+                .columnsForViewRows("GDP")
+                .columnForSize("GDP_Capita_Ratio")
+                .columnsForLabels("Country")
                 .axisTitles("Population", "GDP")
                 ;
 
-        chartBuilder.layout(1000, 200, 5, 35, 45, 5, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, 5, 35, 45, 5, false);
+        } else {
+            chartBuilder.layout(5, 35, 45, 5, false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
+
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Bubble Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -73,7 +86,9 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
                         "Bubble Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

@@ -38,24 +38,36 @@ public class ChartsLine extends AbstractComponentsChartsPage {
 
         String divName = "lineDiv";
 
+        boolean autoSize = true;
+
         // Add Chart
         Table lineTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(lineTable)
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
+                .axisTitles("Country", "GDP")
                 ;
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.layout(false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Wide Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -64,7 +76,9 @@ public class ChartsLine extends AbstractComponentsChartsPage {
                         "Line Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

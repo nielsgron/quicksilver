@@ -21,7 +21,6 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import tech.tablesaw.api.*;
 import tech.tablesaw.columns.Column;
-import tech.tablesaw.io.jdbc.SqlResultSetReader;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -205,35 +204,22 @@ public class TSDataSetFactory {
         return dataSet;
     }
 
-    public static TSDataSet createSampleFamilyTreeData() {
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Name", "Parent"},
-                new Class[]{String.class, String.class});
-        dataSet.addRow(new Object[] { "FreeBSD"         , "386BSD" });
-        dataSet.addRow(new Object[] { "OpenBSD"         , "NetBSD" });
-        dataSet.addRow(new Object[] { "NetBSD"          , "386BSD" });
-        dataSet.addRow(new Object[] { "DragonFly BSD"   , "FreeBSD" });
-        dataSet.addRow(new Object[] { "macOS"           , "Darwin" });
-        dataSet.addRow(new Object[] { "Darwin"          , "FreeBSD" });
-
-        return dataSet;
-    }
-
     public static TSDataSet createSampleCountryEconomicData() {
 
         // Country, GDP, Population
 
-        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_Capita", "Population"},
-                new Class[]{String.class, Double.class, Double.class, Double.class});
-        dataSet.addRow(new Object[] { "US"          , 20580000000000D    , 62869D    , 327167434D });
-        dataSet.addRow(new Object[] { "China"       , 14216000000000D    , 10153D    , 1403500365D });
-        dataSet.addRow(new Object[] { "Japan"       ,  5176000000000D    , 41021D    , 126317000D });
-        dataSet.addRow(new Object[] { "Germany"     ,  4117000000000D    , 49692D    , 83019200D });
-        dataSet.addRow(new Object[] { "India"       ,  2972000000000D    , 2199D     , 1324171354D });
-        dataSet.addRow(new Object[] { "France"      ,  2845000000000D    , 43500D    , 67022000D });
-        dataSet.addRow(new Object[] { "UK"          ,  2829000000000D    , 42580D    , 67545757D });
-        dataSet.addRow(new Object[] { "Canada"      ,  1820000000000D    , 48601D    , 37602103D });
-        dataSet.addRow(new Object[] { "Spain"       ,  1583000000000D    , 34281D    , 46733038D });
-        dataSet.addRow(new Object[] { "Australia"   ,  1376000000000D    , 53825D    , 25546800D });
+        TSDataSet dataSet = createSampleDataSet(new String[]{"Country", "GDP", "GDP_Capita", "Population", "Continent"},
+                new Class[]{String.class, Double.class, Double.class, Double.class, String.class});
+        dataSet.addRow(new Object[] { "US"          , 20580000000000D    , 62869D    , 327167434D   , "North America"});
+        dataSet.addRow(new Object[] { "China"       , 14216000000000D    , 10153D    , 1403500365D  , "Asia"});
+        dataSet.addRow(new Object[] { "Japan"       ,  5176000000000D    , 41021D    , 126317000D   , "Asia"});
+        dataSet.addRow(new Object[] { "Germany"     ,  4117000000000D    , 49692D    , 83019200D    , "Europe"});
+        dataSet.addRow(new Object[] { "India"       ,  2972000000000D    , 2199D     , 1324171354D  , "Asia"});
+        dataSet.addRow(new Object[] { "France"      ,  2845000000000D    , 43500D    , 67022000D    , "Europe"});
+        dataSet.addRow(new Object[] { "UK"          ,  2829000000000D    , 42580D    , 67545757D    , "Europe"});
+        dataSet.addRow(new Object[] { "Canada"      ,  1820000000000D    , 48601D    , 37602103D    , "North America"});
+        dataSet.addRow(new Object[] { "Spain"       ,  1583000000000D    , 34281D    , 46733038D    , "Europe"});
+        dataSet.addRow(new Object[] { "Australia"   ,  1376000000000D    , 53825D    , 25546800D    , "Australia"});
 
         dataSet.sort("-GDP");
 

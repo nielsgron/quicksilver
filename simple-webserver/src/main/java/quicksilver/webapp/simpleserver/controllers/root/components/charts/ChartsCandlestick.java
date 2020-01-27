@@ -32,7 +32,7 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
 
     public ChartsCandlestick() {
         super();
-        toolbar.setActiveButton("Candlestick");
+        toolbar.setActiveButton("C-stick");
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -40,6 +40,8 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
         QuickBodyPanel body = new QuickBodyPanel();
 
         String divName = "candlestickDiv";
+
+        boolean autoSize = true;
 
         // Add Chart
         Table candleStickTable = null;
@@ -54,18 +56,28 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(candleStickTable)
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
-                .rowColumns("Date")
-                .dataColumns("Open", "High", "Low", "Close")
+                .columnsForViewColumns("Date")
+                .columnsForViewRows("Open", "High", "Low", "Close")
+                .axisTitles("", "Stock Price")
                 ;
 
-        chartBuilder.layout(1000, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, false);
+        } else {
+            chartBuilder.layout(15, 10, 50, 15, false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Candlestick Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -74,7 +86,9 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
                         "Candlestick Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),

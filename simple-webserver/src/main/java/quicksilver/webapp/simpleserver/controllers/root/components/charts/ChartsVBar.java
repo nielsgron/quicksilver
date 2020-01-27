@@ -22,8 +22,11 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
+import tech.tablesaw.api.DoubleColumn;
+import tech.tablesaw.api.NumericColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.plotly.components.Layout;
 
 public class ChartsVBar extends AbstractComponentsChartsPage {
 
@@ -38,26 +41,47 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
 
         String divName = "vbarDiv";
 
+        boolean autoSize = true;
+
         // Add Chart
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
+
+        NumericColumn<?> population = table.numberColumn("Population");
+        double minPopulation = population.min();
+        double maxPopulation = population.max();
+        table.addColumns(
+                population.mapInto(
+                        //this computes roughly a bar width (in position axis units)
+                        (double p) -> 0.1 + (p - minPopulation) / (maxPopulation - minPopulation),
+                        DoubleColumn.create("Width")));
 
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
-                .layout(500, 200, false)
-                .rowColumns("Country")
-                .dataColumns("GDP")
+                .columnsForViewColumns("Country")
+                .columnsForViewRows("GDP")
                 .axisTitles("Country", "GDP")
+                .columnsForLabels("Country")
+                .columnForSize("Width")
                 ;
 
-        chartBuilder.layout(1000, 200, 5, 40, 45, 5, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(1000, 200, 5, 40, 45, 5, false);
+        } else {
+            chartBuilder.layout(5, 40, 45, 5, false);
+            chartBuilder.getLayoutBuilder()
+                    .autosize(true)
+                    .height(250);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "1").build(), divName + "1"),
                         "Wide Chart")
         );
 
-        chartBuilder.layout(450, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(450, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "2").build(), divName + "2"),
@@ -66,7 +90,9 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                         "Half Width Chart")
         );
 
-        chartBuilder.layout(300, 200, false);
+        if ( !autoSize ) {
+            chartBuilder.layout(300, 200, false);
+        }
 
         body.addRowOfColumns(
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "4").build(), divName + "4"),
@@ -74,6 +100,31 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "5").build(), divName + "5"),
                         "Narrow Chart"),
                 new BSCard(new TSFigurePanel(chartBuilder.divName(divName + "6").build(), divName + "6"),
+                        "Narrow Chart")
+        );
+
+        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Continent")
+                .columnsForViewRows("GDP")
+                .axisTitles("Continent", "GDP")
+                .columnForColor("Country");
+
+        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder()
+                .dataTable(table)
+                .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR, Layout.BarMode.STACK)
+                .layout(500, 200, false)
+                .columnsForViewColumns("Continent")
+                .columnsForViewRows("GDP")
+                .axisTitles("Continent", "GDP")
+                .columnForColor("Country");
+
+        body.addRowOfColumns(
+                new BSCard(new TSFigurePanel(chartBuilderPerContinent.divName(divName + "7").build(), divName + "7"),
+                        "Narrow Chart"),
+                new BSCard(new TSFigurePanel(chartBuilderPerContinentStacked.divName(divName + "9").build(), divName + "9"),
                         "Narrow Chart")
         );
 

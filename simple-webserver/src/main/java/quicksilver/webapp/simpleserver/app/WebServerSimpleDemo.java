@@ -25,6 +25,7 @@ import quicksilver.webapp.simpleserver.controllers.root.about.Team;
 import quicksilver.webapp.simpleserver.controllers.root.components.bootstrap.Bootstrap;
 import quicksilver.webapp.simpleserver.controllers.root.Index;
 import quicksilver.webapp.simpleserver.controllers.root.Search;
+import quicksilver.webapp.simpleserver.controllers.root.components.explorer.Explorer;
 import quicksilver.webapp.simpleserver.controllers.root.components.charts.*;
 import quicksilver.webapp.simpleserver.controllers.root.components.customforms.CustomForms;
 import quicksilver.webapp.simpleserver.controllers.root.components.extras.Extras;
@@ -84,6 +85,10 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
         });
         webServer.get("/components/extras", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Extras(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+        webServer.get("/components/explorer", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new Explorer(request.queryMap()), new HtmlStreamStringBuffer());
             return stream.getText();
         });
         webServer.get("/components/customforms", (request, response) -> {
@@ -178,7 +183,7 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
 
 
         webServer.get("/components/charts", (request, response) -> {
-            HtmlStream stream = renderPageAndReturnStream(new Charts(), new HtmlStreamStringBuffer());
+            HtmlStream stream = renderPageAndReturnStream(new ChartsAll(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
 
@@ -238,6 +243,11 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             HtmlStream stream = renderPageAndReturnStream(new ChartsVBar(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
+        webServer.get("/components/charts/calheatmap", (request, response) -> {
+            HtmlStream stream = renderPageAndReturnStream(new ChartsCalHeatmap(), new HtmlStreamStringBuffer());
+            return stream.getText();
+        });
+
 
         webServer.get("/components/tables", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Tables(), new HtmlStreamStringBuffer());
