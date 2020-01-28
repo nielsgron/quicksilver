@@ -128,13 +128,21 @@ public class Explorer extends AbstractComponentsPage {
             form.add(row);
         }
         {
-            BSFormRow row = new BSFormRow(2);
+            BSFormRow row = new BSFormRow(4);
             row.getColumn(0).add(new BSText("<b>Color</b>:"));
             BSInputText colorInput;
             row.getColumn(1).add(colorInput = new BSInputText("Color", "Color", "", "color"));
 
             if (query != null && query.hasKey("color")) {
                 colorInput.setValue(query.get("color").value());
+            }
+
+            row.getColumn(2).add(new BSText("<b>Size</b>:"));
+            BSInputText sizeInput;
+            row.getColumn(3).add(sizeInput = new BSInputText("Size", "Size", "", "size"));
+
+            if (query != null && query.hasKey("size")) {
+                sizeInput.setValue(query.get("size").value());
             }
 
             form.add(row);
@@ -196,6 +204,17 @@ public class Explorer extends AbstractComponentsPage {
 
                 generatedCode.append("  .columnForColor(");
                 generatedCode.append(dataAsString(new String[]{color}));
+                generatedCode.append(")\n");
+            }
+        }
+        if (query != null && query.hasKey("size")) {
+            String size
+                    = query.get("size").value();
+            if (!size.isEmpty()) {
+                chartBuilder.columnForSize(size);
+
+                generatedCode.append("  .columnForSize(");
+                generatedCode.append(dataAsString(new String[]{size}));
                 generatedCode.append(")\n");
             }
         }
