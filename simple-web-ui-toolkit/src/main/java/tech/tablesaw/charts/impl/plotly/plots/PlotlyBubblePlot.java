@@ -8,9 +8,14 @@ import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import quicksilver.commons.data.TSDataSetFactory;
+import tech.tablesaw.api.ColumnType;
+import tech.tablesaw.api.StringColumn;
 
 public class PlotlyBubblePlot extends PlotlyAbstractPlot {
 
@@ -41,10 +46,43 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
 
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
-            Marker marker =
+
+            String[] colors = null;
+            if (columnForColor != null) {
+
+                if (tableList.get(i).column(columnForColor).type() != ColumnType.STRING) {
+                    LOG.warn("Numeric color columns not supported yet");
+                } else {
+                    StringColumn colorCol = tableList.get(i).stringColumn(columnForColor);
+
+                    StringColumn uniqueColors = colorCol.unique();
+
+                    //TODO: Here a random sample of colors is picked. Smarter algorithms could pick a better palette based on proximity, etc.
+                    Table cssColors = TSDataSetFactory.createCSSColorsTable().getTSTable().sampleN(uniqueColors.size());
+                    StringColumn cssColorName = cssColors.stringColumn("Color");
+
+                    //create a mapping between column values and a color
+                    Map<String, String> colorMapping = new HashMap<>();
+                    for (int k = 0; k < uniqueColors.size(); k++) {
+                        colorMapping.put(uniqueColors.get(k), cssColorName.get(k));
+                    }
+
+                    StringColumn mappedColors = colorCol.map(colorMapping::get);
+
+                    colors = mappedColors.asObjectArray();
+                }
+            }
+
+            Marker.MarkerBuilder markerBuilder =
                     Marker.builder()
                             .size(tableList.get(i).numberColumn(sizeColumn))
                             // .opacity(.75)
+                    ;
+            if (colors != null) {
+                markerBuilder.color(colors);
+            }
+
+            Marker marker = markerBuilder
                             .build();
 
             ScatterTrace.ScatterBuilder builder =
