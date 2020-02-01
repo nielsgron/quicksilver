@@ -35,6 +35,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 break;
             case HISTOGRAM:
                 layout(width, height, 5, 20, 35, 20, enabledLegend);
+                configureLayoutBuilderBarMode();
                 break;
             case HORIZONTAL_BAR:
                 layoutHorizontalBar(width, height, enabledLegend);

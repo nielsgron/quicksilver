@@ -26,6 +26,7 @@ import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.plotly.Utils;
+import tech.tablesaw.plotly.components.Layout;
 
 public class Explorer extends AbstractComponentsPage {
 
@@ -148,11 +149,19 @@ public class Explorer extends AbstractComponentsPage {
             form.add(row);
         }
         {
-            BSFormRow row = new BSFormRow(2);
+            BSFormRow row = new BSFormRow(4);
             row.getColumn(0).add(new BSText("<b>Chart</b>:"));
             //TODO: restore chart type selection
             row.getColumn(1).add(new BSInputSelect("chartType", false,
                     Stream.of(ChartBuilder.CHART_TYPE.values()).map(t -> t.name()).toArray(String[]::new)));
+
+            row.getColumn(2).add(new BSText("<b>Options</b>:"));
+            BSInputText optionsInput;
+            row.getColumn(3).add(optionsInput = new BSInputText("Options", "Options", "", "options"));
+
+            if (query != null && query.hasKey("options")) {
+                optionsInput.setValue(query.get("options").value());
+            }
 
             form.add(row);
         }
@@ -167,16 +176,40 @@ public class Explorer extends AbstractComponentsPage {
         }
 
         ChartBuilder chartBuilder = ChartBuilder.createBuilder()
-                .dataTable(table)
-                .chartType(chartType)
-                .layout(500, 200, false);
+                .dataTable(table);
 
         StringBuilder generatedCode = new StringBuilder();
         generatedCode.append("ChartBuilder chartBuilder = ChartBuilder.createBuilder()\n"
                 + "  .dataTable(table)\n"
-                + "  .chartType(ChartBuilder.CHART_TYPE." + chartType.name() + ")\n"
-                + "  .layout(500, 200, false);\n"
-                + "");
+                + "  .chartType(ChartBuilder.CHART_TYPE." + chartType.name()
+                );
+
+        List<Object> chartTypeOptions = new ArrayList<>();
+        if (query != null && query.hasKey("options")) {
+            String options = query.get("options").value().trim();
+            if (!options.isEmpty()) {
+                for (String name : options.split(" ")) {
+                    name = name.trim();
+                    if (name.isEmpty()) {
+                        continue;
+                    }
+                    try {
+                        Layout.BarMode b = Layout.BarMode.valueOf(name.toUpperCase());
+                        chartTypeOptions.add(b);
+                        
+                        generatedCode.append(", Layout.BarMode.").append(b.name());
+                    } catch (IllegalArgumentException iae) {
+                        //ignore, continue
+                    }
+                }
+            }
+        }
+        generatedCode.append(")\n");
+
+        chartBuilder.chartType(chartType, chartTypeOptions.toArray())
+                .layout(500, 200, false);
+
+        generatedCode.append("  .layout(500, 200, false);\n");
 
         if (query != null && query.hasKey("columns")) {
             String[] cols
