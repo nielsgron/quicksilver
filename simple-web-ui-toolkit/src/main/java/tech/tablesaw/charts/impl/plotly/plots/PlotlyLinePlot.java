@@ -8,6 +8,7 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import tech.tablesaw.plotly.components.Line;
 
 public class PlotlyLinePlot extends PlotlyAbstractPlot {
 
@@ -33,12 +34,21 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
 
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
-            traces[i] =
+            ScatterTrace.ScatterBuilder builder =
                     ScatterTrace.builder(
                             tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
                             .showLegend(true)
                             .name(tableList.get(i).name())
-                            .mode(ScatterTrace.Mode.LINE)
+                            .mode(ScatterTrace.Mode.LINE);
+
+            if (columnForColor == null) {
+                if (traceColors != null && traceColors.length > i) {
+                    builder.line(Line.builder()
+                            .color(traceColors[i])
+                            .build());
+                }
+            }
+            traces[i] = builder
                             .build();
         }
 
