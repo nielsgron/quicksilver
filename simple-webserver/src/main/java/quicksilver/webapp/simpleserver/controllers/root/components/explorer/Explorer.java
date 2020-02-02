@@ -1,5 +1,6 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.explorer;
 
+import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -150,6 +151,18 @@ public class Explorer extends AbstractComponentsPage {
         }
         {
             BSFormRow row = new BSFormRow(4);
+            row.getColumn(0).add(new BSText("<b>Trace colors</b>:"));
+            BSInputText tracecolors;
+            row.getColumn(1).add(tracecolors = new BSInputText("", "TraceColor", "", "tracecolors"));
+
+            if (query != null && query.hasKey("tracecolors")) {
+                tracecolors.setValue(query.get("tracecolors").value());
+            }
+
+            form.add(row);
+        }
+        {
+            BSFormRow row = new BSFormRow(4);
             row.getColumn(0).add(new BSText("<b>Chart</b>:"));
             //TODO: restore chart type selection
             row.getColumn(1).add(new BSInputSelect("chartType", false,
@@ -248,6 +261,20 @@ public class Explorer extends AbstractComponentsPage {
 
                 generatedCode.append("  .columnForSize(");
                 generatedCode.append(dataAsString(new String[]{size}));
+                generatedCode.append(")\n");
+            }
+        }
+        if (query != null && query.hasKey("tracecolors")) {
+            String tracecolors
+                    = query.get("tracecolors").value();
+            if (!tracecolors.isEmpty()) {
+                String[] colors = Stream.of(tracecolors.split(" "))
+                        .filter(x -> !x.isEmpty())
+                        .toArray(String[]::new);
+                chartBuilder.setTraceColors(colors);
+
+                generatedCode.append("  .setTraceColors(");
+                generatedCode.append(dataAsString(colors));
                 generatedCode.append(")\n");
             }
         }
