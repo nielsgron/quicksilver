@@ -69,6 +69,7 @@ public class Marker extends Component {
   private final double[] size;
   private final Line line;
   private final String[] color;
+  private final String[] colors;
   private final Palette colorScalePalette;
   private final boolean cAuto;
   private final double cMin;
@@ -92,6 +93,7 @@ public class Marker extends Component {
     line = builder.line;
     size = builder.size;
     color = builder.color;
+    colors = builder.colors;
     colorArray = builder.colorArray;
     gradient = builder.gradient;
     colorScalePalette = builder.colorScalePalette;
@@ -130,6 +132,9 @@ public class Marker extends Component {
     } else if (colorArray != null) {
       context.put("color", Utils.dataAsString(colorArray));
     }
+    if(colors != null) {
+        context.put("colors", Utils.dataAsString(colors));
+    }
     if (line != null) context.put("line", line.asJavascript());
     if (autoColorScale != DEFAULT_AUTO_COLOR_SCALE) context.put("autoColorScale", autoColorScale);
     if (showScale != DEFAULT_SHOW_SCALE) context.put("showScale", showScale);
@@ -147,7 +152,9 @@ public class Marker extends Component {
     private double[] size = {6};
 
     // Note, a marker can have a color, or color array, but not both
+    // EMI: the pie chart marker needs the `colors` (not `color`) array.
     private String[] color;
+    private String[] colors;
     private double[] colorArray;
 
     private Gradient gradient;
@@ -285,6 +292,12 @@ public class Marker extends Component {
     /** Sets the marker color to an array of color values */
     public MarkerBuilder color(String[] color) {
       this.color = color;
+      this.colorArray = null;
+      return this;
+    }
+
+    public MarkerBuilder colors(String[] color) {
+      this.colors = color;
       this.colorArray = null;
       return this;
     }

@@ -5,6 +5,9 @@
 {% if color is not null %}
     color: {{color | raw}},
 {% endif %}
+{% if colors is not null %}
+    colors: {{colors | raw}},
+{% endif %}
 {% if colorArray is not null %}
     color: {{colorArray | raw}},
 {% endif %}

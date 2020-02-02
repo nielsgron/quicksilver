@@ -6,6 +6,9 @@ var {{variableName}} =
 {% if values is not null %}
         values: {{values | raw}},
 {% endif %}
+{% if marker is not null %}
+        marker: {{marker | raw}},
+{% endif %}
         type: '{{type}}',
         name: '{{name}}',
  }
