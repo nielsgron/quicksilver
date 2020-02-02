@@ -4,7 +4,6 @@ import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChart;
 import tech.tablesaw.plotly.components.Config;
-import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
 
 public class PlotlyAbstractPlot extends PlotlyChart {
@@ -20,6 +19,8 @@ public class PlotlyAbstractPlot extends PlotlyChart {
     protected String columnForColor;
     protected String columnForSize;
 
+    protected String[] traceColors;
+
     public void setChartBuilder(ChartBuilder chartBuilder) {
 
         layout = chartBuilder.getLayout();
@@ -33,6 +34,7 @@ public class PlotlyAbstractPlot extends PlotlyChart {
         columnForColor = chartBuilder.getColumnsForColor();
         columnForSize = chartBuilder.getColumnsForSize();
 
+        traceColors = chartBuilder.getTraceColors();
     }
 
 }
