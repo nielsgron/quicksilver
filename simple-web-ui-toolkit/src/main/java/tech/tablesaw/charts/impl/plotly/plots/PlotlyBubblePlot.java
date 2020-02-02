@@ -80,6 +80,8 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
                     ;
             if (colors != null) {
                 markerBuilder.color(colors);
+            } else if (traceColors != null && traceColors.length > i) {
+                markerBuilder.color(traceColors[i]);
             }
 
             Marker marker = markerBuilder
