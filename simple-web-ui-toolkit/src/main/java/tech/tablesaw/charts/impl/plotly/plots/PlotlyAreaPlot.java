@@ -51,13 +51,17 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
         } else {
             ScatterTrace[] traces = new ScatterTrace[tableList.size()];
             for (int i = 0; i < tableList.size(); i++) {
-                traces[i] =
+                ScatterTrace.ScatterBuilder builder = 
                         ScatterTrace.builder(
                                 tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
                                 .showLegend(true)
                                 .name(tableList.get(i).name())
                                 .mode(ScatterTrace.Mode.LINE)
-                                .fill(ScatterTrace.Fill.TO_NEXT_Y)
+                                .fill(ScatterTrace.Fill.TO_NEXT_Y);
+                if (traceColors != null && traceColors.length > i) {
+                    builder.fillColor(traceColors[i]);
+                }
+                traces[i] = builder
                                 .build();
             }
 
