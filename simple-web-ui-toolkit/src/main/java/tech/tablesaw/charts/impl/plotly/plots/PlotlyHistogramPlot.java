@@ -7,6 +7,7 @@ import tech.tablesaw.api.NumericColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Marker;
 import tech.tablesaw.plotly.traces.HistogramTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
@@ -41,7 +42,16 @@ public class PlotlyHistogramPlot extends PlotlyAbstractPlot {
             setFigure(new Figure(layout, config, traces));
         } else {
             NumericColumn<?> column = table.numberColumn(numericColumnName);
-            HistogramTrace trace = HistogramTrace.builder(column.asDoubleArray()).build();
+            HistogramTrace.HistogramBuilder builder = HistogramTrace.builder(column.asDoubleArray());
+            if (columnForColor == null) {
+                if (traceColors != null && traceColors.length > 0) {
+                    builder.marker(Marker.builder()
+                            .color(traceColors[0])
+                            .build());
+                }
+            }
+            HistogramTrace trace = builder.build();
+            
             setFigure(new Figure(layout, config, new Trace[]{trace}));
         }
     }
