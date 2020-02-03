@@ -55,6 +55,8 @@ public abstract class ChartBuilder {
     protected String columnForSize;
     protected EventHandler eventHandler;
 
+    protected String[] traceColors;
+
     public ChartBuilder() {
 
         initLayoutBuilder();
@@ -200,8 +202,17 @@ public abstract class ChartBuilder {
         configBuilder.displayModeBar(b);
         return this;
     }
+    
+    public ChartBuilder setTraceColors(String... colors) {
+        this.traceColors = colors;
+        return this;
+    }
 
     // Getter methods
+    public String[] getTraceColors() {
+        return traceColors;
+    }
+
     public Config getConfig() {
         return config;
     }

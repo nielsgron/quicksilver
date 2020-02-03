@@ -10,16 +10,19 @@ import java.util.Map;
 import tech.tablesaw.api.NumericColumn;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.plotly.Utils;
+import tech.tablesaw.plotly.components.Marker;
 
 public class PieTrace extends AbstractTrace {
 
   private final double[] values;
   private final Object[] labels;
+  private final Marker marker;
 
   private PieTrace(PieBuilder builder) {
     super(builder);
     this.values = builder.values;
     this.labels = builder.labels;
+    this.marker = builder.marker;
   }
 
   @Override
@@ -46,6 +49,9 @@ public class PieTrace extends AbstractTrace {
     if (labels != null) {
       context.put("labels", Utils.dataAsString(labels));
     }
+    if (marker != null) {
+      context.put("marker", marker);
+    }
     return context;
   }
 
@@ -62,6 +68,7 @@ public class PieTrace extends AbstractTrace {
     private final String type = "pie";
     private final double[] values;
     private final Object[] labels;
+    private Marker marker;
 
     private PieBuilder(Object[] labels, double[] values) {
       this.labels = labels;
@@ -80,6 +87,11 @@ public class PieTrace extends AbstractTrace {
     @Override
     public PieTrace.PieBuilder showLegend(boolean b) {
       super.showLegend(b);
+      return this;
+    }
+
+    public PieTrace.PieBuilder marker(Marker marker) {
+      this.marker = marker;
       return this;
     }
   }

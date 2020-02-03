@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Marker;
 import tech.tablesaw.plotly.traces.BarTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
@@ -79,6 +80,13 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             }
             if(size.isPresent()) {
                 builder.width(table.numberColumn(size.get()));
+            }
+            if (columnForColor == null) {
+                if (traceColors != null && traceColors.length > i) {
+                    builder.marker(Marker.builder()
+                            .color(traceColors[i])
+                            .build());
+                }
             }
             BarTrace trace = builder
                             .build();
