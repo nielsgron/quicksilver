@@ -5,4 +5,7 @@
 {% if fillColor is not null %}
     fillcolor: '{{fillColor}}',
 {% endif %}
+{% if line is not null %}
+    line: {{line | raw}},
+{% endif %}
 }

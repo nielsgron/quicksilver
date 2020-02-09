@@ -1,5 +1,7 @@
 package tech.tablesaw.plotly.components.change;
 
+import tech.tablesaw.plotly.components.Line;
+
 public class Increasing extends Change {
 
   private Increasing(IncreasingBuilder builder) {
@@ -15,6 +17,12 @@ public class Increasing extends Change {
     @Override
     public Increasing.IncreasingBuilder fillColor(String color) {
       this.fillColor = color;
+      return this;
+    }
+
+    @Override
+    public Increasing.IncreasingBuilder line(Line line) {
+      this.line = line;
       return this;
     }
 
