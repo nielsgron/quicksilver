@@ -8,18 +8,29 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import tech.tablesaw.plotly.components.Line;
 
 public class PlotlyLinePlot extends PlotlyAbstractPlot {
 
+    private final static Logger LOG = LogManager.getLogger();
+
     public PlotlyLinePlot(ChartBuilder chartBuilder, String groupCol) {
         setChartBuilder(chartBuilder);
         String xCol = columnsForViewColumns[0];
+        if (columnsForViewColumns.length > 1) {
+            LOG.warn("Only one view column is supported but {} received", columnsForViewColumns.length);
+        }
+
         String yCol = columnsForViewRows[0];
+        if (columnsForViewRows.length > 1) {
+            //TODO: Support more columns in columnsForViewRows by creating more figures?
+            LOG.warn("Only one view row is supported but {} received", columnsForViewRows.length);
+        }
 
         // TODO : columnForLabels -
         // TODO : columnForDetails -
-        // TODO : columnForColor -
         // TODO : columnForSize -
 
         List<Table> tableList;
@@ -27,9 +38,20 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
         if ( groupCol != null ) {
             TableSliceGroup tables = table.splitOn(table.categoricalColumn(groupCol));
             tableList = tables.asTableList();
+
+            if (columnForColor != null) {
+                if (!columnForColor.equals(groupCol)) {
+                    LOG.warn("Cannot use a different color column when a group column is also present for line plot: color column ignored.");
+                }
+            }
         } else {
-            tableList = new ArrayList<Table>();
-            tableList.add(table);
+            if (columnForColor == null) {
+                tableList = new ArrayList<Table>();
+                tableList.add(table);
+            } else {
+                TableSliceGroup colorTables = table.splitOn(table.categoricalColumn(columnForColor));
+                tableList = colorTables.asTableList();
+            }
         }
 
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
