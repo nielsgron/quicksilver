@@ -5,12 +5,14 @@ import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.PlotlyChart;
 import tech.tablesaw.plotly.components.Config;
 import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.plotly.event.EventHandler;
 
 public class PlotlyAbstractPlot extends PlotlyChart {
 
     protected Layout layout;
     protected Config config;
     protected Table  table;
+    protected EventHandler eventHandler;
 
     protected String[] columnsForViewColumns;
     protected String[] columnsForViewRows;
@@ -26,6 +28,7 @@ public class PlotlyAbstractPlot extends PlotlyChart {
         layout = chartBuilder.getLayout();
         config = chartBuilder.getConfig();
         table = chartBuilder.getDataTable();
+        eventHandler = chartBuilder.getEventHandler();
 
         columnsForViewColumns = chartBuilder.getColumnsForViewColumns();
         columnsForViewRows = chartBuilder.getColumnsForViewRows();
