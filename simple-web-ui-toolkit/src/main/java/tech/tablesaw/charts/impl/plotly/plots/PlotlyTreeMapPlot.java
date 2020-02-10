@@ -43,6 +43,8 @@ public class PlotlyTreeMapPlot extends PlotlyAbstractPlot {
         }
         if (columnForColor != null) {
             extra.put("marker.colors", table.column(TableExtract.measure(columnForColor)).asObjectArray());
+        } else if (traceColors != null && traceColors.length > 0) {
+            extra.put("marker.colors", traceColors);
         }
 
         EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
