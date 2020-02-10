@@ -2,6 +2,9 @@ package tech.tablesaw.charts.impl.plotly.plots;
 
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
+import tech.tablesaw.plotly.components.Line;
+import tech.tablesaw.plotly.components.change.Decreasing;
+import tech.tablesaw.plotly.components.change.Increasing;
 import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
@@ -17,10 +20,9 @@ public class PlotlyCandlestickPlot extends PlotlyAbstractPlot {
 
         // TODO : columnForLabels -
         // TODO : columnForDetails -
-        // TODO : columnForColor -
         // TODO : columnForSize -
 
-        ScatterTrace trace =
+        ScatterTrace.ScatterBuilder builder =
                 ScatterTrace.builder(
                         table.dateColumn(xCol),
                         table.numberColumn(openCol),
@@ -28,6 +30,21 @@ public class PlotlyCandlestickPlot extends PlotlyAbstractPlot {
                         table.numberColumn(lowCol),
                         table.numberColumn(closeCol))
                         .type("candlestick")
+                        ;
+        if (traceColors != null && traceColors.length > 1) {
+            builder.decreasing(Decreasing.builder()
+                    .line(Line.builder()
+                            .color(traceColors[0])
+                            .build())
+                    .build());
+            builder.increasing(Increasing.builder()
+                    .line(Line.builder()
+                            .color(traceColors[1])
+                            .build())
+                    .build());
+        }
+
+        ScatterTrace trace = builder
                         .build();
 
         setFigure( new Figure(layout, config, new Trace[]{trace}) );
