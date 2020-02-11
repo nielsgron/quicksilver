@@ -1,14 +1,9 @@
 package tech.tablesaw.charts.impl.plotly;
 
-import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.Chart;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
-import tech.tablesaw.plotly.api.SunburstPlot;
-import tech.tablesaw.plotly.api.TableExtract;
-import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
-import tech.tablesaw.plotly.event.EventHandler;
 
 public class PlotlyChartBuilder extends ChartBuilder {
 
@@ -180,24 +175,13 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
     @Override
     protected Chart buildSunburst() {
-        Figure figure =null;
         try {
-            if (columnForSize == null) {
-                throw new IllegalStateException("Missing size column");
-            }
-
-            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, columnsForViewColumns, new String[]{getWithDefaultAggregation(columnForSize, "ZERO")}), "ids");
-
-            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
-                    
-            figure = SunburstPlot.create(layout, config, table,
-                    "ids", "Label", "Parent",
-                    columnForSize,
-                    eventHandlers);
+            PlotlySunburstPlot plot = new PlotlySunburstPlot(this);
+            return plot;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return new PlotlyChart(figure);
     }
 
     @Override
@@ -209,13 +193,6 @@ public class PlotlyChartBuilder extends ChartBuilder {
             e.printStackTrace();
             return null;
         }
-    }
-
-    static String getWithDefaultAggregation(String measure, String defaultAgg) {
-        if (TableExtract.agg(measure) == null) {
-            return defaultAgg + " [" + measure + "]";
-        }
-        return measure;
     }
 
     @Override
