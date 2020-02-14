@@ -15,6 +15,8 @@ public class PlotlyTreeMapPlot extends PlotlyAbstractPlot {
     public PlotlyTreeMapPlot(ChartBuilder chartBuilder) {
         setChartBuilder(chartBuilder);
 
+        // TODO : columnForDetails -
+
         List<String> extraCols = new ArrayList<>();
         if(columnForSize != null) {
             //For columnForSize(), we default to SUM()

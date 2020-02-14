@@ -11,6 +11,10 @@ public class PlotlySunburstPlot extends PlotlyAbstractPlot {
     public PlotlySunburstPlot(ChartBuilder chartBuilder) {
         setChartBuilder(chartBuilder);
 
+        // TODO : columnForLabels -
+        // TODO : columnForDetails -
+        // TODO : columnForColor -
+
         if (columnForSize == null) {
             throw new IllegalStateException("Missing size column");
         }
