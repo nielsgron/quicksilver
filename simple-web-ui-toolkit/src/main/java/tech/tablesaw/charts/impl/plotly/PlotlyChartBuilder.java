@@ -1,19 +1,9 @@
 package tech.tablesaw.charts.impl.plotly;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.Chart;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
-import tech.tablesaw.plotly.api.SunburstPlot;
-import tech.tablesaw.plotly.api.TableExtract;
-import tech.tablesaw.plotly.api.TreemapPlot;
-import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Layout;
-import tech.tablesaw.plotly.event.EventHandler;
 
 public class PlotlyChartBuilder extends ChartBuilder {
 
@@ -185,24 +175,13 @@ public class PlotlyChartBuilder extends ChartBuilder {
 
     @Override
     protected Chart buildSunburst() {
-        Figure figure =null;
         try {
-            if (columnForSize == null) {
-                throw new IllegalStateException("Missing size column");
-            }
-
-            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, columnsForViewColumns, new String[]{getWithDefaultAggregation(columnForSize, "ZERO")}), "ids");
-
-            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
-                    
-            figure = SunburstPlot.create(layout, config, table,
-                    "ids", "Label", "Parent",
-                    columnForSize,
-                    eventHandlers);
+            PlotlySunburstPlot plot = new PlotlySunburstPlot(this);
+            return plot;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return new PlotlyChart(figure);
     }
 
     @Override
@@ -216,58 +195,15 @@ public class PlotlyChartBuilder extends ChartBuilder {
         }
     }
 
-    static String getWithDefaultAggregation(String measure, String defaultAgg) {
-        if (TableExtract.agg(measure) == null) {
-            return defaultAgg + " [" + measure + "]";
-        }
-        return measure;
-    }
-
     @Override
     protected Chart buildTreemap() {
-        Figure figure =null;
         try {
-            
-            List<String> extraCols = new ArrayList<>();
-            if(columnForSize != null) {
-                //For columnForSize(), we default to SUM()
-                String sizeWithAgg = getWithDefaultAggregation(columnForSize, "SUM");
-                extraCols.add(sizeWithAgg);
-            }
-            if (columnsForLabels != null && columnsForLabels.length > 0) {
-                String labelWithAgg = getWithDefaultAggregation(columnsForLabels[0], "EMPTY");
-                extraCols.add(labelWithAgg);
-            }
-            if(columnForColor !=null){
-                //For columnForColor(), we default to MEAN (aka average)
-                String colorWithAgg = getWithDefaultAggregation(columnForColor, "MEAN");
-                extraCols.add(colorWithAgg);
-            }
-            
-            Table table = TableExtract.unique(TableExtract.aggregate(dataTable, columnsForViewColumns, extraCols.stream().toArray(String[]::new)), "ids");
-            
-            Map<String, Object[]> extra = new HashMap<>();
-            if (columnForSize != null) {
-                extra.put("values", table.column(TableExtract.measure(columnForSize)).asObjectArray());
-            }
-            if (columnsForLabels != null && columnsForLabels.length > 0) {
-                //TODO: log if columnsForDetails has more then 1 item?
-                extra.put("text", table.column(TableExtract.measure(columnsForLabels[0])).asObjectArray());
-            }
-            if (columnForColor != null) {
-                extra.put("marker.colors", table.column(TableExtract.measure(columnForColor)).asObjectArray());
-            }
-
-            EventHandler[] eventHandlers = eventHandler == null ? new EventHandler[0] : new EventHandler[]{eventHandler};
-
-            figure = TreemapPlot.create(layout, config, table,
-                    "ids", "Label", "Parent",
-                    extra,
-                    eventHandlers);
+            PlotlyTreeMapPlot plot = new PlotlyTreeMapPlot(this);
+            return plot;
         } catch ( Exception e ) {
             e.printStackTrace();
+            return null;
         }
-        return new PlotlyChart(figure);
     }
 
     @Override
