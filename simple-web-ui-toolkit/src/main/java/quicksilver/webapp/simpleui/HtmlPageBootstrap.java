@@ -145,12 +145,16 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
 
     }
 
+    //protected static String VERSION = "4.1";
+    protected static String VERSION = "4.4.1";
+
     public enum BootstrapTheme {
 
-        DEFAULT("/bootstrap-4.1"),
-        FLATLY("/bootstrap-4.1-flatly"),
-        SIMPLEX("/bootstrap-4.1-simplex"),
-        CYBORG("/bootstrap-4.1-cyborg");
+
+        DEFAULT("/bootstrap-" + HtmlPageBootstrap.VERSION),
+        FLATLY("/bootstrap-" + HtmlPageBootstrap.VERSION + "-flatly"),
+        SIMPLEX("/bootstrap-" + HtmlPageBootstrap.VERSION + "-simplex"),
+        CYBORG("/bootstrap-" + HtmlPageBootstrap.VERSION + "-cyborg");
 
         private final String bootstrapBaseURI;
 
