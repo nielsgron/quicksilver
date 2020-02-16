@@ -27,15 +27,17 @@
                 <include>start-process.sh</include>
             </includes>
         </fileSet>
-
     </fileSets>
+
     <!-- section to package dependencies -->
     <dependencySets>
         <dependencySet>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory>/lib</outputDirectory>
+            <!--
             <excludes>
                 <exclude>*:pom</exclude>
             </excludes>
+            -->
             <useStrictFiltering>true</useStrictFiltering>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>runtime</scope>
