@@ -8,17 +8,29 @@ import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PlotlyAreaPlot extends PlotlyAbstractPlot {
+
+    private final static Logger LOG = LogManager.getLogger();
 
     public PlotlyAreaPlot(ChartBuilder chartBuilder, String groupCol) {
         setChartBuilder(chartBuilder);
         String xCol = columnsForViewColumns[0];
+
+        if (columnsForViewColumns.length > 1) {
+            LOG.warn("Area plot will only take into account the 1st view colum ({} received)", columnsForViewColumns.length);
+        }
+
         String yCol = columnsForViewRows[0];
+
+        if (columnsForViewRows.length > 1) {
+            LOG.warn("Area plot will only take into account the 1st view row ({} received)", columnsForViewRows.length);
+        }
 
         // TODO : columnForLabels -
         // TODO : columnForDetails -
-        // TODO : columnForSize -
 
         List<Table> tableList;
 
