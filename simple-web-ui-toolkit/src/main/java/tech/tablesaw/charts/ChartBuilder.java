@@ -62,6 +62,9 @@ public abstract class ChartBuilder {
 
     protected String[] traceColors;
 
+    //XXX: internal?
+    protected String groupBy;
+
     public ChartBuilder() {
 
         initLayoutBuilder();
@@ -118,6 +121,11 @@ public abstract class ChartBuilder {
 
     public ChartBuilder axesType(Axes axes) {
         this.axes = axes;
+        return this;
+    }
+
+    public ChartBuilder groupBy(String col) {
+        this.groupBy = col;
         return this;
     }
 
@@ -222,6 +230,10 @@ public abstract class ChartBuilder {
     // Getter methods
     public Axes getAxes() {
         return axes;
+    }
+
+    public String getGroupBy() {
+        return groupBy;
     }
 
     public String[] getTraceColors() {

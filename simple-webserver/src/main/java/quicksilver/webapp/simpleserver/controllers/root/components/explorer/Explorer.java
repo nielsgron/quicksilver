@@ -189,6 +189,14 @@ public class Explorer extends AbstractComponentsPage {
                 //axes.setValue(query.get("axes").value());
             }
 
+            row.getColumn(2).add(new BSText("<b>Group By</b>:"));
+            BSInputText groupBy;
+            row.getColumn(3).add(groupBy = new BSInputText("", "groupby", "", "groupby"));
+
+            if (query != null && query.hasKey("groupby")) {
+                groupBy.setValue(query.get("groupby").value());
+            }
+
             form.add(row);
         }        {
             form.add(new BSFormButton("Submit"));
@@ -250,6 +258,14 @@ public class Explorer extends AbstractComponentsPage {
                 } catch (IllegalArgumentException iae) {
                     //ignore, continue
                 }
+            }
+        }
+        if (query != null && query.hasKey("groupby")) {
+            String groupby = query.get("groupby").value().trim();
+            if (!groupby.isEmpty()) {
+                chartBuilder.groupBy(groupby);
+
+                generatedCode.append("  .groupBy(\"").append(groupby).append("\")\n");
             }
         }
 
