@@ -7,7 +7,9 @@ import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
+import static java.util.Collections.singletonList;
 import java.util.List;
+import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,15 +17,18 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
 
     private final static Logger LOG = LogManager.getLogger();
 
+    private final String xCol;
+    private final String yCol;
+
     public PlotlyAreaPlot(ChartBuilder chartBuilder, String groupCol) {
         setChartBuilder(chartBuilder);
-        String xCol = columnsForViewColumns[0];
+        xCol = columnsForViewColumns[0];
 
         if (columnsForViewColumns.length > 1) {
             LOG.warn("Area plot will only take into account the 1st view colum ({} received)", columnsForViewColumns.length);
         }
 
-        String yCol = columnsForViewRows[0];
+        yCol = columnsForViewRows[0];
 
         if (columnsForViewRows.length > 1) {
             LOG.warn("Area plot will only take into account the 1st view row ({} received)", columnsForViewRows.length);
@@ -42,6 +47,35 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
             tableList.add(table);
         }
 
+        if (individualAxes) {
+            setFigures(tableList.stream()
+                    .map(t -> createFigure(singletonList(t)))
+                    .flatMap(f -> Stream.of(f.getFigures()))
+                    .toArray(Figure[]::new));
+        } else {
+            setFigures(createFigure(tableList).getFigures());
+        }
+
+    }
+
+    static class FigureOrFigures {
+
+        private final Figure[] figures;
+
+        public FigureOrFigures(Figure f) {
+            this.figures = new Figure[]{f};
+        }
+
+        public FigureOrFigures(Figure[] figures) {
+            this.figures = figures;
+        }
+
+        public Figure[] getFigures() {
+            return figures;
+        }
+    }
+
+    private FigureOrFigures createFigure(List<Table> tableList) {
         if(columnForColor != null && !columnForColor.isEmpty()) {
             Figure[] figures = tableList.stream()
                     .map(tab -> {
@@ -59,7 +93,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
                         return new Figure(layout, config, traces);
                     })
                     .toArray(Figure[]::new);
-            setFigures(figures);
+            return new FigureOrFigures(figures);
         } else {
             ScatterTrace[] traces = new ScatterTrace[tableList.size()];
             for (int i = 0; i < tableList.size(); i++) {
@@ -77,7 +111,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
                                 .build();
             }
 
-            setFigure( new Figure(layout, config, traces) );
+            return new FigureOrFigures(new Figure(layout, config, traces));
         }
     }
 

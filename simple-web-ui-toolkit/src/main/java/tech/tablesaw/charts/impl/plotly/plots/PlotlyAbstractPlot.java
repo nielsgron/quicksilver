@@ -19,7 +19,10 @@ public class PlotlyAbstractPlot extends PlotlyChart {
     protected String columnForColor;
     protected String columnForSize;
 
+    protected String groupBy;
+
     protected String[] traceColors;
+    protected boolean individualAxes;
 
     public void setChartBuilder(ChartBuilder chartBuilder) {
 
@@ -34,7 +37,10 @@ public class PlotlyAbstractPlot extends PlotlyChart {
         columnForColor = chartBuilder.getColumnsForColor();
         columnForSize = chartBuilder.getColumnsForSize();
 
+        groupBy = chartBuilder.getGroupBy();
+
         traceColors = chartBuilder.getTraceColors();
+        individualAxes = chartBuilder.getAxes() == ChartBuilder.Axes.Individual;
     }
 
 }
