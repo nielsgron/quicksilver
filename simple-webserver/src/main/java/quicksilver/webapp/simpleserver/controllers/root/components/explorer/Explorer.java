@@ -1,6 +1,5 @@
 package quicksilver.webapp.simpleserver.controllers.root.components.explorer;
 
-import java.awt.Color;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -179,6 +178,19 @@ public class Explorer extends AbstractComponentsPage {
             form.add(row);
         }
         {
+            BSFormRow row = new BSFormRow(4);
+            row.getColumn(0).add(new BSText("<b>Axes</b>:"));
+            BSInputSelect axes;
+            row.getColumn(1).add(axes = new BSInputSelect("axes", false,
+                    Stream.of(ChartBuilder.Axes.values()).map(t -> t.name()).toArray(String[]::new)));
+
+            if (query != null && query.hasKey("axes")) {
+                //TODO: restore axes type selection
+                //axes.setValue(query.get("axes").value());
+            }
+
+            form.add(row);
+        }        {
             form.add(new BSFormButton("Submit"));
         }
 
@@ -223,6 +235,23 @@ public class Explorer extends AbstractComponentsPage {
                 .layout(500, 200, false);
 
         generatedCode.append("  .layout(500, 200, false);\n");
+
+        if (query != null && query.hasKey("axes")) {
+            String axes = query.get("axes").value().trim();
+            if (!axes.isEmpty()) {
+                try {
+                    ChartBuilder.Axes axesType = ChartBuilder.Axes.valueOf(axes);
+                    chartBuilder.axesType(axesType);
+
+                    //is it the default axes type?
+                    if (axesType != ChartBuilder.DEFAULT_AXES) {
+                        generatedCode.append("  .axesType(ChartBuilder.Axes.").append(axesType.name()).append(")\n");
+                    }
+                } catch (IllegalArgumentException iae) {
+                    //ignore, continue
+                }
+            }
+        }
 
         if (query != null && query.hasKey("columns")) {
             String[] cols
