@@ -66,7 +66,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
     @Override
     protected Chart buildArea() {
         try {
-            PlotlyAreaPlot plot = new PlotlyAreaPlot(this);
+            PlotlyAreaPlot plot = new PlotlyAreaPlot(this, groupBy);
             return plot;
         } catch ( Exception e ) {
             e.printStackTrace();

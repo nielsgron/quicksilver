@@ -38,11 +38,16 @@ public abstract class ChartBuilder {
         AREA, BUBBLE, CANDLESTICK, HEATMAP, HEATMAP_CALENDAR, HISTOGRAM, HORIZONTAL_BAR, LINE, OHLC, PIE, SCATTERPLOT, SUNBURST, TIMESERIES, TREEMAP, VERTICAL_BAR
     }
 
+    public enum Axes {
+        Individual, MergedSharedScale
+    }
+
     protected Layout.LayoutBuilder layoutBuilder;
     protected Config.Builder configBuilder;
 
     protected Table dataTable;
     protected CHART_TYPE chartType;
+    protected Axes axes = DEFAULT_AXES;
     protected Object[] chartTypeOptions;
     protected Layout layout;
     protected Config config;
@@ -56,6 +61,9 @@ public abstract class ChartBuilder {
     protected EventHandler eventHandler;
 
     protected String[] traceColors;
+
+    //XXX: internal?
+    protected String groupBy;
 
     public ChartBuilder() {
 
@@ -73,6 +81,7 @@ public abstract class ChartBuilder {
     }
 
     public static CHART_RENDERER DEFAULT_CHART_RENDERER;
+    public final static Axes DEFAULT_AXES = Axes.MergedSharedScale;
 
     public static ChartBuilder createBuilder() {
         return createBuilder(DEFAULT_CHART_RENDERER);
@@ -107,6 +116,16 @@ public abstract class ChartBuilder {
     public ChartBuilder chartType(CHART_TYPE chartType, Object... chartTypeOptions) {
         this.chartType = chartType;
         this.chartTypeOptions = chartTypeOptions;
+        return this;
+    }
+
+    public ChartBuilder axesType(Axes axes) {
+        this.axes = axes;
+        return this;
+    }
+
+    public ChartBuilder groupBy(String col) {
+        this.groupBy = col;
         return this;
     }
 
@@ -209,6 +228,14 @@ public abstract class ChartBuilder {
     }
 
     // Getter methods
+    public Axes getAxes() {
+        return axes;
+    }
+
+    public String getGroupBy() {
+        return groupBy;
+    }
+
     public String[] getTraceColors() {
         return traceColors;
     }
