@@ -25,8 +25,37 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSSelect extends BSComponentContainer {
 
+    private boolean isMultiple;
+
+    public BSSelect() {
+        this.isMultiple = false;
+    }
+
+    public BSSelect(boolean isMultiple) {
+        this.isMultiple = isMultiple;
+    }
+
     protected void defineAttributes() {
 
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Select");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+
+        if ( isMultiple ) {
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "select multiple");
+        } else {
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "select");
+        }
+
+        addTagAttribute("class", getClassNames());
+
+    }
+
+    protected String getClassNames() {
+        StringBuilder cNames = new StringBuilder();
+
+        cNames.append("form-control");
+
+        return cNames.toString();
     }
 
 }

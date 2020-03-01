@@ -111,7 +111,7 @@ public class Badges extends AbstractComponentsBootstrapPage {
         panel.add(new BSBadge("Light", BSComponent.Type.LIGHT, "#", true));
         panel.add(new BSBadge("Dark", BSComponent.Type.DARK, "#", true));
 
-        panel.add(new HTMLLineBreak(1));
+        panel.add(new HTMLLineBreak(2));
 
         return panel;
     }

@@ -19,6 +19,7 @@ package quicksilver.webapp.simpleui.bootstrap4.quick;
 import quicksilver.webapp.simpleui.bootstrap4.components.*;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSBorderLayout;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSGridLayout;
+import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class QuickBodyPanel extends BSPanel {
 
     }
 
-    public void addRowOfColumns(BSComponent... components) {
+    public void addRowOfColumns(HTMLComponent... components) {
 
         BSPanel panel = new BSPanel();
         panel.setLayout(new BSGridLayout(1, components.length));

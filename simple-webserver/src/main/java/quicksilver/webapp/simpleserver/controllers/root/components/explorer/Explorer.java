@@ -30,8 +30,8 @@ import tech.tablesaw.plotly.components.Layout;
 
 public class Explorer extends AbstractComponentsPage {
 
-    private final QueryParamsMap query;
-    private BSPanel panel;
+    protected final QueryParamsMap query;
+    protected BSPanel panel;
 
     public Explorer(QueryParamsMap query) {
         this.query = query;
