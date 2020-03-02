@@ -5,6 +5,7 @@ import quicksilver.commons.data.TSDataSetFactory;
 import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.*;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSBorderLayout;
+import quicksilver.webapp.simpleui.bootstrap4.layouts.BSFlowLayout;
 import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import spark.QueryParamsMap;
@@ -262,38 +263,32 @@ public class Explorer2 extends Explorer {
             }
         }
 
-
         // DataSet Panel
-        QuickBodyPanel dataPanel = new QuickBodyPanel();
 
-        dataPanel.addRowOfColumns(new BSText("<b>Data</b>"));
-        dataPanel.addRowOfColumns(dataSetList);
+        BSPanel dataPanel = new BSPanel();
+        dataPanel.setLayout(new BSFlowLayout(BSComponent.Alignment.VERTICAL));
 
-        dataPanel.addRowOfColumns(new BSText("<b>Dimensions</b>"));
-        dataPanel.addRowOfColumns(dimensionList);
+        dataPanel.add(new BSText("<b>Data</b>"));
+        dataPanel.add(dataSetList);
 
-        dataPanel.addRowOfColumns(new BSText("<b>Measures</b>"));
-        dataPanel.addRowOfColumns(measureList);
+        dataPanel.add(new BSText("<b>Dimensions</b>"));
+        dataPanel.add(dimensionList);
+
+        dataPanel.add(new BSText("<b>Measures</b>"));
+        dataPanel.add(measureList);
 
         // Chart Properties Panel
 
-        QuickBodyPanel chartPropertiesPanel = new QuickBodyPanel();
-
+        BSPanel chartPropertiesPanel = new BSPanel();
+        chartPropertiesPanel.setLayout(new BSFlowLayout(BSComponent.Alignment.VERTICAL));
         {
-            BSPanel chartPanel = new BSPanel();
-            chartPanel.add(new BSText("<b>Chart</b>:"), BSBorderLayout.WEST);
-            chartPanel.add(new BSInputSelect("chartType", false,
-                    Stream.of(ChartBuilder.CHART_TYPE.values()).map(t -> t.name()).toArray(String[]::new)), BSBorderLayout.CENTER);
-
-            chartPropertiesPanel.addRowsOfComponents();
-
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Chart</b>:"));
-            chartPropertiesPanel.addRowOfColumns(new BSInputSelect("chartType", false,
+            chartPropertiesPanel.add(new BSText("<b>Chart</b>:"));
+            chartPropertiesPanel.add(new BSInputSelect("chartType", false,
                     Stream.of(ChartBuilder.CHART_TYPE.values()).map(t -> t.name()).toArray(String[]::new)));
 
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Options</b>:"));
+            chartPropertiesPanel.add(new BSText("<b>Options</b>:"));
             BSInputText optionsInput;
-            chartPropertiesPanel.addRowOfColumns(optionsInput = new BSInputText("Options", "Options", "", "options"));
+            chartPropertiesPanel.add(optionsInput = new BSInputText("Options", "Options", "", "options"));
 
             if (query != null && query.hasKey("options")) {
                 optionsInput.setValue(query.get("options").value());
@@ -301,33 +296,34 @@ public class Explorer2 extends Explorer {
         }
         {
             BSInputText colorInput;
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Color</b>:"), colorInput = new BSInputText("Color", "Color", "", "color"));
+            chartPropertiesPanel.add(new BSText("<b>Color</b>:"));
+            chartPropertiesPanel.add(colorInput = new BSInputText("Color", "Color", "", "color"));
 
             if (query != null && query.hasKey("color")) {
                 colorInput.setValue(query.get("color").value());
             }
 
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Size</b>:"));
+            chartPropertiesPanel.add(new BSText("<b>Size</b>:"));
             BSInputText sizeInput;
-            chartPropertiesPanel.addRowOfColumns(sizeInput = new BSInputText("Size", "Size", "", "size"));
+            chartPropertiesPanel.add(sizeInput = new BSInputText("Size", "Size", "", "size"));
 
             if (query != null && query.hasKey("size")) {
                 sizeInput.setValue(query.get("size").value());
             }
         }
         {
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Trace colors</b>:"));
+            chartPropertiesPanel.add(new BSText("<b>Trace colors</b>:"));
             BSInputText tracecolors;
-            chartPropertiesPanel.addRowOfColumns(tracecolors = new BSInputText("", "TraceColor", "", "tracecolors"));
+            chartPropertiesPanel.add(tracecolors = new BSInputText("", "TraceColor", "", "tracecolors"));
 
             if (query != null && query.hasKey("tracecolors")) {
                 tracecolors.setValue(query.get("tracecolors").value());
             }
         }
         {
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Axes</b>:"));
+            chartPropertiesPanel.add(new BSText("<b>Axes</b>:"));
             BSInputSelect axes;
-            chartPropertiesPanel.addRowOfColumns(axes = new BSInputSelect("axes", false,
+            chartPropertiesPanel.add(axes = new BSInputSelect("axes", false,
                     Stream.of(ChartBuilder.Axes.values()).map(t -> t.name()).toArray(String[]::new)));
 
             if (query != null && query.hasKey("axes")) {
@@ -335,48 +331,65 @@ public class Explorer2 extends Explorer {
                 //axes.setValue(query.get("axes").value());
             }
 
-            chartPropertiesPanel.addRowOfColumns(new BSText("<b>Group By</b>:"));
+            chartPropertiesPanel.add(new BSText("<b>Group By</b>:"));
             BSInputText groupBy;
-            chartPropertiesPanel.addRowOfColumns(groupBy = new BSInputText("", "groupby", "", "groupby"));
+            chartPropertiesPanel.add(groupBy = new BSInputText("", "groupby", "", "groupby"));
 
             if (query != null && query.hasKey("groupby")) {
                 groupBy.setValue(query.get("groupby").value());
             }
         }
+        //chartPropertiesPanel.doLayout();
 
         // View Panel
 
-        QuickBodyPanel viewPanel = new QuickBodyPanel();
-
+        BSPanel viewPanel = new BSPanel();
+        viewPanel.setLayout(new BSFlowLayout(BSComponent.Alignment.VERTICAL));
         {
-            viewPanel.addRowOfColumns(new BSText("<b>Columns</b>:"));
+            viewPanel.add(new BSText("<b>Columns</b>:"));
             BSInputText colsInput;
-            viewPanel.addRowOfColumns(colsInput = new BSInputText("Columns", "Columns", "", "columns"));
+            viewPanel.add(colsInput = new BSInputText("Columns", "Columns", "", "columns"));
 
             if (query != null && query.hasKey("columns")) {
                 colsInput.setValue(query.get("columns").value());
             }
 
-            viewPanel.addRowOfColumns(new BSText("<b>Rows</b>:"));
+            viewPanel.add(new BSText("<b>Rows</b>:"));
             BSInputText rowsInput;
-            viewPanel.addRowOfColumns(rowsInput = new BSInputText("Rows", "Rows", "", "rows"));
+            viewPanel.add(rowsInput = new BSInputText("Rows", "Rows", "", "rows"));
 
             if (query != null && query.hasKey("rows")) {
                 rowsInput.setValue(query.get("rows").value());
             }
         }
-
-
-
-        dataPanel.doLayout();
-        chartPropertiesPanel.doLayout();
-        viewPanel.doLayout();
-
+        //viewPanel.doLayout();
 
         // Full Panel
-        QuickBodyPanel formPanel = new QuickBodyPanel();
-        formPanel.addRowOfColumns( dataPanel, chartPropertiesPanel, viewPanel );
-        formPanel.doLayout();
+        BSPanel propAndViewPanel = new BSPanel();
+        BSPanel formPanel = new BSPanel();
+
+        BSBorderLayout propLayout = new BSBorderLayout();
+        BSBorderLayout formLayout = new BSBorderLayout();
+
+        propLayout.setQuadrantColumnWidth(BSBorderLayout.WEST, 4);
+        propLayout.setQuadrantColumnWidth(BSBorderLayout.CENTER, 8);
+
+        formLayout.setQuadrantColumnWidth(BSBorderLayout.WEST, 3);
+        formLayout.setQuadrantColumnWidth(BSBorderLayout.CENTER, 9);
+
+        propAndViewPanel.setLayout(propLayout);
+        formPanel.setLayout(formLayout);
+
+        propAndViewPanel.add(chartPropertiesPanel, BSBorderLayout.WEST);
+        propAndViewPanel.add(viewPanel, BSBorderLayout.CENTER);
+
+        formPanel.add(dataPanel, BSBorderLayout.WEST);
+        formPanel.add(propAndViewPanel, BSBorderLayout.CENTER);
+
+        // Full Panel
+//        QuickBodyPanel formPanel = new QuickBodyPanel();
+//        formPanel.addRowOfColumns( dataPanel, chartPropertiesPanel, viewPanel );
+//        formPanel.doLayout();
 
         BSBorderedPanel bpanel = new BSBorderedPanel();
         bpanel.add(formPanel);

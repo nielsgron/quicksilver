@@ -22,6 +22,8 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSContainer;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSRow;
 
+import java.util.HashMap;
+
 public class BSBorderLayout implements BSLayoutManager {
 
     public static final String NORTH = "north";
@@ -31,6 +33,8 @@ public class BSBorderLayout implements BSLayoutManager {
     public static final String CENTER = "center";
 
     private BSContainer childrenContainer = new BSContainer(false,0,0);
+
+    private HashMap<String, Integer> quadrantColumnWidth = new HashMap<String, Integer>();
 
     public BSBorderLayout() {
 
@@ -47,7 +51,7 @@ public class BSBorderLayout implements BSLayoutManager {
         // NORTH
         if ( getNorthPanel(false) != null ) {
             ((BSRow)(container.add(new BSRow(1)))).getColumn(0).add(getNorthPanel(false));
-            container.getRow(container.getChildrenCount()-1 ).getColumn(0).setColumnWeight(12);
+            container.getRow(container.getChildrenCount()-1 ).getColumn(0).setColumnWeight(getQuadrantColumnWidth(NORTH, 12));
         }
 
         // CENTER
@@ -73,12 +77,12 @@ public class BSBorderLayout implements BSLayoutManager {
             if ( west != null ) {
                 row.getColumn(columnPos).add(west);
                 if ( columnCount == 1 ) {
-                    row.getColumn(columnPos).setColumnWeight(12);
+                    row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(WEST, 12));
                 } else {
                     if ( getCenterPanel(false) == null ) {
-                        row.getColumn(columnPos).setColumnWeight(6);
+                        row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(WEST, 6));
                     } else {
-                        row.getColumn(columnPos).setColumnWeight(2);
+                        row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(WEST, 2));
                     }
                 }
                 columnPos++;
@@ -86,23 +90,23 @@ public class BSBorderLayout implements BSLayoutManager {
             if ( center != null ) {
                 row.getColumn(columnPos).add(center);
                 if ( columnCount == 1 ) {
-                    row.getColumn(columnPos).setColumnWeight(12);
+                    row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(CENTER, 12));
                 } else if (columnCount == 2) {
-                    row.getColumn(columnPos).setColumnWeight(10);
+                    row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(CENTER, 10));
                 } else {
-                    row.getColumn(columnPos).setColumnWeight(8);
+                    row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(CENTER, 8));
                 }
                 columnPos++;
             }
             if ( east != null ) {
                 row.getColumn(columnPos).add(east);
                 if ( columnCount == 1 ) {
-                    row.getColumn(columnPos).setColumnWeight(12);
+                    row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(EAST, 12));
                 } else {
                     if ( getCenterPanel(false) == null ) {
-                        row.getColumn(columnPos).setColumnWeight(6);
+                        row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(EAST, 6));
                     } else {
-                        row.getColumn(columnPos).setColumnWeight(2);
+                        row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(EAST, 2));
                     }
                 }
                 columnPos++;
@@ -113,10 +117,23 @@ public class BSBorderLayout implements BSLayoutManager {
         // SOUTH
         if ( getSouthPanel(false) != null ) {
             ((BSRow)(container.add(new BSRow(1)))).getColumn(0).add(getSouthPanel(false));
-            container.getRow(container.getChildrenCount()-1 ).getColumn(0).setColumnWeight(12);
+            container.getRow(container.getChildrenCount()-1 ).getColumn(0).setColumnWeight(getQuadrantColumnWidth(SOUTH, 12));
         }
 
         container.render(stream);
+    }
+
+    public void setQuadrantColumnWidth(String quadrantName, int columnWidth) {
+        quadrantColumnWidth.put(quadrantName, columnWidth);
+    }
+
+    public int getQuadrantColumnWidth(String quadrantName, int defaultValue) {
+        Integer qValue = quadrantColumnWidth.get(quadrantName);
+        if ( qValue == null ) {
+            return defaultValue;
+        } else {
+            return qValue.intValue();
+        }
     }
 
     public HTMLComponent add(HTMLComponent component) {

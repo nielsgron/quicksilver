@@ -17,22 +17,46 @@
 package quicksilver.webapp.simpleui.bootstrap4.layouts;
 
 import quicksilver.webapp.simpleui.HtmlStream;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+
+import java.util.ArrayList;
 
 public class BSFlowLayout implements BSLayoutManager {
 
     public static final BSFlowLayout INSTANCE = new BSFlowLayout();
+
+    protected BSComponent.Alignment alignment;
+
+    protected ArrayList<HTMLComponent> children = new ArrayList<HTMLComponent>();
+
+    public BSFlowLayout() {
+        this(BSComponent.Alignment.HORIZONTAL);
+    }
+
+    public BSFlowLayout(BSComponent.Alignment alignment) {
+        this.alignment = alignment;
+    }
 
     public HTMLComponent add(HTMLComponent component) {
         return add(component, null);
     }
 
     public HTMLComponent add(HTMLComponent component, Object constraint) {
+        children.add(component);
         return component;
     }
 
     @Override
     public void render(HtmlStream stream) {
+
+        for ( int i = 0; i < children.size(); i++ ) {
+            HTMLComponent c = children.get(i);
+            c.render(stream);
+            if ( alignment == BSComponent.Alignment.VERTICAL ) {
+                stream.writeln("<BR>");
+            }
+        }
 
     }
 
