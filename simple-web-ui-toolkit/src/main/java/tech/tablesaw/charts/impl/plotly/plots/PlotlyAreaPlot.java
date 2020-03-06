@@ -80,15 +80,8 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
             Figure[] figures = tableList.stream()
                     .map(tab -> {
                         ScatterTrace[] traces = tab.splitOn(columnForColor).asTableList().stream()
-                                .map(t -> {
-                                    return ScatterTrace.builder(
-                                            t.numberColumn(xCol), t.numberColumn(yCol))
-                                            .showLegend(true)
-                                            .name(t.name())
-                                            .mode(ScatterTrace.Mode.LINE)
-                                            .fill(ScatterTrace.Fill.TO_NEXT_Y)
-                                            .build();
-                                })
+                                .map(this::createTrace)
+                                .map(ScatterTrace.ScatterBuilder::build)
                                 .toArray(ScatterTrace[]::new);
                         return new Figure(layout, config, traces);
                     })
@@ -97,13 +90,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
         } else {
             ScatterTrace[] traces = new ScatterTrace[tableList.size()];
             for (int i = 0; i < tableList.size(); i++) {
-                ScatterTrace.ScatterBuilder builder = 
-                        ScatterTrace.builder(
-                                tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
-                                .showLegend(true)
-                                .name(tableList.get(i).name())
-                                .mode(ScatterTrace.Mode.LINE)
-                                .fill(ScatterTrace.Fill.TO_NEXT_Y);
+                ScatterTrace.ScatterBuilder builder = createTrace(tableList.get(i));
                 if (traceColors != null && traceColors.length > i) {
                     builder.fillColor(traceColors[i]);
                 }
@@ -113,6 +100,15 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
 
             return new FigureOrFigures(new Figure(layout, config, traces));
         }
+    }
+
+    private ScatterTrace.ScatterBuilder createTrace(Table t) {
+        return ScatterTrace.builder(
+                t.numberColumn(xCol), t.numberColumn(yCol))
+                .showLegend(true)
+                .name(t.name())
+                .mode(ScatterTrace.Mode.LINE)
+                .fill(ScatterTrace.Fill.TO_NEXT_Y);
     }
 
     public PlotlyAreaPlot(ChartBuilder chartBuilder) {
