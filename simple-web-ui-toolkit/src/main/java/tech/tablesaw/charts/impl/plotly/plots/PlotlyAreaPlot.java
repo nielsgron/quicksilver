@@ -60,7 +60,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
 
     private Figure[] createFigure(List<Table> tableList) {
         if(columnForColor != null && !columnForColor.isEmpty()) {
-            Figure[] figures = tableList.stream()
+            return tableList.stream()
                     .map(tab -> {
                         ScatterTrace[] traces = tab.splitOn(columnForColor).asTableList().stream()
                                 .map(this::createTrace)
@@ -69,20 +69,23 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
                         return new Figure(layout, config, traces);
                     })
                     .toArray(Figure[]::new);
-            return figures;
-        } else {
-            ScatterTrace[] traces = new ScatterTrace[tableList.size()];
-            for (int i = 0; i < tableList.size(); i++) {
-                ScatterTrace.ScatterBuilder builder = createTrace(tableList.get(i));
-                if (traceColors != null && traceColors.length > i) {
-                    builder.fillColor(traceColors[i]);
-                }
-                traces[i] = builder
-                                .build();
-            }
-
-            return new Figure[]{new Figure(layout, config, traces)};
         }
+
+        return createFigureTraceColors(tableList);
+    }
+
+    private Figure[] createFigureTraceColors(List<Table> tableList) {
+        ScatterTrace[] traces = new ScatterTrace[tableList.size()];
+        for (int i = 0; i < tableList.size(); i++) {
+            ScatterTrace.ScatterBuilder builder = createTrace(tableList.get(i));
+            if (traceColors != null && traceColors.length > i) {
+                builder.fillColor(traceColors[i]);
+            }
+            traces[i] = builder
+                    .build();
+        }
+
+        return new Figure[]{new Figure(layout, config, traces)};
     }
 
     private ScatterTrace.ScatterBuilder createTrace(Table t) {
