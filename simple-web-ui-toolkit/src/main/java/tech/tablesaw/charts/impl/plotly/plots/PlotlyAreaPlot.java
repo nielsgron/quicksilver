@@ -50,32 +50,15 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
         if (individualAxes) {
             setFigures(tableList.stream()
                     .map(t -> createFigure(singletonList(t)))
-                    .flatMap(f -> Stream.of(f.getFigures()))
+                    .flatMap(Stream::of)
                     .toArray(Figure[]::new));
         } else {
-            setFigures(createFigure(tableList).getFigures());
+            setFigures(createFigure(tableList));
         }
 
     }
 
-    static class FigureOrFigures {
-
-        private final Figure[] figures;
-
-        public FigureOrFigures(Figure f) {
-            this.figures = new Figure[]{f};
-        }
-
-        public FigureOrFigures(Figure[] figures) {
-            this.figures = figures;
-        }
-
-        public Figure[] getFigures() {
-            return figures;
-        }
-    }
-
-    private FigureOrFigures createFigure(List<Table> tableList) {
+    private Figure[] createFigure(List<Table> tableList) {
         if(columnForColor != null && !columnForColor.isEmpty()) {
             Figure[] figures = tableList.stream()
                     .map(tab -> {
@@ -86,7 +69,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
                         return new Figure(layout, config, traces);
                     })
                     .toArray(Figure[]::new);
-            return new FigureOrFigures(figures);
+            return figures;
         } else {
             ScatterTrace[] traces = new ScatterTrace[tableList.size()];
             for (int i = 0; i < tableList.size(); i++) {
@@ -98,7 +81,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
                                 .build();
             }
 
-            return new FigureOrFigures(new Figure(layout, config, traces));
+            return new Figure[]{new Figure(layout, config, traces)};
         }
     }
 
