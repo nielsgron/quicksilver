@@ -7,7 +7,7 @@ import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.table.TableSliceGroup;
 
 import java.util.ArrayList;
-import static java.util.Collections.singletonList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
@@ -36,10 +36,13 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
 
         // TODO : columnForLabels -
         // TODO : columnForDetails -
+        setFigures(groupBy(groupCol).toArray(Figure[]::new));
+    }
 
+    private Stream<Figure> groupBy(String groupCol) {
         List<Table> tableList;
 
-        if ( groupCol != null ) {
+        if (groupCol != null) {
             TableSliceGroup tables = table.splitOn(table.categoricalColumn(groupCol));
             tableList = tables.asTableList();
         } else {
@@ -47,45 +50,46 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
             tableList.add(table);
         }
 
+        return axes(tableList.stream());
+    }
+
+    private Stream<Figure> axes(Stream<Table> tableList) {
         if (individualAxes) {
-            setFigures(tableList.stream()
-                    .map(t -> createFigure(singletonList(t)))
-                    .flatMap(Stream::of)
-                    .toArray(Figure[]::new));
+            return tableList
+                    .flatMap(t -> colorColumn(Stream.of(t)));
         } else {
-            setFigures(createFigure(tableList));
+            return colorColumn(tableList);
         }
-
     }
 
-    private Figure[] createFigure(List<Table> tableList) {
-        if(columnForColor != null && !columnForColor.isEmpty()) {
-            return tableList.stream()
-                    .map(tab -> {
-                        ScatterTrace[] traces = tab.splitOn(columnForColor).asTableList().stream()
-                                .map(this::createTrace)
-                                .map(ScatterTrace.ScatterBuilder::build)
-                                .toArray(ScatterTrace[]::new);
-                        return new Figure(layout, config, traces);
-                    })
-                    .toArray(Figure[]::new);
+    private Stream<Figure> colorColumn(Stream<Table> tableList) {
+        if (columnForColor != null && !columnForColor.isEmpty()) {
+            return tableList
+                    .flatMap(tab -> plainFigure(tab.splitOn(columnForColor).asTableList().stream()));
         }
 
-        return createFigureTraceColors(tableList);
+        return traceColors(tableList);
     }
 
-    private Figure[] createFigureTraceColors(List<Table> tableList) {
-        ScatterTrace[] traces = new ScatterTrace[tableList.size()];
-        for (int i = 0; i < tableList.size(); i++) {
-            ScatterTrace.ScatterBuilder builder = createTrace(tableList.get(i));
-            if (traceColors != null && traceColors.length > i) {
-                builder.fillColor(traceColors[i]);
-            }
-            traces[i] = builder
-                    .build();
-        }
+    private Stream<Figure> traceColors(Stream<Table> tables) {
+        return plainFigure(tables, traceColors != null);
+    }
 
-        return new Figure[]{new Figure(layout, config, traces)};
+    private Stream<Figure> plainFigure(Stream<Table> tables) {
+        return plainFigure(tables, false);
+    }
+
+    private Stream<Figure> plainFigure(Stream<Table> tables, boolean fillColors) {
+        Stream<ScatterTrace.ScatterBuilder> builders = tables.map(this::createTrace);
+        if (fillColors) {
+            Iterator<String> colors = Stream.of(traceColors).iterator();
+            builders = builders.map(builder -> builder.fillColor(colors.next()));
+        }
+        ScatterTrace[] traces = builders
+                .map(ScatterTrace.ScatterBuilder::build)
+                .toArray(ScatterTrace[]::new);
+
+        return Stream.of(new Figure(layout, config, traces));
     }
 
     private ScatterTrace.ScatterBuilder createTrace(Table t) {
