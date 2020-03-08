@@ -20,12 +20,20 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import quicksilver.webapp.simpleserver.controllers.root.components.AbstractComponentsPage;
+import tech.tablesaw.plotly.Utils;
 import tech.tablesaw.plotly.components.Grid;
 
-public class Explorer2 extends Explorer {
+public class Explorer2 extends AbstractComponentsPage {
+
+    protected final QueryParamsMap query;
+    protected BSPanel panel;
 
     public Explorer2(QueryParamsMap query) {
-        super(query);
+        this.query = query;
+        getComponentNavTab().setActiveItem("Data Explorer");
+        //continue creating panel (workaround)
+        createContentPanelCenter();
     }
 
     protected BSPanel createContentPanelCenter() {
@@ -219,7 +227,7 @@ public class Explorer2 extends Explorer {
 
     protected BSForm createForm() {
 
-        BSForm form = new BSForm("/components/explorer2", true);
+        BSForm form = new BSForm("/components/explorer", true);
 
         List<Method> datasetSampleMethods = new ArrayList<>();
         for (Method m : TSDataSetFactory.class.getDeclaredMethods()) {
@@ -415,4 +423,14 @@ public class Explorer2 extends Explorer {
 
     }
 
+    public String getTitle() {
+        return "Data Explorer";
+    }
+
+    static String dataAsString(String[] x) {
+        String das = Utils.dataAsString(x);
+        das = das.substring(1); //remove first '['
+        das = das.substring(0, das.length() - 1); //remove last '['
+        return das;
+    }
 }
