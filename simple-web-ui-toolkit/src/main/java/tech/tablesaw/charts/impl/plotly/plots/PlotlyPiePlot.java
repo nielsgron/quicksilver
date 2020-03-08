@@ -1,5 +1,6 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,19 +30,29 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
                     .map(numberColName -> simpleFigure(table, groupColName, numberColName))
                     .toArray(Figure[]::new));
         } else {
-            //TODO: EMI: Add `domain` to trace
-            String numberColName = columnsForViewRows[0];
             if (columnsForViewRows.length > 1) {
                 //TODO: EMI: there's no clean way to check if the layout has a grid... perhaps reflection or add public getters?
                 if (!layout.asJavascript().contains("grid:")) {
                     LOG.warn("Pie plot has multiple view rows and shared axes but no layout.grid is defined");
                 }
+                //doesn't have to be atomic, just a counter to use in the lambda bellow
+                AtomicInteger counter = new AtomicInteger();
+                PieTrace[] traces = Stream.of(columnsForViewRows)
+                        .map(numberColName -> trace(table, groupColName, numberColName))
+                        //XXX: EMI: row is always 0, not sure how to allow the user control the grid size
+                        .map(builder -> builder.domainRow(0).domainColumn(counter.getAndIncrement()))
+                        .map(builder -> builder.build())
+                        .toArray(PieTrace[]::new);
+
+                setFigure(new Figure(layout, config, traces));
+            } else {
+                String numberColName = columnsForViewRows[0];
+                setFigure(simpleFigure(table, groupColName, numberColName));
             }
-            setFigure(simpleFigure(table, groupColName, numberColName));
         }
     }
 
-    private Figure simpleFigure(Table table, String groupColName, String numberColName) {
+    private PieTrace.PieBuilder trace(Table table, String groupColName, String numberColName) {
         PieTrace.PieBuilder builder
                 = PieTrace.builder(table.column(groupColName), table.numberColumn(numberColName))
                         .showLegend(true);
@@ -53,7 +64,12 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
                         .build());
             }
         }
-        PieTrace trace = builder
+
+        return builder;
+    }
+
+    private Figure simpleFigure(Table table, String groupColName, String numberColName) {
+        PieTrace trace = trace(table, groupColName, numberColName)
                         .build();
 
         return new Figure(layout, config, trace);

@@ -9,6 +9,12 @@ var {{variableName}} =
 {% if marker is not null %}
         marker: {{marker | raw}},
 {% endif %}
+{% if domain is not null %}
+        domain: {
+            row: {{domain.row | raw}},
+            column: {{domain.column | raw}}
+        },
+{% endif %}
         type: '{{type}}',
         name: '{{name}}',
  }

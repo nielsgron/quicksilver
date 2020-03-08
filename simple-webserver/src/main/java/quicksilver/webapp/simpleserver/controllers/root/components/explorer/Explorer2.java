@@ -6,7 +6,6 @@ import quicksilver.webapp.simpleui.bootstrap4.charts.TSFigurePanel;
 import quicksilver.webapp.simpleui.bootstrap4.components.*;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSBorderLayout;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSFlowLayout;
-import quicksilver.webapp.simpleui.bootstrap4.quick.QuickBodyPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import spark.QueryParamsMap;
 import tech.tablesaw.api.NumericColumn;
@@ -21,6 +20,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import tech.tablesaw.plotly.components.Grid;
 
 public class Explorer2 extends Explorer {
 
@@ -104,6 +104,17 @@ public class Explorer2 extends Explorer {
                         generatedCode.append(", Layout.BarMode.").append(b.name());
                     } catch (IllegalArgumentException iae) {
                         //ignore, continue
+                    }
+                    if(name.startsWith("grid(")) {
+                        String dims = name.substring("grid(".length());
+                        dims = dims.substring(0, dims.length() - 1);
+
+                        String[] colrows = dims.split(",");
+                        int rows = Integer.parseInt(colrows[0].trim());
+                        int cols = Integer.parseInt(colrows[1].trim());
+
+                        chartTypeOptions.add(Grid.builder().rows(rows).columns(cols).build());
+                        generatedCode.append(String.format(", Grid.builder().rows(%d).columns(%d).build()", rows, cols));
                     }
                 }
             }
