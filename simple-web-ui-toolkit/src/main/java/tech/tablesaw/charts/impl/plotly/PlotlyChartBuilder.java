@@ -3,8 +3,17 @@ package tech.tablesaw.charts.impl.plotly;
 import tech.tablesaw.charts.Chart;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.charts.impl.plotly.plots.*;
+import tech.tablesaw.plotly.components.Grid;
 import tech.tablesaw.plotly.components.Layout;
 
+/**
+ * Supported chart type options:
+ *
+ * <ul>
+ * <li>Layout.BarMode - sets the bar mode. Useful to create, eg. a stacked bar chart.
+ * <li>Grid - sets a layout grid. Useful to create, eg. pie chart subplots.
+ * </ul>
+ */
 public class PlotlyChartBuilder extends ChartBuilder {
 
     @Override
@@ -38,6 +47,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 break;
             case PIE:
                 layout(width, height, 5, 40, 5, 5, enabledLegend);
+                configureLayoutBuilderBarMode();
                 break;
             case SCATTERPLOT:
                 layout(width, height, 5, 20, 35, 5, enabledLegend);
@@ -233,6 +243,9 @@ public class PlotlyChartBuilder extends ChartBuilder {
                 //EMI: XXX: Normally this should be called on bar charts only if a color column is set
                 // (but seems harmless since otherwise each row column gets a separate figure so there's nothing to stack anyhow)
                 layoutBuilder.barMode((Layout.BarMode) o);
+            }
+            if (o instanceof Grid) {
+                layoutBuilder.grid((Grid) o);
             }
         }
     }

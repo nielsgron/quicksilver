@@ -17,12 +17,18 @@ public class PieTrace extends AbstractTrace {
   private final double[] values;
   private final Object[] labels;
   private final Marker marker;
+  private final Domain domain;
+
+  public static class Domain {
+    public int row, column;
+  }
 
   private PieTrace(PieBuilder builder) {
     super(builder);
     this.values = builder.values;
     this.labels = builder.labels;
     this.marker = builder.marker;
+    this.domain = builder.domain;
   }
 
   @Override
@@ -52,6 +58,9 @@ public class PieTrace extends AbstractTrace {
     if (marker != null) {
       context.put("marker", marker);
     }
+    if (domain != null) {
+      context.put("domain", domain);
+    }
     return context;
   }
 
@@ -69,6 +78,7 @@ public class PieTrace extends AbstractTrace {
     private final double[] values;
     private final Object[] labels;
     private Marker marker;
+    private Domain domain;
 
     private PieBuilder(Object[] labels, double[] values) {
       this.labels = labels;
@@ -92,6 +102,23 @@ public class PieTrace extends AbstractTrace {
 
     public PieTrace.PieBuilder marker(Marker marker) {
       this.marker = marker;
+      return this;
+    }
+
+    //XXX: EMI: These should be replaced by a separate Domain class, with a separate builder, etc, etc.
+    public PieTrace.PieBuilder domainRow(int row) {
+        if(this.domain == null) {
+            this.domain = new Domain();
+        }
+      this.domain.row = row;
+      return this;
+    }
+
+    public PieTrace.PieBuilder domainColumn(int column) {
+        if(this.domain == null) {
+            this.domain = new Domain();
+        }
+      this.domain.column = column;
       return this;
     }
   }

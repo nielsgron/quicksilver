@@ -25,7 +25,6 @@ import quicksilver.webapp.simpleserver.controllers.root.about.Team;
 import quicksilver.webapp.simpleserver.controllers.root.components.bootstrap.Bootstrap;
 import quicksilver.webapp.simpleserver.controllers.root.Index;
 import quicksilver.webapp.simpleserver.controllers.root.Search;
-import quicksilver.webapp.simpleserver.controllers.root.components.explorer.Explorer;
 import quicksilver.webapp.simpleserver.controllers.root.components.charts.*;
 import quicksilver.webapp.simpleserver.controllers.root.components.customforms.CustomForms;
 import quicksilver.webapp.simpleserver.controllers.root.components.explorer.Explorer2;
@@ -89,10 +88,6 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             return stream.getText();
         });
         webServer.get("/components/explorer", (request, response) -> {
-            HtmlStream stream = renderPageAndReturnStream(new Explorer(request.queryMap()), new HtmlStreamStringBuffer());
-            return stream.getText();
-        });
-        webServer.get("/components/explorer2", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Explorer2(request.queryMap()), new HtmlStreamStringBuffer());
             return stream.getText();
         });
