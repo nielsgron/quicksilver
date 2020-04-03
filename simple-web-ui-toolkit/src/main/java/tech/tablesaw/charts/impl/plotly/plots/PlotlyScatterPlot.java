@@ -31,7 +31,6 @@ public class PlotlyScatterPlot extends PlotlyAbstractPlot {
 
         // TODO : columnForDetails -
         // TODO : columnForColor -
-        // TODO : columnForSize -
 
         List<Table> tableList;
 
