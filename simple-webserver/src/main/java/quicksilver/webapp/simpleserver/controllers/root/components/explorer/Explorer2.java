@@ -150,6 +150,18 @@ public class Explorer2 extends AbstractComponentsPage {
                 }
             }
         }
+        if (query != null && query.hasKey("labels")) {
+            String labelsText = query.get("labels").value().trim();
+            if (!labelsText.isEmpty()) {
+                String[] labels = labelsText.split(" ");
+                chartBuilder.columnsForLabels(labels);
+
+                generatedCode.append("  .columnsForLabels(");
+                generatedCode.append(dataAsString(labels));
+                generatedCode.append(")\n");
+            }
+        }
+
         if (query != null && query.hasKey("groupby")) {
             String groupby = query.get("groupby").value().trim();
             if (!groupby.isEmpty()) {
@@ -348,6 +360,14 @@ public class Explorer2 extends AbstractComponentsPage {
             if (query != null && query.hasKey("axes")) {
                 //TODO: restore axes type selection
                 //axes.setValue(query.get("axes").value());
+            }
+
+            chartPropertiesPanel.add(new BSText("<b>Labels</b>:"));
+            BSInputText labels;
+            chartPropertiesPanel.add(labels = new BSInputText("", "labels", "", "labels"));
+
+            if (query != null && query.hasKey("labels")) {
+                labels.setValue(query.get("labels").value());
             }
 
             chartPropertiesPanel.add(new BSText("<b>Group By</b>:"));
