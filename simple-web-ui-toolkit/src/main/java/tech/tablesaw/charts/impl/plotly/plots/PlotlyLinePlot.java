@@ -41,7 +41,7 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
 
             if (columnForColor != null) {
                 if (!columnForColor.equals(groupCol)) {
-                    LOG.warn("Cannot use a different color column when a group column is also present for line plot: color column ignored.");
+                    LOG.warn("Cannot use a different color column when a group column is also present: color column ignored.");
                 }
             }
         } else {
@@ -56,9 +56,10 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
 
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
+            Table t = tableList.get(i);
             ScatterTrace.ScatterBuilder builder =
                     ScatterTrace.builder(
-                            tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
+                            t.column(xCol), t.column(yCol))
                             .showLegend(true)
                             .name(tableList.get(i).name())
                             .mode(ScatterTrace.Mode.LINE);

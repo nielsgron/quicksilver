@@ -45,9 +45,10 @@ public class PlotlyScatterPlot extends PlotlyAbstractPlot {
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         Marker marker = Marker.builder().opacity(0.75D).build();
         for (int i = 0; i < tableList.size(); i++) {
+            Table t = tableList.get(i);
             ScatterTrace.ScatterBuilder builder =
                     ScatterTrace.builder(
-                            tableList.get(i).numberColumn(xCol), tableList.get(i).numberColumn(yCol))
+                            t.column(xCol), t.column(yCol))
                             .showLegend(true)
                             .marker(marker)
                             .name(tableList.get(i).name());

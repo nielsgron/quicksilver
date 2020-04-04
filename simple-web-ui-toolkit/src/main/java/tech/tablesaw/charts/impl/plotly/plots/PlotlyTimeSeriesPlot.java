@@ -1,6 +1,6 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
-import tech.tablesaw.api.*;
+import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.traces.ScatterTrace;
@@ -41,7 +41,7 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
 
             if (columnForColor != null) {
                 if (!columnForColor.equals(groupCol)) {
-                    LOG.warn("Cannot use a different color column when a group column is also present for time series plot: color column ignored.");
+                    LOG.warn("Cannot use a different color column when a group column is also present: color column ignored.");
                 }
             }
         } else {
@@ -58,11 +58,11 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
         for (int i = 0; i < tableList.size(); i++) {
             Table t = tableList.get(i).sortOn(dateColX);
             ScatterTrace.ScatterBuilder builder =
-                    ScatterTrace.builder(t.dateColumn(dateColX), t.numberColumn(yCol))
+                    ScatterTrace.builder(
+                            t.column(dateColX), t.column(yCol))
                             .showLegend(true)
                             .name(tableList.get(i).name())
-                            .mode(ScatterTrace.Mode.LINE)
-                            ;
+                            .mode(ScatterTrace.Mode.LINE);
 
             if (columnForColor == null) {
                 if (traceColors != null && traceColors.length > i) {
