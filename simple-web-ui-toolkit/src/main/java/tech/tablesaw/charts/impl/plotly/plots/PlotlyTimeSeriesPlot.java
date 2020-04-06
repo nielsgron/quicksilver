@@ -29,7 +29,6 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
             LOG.warn("Only one view row is supported but {} received", columnsForViewRows.length);
         }
 
-        // TODO : columnForLabels -
         // TODO : columnForDetails -
         // TODO : columnForSize -
 
@@ -71,6 +70,18 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
                             .build());
                 }
             }
+
+            if (columnsForLabels != null && columnsForLabels.length > 0) {
+                if (columnsForLabels.length > 1) {
+                    LOG.warn("Plot will only take into account the 1st label column ({} received)", columnsForLabels.length);
+                }
+
+                //assert ColumnType.STRING == tableList.get(i).column(columnsForLabels[0]).type();
+                //TODO: other column type might make sense (like a date column) but then the text might be different...
+                builder.text(tableList.get(i).stringColumn(columnsForLabels[0]).asObjectArray());
+                builder.mode(ScatterTrace.Mode.LINE_AND_TEXT);
+            }
+
             traces[i] = builder
                             .build();
         }
