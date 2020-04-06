@@ -257,7 +257,11 @@ public class Explorer2 extends AbstractComponentsPage {
 
 
         // Build DataSet List
-        BSSelect dataSetList = new BSSelect(true);
+        BSSelect dataSetList = new BSSelect(true) {
+            {
+                this.addTagAttribute("name", "dataset");
+            }
+        };
         for ( int i = 0; i < datasets.length; i++ ) {
             dataSetList.add(new BSSelectOption(datasets[i]));
         }
