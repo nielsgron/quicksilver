@@ -56,6 +56,7 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
             Table t = tableList.get(i);
+            t = prepareTableForTrace(t, xCol, yCol);
             ScatterTrace.ScatterBuilder builder =
                     ScatterTrace.builder(
                             t.column(xCol), t.column(yCol))
@@ -76,6 +77,8 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
                     LOG.warn("Plot will only take into account the 1st label column ({} received)", columnsForLabels.length);
                 }
 
+                //assert ColumnType.STRING == tableList.get(i).column(columnsForLabels[0]).type();
+                //TODO: other column type might make sense (like a date column) but then the text might be different...
                 builder.text(tableList.get(i).stringColumn(columnsForLabels[0]).asObjectArray());
                 builder.mode(ScatterTrace.Mode.LINE_AND_TEXT);
             }
@@ -85,6 +88,10 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
         }
 
         setFigure( new Figure(layout, config, traces) );
+    }
+
+    protected Table prepareTableForTrace(Table t, String xCol, String yCol) {
+        return t;
     }
 
     public PlotlyLinePlot(ChartBuilder chartBuilder) {

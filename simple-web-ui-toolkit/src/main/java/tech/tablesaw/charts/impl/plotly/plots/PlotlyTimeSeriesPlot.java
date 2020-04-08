@@ -18,7 +18,7 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
 
     public PlotlyTimeSeriesPlot(ChartBuilder chartBuilder, String groupCol) {
         setChartBuilder(chartBuilder);
-        String dateColX = columnsForViewColumns[0];
+        String xCol = columnsForViewColumns[0];
         if (columnsForViewColumns.length > 1) {
             LOG.warn("Only one view column is supported but {} received", columnsForViewColumns.length);
         }
@@ -55,10 +55,11 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
 
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
-            Table t = tableList.get(i).sortOn(dateColX);
+            Table t = tableList.get(i);
+            t = prepareTableForTrace(t, xCol, yCol);
             ScatterTrace.ScatterBuilder builder =
                     ScatterTrace.builder(
-                            t.column(dateColX), t.column(yCol))
+                            t.column(xCol), t.column(yCol))
                             .showLegend(true)
                             .name(tableList.get(i).name())
                             .mode(ScatterTrace.Mode.LINE);
@@ -87,6 +88,10 @@ public class PlotlyTimeSeriesPlot extends PlotlyAbstractPlot {
         }
 
         setFigure( new Figure(layout, config, traces) );
+    }
+
+    protected Table prepareTableForTrace(Table t, String xCol, String yCol) {
+        return t.sortOn(xCol);
     }
 
     public PlotlyTimeSeriesPlot(ChartBuilder chartBuilder) {
