@@ -142,7 +142,7 @@ public class PlotlyChartBuilder extends ChartBuilder {
     @Override
     protected Chart buildLine() {
         try {
-            PlotlyLinePlot plot = new PlotlyLinePlot(this);
+            PlotlyLinePlot plot = new PlotlyLinePlot(this, groupBy);
             return plot;
         } catch ( Exception e ) {
             e.printStackTrace();

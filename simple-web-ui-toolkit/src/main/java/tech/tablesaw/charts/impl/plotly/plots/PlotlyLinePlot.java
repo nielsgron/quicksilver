@@ -1,29 +1,32 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.traces.ScatterTrace;
-import tech.tablesaw.table.TableSliceGroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.tablesaw.plotly.components.Line;
 
-public class PlotlyLinePlot extends PlotlyAbstractPlot {
+public class PlotlyLinePlot extends PlotlyAbstractBasicPlot {
 
     private final static Logger LOG = LogManager.getLogger();
 
+    private final String xCol;
+    private final String yCol;
+
     public PlotlyLinePlot(ChartBuilder chartBuilder, String groupCol) {
         setChartBuilder(chartBuilder);
-        String xCol = columnsForViewColumns[0];
+        xCol = columnsForViewColumns[0];
         if (columnsForViewColumns.length > 1) {
             LOG.warn("Only one view column is supported but {} received", columnsForViewColumns.length);
         }
 
-        String yCol = columnsForViewRows[0];
+        yCol = columnsForViewRows[0];
         if (columnsForViewRows.length > 1) {
             //TODO: Support more columns in columnsForViewRows by creating more figures?
             LOG.warn("Only one view row is supported but {} received", columnsForViewRows.length);
@@ -32,26 +35,13 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
         // TODO : columnForDetails -
         // TODO : columnForSize -
 
-        List<Table> tableList;
+        setFigures(groupBy(groupCol).toArray(Figure[]::new));
+    }
 
-        if ( groupCol != null ) {
-            TableSliceGroup tables = table.splitOn(table.categoricalColumn(groupCol));
-            tableList = tables.asTableList();
-
-            if (columnForColor != null) {
-                if (!columnForColor.equals(groupCol)) {
-                    LOG.warn("Cannot use a different color column when a group column is also present: color column ignored.");
-                }
-            }
-        } else {
-            if (columnForColor == null) {
-                tableList = new ArrayList<Table>();
-                tableList.add(table);
-            } else {
-                TableSliceGroup colorTables = table.splitOn(table.categoricalColumn(columnForColor));
-                tableList = colorTables.asTableList();
-            }
-        }
+    @Override
+    protected Stream<Figure> plainFigure(Stream<Table> tables) {
+        //XXX: replace tableList with proper stream map, etc.
+        List<Table> tableList = tables.collect(Collectors.toList());
 
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
@@ -87,7 +77,7 @@ public class PlotlyLinePlot extends PlotlyAbstractPlot {
                             .build();
         }
 
-        setFigure( new Figure(layout, config, traces) );
+        return Stream.of(new Figure(layout, config, traces));
     }
 
     protected Table prepareTableForTrace(Table t, String xCol, String yCol) {
