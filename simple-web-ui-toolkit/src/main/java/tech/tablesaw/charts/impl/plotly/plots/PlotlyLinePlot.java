@@ -51,7 +51,7 @@ public class PlotlyLinePlot extends PlotlyAbstractBasicPlot {
                     ScatterTrace.builder(
                             t.column(xCol), t.column(yCol))
                             .showLegend(true)
-                            .name(tableList.get(i).name())
+                            .name(t.name())
                             .mode(ScatterTrace.Mode.LINE);
 
             if (columnForColor == null) {
@@ -69,7 +69,7 @@ public class PlotlyLinePlot extends PlotlyAbstractBasicPlot {
 
                 //assert ColumnType.STRING == tableList.get(i).column(columnsForLabels[0]).type();
                 //TODO: other column type might make sense (like a date column) but then the text might be different...
-                builder.text(tableList.get(i).stringColumn(columnsForLabels[0]).asObjectArray());
+                builder.text(t.stringColumn(columnsForLabels[0]).asObjectArray());
                 builder.mode(ScatterTrace.Mode.LINE_AND_TEXT);
             }
 
