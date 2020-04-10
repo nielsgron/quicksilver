@@ -203,7 +203,7 @@ public class TableExtract {
         }
     };
 
-    static AggregateFunction<StringColumn, String> firstString = new AggregateFunction<StringColumn, String>("First") {
+    public static AggregateFunction<StringColumn, String> firstString = new AggregateFunction<StringColumn, String>("First") {
         @Override
         public String summarize(StringColumn v) {
             return v.isEmpty() ? StringColumnType.missingValueIndicator() : v.get(0);
