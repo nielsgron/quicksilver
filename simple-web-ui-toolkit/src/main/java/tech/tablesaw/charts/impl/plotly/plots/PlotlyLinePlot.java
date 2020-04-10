@@ -33,7 +33,6 @@ public class PlotlyLinePlot extends PlotlyAbstractBasicPlot {
         }
 
         // TODO : columnForDetails -
-        // TODO : columnForSize -
 
         setFigures(groupBy(groupCol).toArray(Figure[]::new));
     }
@@ -54,13 +53,27 @@ public class PlotlyLinePlot extends PlotlyAbstractBasicPlot {
                             .name(t.name())
                             .mode(ScatterTrace.Mode.LINE);
 
+            Line.LineBuilder lineBuilder = null;
             if (columnForColor == null) {
                 if (traceColors != null && traceColors.length > i) {
-                    builder.line(Line.builder()
-                            .color(traceColors[i])
-                            .build());
+                    lineBuilder = Line.builder()
+                            .color(traceColors[i]);
                 }
             }
+
+            if (columnForSize != null) {
+                if (lineBuilder == null) {
+                    lineBuilder = Line.builder();
+                }
+
+                //TODO: support multiple summarization functions via something like "AVG[ColumnName]"
+                double width = t.numberColumn(columnForSize).mean();
+                //width between [1, 20]
+                width = Math.max(1, Math.min(width, 20));
+                lineBuilder.width(width);
+            }
+
+            builder.line(lineBuilder.build());
 
             if (columnsForLabels != null && columnsForLabels.length > 0) {
                 if (columnsForLabels.length > 1) {

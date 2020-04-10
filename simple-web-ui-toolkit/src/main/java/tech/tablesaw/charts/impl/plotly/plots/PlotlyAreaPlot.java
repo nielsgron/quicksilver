@@ -34,7 +34,6 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
             LOG.warn("Area plot will only take into account the 1st view row ({} received)", columnsForViewRows.length);
         }
 
-        // TODO : columnForLabels -
         // TODO : columnForDetails -
         setFigures(groupBy(groupCol).toArray(Figure[]::new));
     }
@@ -46,7 +45,7 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
             TableSliceGroup tables = table.splitOn(table.categoricalColumn(groupCol));
             tableList = tables.asTableList();
         } else {
-            tableList = new ArrayList<Table>();
+            tableList = new ArrayList<>();
             tableList.add(table);
         }
 
@@ -93,12 +92,21 @@ public class PlotlyAreaPlot extends PlotlyAbstractPlot {
     }
 
     private ScatterTrace.ScatterBuilder createTrace(Table t) {
-        return ScatterTrace.builder(
+        ScatterTrace.ScatterBuilder builder = ScatterTrace.builder(
                 t.numberColumn(xCol), t.numberColumn(yCol))
                 .showLegend(true)
                 .name(t.name())
                 .mode(ScatterTrace.Mode.LINE)
                 .fill(ScatterTrace.Fill.TO_NEXT_Y);
+
+        if (columnsForLabels != null && columnsForLabels.length > 0) {
+            if (columnsForLabels.length > 1) {
+                LOG.warn("Plot will only take into account the 1st label column ({} received)", columnsForLabels.length);
+            }
+            builder = builder.text(t.stringColumn(columnsForLabels[0]).asObjectArray());
+        }
+
+        return builder;
     }
 
     public PlotlyAreaPlot(ChartBuilder chartBuilder) {
