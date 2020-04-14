@@ -10,10 +10,7 @@ var {{variableName}} =
         marker: {{marker | raw}},
 {% endif %}
 {% if domain is not null %}
-        domain: {
-            row: {{domain.row | raw}},
-            column: {{domain.column | raw}}
-        },
+        domain: {{domain | raw}},
 {% endif %}
         type: '{{type}}',
         name: '{{name}}',

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.plotly.components.Domain;
 import tech.tablesaw.plotly.components.Figure;
 import tech.tablesaw.plotly.components.Marker;
 import tech.tablesaw.plotly.traces.PieTrace;
@@ -40,7 +41,7 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
                 PieTrace[] traces = Stream.of(columnsForViewRows)
                         .map(numberColName -> trace(table, groupColName, numberColName))
                         //XXX: EMI: row is always 0, not sure how to allow the user control the grid size
-                        .map(builder -> builder.domainRow(0).domainColumn(counter.getAndIncrement()))
+                        .map(builder -> builder.domain(Domain.builder().row(0).column(counter.getAndIncrement()).build()))
                         .map(builder -> builder.build())
                         .toArray(PieTrace[]::new);
 
