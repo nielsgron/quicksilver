@@ -11,6 +11,7 @@ import tech.tablesaw.api.NumericColumn;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.plotly.Utils;
 import tech.tablesaw.plotly.components.Marker;
+import tech.tablesaw.plotly.components.Domain;
 
 public class PieTrace extends AbstractTrace {
 
@@ -18,10 +19,6 @@ public class PieTrace extends AbstractTrace {
   private final Object[] labels;
   private final Marker marker;
   private final Domain domain;
-
-  public static class Domain {
-    public int row, column;
-  }
 
   private PieTrace(PieBuilder builder) {
     super(builder);
@@ -59,7 +56,7 @@ public class PieTrace extends AbstractTrace {
       context.put("marker", marker);
     }
     if (domain != null) {
-      context.put("domain", domain);
+      context.put("domain", domain.asJavascript());
     }
     return context;
   }
@@ -85,6 +82,11 @@ public class PieTrace extends AbstractTrace {
       this.values = values;
     }
 
+    public PieBuilder domain(Domain domain) {
+      this.domain = domain;
+      return this;
+    }
+
     public PieTrace build() {
       return new PieTrace(this);
     }
@@ -105,21 +107,5 @@ public class PieTrace extends AbstractTrace {
       return this;
     }
 
-    //XXX: EMI: These should be replaced by a separate Domain class, with a separate builder, etc, etc.
-    public PieTrace.PieBuilder domainRow(int row) {
-        if(this.domain == null) {
-            this.domain = new Domain();
-        }
-      this.domain.row = row;
-      return this;
-    }
-
-    public PieTrace.PieBuilder domainColumn(int column) {
-        if(this.domain == null) {
-            this.domain = new Domain();
-        }
-      this.domain.column = column;
-      return this;
-    }
   }
 }
