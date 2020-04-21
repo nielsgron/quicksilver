@@ -35,12 +35,8 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                 Trace[] traces = colorDimension.stream()
                         .map(color -> {
                             Table colorTable = table.where(table.stringColumn(columnForColor).isEqualTo(color));
-                            BarTrace trace
-                                    = BarTrace.builder(colorTable.categoricalColumn(groupColName), colorTable.numberColumn(measure))
-                                            .orientation(getOrientation())
-                                            .showLegend(true)
-                                            .name(color)
-                                            .build();
+                            BarTrace trace = createTrace(colorTable, groupColName, measure, color)
+                                    .build();
                             return trace;
                         })
                         .toArray(Trace[]::new);
@@ -70,11 +66,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         Trace[] traces = new Trace[numberColNames.length];
         for (int i = 0; i < numberColNames.length; i++) {
             String name = numberColNames[i];
-            BarTrace.BarBuilder builder =
-                    BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(name))
-                            .orientation(getOrientation())
-                            .showLegend(true)
-                            .name(name);
+            BarTrace.BarBuilder builder = createTrace(table, groupColName, name, name);
             if(columnForLabel.isPresent()) {
                 builder.text(table.stringColumn(columnForLabel.get()));
             }
@@ -104,6 +96,15 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             setFigure(new Figure(layout, config, traces));
         }
 
+    }
+
+    private BarTrace.BarBuilder createTrace(Table table, String groupColName, String numberColumn, String traceName) {
+        BarTrace.BarBuilder builder
+                = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(numberColumn))
+                        .orientation(getOrientation())
+                        .showLegend(true)
+                        .name(traceName);
+        return builder;
     }
 
     protected abstract BarTrace.Orientation getOrientation();
