@@ -24,6 +24,22 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             LOG.warn("Bar plot will only take into account the 1st view colum ({} received)", columnsForViewColumns.length);
         }
 
+        final String[] numberColNames = columnsForViewRows;
+
+        // TODO : columnForDetails -
+
+        final Optional<String> columnForLabel;
+        if (columnsForLabels != null && columnsForLabels.length > 0) {
+            columnForLabel = Optional.of(columnsForLabels[0]);
+            if(columnsForLabels.length > 1) {
+                LOG.warn("Bar plot will only take into account the 1st label column ({} received)", columnsForLabels.length);
+            }
+        } else {
+            columnForLabel = Optional.empty();
+        }
+
+        final Optional<String> size = Optional.ofNullable(this.columnForSize);
+
         if (columnForColor != null && !groupColName.equals(columnForColor)) {
             //add column values
             List<Figure> measureFigures = new ArrayList<>();
@@ -45,19 +61,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             setFigures(measureFigures.toArray(new Figure[0]));
             return;
         }
-        String[] numberColNames = columnsForViewRows;
 
-        // TODO : columnForDetails -
-        final Optional<String> columnForLabel;
-        if (columnsForLabels != null && columnsForLabels.length > 0) {
-            columnForLabel = Optional.of(columnsForLabels[0]);
-            if(columnsForLabels.length > 1) {
-                LOG.warn("Bar plot will only take into account the 1st label column ({} received)", columnsForLabels.length);
-            }
-        } else {
-            columnForLabel = Optional.empty();
-        }
-        final Optional<String> size = Optional.ofNullable(this.columnForSize);
 
         // TODO : Support Clustered & Area display type. Research BarTrace.builder.mode(ScatterTrace.Mode.LINE) & BarTrace.builder.fill(ScatterTrace.Fill.TO_NEXT_Y) as in PlotlyAreaPlot
 
