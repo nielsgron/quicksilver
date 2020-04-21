@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018, 2019, 2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,8 +51,7 @@ public class DataFeedHTML extends DataFeed {
         }
         HtmlReadOptions.Builder b = HtmlReadOptions.builder(new Source(new ByteArrayInputStream(dataPayload), charset));
         if (tableIndex != null) {
-            //available after 0.36.1 see https://github.com/jtablesaw/tablesaw/pull/682
-//                b.tableIndex(tableIndex);
+            b.tableIndex(tableIndex);
         }
         HtmlReadOptions o = b.build();
         dataTable = new HtmlReader().read(o);
