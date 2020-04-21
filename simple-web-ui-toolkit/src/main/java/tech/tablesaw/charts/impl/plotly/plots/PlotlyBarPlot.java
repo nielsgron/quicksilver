@@ -26,16 +26,14 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
         if (columnForColor != null && !groupColName.equals(columnForColor)) {
             //add column values
-            List<String> colorDimension = table.stringColumn(columnForColor).unique().asList();
             List<Figure> measureFigures = new ArrayList<>();
 
             //create a figure for each measure
             for (String measure : columnsForViewRows) {
 
-                Trace[] traces = colorDimension.stream()
-                        .map(color -> {
-                            Table colorTable = table.where(table.stringColumn(columnForColor).isEqualTo(color));
-                            BarTrace trace = createTrace(colorTable, groupColName, measure, color)
+                Trace[] traces = table.splitOn(columnForColor).asTableList().stream()
+                        .map(colorTable -> {
+                            BarTrace trace = createTrace(colorTable, groupColName, measure, colorTable.name())
                                     .build();
                             return trace;
                         })
