@@ -44,18 +44,11 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             //add column values
             List<Figure> measureFigures = new ArrayList<>();
 
+            List<Table> tables = table.splitOn(columnForColor).asTableList();
             //create a figure for each measure
-            for (String measure : columnsForViewRows) {
-
-                Trace[] traces = table.splitOn(columnForColor).asTableList().stream()
-                        .map(colorTable -> {
-                            BarTrace trace = createTrace(colorTable, groupColName, measure, colorTable.name())
-                                    .build();
-                            return trace;
-                        })
-                        .toArray(Trace[]::new);
-
-                measureFigures.add(new Figure(layout, config, traces));
+            for (String measure : numberColNames) {
+                Figure figure = createFigure(tables, groupColName, measure);
+                measureFigures.add(figure);
             }
 
             setFigures(measureFigures.toArray(new Figure[0]));
@@ -110,4 +103,16 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
     }
 
     protected abstract BarTrace.Orientation getOrientation();
+
+    private Figure createFigure(List<Table> colorTables, String groupColName, String measure) {
+        Trace[] traces = colorTables.stream()
+                .map(colorTable -> {
+                    BarTrace trace = createTrace(colorTable, groupColName, measure, colorTable.name())
+                            .build();
+                    return trace;
+                })
+                .toArray(Trace[]::new);
+
+        return new Figure(layout, config, traces);
+    }
 }
