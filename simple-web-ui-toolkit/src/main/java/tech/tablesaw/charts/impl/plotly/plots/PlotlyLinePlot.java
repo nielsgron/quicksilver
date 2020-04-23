@@ -73,7 +73,9 @@ public class PlotlyLinePlot extends PlotlyAbstractBasicPlot {
                 lineBuilder.width(width);
             }
 
-            builder.line(lineBuilder.build());
+            if (lineBuilder != null) {
+                builder.line(lineBuilder.build());
+            }
 
             if (columnsForLabels != null && columnsForLabels.length > 0) {
                 if (columnsForLabels.length > 1) {

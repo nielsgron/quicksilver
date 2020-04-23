@@ -10,8 +10,6 @@ import tech.tablesaw.plotly.traces.SunburstTrace;
 public class SunburstPlot {
 
     public static Figure create(Layout layout, Config config, String[] ids, Object[] labels, Object[] labelParents, double[] values, EventHandler[] handlers) {
-        TreemapPlot.sanitize(labels);
-        TreemapPlot.sanitize(labelParents);
         SunburstTrace trace = SunburstTrace.builder(
                 ids,
                 labels,
