@@ -81,20 +81,28 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
     private Trace[] createTraces(String[] numberColNames, String groupColName) {
         Trace[] traces = new Trace[numberColNames.length];
         for (int i = 0; i < numberColNames.length; i++) {
+            String traceColor = null;
             String name = numberColNames[i];
-            BarTrace.BarBuilder builder = createTrace(table, groupColName, name, name);
             if (columnForColor == null) {
                 if (traceColors != null && traceColors.length > i) {
-                    builder.marker(Marker.builder()
-                            .color(traceColors[i])
-                            .build());
+                    traceColor = traceColors[i];
                 }
+            }
+            traces[i] = createTrace(name, groupColName, traceColor);
+        }
+        return traces;
+    }
+
+    private Trace createTrace(String name, String groupColName, String traceColor) {
+            BarTrace.BarBuilder builder = createTrace(table, groupColName, name, name);
+            if(traceColor != null) {
+                    builder.marker(Marker.builder()
+                            .color(traceColor)
+                            .build());
             }
             BarTrace trace = builder
                             .build();
-            traces[i] = trace;
-        }
-        return traces;
+            return trace;
     }
 
     private BarTrace.BarBuilder createTrace(Table table, String groupColName, String numberColumn, String traceName) {
