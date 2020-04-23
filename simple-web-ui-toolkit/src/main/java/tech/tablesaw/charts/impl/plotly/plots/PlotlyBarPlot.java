@@ -48,28 +48,17 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             //add column values
 
             List<Table> tables = table.splitOn(columnForColor).asTableList();
+            FigureBag bag = individualAxes
+                    ? new IndividualFigureBag(this::createFigure)
+                    : new SharedAxisFigureBag(this::createFigure);
 
-            if(individualAxes) {
-                //create a figure for each measure
-                List<Figure> measureFigures = new ArrayList<>();
-                for (String measure : numberColNames) {
-                    Trace[] measureTraces = createTraces(tables, groupColName, measure);
-                    Figure figure = new Figure(layout, config, measureTraces);
-                    measureFigures.add(figure);
-                }
-
-                setFigures(measureFigures.toArray(new Figure[0]));
-            } else {
-                //shared axis
-                //XXX: use same color for a given color column value across measures? Eg. a continent across multiple country-level measurements should get the same color or not?
-                List<Trace> traces = new ArrayList<>();
-                for (String measure : numberColNames) {
-                    Trace[] measureTraces = createTraces(tables, groupColName, measure);
-                    traces.addAll(Arrays.asList(measureTraces));
-                }
-
-                setFigure(new Figure(layout, config, traces.toArray(new Trace[0])));
+            //XXX: use same color for a given color column value across measures? Eg. a continent across multiple country-level measurements should get the same color or not?
+            for (String measure : numberColNames) {
+                Trace[] measureTraces = createTraces(tables, groupColName, measure);
+                bag.addTraces(measureTraces);
             }
+
+            setFigures(bag.getFigures());
         } else {
             Trace[] traces = createTraces(numberColNames, groupColName);
 
@@ -83,6 +72,10 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                 setFigure(new Figure(layout, config, traces));
             }
         }
+    }
+
+    private Figure createFigure(Trace[] traces) {
+        return new Figure(layout, config, traces);
     }
 
     private Trace[] createTraces(String[] numberColNames, String groupColName) {
