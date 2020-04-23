@@ -53,7 +53,8 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                 //create a figure for each measure
                 List<Figure> measureFigures = new ArrayList<>();
                 for (String measure : numberColNames) {
-                    Figure figure = createFigure(tables, groupColName, measure);
+                    Trace[] measureTraces = createTraces(tables, groupColName, measure);
+                    Figure figure = new Figure(layout, config, measureTraces);
                     measureFigures.add(figure);
                 }
 
@@ -130,10 +131,5 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                 })
                 .toArray(Trace[]::new);
         return traces;
-    }
-
-    private Figure createFigure(List<Table> colorTables, String groupColName, String measure) {
-        Trace[] traces = createTraces(colorTables, groupColName, measure);
-        return new Figure(layout, config, traces);
     }
 }
