@@ -17,6 +17,9 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
     private final static Logger LOG = LogManager.getLogger();
 
+    private final Optional<String> size;
+    private final Optional<String> columnForLabel;
+
     public PlotlyBarPlot(ChartBuilder chartBuilder) {
         setChartBuilder(chartBuilder);
         String groupColName = columnsForViewColumns[0];
@@ -28,7 +31,6 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
         // TODO : columnForDetails -
 
-        final Optional<String> columnForLabel;
         if (columnsForLabels != null && columnsForLabels.length > 0) {
             columnForLabel = Optional.of(columnsForLabels[0]);
             if(columnsForLabels.length > 1) {
@@ -38,7 +40,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             columnForLabel = Optional.empty();
         }
 
-        final Optional<String> size = Optional.ofNullable(this.columnForSize);
+        size = Optional.ofNullable(this.columnForSize);
 
         if (columnForColor != null && !groupColName.equals(columnForColor)) {
             //add column values
@@ -58,6 +60,22 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
         // TODO : Support Clustered & Area display type. Research BarTrace.builder.mode(ScatterTrace.Mode.LINE) & BarTrace.builder.fill(ScatterTrace.Fill.TO_NEXT_Y) as in PlotlyAreaPlot
 
+        Trace[] traces = createTraces(numberColNames, groupColName);
+
+        if (columnForColor == null) {
+            //create one figure for each viewRows column
+            setFigures(Stream.of(traces)
+                    .map(t -> new Figure(layout, config, new Trace[]{t}))
+                    .toArray(Figure[]::new));
+        } else {
+            assert groupColName.equals(columnForColor);
+
+            setFigure(new Figure(layout, config, traces));
+        }
+
+    }
+
+    private Trace[] createTraces(String[] numberColNames, String groupColName) {
         Trace[] traces = new Trace[numberColNames.length];
         for (int i = 0; i < numberColNames.length; i++) {
             String name = numberColNames[i];
@@ -79,18 +97,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                             .build();
             traces[i] = trace;
         }
-
-        if (columnForColor == null) {
-            //create one figure for each viewRows column
-            setFigures(Stream.of(traces)
-                    .map(t -> new Figure(layout, config, new Trace[]{t}))
-                    .toArray(Figure[]::new));
-        } else {
-            assert groupColName.equals(columnForColor);
-
-            setFigure(new Figure(layout, config, traces));
-        }
-
+        return traces;
     }
 
     private BarTrace.BarBuilder createTrace(Table table, String groupColName, String numberColumn, String traceName) {
