@@ -58,17 +58,17 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
             setFigures(bag.getFigures());
         } else {
+            FigureBag bag = individualAxes
+                    //create one figure for each measure
+                    ? new IndividualFigureBag(this::createFigure)
+                    //shared axis, create a single figure for all measures
+                    : new SharedAxisFigureBag(this::createFigure);
+
             Trace[] traces = createTraces(numberColNames, groupColName);
 
-            if (individualAxes) {
-                //create one figure for each viewRows column
-                setFigures(Stream.of(traces)
-                        .map(t -> new Figure(layout, config, new Trace[]{t}))
-                        .toArray(Figure[]::new));
-            } else {
-                //shared axis, create a single figure for all measures
-                setFigure(new Figure(layout, config, traces));
-            }
+            Stream.of(traces)
+                    .forEach(t -> bag.addTraces(new Trace[]{t}));
+            setFigures(bag.getFigures());
         }
     }
 
