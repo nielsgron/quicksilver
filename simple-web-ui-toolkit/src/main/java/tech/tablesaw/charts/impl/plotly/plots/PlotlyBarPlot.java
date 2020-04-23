@@ -41,6 +41,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         }
 
         size = Optional.ofNullable(this.columnForSize);
+        // TODO : Support Clustered & Area display type. Research BarTrace.builder.mode(ScatterTrace.Mode.LINE) & BarTrace.builder.fill(ScatterTrace.Fill.TO_NEXT_Y) as in PlotlyAreaPlot
 
         if (columnForColor != null) {
             //add column values
@@ -54,19 +55,14 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
             }
 
             setFigures(measureFigures.toArray(new Figure[0]));
-            return;
+        } else {
+            Trace[] traces = createTraces(numberColNames, groupColName);
+
+            //create one figure for each viewRows column
+            setFigures(Stream.of(traces)
+                    .map(t -> new Figure(layout, config, new Trace[]{t}))
+                    .toArray(Figure[]::new));
         }
-
-
-        // TODO : Support Clustered & Area display type. Research BarTrace.builder.mode(ScatterTrace.Mode.LINE) & BarTrace.builder.fill(ScatterTrace.Fill.TO_NEXT_Y) as in PlotlyAreaPlot
-
-        Trace[] traces = createTraces(numberColNames, groupColName);
-
-        assert (columnForColor == null);
-        //create one figure for each viewRows column
-        setFigures(Stream.of(traces)
-                .map(t -> new Figure(layout, config, new Trace[]{t}))
-                .toArray(Figure[]::new));
     }
 
     private Trace[] createTraces(String[] numberColNames, String groupColName) {
