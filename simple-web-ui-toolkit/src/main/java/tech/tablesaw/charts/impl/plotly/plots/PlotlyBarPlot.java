@@ -67,7 +67,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                     traces.addAll(Arrays.asList(measureTraces));
                 }
 
-                setFigure(new Figure(layout, config, traces.toArray(Trace[]::new)));
+                setFigure(new Figure(layout, config, traces.toArray(new Trace[0])));
             }
         } else {
             Trace[] traces = createTraces(numberColNames, groupColName);
