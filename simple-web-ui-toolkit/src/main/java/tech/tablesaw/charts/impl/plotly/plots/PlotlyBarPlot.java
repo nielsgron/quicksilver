@@ -42,7 +42,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
         size = Optional.ofNullable(this.columnForSize);
 
-        if (columnForColor != null && !groupColName.equals(columnForColor)) {
+        if (columnForColor != null) {
             //add column values
             List<Figure> measureFigures = new ArrayList<>();
 
@@ -62,17 +62,11 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
         Trace[] traces = createTraces(numberColNames, groupColName);
 
-        if (columnForColor == null) {
-            //create one figure for each viewRows column
-            setFigures(Stream.of(traces)
-                    .map(t -> new Figure(layout, config, new Trace[]{t}))
-                    .toArray(Figure[]::new));
-        } else {
-            assert groupColName.equals(columnForColor);
-
-            setFigure(new Figure(layout, config, traces));
-        }
-
+        assert (columnForColor == null);
+        //create one figure for each viewRows column
+        setFigures(Stream.of(traces)
+                .map(t -> new Figure(layout, config, new Trace[]{t}))
+                .toArray(Figure[]::new));
     }
 
     private Trace[] createTraces(String[] numberColNames, String groupColName) {
