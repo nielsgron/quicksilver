@@ -1,7 +1,5 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -94,18 +92,13 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
     }
 
     private Trace createTrace(String name, String groupColName, String traceColor) {
-            BarTrace.BarBuilder builder = createTrace(table, groupColName, name, name);
-            if(traceColor != null) {
-                    builder.marker(Marker.builder()
-                            .color(traceColor)
-                            .build());
-            }
+            BarTrace.BarBuilder builder = createTrace(table, groupColName, name, name, traceColor);
             BarTrace trace = builder
                             .build();
             return trace;
     }
 
-    private BarTrace.BarBuilder createTrace(Table table, String groupColName, String numberColumn, String traceName) {
+    private BarTrace.BarBuilder createTrace(Table table, String groupColName, String numberColumn, String traceName, String traceColor) {
         BarTrace.BarBuilder builder
                 = BarTrace.builder(table.categoricalColumn(groupColName), table.numberColumn(numberColumn))
                         .orientation(getOrientation())
@@ -117,7 +110,11 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         if (size.isPresent()) {
             builder.width(table.numberColumn(size.get()));
         }
-        //TODO: add trace color here too (and merge / remove the same chunk from createTraces)
+        if (traceColor != null) {
+            builder.marker(Marker.builder()
+                    .color(traceColor)
+                    .build());
+        }
         return builder;
     }
 
@@ -126,7 +123,7 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
     private Trace[] createTraces(List<Table> colorTables, String groupColName, String measure) {
         Trace[] traces = colorTables.stream()
                 .map(colorTable -> {
-                    BarTrace trace = createTrace(colorTable, groupColName, measure, colorTable.name())
+                    BarTrace trace = createTrace(colorTable, groupColName, measure, colorTable.name(), null)
                             .build();
                     return trace;
                 })
