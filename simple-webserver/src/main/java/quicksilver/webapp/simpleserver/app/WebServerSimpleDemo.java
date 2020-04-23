@@ -87,6 +87,8 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
             HtmlStream stream = renderPageAndReturnStream(new Extras(), new HtmlStreamStringBuffer());
             return stream.getText();
         });
+        //make sure the builder is regiestered early.
+        Explorer2.registerBuilder();
         webServer.get("/components/explorer", (request, response) -> {
             HtmlStream stream = renderPageAndReturnStream(new Explorer2(request.queryMap()), new HtmlStreamStringBuffer());
             return stream.getText();

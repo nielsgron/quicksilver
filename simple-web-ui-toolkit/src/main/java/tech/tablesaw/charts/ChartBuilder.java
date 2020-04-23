@@ -1,5 +1,6 @@
 package tech.tablesaw.charts;
 
+import java.util.function.Supplier;
 import org.apache.commons.lang3.NotImplementedException;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.impl.calheatmap.CalHeatmapChartBuilder;
@@ -31,7 +32,7 @@ public abstract class ChartBuilder {
     }
 
     public enum CHART_RENDERER {
-        PLOTLY, CHARTJS, VEGA, CALHEATMAP
+        PLOTLY, CHARTJS, VEGA, CALHEATMAP, EXPLORER
     }
 
     public enum CHART_TYPE {
@@ -81,6 +82,7 @@ public abstract class ChartBuilder {
     }
 
     public static CHART_RENDERER DEFAULT_CHART_RENDERER;
+    public static Supplier<ChartBuilder> EXPLORER_CHART_BUILDER;
     public final static Axes DEFAULT_AXES = Axes.MergedSharedScale;
 
     public static ChartBuilder createBuilder() {
@@ -93,6 +95,8 @@ public abstract class ChartBuilder {
 
             case PLOTLY:
                 return new PlotlyChartBuilder();
+            case EXPLORER:
+                return EXPLORER_CHART_BUILDER.get();
 
             case CHARTJS:
                 return new ChartjsChartBuilder();

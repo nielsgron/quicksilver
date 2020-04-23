@@ -26,6 +26,10 @@ import tech.tablesaw.plotly.components.Grid;
 
 public class Explorer2 extends AbstractComponentsPage {
 
+    public static void registerBuilder() {
+        ChartBuilder.EXPLORER_CHART_BUILDER = () -> new ExplorerChartBuilder();
+    }
+
     protected final QueryParamsMap query;
     protected BSPanel panel;
 
