@@ -90,12 +90,6 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
         for (int i = 0; i < numberColNames.length; i++) {
             String name = numberColNames[i];
             BarTrace.BarBuilder builder = createTrace(table, groupColName, name, name);
-            if(columnForLabel.isPresent()) {
-                builder.text(table.stringColumn(columnForLabel.get()));
-            }
-            if(size.isPresent()) {
-                builder.width(table.numberColumn(size.get()));
-            }
             if (columnForColor == null) {
                 if (traceColors != null && traceColors.length > i) {
                     builder.marker(Marker.builder()
@@ -116,7 +110,13 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                         .orientation(getOrientation())
                         .showLegend(true)
                         .name(traceName);
-        //TODO: add label / size / trace color here too (and merge / remove the same chunk from createTraces)
+        if (columnForLabel.isPresent()) {
+            builder.text(table.stringColumn(columnForLabel.get()));
+        }
+        if (size.isPresent()) {
+            builder.width(table.numberColumn(size.get()));
+        }
+        //TODO: add trace color here too (and merge / remove the same chunk from createTraces)
         return builder;
     }
 
