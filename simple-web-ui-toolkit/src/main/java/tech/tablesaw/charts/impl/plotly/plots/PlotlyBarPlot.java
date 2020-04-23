@@ -1,6 +1,7 @@
 package tech.tablesaw.charts.impl.plotly.plots;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -45,23 +46,41 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
 
         if (columnForColor != null) {
             //add column values
-            List<Figure> measureFigures = new ArrayList<>();
 
             List<Table> tables = table.splitOn(columnForColor).asTableList();
-            //create a figure for each measure
-            for (String measure : numberColNames) {
-                Figure figure = createFigure(tables, groupColName, measure);
-                measureFigures.add(figure);
-            }
 
-            setFigures(measureFigures.toArray(new Figure[0]));
+            if(individualAxes) {
+                //create a figure for each measure
+                List<Figure> measureFigures = new ArrayList<>();
+                for (String measure : numberColNames) {
+                    Figure figure = createFigure(tables, groupColName, measure);
+                    measureFigures.add(figure);
+                }
+
+                setFigures(measureFigures.toArray(new Figure[0]));
+            } else {
+                //shared axis
+                //XXX: use same color for a given color column value across measures? Eg. a continent across multiple country-level measurements should get the same color or not?
+                List<Trace> traces = new ArrayList<>();
+                for (String measure : numberColNames) {
+                    Trace[] measureTraces = createTraces(tables, groupColName, measure);
+                    traces.addAll(Arrays.asList(measureTraces));
+                }
+
+                setFigure(new Figure(layout, config, traces.toArray(Trace[]::new)));
+            }
         } else {
             Trace[] traces = createTraces(numberColNames, groupColName);
 
-            //create one figure for each viewRows column
-            setFigures(Stream.of(traces)
-                    .map(t -> new Figure(layout, config, new Trace[]{t}))
-                    .toArray(Figure[]::new));
+            if (individualAxes) {
+                //create one figure for each viewRows column
+                setFigures(Stream.of(traces)
+                        .map(t -> new Figure(layout, config, new Trace[]{t}))
+                        .toArray(Figure[]::new));
+            } else {
+                //shared axis, create a single figure for all measures
+                setFigure(new Figure(layout, config, traces));
+            }
         }
     }
 
@@ -96,12 +115,13 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                         .orientation(getOrientation())
                         .showLegend(true)
                         .name(traceName);
+        //TODO: add label / size / trace color here too (and merge / remove the same chunk from createTraces)
         return builder;
     }
 
     protected abstract BarTrace.Orientation getOrientation();
 
-    private Figure createFigure(List<Table> colorTables, String groupColName, String measure) {
+    private Trace[] createTraces(List<Table> colorTables, String groupColName, String measure) {
         Trace[] traces = colorTables.stream()
                 .map(colorTable -> {
                     BarTrace trace = createTrace(colorTable, groupColName, measure, colorTable.name())
@@ -109,7 +129,11 @@ public abstract class PlotlyBarPlot extends PlotlyAbstractPlot {
                     return trace;
                 })
                 .toArray(Trace[]::new);
+        return traces;
+    }
 
+    private Figure createFigure(List<Table> colorTables, String groupColName, String measure) {
+        Trace[] traces = createTraces(colorTables, groupColName, measure);
         return new Figure(layout, config, traces);
     }
 }
