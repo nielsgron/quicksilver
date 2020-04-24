@@ -58,7 +58,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
             sunburstTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
         }
 
-        ChartBuilder sunburstBuilderBig = ChartBuilder.createBuilder()
+        ChartBuilder sunburstBuilderBig = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
                 .columnsForViewColumns("Company", "Industry", "Sector")
@@ -84,7 +84,7 @@ public class ChartsSunburst extends AbstractComponentsChartsPage {
                         "Sunburst Chart")
         );
 
-        ChartBuilder sunburstBuilder = ChartBuilder.createBuilder()
+        ChartBuilder sunburstBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
                 .columnsForViewColumns("Company", "Sector")

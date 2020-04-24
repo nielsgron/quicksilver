@@ -50,7 +50,7 @@ public class ChartsBubble extends AbstractComponentsChartsPage {
         oldColumn.mapInto((Double p) -> { return p / 1000; }, newColumn);
         bubbleTable.addColumns(newColumn);
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(bubbleTable)
                 .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
                 .columnsForViewColumns("Population")

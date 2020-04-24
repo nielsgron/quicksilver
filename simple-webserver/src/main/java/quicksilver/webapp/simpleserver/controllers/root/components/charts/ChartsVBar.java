@@ -55,7 +55,7 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                         (double p) -> 0.1 + (p - minPopulation) / (maxPopulation - minPopulation),
                         DoubleColumn.create("Width")));
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
                 .columnsForViewColumns("Country")
@@ -103,7 +103,7 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                         "Narrow Chart")
         );
 
-        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR)
                 .layout(500, 200, false)
@@ -112,7 +112,7 @@ public class ChartsVBar extends AbstractComponentsChartsPage {
                 .axisTitles("Continent", "GDP")
                 .columnForColor("Country");
 
-        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR, Layout.BarMode.STACK)
                 .layout(500, 200, false)

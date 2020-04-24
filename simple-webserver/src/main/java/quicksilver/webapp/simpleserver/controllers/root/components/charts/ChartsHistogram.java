@@ -43,7 +43,7 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
         // Add Chart
         Table histogramTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(histogramTable)
                 .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
                 //.columnsForViewColumns("Country")

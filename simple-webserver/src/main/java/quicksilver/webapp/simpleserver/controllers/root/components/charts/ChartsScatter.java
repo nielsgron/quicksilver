@@ -43,7 +43,7 @@ public class ChartsScatter extends AbstractComponentsChartsPage {
         // Add Chart
         Table scatterTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(scatterTable)
                 .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
                 .columnsForViewColumns("Population")

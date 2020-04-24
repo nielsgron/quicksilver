@@ -53,7 +53,7 @@ public class ChartsOHLC extends AbstractComponentsChartsPage {
             ohlcTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
         }
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(ohlcTable)
                 .chartType(ChartBuilder.CHART_TYPE.OHLC)
                 .columnsForViewColumns("Date")

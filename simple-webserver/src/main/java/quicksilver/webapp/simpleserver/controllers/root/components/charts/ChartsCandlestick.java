@@ -53,7 +53,7 @@ public class ChartsCandlestick extends AbstractComponentsChartsPage {
             candleStickTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
         }
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(candleStickTable)
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
                 .columnsForViewColumns("Date")

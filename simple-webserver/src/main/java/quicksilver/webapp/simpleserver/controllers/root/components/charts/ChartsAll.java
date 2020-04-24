@@ -53,7 +53,7 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         // Add Horizontal Bar Chart
         Table hBarTable = economicTable;
 
-        ChartBuilder vbarChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder vbarChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(hBarTable)
                 .chartType(ChartBuilder.CHART_TYPE.VERTICAL_BAR, Layout.BarMode.STACK)
                 .layout(500, 200, false)
@@ -61,7 +61,7 @@ public class ChartsAll extends AbstractComponentsChartsPage {
                 .columnsForViewRows("GDP")
                 .columnForColor("Country")
                 ;
-        ChartBuilder hbarChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder hbarChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(hBarTable)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
                 .layout(500, 200, false)
@@ -81,14 +81,14 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         Table lineTable = economicTable;
         Table areaTable = economicTable;
 
-        ChartBuilder lineChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder lineChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(lineTable)
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
                 .layout(500, 200, false)
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
                 ;
-        ChartBuilder areaChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder areaChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(areaTable)
                 .chartType(ChartBuilder.CHART_TYPE.AREA)
                 .layout(500, 200, false)
@@ -108,14 +108,14 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         Table pieTable = economicTable;
         Table timeSeriesTable = stockPricesTable;
 
-        ChartBuilder pieChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder pieChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(pieTable)
                 .chartType(ChartBuilder.CHART_TYPE.PIE)
                 .layout(500, 200, false)
                 .columnsForViewColumns("Country")
                 .columnsForViewRows("GDP")
                 ;
-        ChartBuilder timeseriesChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder timeseriesChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(timeSeriesTable)
                 .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
                 .layout(500, 200, false)
@@ -142,7 +142,7 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         oldColumn.mapInto((Double p) -> { return p / 1000; }, newColumn);
         bubbleTable.replaceColumn(newColumn);
 
-        ChartBuilder scatterChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder scatterChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(scatterTable)
                 .chartType(ChartBuilder.CHART_TYPE.SCATTERPLOT)
                 .columnsForViewColumns("Population")
@@ -150,7 +150,7 @@ public class ChartsAll extends AbstractComponentsChartsPage {
                 .layout(500, 200, false)
                 .axisTitles("Population", "GDP")
                 ;
-        ChartBuilder bubbleChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder bubbleChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(bubbleTable)
                 .chartType(ChartBuilder.CHART_TYPE.BUBBLE)
                 .columnsForViewColumns("Population")
@@ -172,14 +172,14 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         Table histogramTable = economicTable;
         Table heatmapTable = stockEquitiesTable;
 
-        ChartBuilder histogramChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder histogramChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(histogramTable)
                 .chartType(ChartBuilder.CHART_TYPE.HISTOGRAM)
                 .layout(500, 200, false)
                 //.columnsForViewColumns("Country")
                 .columnsForViewRows("Population")
                 ;
-        ChartBuilder heatmapChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder heatmapChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(heatmapTable)
                 .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
                 .layout(500, 200, false)
@@ -199,14 +199,14 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         Table candleStickTable = stockPricesTable;
         Table ohlcTable = stockPricesTable;
 
-        ChartBuilder candlestickChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder candlestickChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(candleStickTable)
                 .chartType(ChartBuilder.CHART_TYPE.CANDLESTICK)
                 .layout(500, 200, false)
                 .columnsForViewColumns("Date")
                 .columnsForViewRows("Open", "High", "Low", "Close")
                 ;
-        ChartBuilder ohlcChartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder ohlcChartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(ohlcTable)
                 .chartType(ChartBuilder.CHART_TYPE.OHLC)
                 .layout(500, 200, false)
@@ -226,13 +226,13 @@ public class ChartsAll extends AbstractComponentsChartsPage {
         Table treemapTable = stockEquitiesTable;
         Table sunburstTable = stockEquitiesTable;
 
-        ChartBuilder treemapBuilder = ChartBuilder.createBuilder()
+        ChartBuilder treemapBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(treemapTable)
                 .chartType(ChartBuilder.CHART_TYPE.TREEMAP)
                 .columnsForViewColumns("Company", "Sector")
                 .layout(500, 200, false);
 
-        ChartBuilder sunburstBuilder = ChartBuilder.createBuilder()
+        ChartBuilder sunburstBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(sunburstTable)
                 .chartType(ChartBuilder.CHART_TYPE.SUNBURST)
                 .columnsForViewColumns("Company", "Sector")

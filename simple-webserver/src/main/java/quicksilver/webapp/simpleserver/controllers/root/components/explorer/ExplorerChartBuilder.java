@@ -6,8 +6,10 @@ import okhttp3.HttpUrl;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.charts.Chart;
 import tech.tablesaw.charts.ChartBuilder;
+import tech.tablesaw.charts.ChartBuilder.CHART_TYPE;
 import tech.tablesaw.charts.impl.plotly.PlotlyChartBuilder;
 import tech.tablesaw.plotly.components.Layout;
+import tech.tablesaw.plotly.event.EventHandler;
 
 /**
  * A dummy builder that just defers anything substantial to the Plotly builder
@@ -52,6 +54,27 @@ public class ExplorerChartBuilder extends ChartBuilder {
     public ChartBuilder columnForColor(String column) {
         builder.columnForColor(column);
         query.put("color", column);
+        return this;
+    }
+
+    @Override
+    public ChartBuilder columnsForLabels(String... columns) {
+        builder.columnsForLabels(columns);
+        query.put("labels", String.join(" ", columns));
+        return this;
+    }
+
+    @Override
+    public ChartBuilder columnForSize(String column) {
+        builder.columnForSize(column);
+        query.put("size", column);
+        return this;
+    }
+
+    @Override
+    public ChartBuilder eventHandler(EventHandler handler) {
+        builder.eventHandler(handler);
+        //no way to put this in query
         return this;
     }
 
