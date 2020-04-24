@@ -43,7 +43,7 @@ public class ChartsHeatmap extends AbstractComponentsChartsPage {
         // Add Chart
         Table heatmapTable = TSDataSetFactory.createSampleStockMarketEquities().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(heatmapTable)
                 .chartType(ChartBuilder.CHART_TYPE.HEATMAP)
                 .columnsForViewColumns("Company", "Sector")

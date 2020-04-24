@@ -43,7 +43,7 @@ public class ChartsPie extends AbstractComponentsChartsPage {
         // Add Chart
         Table pieTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(pieTable)
                 .chartType(ChartBuilder.CHART_TYPE.PIE)
                 .columnsForViewColumns("Country")

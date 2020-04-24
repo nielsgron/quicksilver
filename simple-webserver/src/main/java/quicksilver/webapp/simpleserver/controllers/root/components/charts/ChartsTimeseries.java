@@ -43,7 +43,7 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
         // Add Chart
         Table timeSeriesTable = TSDataSetFactory.createSampleStockPrices().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(timeSeriesTable)
                 .chartType(ChartBuilder.CHART_TYPE.TIMESERIES)
                 .columnsForViewColumns("Date")
