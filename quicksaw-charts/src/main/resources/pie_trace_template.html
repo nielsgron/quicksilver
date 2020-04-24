@@ -12,6 +12,9 @@ var {{variableName}} =
 {% if domain is not null %}
         domain: {{domain | raw}},
 {% endif %}
+{% if textinfo is not null %}
+        textinfo: '{{textinfo | raw}}',
+{% endif %}
         type: '{{type}}',
         name: '{{name}}',
  }

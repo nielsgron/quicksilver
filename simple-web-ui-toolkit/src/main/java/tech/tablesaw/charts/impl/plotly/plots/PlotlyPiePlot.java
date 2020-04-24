@@ -22,10 +22,8 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
             LOG.warn("Pie plot will only take into account the 1st view colum ({} received)", columnsForViewColumns.length);
         }
 
-        // TODO : columnForLabels -
         // TODO : columnForDetails -
         // TODO : columnForColor -
-        // TODO : columnForSize -
         if (individualAxes) {
             setFigures(Stream.of(columnsForViewRows)
                     .map(numberColName -> simpleFigure(table, groupColName, numberColName))
@@ -63,6 +61,17 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
                 builder.marker(Marker.builder()
                         .colors(traceColors)
                         .build());
+            }
+        }
+        if (columnsForLabels != null && columnsForLabels.length > 0) {
+            if (columnsForLabels.length > 1) {
+                LOG.warn("Plot will only take into account the 1st label colum ({} received)", columnsForLabels.length);
+            }
+            if (groupColName.equals(columnsForLabels[0])) {
+                //makes no sense to have another label column... but when it is set, show the label
+                builder.addTextInfo(PieTrace.TextInfo.LABEL);
+            } else {
+                LOG.warn("Plot will only ignore label colum unless it's the same as a view column");
             }
         }
 

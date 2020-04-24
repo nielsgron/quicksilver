@@ -19,6 +19,26 @@ public class PieTrace extends AbstractTrace {
   private final Object[] labels;
   private final Marker marker;
   private final Domain domain;
+  private final String textinfo;
+
+  public enum TextInfo {
+    NONE("none"),
+    LABEL("label"),
+    TEXT("text"),
+    VALUE("value"),
+    PERCENT("percent");
+
+    private final String value;
+
+    TextInfo(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return value;
+    }
+  }
 
   private PieTrace(PieBuilder builder) {
     super(builder);
@@ -26,6 +46,7 @@ public class PieTrace extends AbstractTrace {
     this.labels = builder.labels;
     this.marker = builder.marker;
     this.domain = builder.domain;
+    this.textinfo = builder.textinfo;
   }
 
   @Override
@@ -58,6 +79,9 @@ public class PieTrace extends AbstractTrace {
     if (domain != null) {
       context.put("domain", domain.asJavascript());
     }
+    if (textinfo != null) {
+      context.put("textinfo", textinfo);
+    }
     return context;
   }
 
@@ -76,10 +100,22 @@ public class PieTrace extends AbstractTrace {
     private final Object[] labels;
     private Marker marker;
     private Domain domain;
+    private String textinfo;
 
     private PieBuilder(Object[] labels, double[] values) {
       this.labels = labels;
       this.values = values;
+    }
+
+    public PieBuilder addTextInfo(TextInfo info) {
+      if(info == TextInfo.NONE) {
+        this.textinfo = info.toString();
+      } else if(this.textinfo == null) {
+        this.textinfo = info.toString();
+      } else {
+        this.textinfo = this.textinfo + "+" + info.toString();
+      }
+      return this;
     }
 
     public PieBuilder domain(Domain domain) {
