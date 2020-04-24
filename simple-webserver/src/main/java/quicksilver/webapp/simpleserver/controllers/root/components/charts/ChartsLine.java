@@ -43,7 +43,7 @@ public class ChartsLine extends AbstractComponentsChartsPage {
         // Add Chart
         Table lineTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(lineTable)
                 .chartType(ChartBuilder.CHART_TYPE.LINE)
                 .columnsForViewColumns("Country")

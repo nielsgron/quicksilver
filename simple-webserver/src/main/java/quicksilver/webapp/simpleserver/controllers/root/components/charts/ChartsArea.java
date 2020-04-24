@@ -43,7 +43,7 @@ public class ChartsArea extends AbstractComponentsChartsPage {
         // Add Chart
         Table areaTable = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(areaTable)
                 .chartType(ChartBuilder.CHART_TYPE.AREA)
                 .columnsForViewColumns("Country")

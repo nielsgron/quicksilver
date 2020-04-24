@@ -18,9 +18,7 @@ public class PlotlyCandlestickPlot extends PlotlyAbstractPlot {
         String lowCol = columnsForViewRows[2];
         String closeCol = columnsForViewRows[3];
 
-        // TODO : columnForLabels -
         // TODO : columnForDetails -
-        // TODO : columnForSize -
 
         ScatterTrace.ScatterBuilder builder =
                 ScatterTrace.builder(

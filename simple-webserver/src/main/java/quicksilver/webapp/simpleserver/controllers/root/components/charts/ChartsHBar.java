@@ -46,7 +46,7 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
         //Table table = Charts.createPieDataSet(true);
         Table table = TSDataSetFactory.createSampleCountryEconomicData().getTSTable();
 
-        ChartBuilder chartBuilder = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilder = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
                 .columnsForViewColumns("Country")
@@ -92,7 +92,7 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                     "Country Population")
         );
 
-        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilderPerContinent = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR)
                 .layout(500, 200, false)
@@ -101,7 +101,7 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                 .axisTitles("GDP", "Continent")
                 .columnForColor("Country");
 
-        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder()
+        ChartBuilder chartBuilderPerContinentStacked = ChartBuilder.createBuilder(ChartBuilder.CHART_RENDERER.EXPLORER)
                 .dataTable(table)
                 .chartType(ChartBuilder.CHART_TYPE.HORIZONTAL_BAR, Layout.BarMode.STACK)
                 .layout(500, 200, false)
