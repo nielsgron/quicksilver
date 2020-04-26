@@ -47,31 +47,7 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
         ScatterTrace[] traces = new ScatterTrace[tableList.size()];
         for (int i = 0; i < tableList.size(); i++) {
 
-            String[] colors = null;
-            if (columnForColor != null) {
-
-                if (tableList.get(i).column(columnForColor).type() != ColumnType.STRING) {
-                    LOG.warn("Numeric color columns not supported yet");
-                } else {
-                    StringColumn colorCol = tableList.get(i).stringColumn(columnForColor);
-
-                    StringColumn uniqueColors = colorCol.unique();
-
-                    //TODO: Here a random sample of colors is picked. Smarter algorithms could pick a better palette based on proximity, etc.
-                    Table cssColors = TSDataSetFactory.createCSSColorsTable().getTSTable().sampleN(uniqueColors.size());
-                    StringColumn cssColorName = cssColors.stringColumn("Color");
-
-                    //create a mapping between column values and a color
-                    Map<String, String> colorMapping = new HashMap<>();
-                    for (int k = 0; k < uniqueColors.size(); k++) {
-                        colorMapping.put(uniqueColors.get(k), cssColorName.get(k));
-                    }
-
-                    StringColumn mappedColors = colorCol.map(colorMapping::get);
-
-                    colors = mappedColors.asObjectArray();
-                }
-            }
+            String[] colors = getColors(tableList.get(i), columnForColor);
 
             Marker.MarkerBuilder markerBuilder =
                     Marker.builder()
@@ -103,6 +79,34 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
         }
 
         setFigure( new Figure(layout, config, traces) );
+    }
+
+    private static String[] getColors(Table t, String columnForColor) {
+        if (columnForColor != null) {
+
+            if (t.column(columnForColor).type() != ColumnType.STRING) {
+                LOG.warn("Numeric color columns not supported yet");
+            } else {
+                StringColumn colorCol = t.stringColumn(columnForColor);
+
+                StringColumn uniqueColors = colorCol.unique();
+
+                //TODO: Here a random sample of colors is picked. Smarter algorithms could pick a better palette based on proximity, etc.
+                Table cssColors = TSDataSetFactory.createCSSColorsTable().getTSTable().sampleN(uniqueColors.size());
+                StringColumn cssColorName = cssColors.stringColumn("Color");
+
+                //create a mapping between column values and a color
+                Map<String, String> colorMapping = new HashMap<>();
+                for (int k = 0; k < uniqueColors.size(); k++) {
+                    colorMapping.put(uniqueColors.get(k), cssColorName.get(k));
+                }
+
+                StringColumn mappedColors = colorCol.map(colorMapping::get);
+
+                return mappedColors.asObjectArray();
+            }
+        }
+        return null;
     }
 
     public PlotlyBubblePlot(ChartBuilder chartBuilder) {
