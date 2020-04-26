@@ -23,7 +23,6 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
         }
 
         // TODO : columnForDetails -
-        // TODO : columnForColor -
         if (individualAxes) {
             setFigures(Stream.of(columnsForViewRows)
                     .map(numberColName -> simpleFigure(table, groupColName, numberColName))
@@ -62,6 +61,10 @@ public class PlotlyPiePlot extends PlotlyAbstractPlot {
                         .colors(traceColors)
                         .build());
             }
+        } else {
+            builder.marker(Marker.builder()
+                    .colors(PlotlyBubblePlot.getColors(table, columnForColor))
+                    .build());
         }
         if (columnsForLabels != null && columnsForLabels.length > 0) {
             if (columnsForLabels.length > 1) {
