@@ -81,7 +81,7 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
         setFigure( new Figure(layout, config, traces) );
     }
 
-    private static String[] getColors(Table t, String columnForColor) {
+    static String[] getColors(Table t, String columnForColor) {
         if (columnForColor != null) {
 
             if (t.column(columnForColor).type() != ColumnType.STRING) {
@@ -92,13 +92,14 @@ public class PlotlyBubblePlot extends PlotlyAbstractPlot {
                 StringColumn uniqueColors = colorCol.unique();
 
                 //TODO: Here a random sample of colors is picked. Smarter algorithms could pick a better palette based on proximity, etc.
-                Table cssColors = TSDataSetFactory.createCSSColorsTable().getTSTable().sampleN(uniqueColors.size());
+                Table cssColorsTable = TSDataSetFactory.createCSSColorsTable().getTSTable();
+                Table cssColors = cssColorsTable.sampleN(Math.min(cssColorsTable.rowCount(), uniqueColors.size()));
                 StringColumn cssColorName = cssColors.stringColumn("Color");
 
                 //create a mapping between column values and a color
                 Map<String, String> colorMapping = new HashMap<>();
                 for (int k = 0; k < uniqueColors.size(); k++) {
-                    colorMapping.put(uniqueColors.get(k), cssColorName.get(k));
+                    colorMapping.put(uniqueColors.get(k), cssColorName.get(k % cssColorName.size()));
                 }
 
                 StringColumn mappedColors = colorCol.map(colorMapping::get);
