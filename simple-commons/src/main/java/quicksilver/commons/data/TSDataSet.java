@@ -106,7 +106,8 @@ public class TSDataSet implements DataSet {
             Object val = row[i];
             Column col = table.column(i);
             if ( val == null ) {
-                col.appendCell("[NULL]");
+                //col.appendCell("[NULL]");
+                col.appendCell(null);
             } else {
                 //col.appendCell(val.toString());
                 col.appendObj(val);

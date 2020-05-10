@@ -22,6 +22,8 @@ public abstract class DatabaseOperation {
 
     private DatabaseConnection dbConnection;
 
+    public int recordCount;
+
     public DatabaseOperation(DatabaseConnection dbConnection) {
         this.dbConnection = dbConnection;
     }

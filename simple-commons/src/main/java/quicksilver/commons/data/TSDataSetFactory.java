@@ -68,6 +68,25 @@ public class TSDataSetFactory {
                         .build());
     }
 
+    public static TSDataSet createDataSetFromSELECTParams(Connection dbConnection, String columnNames, String tableName, String whereClause, String groupBy, String orderBy ) {
+
+        StringBuilder query = new StringBuilder();
+
+        query.append("SELECT ").append(columnNames).append(" ");
+        query.append("FROM ").append(tableName).append(" ");
+        if ( whereClause != null ) {
+            query.append("WHERE ").append(whereClause).append(" ");
+        }
+        if ( groupBy != null ) {
+            query.append("GROUP BY ").append(groupBy).append(" ");
+        }
+        if ( orderBy != null ) {
+            query.append("ORDER BY ").append(orderBy).append(" ");
+        }
+
+        return createDataSetFromQuery(dbConnection, query.toString());
+    }
+
     public static TSDataSet createDataSetFromQuery(Connection dbConnection, String query, Object... params ) {
 
         ResultSetHandler<TSDataSet> h = new ResultSetHandler<TSDataSet>() {

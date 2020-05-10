@@ -21,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import quicksilver.commons.config.*;
 import quicksilver.commons.db.DatabaseConnection;
+import quicksilver.commons.db.MyDatabaseConnection;
 import quicksilver.commons.email.EmailService;
 import quicksilver.commons.i18n.I18N;
 import quicksilver.commons.scheduler.SchedulerService;
@@ -193,7 +194,7 @@ public class SimpleApplication {
         throws SQLException {
 
         // Create Database Connection
-        dbConnection = new DatabaseConnection(
+        dbConnection = new MyDatabaseConnection(
                 configDatabase.getHost(null),
                 configDatabase.getPort(null),
                 configDatabase.getDatabase(null),

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class QuickBodyPanel extends BSPanel {
 
     private QuickSidebar sideBar;
-    private ArrayList<BSComponent> components = new ArrayList<BSComponent>();
+    private ArrayList<HTMLComponent> components = new ArrayList<HTMLComponent>();
 
     public QuickBodyPanel() {
 
@@ -66,7 +66,7 @@ public class QuickBodyPanel extends BSPanel {
         return sideBar;
     }
 
-    public void addRowsOfComponents(BSComponent... components) {
+    public void addRowsOfComponents(HTMLComponent... components) {
 
         for ( int j = 0; j < components.length; j++ ) {
             this.components.add(components[j]);
