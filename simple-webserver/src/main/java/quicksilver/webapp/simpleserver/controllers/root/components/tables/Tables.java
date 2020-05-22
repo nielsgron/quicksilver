@@ -67,8 +67,6 @@ public class Tables extends AbstractComponentsTablesPage {
 
         body.addRowOfColumns( new BSCard( bsTable, "MSFT - Stock Prices"));
 
-        body.doLayout();
-
         BSPanel panel = new BSPanel();
         panel.add(new HTMLLineBreak(1));
         panel.add(body);

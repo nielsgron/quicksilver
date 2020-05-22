@@ -112,8 +112,6 @@ public class ChartsCalHeatmap extends AbstractComponentsChartsPage {
                         "Narrow Chart")
         );
 
-        body.doLayout();
-
         BSPanel panel = new BSPanel();
         panel.add(new HTMLLineBreak(1));
         panel.add(body);

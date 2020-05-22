@@ -89,8 +89,6 @@ public class ChartsTimeseries extends AbstractComponentsChartsPage {
                         "Timeseries Chart")
         );
 
-        body.doLayout();
-
         BSPanel panel = new BSPanel();
         panel.add(new HTMLLineBreak(1));
         panel.add(body);

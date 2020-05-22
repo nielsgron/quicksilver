@@ -67,8 +67,8 @@ public abstract class HTMLComponent {
 
     public void render(HtmlStream stream) {
 
-        // Call this to tell the implementing component to build the attributes for rendering
-        defineAttributes();
+        // Call this to tell the implementing component to build the attributes and layout component for rendering
+        validate();
 
         Boolean eol = (Boolean)componentAttributes.get(COMPONENT_ATTRIB_END_WITH_LINEBREAK);
 
@@ -107,6 +107,31 @@ public abstract class HTMLComponent {
 
         }
 
+    }
+
+    private boolean valid = false;
+
+    protected void doLayout() {
+
+    }
+
+    public void validate() {
+
+        boolean wasValid = isValid();
+        if ( !wasValid ) {
+            defineAttributes();
+            doLayout();
+        }
+        valid = true;
+
+    }
+
+    public void invalidate() {
+        valid = false;
+    }
+
+    public boolean isValid() {
+        return valid;
     }
 
 }

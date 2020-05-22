@@ -25,6 +25,7 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSColumn extends BSComponentContainer {
 
+    private String textAlign = null;
     private int prop_columnWeight = -1;
 
     public BSColumn() {
@@ -40,9 +41,17 @@ public class BSColumn extends BSComponentContainer {
         if ( prop_columnWeight <= 0 || prop_columnWeight > 12 ) {
             addTagAttribute("class", "column");
         } else {
-            addTagAttribute("class", "col-md-" + prop_columnWeight);
+            addTagAttribute("class", "col-md-" + prop_columnWeight );
         }
 
+        if ( textAlign != null ) {
+            addTagAttribute("style", "text-align: " + textAlign + ";");
+        }
+
+    }
+
+    public void setTextAlign(String align) {
+        this.textAlign = align;
     }
 
     public void setColumnWeight(int columnWeight) {

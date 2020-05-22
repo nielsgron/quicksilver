@@ -21,6 +21,8 @@ import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
 public class BSContainer extends BSComponentContainer {
 
+    private static String padding = "padding: 1px 1px 1px 1px;";
+
     private boolean isFluid = false;
     private int nRows = 0;
     private int nColumns = 0;
@@ -58,7 +60,12 @@ public class BSContainer extends BSComponentContainer {
                 stream.write("<div class=\"container");
             }
 
-            stream.writeln("\">");
+            stream.writeln("\"");
+
+            stream.write(" style=\"" + padding + "\"");
+
+            stream.writeln(" >");
+
             // Render all the BSRow children
             super.renderBody(stream);
             stream.writeln("</div>");

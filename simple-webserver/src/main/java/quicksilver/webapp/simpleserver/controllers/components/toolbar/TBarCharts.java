@@ -48,7 +48,7 @@ public class TBarCharts  extends BSButtonToolbar {
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
-        b = new QuickButton("Heatmap", "/components/charts/heatmap", false);
+        b = new QuickButton("Heat", "/components/charts/heatmap", false);
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
@@ -68,7 +68,7 @@ public class TBarCharts  extends BSButtonToolbar {
         b.setSize(Size.SMALL);
         addAsGroup(b);
 
-        b = new QuickButton("Cal-Heatmap", "/components/charts/calheatmap", false);
+        b = new QuickButton("Cal-Heat", "/components/charts/calheatmap", false);
         b.setSize(Size.SMALL);
         addAsGroup(b);
 

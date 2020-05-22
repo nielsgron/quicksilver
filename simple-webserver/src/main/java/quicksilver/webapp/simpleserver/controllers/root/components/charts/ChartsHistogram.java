@@ -89,8 +89,6 @@ public class ChartsHistogram extends AbstractComponentsChartsPage {
                         "Histogram Chart")
         );
 
-        body.doLayout();
-
         BSPanel panel = new BSPanel();
         panel.add(new HTMLLineBreak(1));
         panel.add(body);

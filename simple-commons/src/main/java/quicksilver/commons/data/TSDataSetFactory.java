@@ -151,6 +151,48 @@ public class TSDataSetFactory {
         return dataSet;
     }
 
+    public static TSDataSet createDataSetFromDBMetaData(Connection dbConnection, String databaseName, String tableName) {
+
+        TSDataSet dataSet = null;
+
+        IntColumn indexColumn = IntColumn.create("Index");
+        StringColumn nameColumn = StringColumn.create("Column Name");
+        StringColumn columnTypeColumn = StringColumn.create("Column Type");
+        IntColumn sizeColumn = IntColumn.create("Size");
+        StringColumn nullableColumn = StringColumn.create("Nullable");
+
+        Column[] colObjects = new Column[] { indexColumn, nameColumn, columnTypeColumn, sizeColumn, nullableColumn } ;
+        String[] colNames = new String[] { "Index", "Column Name", "Column Type", "Size", "Nullable" };
+        Class[] colTypes = new Class[] { Integer.class, String.class, String.class, Integer.class, String.class };
+
+        try {
+
+            DatabaseMetaData dbMetaData = dbConnection.getMetaData();
+
+            ResultSet rs = dbMetaData.getColumns(databaseName.toUpperCase(), null, tableName.toUpperCase(), null);
+//            dataSet = TSDataSetFactory.createDataSetFromResultSet(rs);
+
+            int rowCount = 0;
+            while ( rs.next() ) {
+                indexColumn.append(rowCount);
+                nameColumn.append(rs.getString("COLUMN_NAME"));
+                columnTypeColumn.append(rs.getString("TYPE_NAME"));
+                sizeColumn.append(rs.getInt("COLUMN_SIZE"));
+                nullableColumn.append(rs.getString("IS_NULLABLE"));
+
+                rowCount++;
+            }
+
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+
+        TSDataSetMeta meta = new TSDataSetMeta(colObjects, colNames, colTypes);
+        dataSet = new TSDataSet(meta);
+
+        return dataSet;
+    }
+
     public static Column createColumnByJDBCType(int type, String colName) {
 
         ColumnType colType = SQL_TYPE_TO_TABLESAW_TYPE.get(type);

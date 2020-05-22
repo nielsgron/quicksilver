@@ -17,10 +17,8 @@
 package quicksilver.webapp.simpleui.bootstrap4.layouts;
 
 import quicksilver.webapp.simpleui.HtmlStream;
+import quicksilver.webapp.simpleui.bootstrap4.components.*;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSContainer;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSRow;
 
 import java.util.HashMap;
 
@@ -34,6 +32,7 @@ public class BSBorderLayout implements BSLayoutManager {
 
     private BSContainer childrenContainer = new BSContainer(false,0,0);
 
+    private HashMap<String, String> quadrantColumnTextAlign = new HashMap<String, String>();
     private HashMap<String, Integer> quadrantColumnWidth = new HashMap<String, Integer>();
 
     public BSBorderLayout() {
@@ -52,6 +51,7 @@ public class BSBorderLayout implements BSLayoutManager {
         if ( getNorthPanel(false) != null ) {
             ((BSRow)(container.add(new BSRow(1)))).getColumn(0).add(getNorthPanel(false));
             container.getRow(container.getChildrenCount()-1 ).getColumn(0).setColumnWeight(getQuadrantColumnWidth(NORTH, 12));
+            setQuadrantTextAlign(NORTH, container.getRow(container.getChildrenCount()-1 ).getColumn(0));
         }
 
         // CENTER
@@ -85,6 +85,7 @@ public class BSBorderLayout implements BSLayoutManager {
                         row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(WEST, 2));
                     }
                 }
+                setQuadrantTextAlign(WEST, row.getColumn(columnPos));
                 columnPos++;
             }
             if ( center != null ) {
@@ -96,6 +97,7 @@ public class BSBorderLayout implements BSLayoutManager {
                 } else {
                     row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(CENTER, 8));
                 }
+                setQuadrantTextAlign(CENTER, row.getColumn(columnPos));
                 columnPos++;
             }
             if ( east != null ) {
@@ -109,6 +111,7 @@ public class BSBorderLayout implements BSLayoutManager {
                         row.getColumn(columnPos).setColumnWeight(getQuadrantColumnWidth(EAST, 2));
                     }
                 }
+                setQuadrantTextAlign(EAST, row.getColumn(columnPos));
                 columnPos++;
             }
 
@@ -118,9 +121,20 @@ public class BSBorderLayout implements BSLayoutManager {
         if ( getSouthPanel(false) != null ) {
             ((BSRow)(container.add(new BSRow(1)))).getColumn(0).add(getSouthPanel(false));
             container.getRow(container.getChildrenCount()-1 ).getColumn(0).setColumnWeight(getQuadrantColumnWidth(SOUTH, 12));
+            setQuadrantTextAlign(SOUTH, container.getRow(container.getChildrenCount()-1 ).getColumn(0));
         }
 
         container.render(stream);
+    }
+
+    public void setQuadrantTextAlign(String quadrantName, String alignment /* left, center, right */) {
+        quadrantColumnTextAlign.put(quadrantName, alignment);
+    }
+    private void setQuadrantTextAlign(String quadrantName, BSColumn column) {
+        String textAlign = quadrantColumnTextAlign.get(quadrantName);
+        if ( textAlign != null ) {
+            column.setTextAlign(textAlign);
+        }
     }
 
     public void setQuadrantColumnWidth(String quadrantName, int columnWidth) {
@@ -162,48 +176,73 @@ public class BSBorderLayout implements BSLayoutManager {
     }
 
     private BSPanel getNorthPanel(boolean createIfDoesNotExist) {
-        BSPanel panel = (BSPanel)childrenContainer.getRow(0).getColumn(0).get(0);
+        BSPanel panel = (BSPanel)getNorthCell().get(0);
         if ( panel == null && createIfDoesNotExist ) {
             panel = new BSPanel();
-            childrenContainer.getRow(0).getColumn(0).add(panel);
+            getNorthCell().add(panel);
         }
         return panel;
     }
 
     private BSPanel getSouthPanel(boolean createIfDoesNotExist) {
-        BSPanel panel = (BSPanel)childrenContainer.getRow(2).getColumn(0).get(0);
+        BSPanel panel = (BSPanel)getSouthCell().get(0);
         if ( panel == null && createIfDoesNotExist ) {
             panel = new BSPanel();
-            childrenContainer.getRow(2).getColumn(0).add(panel);
+            getSouthCell().add(panel);
         }
         return panel;
     }
 
     private BSPanel getWestPanel(boolean createIfDoesNotExist) {
-        BSPanel panel = (BSPanel)childrenContainer.getRow(1).getColumn(0).get(0);
+        BSPanel panel = (BSPanel)getWestCell().get(0);
         if ( panel == null && createIfDoesNotExist ) {
             panel = new BSPanel();
-            childrenContainer.getRow(1).getColumn(0).add(panel);
+            getWestCell().add(panel);
         }
         return panel;
     }
 
     private BSPanel getEastPanel(boolean createIfDoesNotExist) {
-        BSPanel panel = (BSPanel)childrenContainer.getRow(1).getColumn(2).get(0);
+        BSPanel panel = (BSPanel)getEastCell().get(0);
         if ( panel == null && createIfDoesNotExist ) {
             panel = new BSPanel();
-            childrenContainer.getRow(1).getColumn(2).add(panel);
+            getEastCell().add(panel);
         }
         return panel;
     }
 
     private BSPanel getCenterPanel(boolean createIfDoesNotExist) {
-        BSPanel panel = (BSPanel)childrenContainer.getRow(1).getColumn(1).get(0);
+        BSPanel panel = (BSPanel)getCenterCell().get(0);
         if ( panel == null && createIfDoesNotExist ) {
             panel = new BSPanel();
-            childrenContainer.getRow(1).getColumn(1).add(panel);
+            getCenterCell().add(panel);
         }
         return panel;
+    }
+
+    private BSColumn getNorthCell() {
+        BSColumn column = childrenContainer.getRow(0).getColumn(0);
+        return column;
+    }
+
+    private BSColumn getSouthCell() {
+        BSColumn column = childrenContainer.getRow(2).getColumn(0);
+        return column;
+    }
+
+    private BSColumn getWestCell() {
+        BSColumn column = childrenContainer.getRow(1).getColumn(0);
+        return column;
+    }
+
+    private BSColumn getEastCell() {
+        BSColumn column = childrenContainer.getRow(1).getColumn(2);
+        return column;
+    }
+
+    private BSColumn getCenterCell() {
+        BSColumn column = childrenContainer.getRow(1).getColumn(1);
+        return column;
     }
 
     public static BSPanel createBorderPanel(HTMLComponent left, HTMLComponent right, HTMLComponent top, HTMLComponent bottom, HTMLComponent center) {

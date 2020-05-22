@@ -27,6 +27,10 @@ public class HtmlPage {
     }
 
     public void render(HtmlStream stream) {
+
+        // Call this to tell the implementing page to layout the page for rendering
+        validate();
+
         renderHTMLOpen(stream);
 
         renderHEADOpen(stream);
@@ -65,6 +69,30 @@ public class HtmlPage {
     }
     public void renderBODY(HtmlStream stream) {
         stream.writeln("");
+    }
+
+    private boolean valid = false;
+
+    public void doLayout() {
+
+    }
+
+    public void validate() {
+
+        boolean wasValid = isValid();
+        if ( !wasValid ) {
+            doLayout();
+        }
+        valid = true;
+
+    }
+
+    public void invalidate() {
+        valid = false;
+    }
+
+    public boolean isValid() {
+        return valid;
     }
 
 }

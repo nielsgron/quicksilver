@@ -32,12 +32,24 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
     Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/button-group/
  */
 
+import quicksilver.webapp.simpleui.bootstrap4.layouts.BSBorderLayout;
+import quicksilver.webapp.simpleui.bootstrap4.layouts.BSLayoutManager;
+import quicksilver.webapp.simpleui.bootstrap4.quick.QuickButton;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 
+import java.awt.*;
+
 public class BSButtonToolbar extends BSComponentContainer {
 
+    private BSPanel tailPanel = new BSPanel();
+
+    Panel p;
+
     public BSButtonToolbar() {
+
+        BSBorderLayout layout = new BSBorderLayout();
+        setLayout(layout);
 
     }
 
@@ -49,6 +61,29 @@ public class BSButtonToolbar extends BSComponentContainer {
 
         addTagAttribute("class", "btn-toolbar");
         addTagAttribute("role", "toolbar");
+
+    }
+
+    protected void doLayout() {
+
+        if ( tailPanel.getChildrenCount() > 0 ) {
+            BSBorderLayout layout = (BSBorderLayout) getLayout();
+            layout.setQuadrantColumnWidth(BSBorderLayout.EAST, 4);
+            layout.setQuadrantColumnWidth(BSBorderLayout.CENTER, 8);
+            layout.setQuadrantTextAlign(BSBorderLayout.EAST, "right");
+
+            add(tailPanel, BSBorderLayout.EAST);
+        }
+
+    }
+
+    public void addAsGroupToTail(BSButton ...buttons) {
+
+        BSButtonGroup g = new BSButtonGroup();
+        for (BSButton b: buttons) {
+            g.add(b);
+        }
+        tailPanel.add(g);
 
     }
 

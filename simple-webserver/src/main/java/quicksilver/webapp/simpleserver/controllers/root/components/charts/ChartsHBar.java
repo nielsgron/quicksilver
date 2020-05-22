@@ -117,8 +117,6 @@ public class ChartsHBar extends AbstractComponentsChartsPage {
                         "Country GDP (Nominal)")
         );
 
-        body.doLayout();
-
         BSPanel panel = new BSPanel();
         panel.add(new HTMLLineBreak(1));
         panel.add(body);

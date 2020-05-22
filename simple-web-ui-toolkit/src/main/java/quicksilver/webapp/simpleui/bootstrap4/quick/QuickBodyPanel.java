@@ -86,7 +86,7 @@ public class QuickBodyPanel extends BSPanel {
 
     }
 
-    public void doLayout() {
+    protected void doLayout() {
 
         if ( sideBar != null ) {
 

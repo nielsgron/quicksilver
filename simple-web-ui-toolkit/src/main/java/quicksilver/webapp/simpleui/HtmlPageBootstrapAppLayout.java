@@ -47,6 +47,10 @@ public abstract class HtmlPageBootstrapAppLayout extends HtmlPageBootstrap {
         return panel;
     }
 
+    public void doLayout() {
+
+    }
+
     protected BSPanel createContentPanelTop() {
         return null;
     }
