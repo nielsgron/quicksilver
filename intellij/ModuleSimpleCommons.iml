@@ -12,14 +12,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-core:0.38.1" level="project" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-beakerx:0.38.1" level="project" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-aggregate:0.38.1" level="project" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-saw:0.38.1" level="project" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-html:0.38.1" level="project" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-json:0.38.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.10.3" level="project" />
-    <orderEntry type="library" name="Maven: tech.tablesaw:tablesaw-excel:0.38.1" level="project" />
     <orderEntry type="module" module-name="ModuleQuicksawCharts" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.2" level="project" />
