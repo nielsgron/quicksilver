@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/forms/#range'>Bootstrap forms</a>
+ */
 public class BSInputRange extends BSInput {
 
     public BSInputRange(String placeholder) {
