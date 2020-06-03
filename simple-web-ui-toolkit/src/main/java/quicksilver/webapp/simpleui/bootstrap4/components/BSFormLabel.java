@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/**
+ * @deprecated Use BSCheckLabel
+ */
+@Deprecated
 public class BSFormLabel extends BSComponentContainer {
 
     private String labelString;
@@ -27,6 +31,7 @@ public class BSFormLabel extends BSComponentContainer {
         add(new BSText(labelString));
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Label");
@@ -38,6 +43,7 @@ public class BSFormLabel extends BSComponentContainer {
 
     }
 
+    @Override
     protected String getClassNames() {
         StringBuilder cNames = new StringBuilder();
 
