@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ public class BSInputFile extends BSInput {
 
     @Override
     protected String getClassNames() {
-        return "custom-file-input";
+        //XXX: We could also do `custom-file-input` but then it needs to be wrapped in a div and have a label with `custom-file-label`
+        return "form-control-file";
     }
 
 }
