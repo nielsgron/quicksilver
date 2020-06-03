@@ -25,13 +25,19 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSSelect extends BSComponentContainer {
 
-    private boolean isMultiple;
+    private final boolean isMultiple;
+    private final String id;
 
     public BSSelect() {
-        this.isMultiple = false;
+        this(null, false);
     }
 
     public BSSelect(boolean isMultiple) {
+        this(null, isMultiple);
+    }
+
+    public BSSelect(String id, boolean isMultiple) {
+        this.id = id;
         this.isMultiple = isMultiple;
     }
 
@@ -47,6 +53,12 @@ public class BSSelect extends BSComponentContainer {
         }
 
         addTagAttribute("class", getClassNames());
+
+        if (id != null) {
+            addTagAttribute("id", id);
+            //TODO: perhaps allow user to set another name?
+            addTagAttribute("name", id);
+        }
 
     }
 

@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>quicksilver-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

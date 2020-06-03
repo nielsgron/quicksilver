@@ -261,14 +261,7 @@ public class Explorer2 extends AbstractComponentsPage {
 
 
         // Build DataSet List
-        BSSelect dataSetList = new BSSelect(true) {
-            {
-                this.addTagAttribute("name", "dataset");
-            }
-        };
-        for ( int i = 0; i < datasets.length; i++ ) {
-            dataSetList.add(new BSSelectOption(datasets[i]));
-        }
+        BSSelect dataSetList = createBSSelect("dataset", datasets, query);
 
         // Build Dimension & Measure List
 
@@ -322,8 +315,8 @@ public class Explorer2 extends AbstractComponentsPage {
         chartPropertiesPanel.setLayout(new BSFlowLayout(BSComponent.Alignment.VERTICAL));
         {
             chartPropertiesPanel.add(new BSText("<b>Chart</b>:"));
-            chartPropertiesPanel.add(new BSInputSelect("chartType", false,
-                    Stream.of(ChartBuilder.CHART_TYPE.values()).map(t -> t.name()).toArray(String[]::new)));
+            BSSelect chartType = createBSSelect("chartType", Stream.of(ChartBuilder.CHART_TYPE.values()).map(t -> t.name()).toArray(String[]::new), query);
+            chartPropertiesPanel.add(chartType);
 
             chartPropertiesPanel.add(new BSText("<b>Options</b>:"));
             BSInputText optionsInput;
@@ -361,14 +354,8 @@ public class Explorer2 extends AbstractComponentsPage {
         }
         {
             chartPropertiesPanel.add(new BSText("<b>Axes</b>:"));
-            BSInputSelect axes;
-            chartPropertiesPanel.add(axes = new BSInputSelect("axes", false,
-                    Stream.of(ChartBuilder.Axes.values()).map(t -> t.name()).toArray(String[]::new)));
-
-            if (query != null && query.hasKey("axes")) {
-                //TODO: restore axes type selection
-                //axes.setValue(query.get("axes").value());
-            }
+            BSSelect axes = createBSSelect("axes", Stream.of(ChartBuilder.Axes.values()).map(t -> t.name()).toArray(String[]::new), query);
+            chartPropertiesPanel.add(axes);
 
             chartPropertiesPanel.add(new BSText("<b>Labels</b>:"));
             BSInputText labels;
@@ -460,5 +447,16 @@ public class Explorer2 extends AbstractComponentsPage {
         das = das.substring(1); //remove first '['
         das = das.substring(0, das.length() - 1); //remove last '['
         return das;
+    }
+
+    private BSSelect createBSSelect(String name, String[] values, QueryParamsMap query) {
+        String existingSelection = (query != null && query.hasKey(name)) ? query.get(name).value() : null;
+
+        BSSelect select = new BSSelect(name, false);
+        for (String v : values) {
+            select.add(new BSSelectOption(v, v.equals(existingSelection)));
+        }
+
+        return select;
     }
 }
