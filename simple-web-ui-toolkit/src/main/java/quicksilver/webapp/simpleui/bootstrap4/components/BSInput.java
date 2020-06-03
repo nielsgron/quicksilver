@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ public abstract class BSInput extends BSComponent {
     private String input_aria_label;
     private String input_aria_describedby;
     private String input_id;
+    protected boolean readonly;
 
     public BSInput(String type) {
         this(type, null);
@@ -72,6 +73,17 @@ public abstract class BSInput extends BSComponent {
             addTagAttribute("name", input_id);
         }
 
+        if (readonly) {
+            addTagAttribute("readonly", null);
+        }
+    }
+
+    public void setReadOnly(boolean readonly) {
+        this.readonly = readonly;
+    }
+
+    public boolean isReadOnly() {
+        return readonly;
     }
 
     public void setValue(String v) {

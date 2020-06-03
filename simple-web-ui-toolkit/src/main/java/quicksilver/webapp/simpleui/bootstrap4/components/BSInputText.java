@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,13 @@ public class BSInputText extends BSInput {
 
     @Override
     protected String getClassNames() {
-        return "form-control";
+        StringBuilder classes = new StringBuilder();
+        classes.append("form-control");
+
+        if (getSize() != Size.NORMAL) {
+            classes.append(" form-control-").append(getSize().getSizeName());
+        }
+        return classes.toString();
     }
 
 }
