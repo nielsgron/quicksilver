@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,11 @@ import quicksilver.webapp.simpleui.HtmlStream;
 public class BSNavbar extends BSComponentContainer {
 
     private boolean isFluid = false;
-    private String navBarBrand;
+    private BSNavbarBrand navBarBrand;
 
     public BSNavbar(boolean bFluid, String brand) {
         isFluid = bFluid;
-        navBarBrand = brand;
+        navBarBrand = new BSNavbarBrand("/", brand);
     }
 
     public void setActiveItem(String name) {
@@ -87,7 +87,7 @@ public class BSNavbar extends BSComponentContainer {
 
     private void renderHeader(HtmlStream stream) {
         //stream.writeln("<div class=\"navbar-header\">");
-        stream.writeln("<a class=\"navbar-brand\" href=\"/\">" + navBarBrand + "</a>");
+        navBarBrand.render(stream);
         //stream.writeln("<div>");
     }
 

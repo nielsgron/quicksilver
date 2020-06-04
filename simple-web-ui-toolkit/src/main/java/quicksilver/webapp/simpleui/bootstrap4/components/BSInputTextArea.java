@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/**
+ * @see <a href='https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp'>W3Schools</a>
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/forms/'>Bootstrap Docs</a>
+ */
 public class BSInputTextArea extends BSComponent {
 
     private String id;
@@ -26,6 +30,7 @@ public class BSInputTextArea extends BSComponent {
         this.rows = rows;
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "TextArea");
@@ -38,6 +43,7 @@ public class BSInputTextArea extends BSComponent {
 
     }
 
+    @Override
     protected String getClassNames() {
         StringBuilder cNames = new StringBuilder();
 

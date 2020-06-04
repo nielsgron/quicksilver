@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,13 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-/*
-    Example :
-
-      <label class="sr-only" for="inlineFormInputGroup">Username</label>
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-      </div>
-
-    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp
-    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/forms/#help-text
+/**
+ * Example:
+ * <pre>
+ *  &lt;small id="helpId" class="form-text text-muted"&gt;...&lt;small&gt;
+ * </pre>
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/forms/#help-text'>Bootstrap Forms</a>
  */
-
 public class BSInputHelpText extends BSComponentContainer {
 
     private String text;
@@ -48,6 +40,15 @@ public class BSInputHelpText extends BSComponentContainer {
         add(new BSText(text));
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public boolean isInline() {
+        return isInline;
+    }
+
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Help Text");
@@ -61,6 +62,7 @@ public class BSInputHelpText extends BSComponentContainer {
         addTagAttribute("class", getClassNames());
     }
 
+    @Override
     protected String getClassNames() {
         if ( isInline ) {
             return "text-muted";
