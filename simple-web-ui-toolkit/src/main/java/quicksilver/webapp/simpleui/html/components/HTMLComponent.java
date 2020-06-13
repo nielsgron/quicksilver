@@ -21,16 +21,20 @@ import quicksilver.webapp.simpleui.HtmlStream;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class HTMLComponent {
+    private static final Logger LOG = LogManager.getLogger();
 
     protected final String COMPONENT_ATTRIB_NAME = "Name";
     protected final String COMPONENT_ATTRIB_TAG_NAME = "tagName";
     protected final String COMPONENT_ATTRIB_TAG_CLOSE = "tagClose";
     protected final String COMPONENT_ATTRIB_END_WITH_LINEBREAK = "endLineBreak";
 
-    protected HashMap<String, Object> componentAttributes = new HashMap<String, Object>();
-    protected ArrayList<AbstractMap.SimpleEntry<String, String>> tagAttributes = new ArrayList<AbstractMap.SimpleEntry<String, String>>();
+    protected final HashMap<String, Object> componentAttributes = new HashMap<>();
+    protected final ArrayList<AbstractMap.SimpleEntry<String, String>> tagAttributes = new ArrayList<AbstractMap.SimpleEntry<String, String>>();
 
     protected void putComponentAttribute(String name, Object value) {
         componentAttributes.put(name, value);
@@ -65,7 +69,7 @@ public abstract class HTMLComponent {
         // Do nothing by default, but can be overriden
     }
 
-    public void render(HtmlStream stream) {
+    public void render(@NonNull HtmlStream stream) {
 
         // Call this to tell the implementing component to build the attributes and layout component for rendering
         validate();
@@ -74,7 +78,14 @@ public abstract class HTMLComponent {
 
         // Open Tag
         stream.write("<");
-        stream.write((String)componentAttributes.get(COMPONENT_ATTRIB_TAG_NAME));
+
+        String tag = (String) componentAttributes.get(COMPONENT_ATTRIB_TAG_NAME);
+
+        if (tag == null) {
+            LOG.warn("Null tag name for component " + getClass());
+        }
+
+        stream.write(tag);
 
         for ( int i = 0; i < tagAttributes.size(); i++ ) {
             String name = tagAttributes.get(i).getKey();

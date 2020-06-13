@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,22 +18,23 @@ package quicksilver.webapp.simpleui.html.components;
 
 public class HTMLHeading extends HTMLComponentContainer {
 
-    private int level;
+    private final int level;
 
     public HTMLHeading(String text, int level) {
         this.level = level;
         add(new HTMLText(text));
     }
 
+    @Override
     protected void defineAttributes() {
-
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Heading");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "h" + level);
 
-        //addTagAttribute("class", getClassNames());
+        if (getClassNames() != null) {
+            addTagAttribute("class", getClassNames());
+        }
         //addTagAttribute("style", getStyle());
-
     }
 
 }

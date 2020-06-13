@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public abstract class BSComponentContainer extends BSComponent {
 
     private BSLayoutManager layoutManager = null; // BSFlowLayout.INSTANCE;
-    protected ArrayList<HTMLComponent> children = new ArrayList<HTMLComponent>();
+    protected final ArrayList<HTMLComponent> children = new ArrayList<>();
 
     public HTMLComponent add(HTMLComponent component) {
         if ( component == null ) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,16 @@ public class HTMLParagraph extends HTMLComponentContainer {
 
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Paragraph");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "p");
 
+        if (getClassNames() != null) {
+            addTagAttribute("class", getClassNames());
+        }
     }
 
 }
