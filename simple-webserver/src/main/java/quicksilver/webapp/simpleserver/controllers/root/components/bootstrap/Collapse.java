@@ -40,7 +40,7 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         panel.add(new HTMLHeading("Example Collapse Component", 4));
         panel.add(new HTMLThematicBreak());
 
-        BSCollapse collapse = new BSCollapse(new BSCard("A card", null, "Collapsed cards may become visible again with a buton, as seen above"));
+        BSCollapse collapse = new BSCollapse(new BSCard().body("A card", null, "Collapsed cards may become visible again with a buton, as seen above"));
 
         panel.add(new BSButton("Link with href", BSComponent.Type.PRIMARY, false, collapse));
         panel.add(new HTMLLineBreak(1));
