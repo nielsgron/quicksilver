@@ -21,7 +21,6 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCollapse;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;

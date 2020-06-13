@@ -15,6 +15,7 @@
  */
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import com.google.common.base.MoreObjects;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import quicksilver.webapp.simpleui.HtmlStream;
@@ -87,7 +88,30 @@ public class BSCard extends BSComponentContainer {
 
     @Override
     protected String getClassNames() {
+        if (getTypeName() != null) {
+            return "card border-" + getTypeName();
+        }
         return "card";
+    }
+
+    private String getTypeName() {
+        Type t = MoreObjects.firstNonNull(getType(), Type.PRIMARY /* which is the default */);
+        if (t != Type.PRIMARY) {
+            return t.getTypeName();
+        }
+        return null;
+    }
+
+    /**
+     * <b>Note:</b> This method must be called before adding any card contents
+     * since the content color might be changed depending on it.
+     *
+     * @param type
+     */
+    //XXX: EMI: the underlying issue is that CardBody, which is a DIV, needs to define the class in the constructor. This is much too early in the lifecycle.
+    @Override
+    public void setType(Type type) {
+        super.setType(type);
     }
 
     public BSCard body(String text) {
@@ -123,10 +147,12 @@ public class BSCard extends BSComponentContainer {
         return this;
     }
 
-    private static class CardBody extends HTMLDiv {
+    private class CardBody extends HTMLDiv {
 
         public CardBody() {
-            super("card-body");
+            //if the main card has a type, color the text too
+            super((getTypeName() != null ? "text-" + getTypeName() + " " : "")
+                    + "card-body");
         }
 
         public CardBody(HTMLComponent... components) {
