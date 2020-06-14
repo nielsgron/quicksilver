@@ -16,9 +16,12 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import quicksilver.webapp.simpleui.bootstrap4.components.BSBadge;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroup;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroupItem;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
@@ -57,6 +60,17 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
 
         listGroup.add(new BSListGroupItem("Link 2", "/2"));
         listGroup.add(new BSListGroupItem("Link 3", "/3"));
+
+        panel.add(listGroup);
+        panel.add(new HTMLLineBreak(2));
+
+        listGroup = new BSListGroup();
+        //TODO: use a layout manager to set justify-content-between
+        listGroup.add(new BSListGroupItem("id1", null, new BSText("Item 1 "), new BSBadge("10", BSComponent.Type.PRIMARY, null, true))
+                .active(true));
+        listGroup.add(new BSListGroupItem("id2", null, new BSText("Item 2 "), new BSBadge("5", BSComponent.Type.SECONDARY, null, true))
+                .disabled(true));
+        listGroup.add(new BSListGroupItem("id3", null, new BSText("Item 3 "), new BSBadge("1", BSComponent.Type.SUCCESS, null, true)));
 
         panel.add(listGroup);
 

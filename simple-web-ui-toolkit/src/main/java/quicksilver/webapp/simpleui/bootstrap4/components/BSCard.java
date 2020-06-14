@@ -18,9 +18,7 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 import com.google.common.base.MoreObjects;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
-import quicksilver.webapp.simpleui.html.components.HTMLComponentContainer;
 import quicksilver.webapp.simpleui.html.components.HTMLDiv;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLParagraph;
@@ -134,7 +132,13 @@ public class BSCard extends BSComponentContainer {
     }
 
     public BSCard listGroup(String... list) {
-        add(new ListBody(list));
+        BSListGroup g = new BSListGroup()
+                .flush(true);
+        for (String item : list) {
+            g.add(new BSListGroupItem(item));
+        }
+        add(g);
+
         return this;
     }
 
@@ -192,29 +196,6 @@ public class BSCard extends BSComponentContainer {
         public CardFooter(String header) {
             super("card-footer text-muted");
             add(new HTMLText(header));
-        }
-    }
-
-    //TODO: This whole clas should be a BSListGroup probably
-    private static class ListBody extends HTMLComponentContainer {
-
-        public ListBody(String... list) {
-            for(String item : list) {
-                add(new BSListGroupItem(item));
-            }
-        }
-
-        protected void defineAttributes() {
-
-        }
-
-        @Override
-        public void render(HtmlStream stream) {
-            stream.writeln(" <ul class=\"list-group list-group-flush\">");
-            for (HTMLComponent child : children) {
-                child.render(stream);
-            }
-            stream.writeln("</ul>");
         }
     }
 

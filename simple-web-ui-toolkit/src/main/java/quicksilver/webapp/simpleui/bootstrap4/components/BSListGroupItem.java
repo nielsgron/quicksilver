@@ -15,6 +15,10 @@
  */
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+
 /**
  * @see
  * <a href='https://getbootstrap.com/docs/4.1/components/list-group/'>Bootstrap
@@ -27,15 +31,20 @@ public class BSListGroupItem extends BSComponentContainer {
     private boolean isActive;
     private boolean disabled;
 
-    public BSListGroupItem(String name) {
+    public BSListGroupItem(@NonNull String name) {
         this(name, null);
     }
 
-    public BSListGroupItem(String name, String url) {
-        itemName = name;
-        urlReference = url;
-        add(new BSText(name));
+    public BSListGroupItem(@NonNull String name, @Nullable String url) {
+        this(name, url, new BSText(name));
+    }
 
+    public BSListGroupItem(@NonNull String name, @Nullable String url, HTMLComponent ...children) {
+        this.itemName = name;
+        this.urlReference = url;
+        for(HTMLComponent c : children) {
+            add(c);
+        }
     }
 
     @Override
