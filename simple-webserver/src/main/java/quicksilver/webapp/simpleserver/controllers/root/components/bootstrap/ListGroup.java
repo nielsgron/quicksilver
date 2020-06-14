@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroup;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroupItem;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
@@ -30,6 +29,7 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
         getSideBar().setActiveItem("List Group");
     }
 
+    @Override
     protected BSPanel createContentPanelCenter() {
 
         BSPanel panel = new BSPanel();
@@ -41,8 +41,10 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
         // List Group Examples
 
         BSListGroup listGroup = new BSListGroup();
-        listGroup.add(new BSListGroupItem("Item 1"));
-        listGroup.add(new BSListGroupItem("Item 2"));
+        listGroup.add(new BSListGroupItem("Item 1")
+                .active(true));
+        listGroup.add(new BSListGroupItem("Item 2")
+                .disabled(true));
         listGroup.add(new BSListGroupItem("Item 3"));
 
         panel.add(listGroup);

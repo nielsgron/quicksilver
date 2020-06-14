@@ -20,6 +20,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
+import quicksilver.webapp.simpleui.html.components.HTMLComponentContainer;
 import quicksilver.webapp.simpleui.html.components.HTMLDiv;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLParagraph;
@@ -95,8 +96,8 @@ public class BSCard extends BSComponentContainer {
     }
 
     private String getTypeName() {
-        Type t = MoreObjects.firstNonNull(getType(), Type.PRIMARY /* which is the default */);
-        if (t != Type.PRIMARY) {
+        Type t = MoreObjects.firstNonNull(getType(), DEFAULT_TYPE);
+        if (t != null && t != DEFAULT_TYPE) {
             return t.getTypeName();
         }
         return null;
@@ -194,12 +195,13 @@ public class BSCard extends BSComponentContainer {
         }
     }
 
-    private static class ListBody extends HTMLComponent {
-
-        private final String[] list;
+    //TODO: This whole clas should be a BSListGroup probably
+    private static class ListBody extends HTMLComponentContainer {
 
         public ListBody(String... list) {
-            this.list = list;
+            for(String item : list) {
+                add(new BSListGroupItem(item));
+            }
         }
 
         protected void defineAttributes() {
@@ -209,11 +211,8 @@ public class BSCard extends BSComponentContainer {
         @Override
         public void render(HtmlStream stream) {
             stream.writeln(" <ul class=\"list-group list-group-flush\">");
-            for (String s : list) {
-                stream.write("<li class=\"list-group-item\">");
-                //TODO: escape HTML
-                stream.write(s);
-                stream.writeln("</li>");
+            for (HTMLComponent child : children) {
+                child.render(stream);
             }
             stream.writeln("</ul>");
         }

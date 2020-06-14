@@ -22,8 +22,9 @@ public abstract class BSComponent extends HTMLComponent {
 
     public static final int HORIZONTAL_ALIGNMENT = 0;
     public static final int VERTICAL_ALIGNMENT = 1;
+    public static final Type DEFAULT_TYPE = Type.PRIMARY;
 
-    private Type componentType = Type.PRIMARY;
+    private Type componentType = DEFAULT_TYPE;
     private Size componentSize = Size.NORMAL;
     private Alignment componentAlignment = Alignment.HORIZONTAL;
     private State componentState = State.ENABLED;
