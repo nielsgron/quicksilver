@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         getSideBar().setActiveItem("Collapse");
     }
 
+    @Override
     protected BSPanel createContentPanelCenter() {
 
         BSPanel panel = new BSPanel();
@@ -53,10 +54,11 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         // Multiple Targets
 
         panel.add(new HTMLLineBreak(2));
-        panel.add(new HTMLHeading("Accordian Example", 4));
+        panel.add(new HTMLHeading("Accordion Example", 4));
         panel.add(new HTMLThematicBreak());
 
         // Accordian Example
+        //TODO: Add accordion example based on BSCard
 
 
 

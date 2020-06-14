@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,47 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import java.util.UUID;
-import quicksilver.webapp.simpleui.HtmlStream;
-import quicksilver.webapp.simpleui.html.components.HTMLDiv;
 
-/*
-    Example :
-
-    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp
-    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/collapse/
+/**
+ * @see
+ * <a href='https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp'>W3Schools</a>
+ * @see
+ * <a href='https://getbootstrap.com/docs/4.1/components/collapse/'>Bootstrap
+ * Docs</a>
  */
+public class BSCollapse extends BSComponentContainer {
 
-public class BSCollapse extends BSComponent {
-
-    private final BSComponent body;
-    private final String id;
+    private String id;
 
     public BSCollapse(BSComponent body) {
-        this.body = body;
-        this.id = "collapse_"+UUID.randomUUID().toString().replaceAll("-", "_");
+        this.id = "collapse_" + UUID.randomUUID().toString().replaceAll("-", "_");
+        add(body);
     }
 
     public String getId() {
         return id;
     }
 
-    protected void defineAttributes() {
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public BSCollapse id(String id) {
+        setId(id);
+        return this;
     }
 
     @Override
-    public void render(HtmlStream stream) {
-        HTMLDiv div = new HTMLDiv("collapse") {
-            {
-                addTagAttribute("id", getId());
-            }
-        };
-        div.add(body);
+    protected void defineAttributes() {
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Collapse");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
-        div.render(stream);
+        addTagAttribute("id", getId());
+        addTagAttribute("class", getClassNames());
     }
+
+    @Override
+    protected String getClassNames() {
+        return "collapse";
+    }
+
 }
