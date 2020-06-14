@@ -22,6 +22,9 @@ public class HTMLHeading extends HTMLComponentContainer {
 
     public HTMLHeading(String text, int level) {
         this.level = level;
+        if (level < 1 || level > 6) {
+            throw new IllegalArgumentException("Heading size must be between 1-6");
+        }
         add(new HTMLText(text));
     }
 
