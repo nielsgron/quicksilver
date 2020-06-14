@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/dropdowns/'>Bootstrap Docs</a>
+ */
 public class BSDropdownMenu extends BSComponentContainer {
 
     private boolean isRightAligned = false;
@@ -28,6 +31,15 @@ public class BSDropdownMenu extends BSComponentContainer {
         this.isRightAligned = isRightAligned;
     }
 
+    public boolean isRightAligned() {
+        return isRightAligned;
+    }
+
+    public void setRightAligned(boolean isRightAligned) {
+        this.isRightAligned = isRightAligned;
+    }
+
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Dropdown-Menu");
@@ -35,9 +47,11 @@ public class BSDropdownMenu extends BSComponentContainer {
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
         addTagAttribute("class", getClassNames());
+        //TODO: addTagAttribute("aria-labelledby", ...); for single button dropdowns
 
     }
 
+    @Override
     protected String getClassNames() {
         StringBuilder cNames = new StringBuilder();
 

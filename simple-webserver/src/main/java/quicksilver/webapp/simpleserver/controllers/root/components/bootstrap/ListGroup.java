@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import quicksilver.webapp.simpleui.bootstrap4.components.BSBadge;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroup;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSListGroupItem;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
@@ -30,6 +32,7 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
         getSideBar().setActiveItem("List Group");
     }
 
+    @Override
     protected BSPanel createContentPanelCenter() {
 
         BSPanel panel = new BSPanel();
@@ -41,8 +44,10 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
         // List Group Examples
 
         BSListGroup listGroup = new BSListGroup();
-        listGroup.add(new BSListGroupItem("Item 1"));
-        listGroup.add(new BSListGroupItem("Item 2"));
+        listGroup.add(new BSListGroupItem("Item 1")
+                .active(true));
+        listGroup.add(new BSListGroupItem("Item 2")
+                .disabled(true));
         listGroup.add(new BSListGroupItem("Item 3"));
 
         panel.add(listGroup);
@@ -55,6 +60,17 @@ public class ListGroup  extends AbstractComponentsBootstrapPage {
 
         listGroup.add(new BSListGroupItem("Link 2", "/2"));
         listGroup.add(new BSListGroupItem("Link 3", "/3"));
+
+        panel.add(listGroup);
+        panel.add(new HTMLLineBreak(2));
+
+        listGroup = new BSListGroup();
+        //TODO: use a layout manager to set justify-content-between
+        listGroup.add(new BSListGroupItem("id1", null, new BSText("Item 1 "), new BSBadge("10", BSComponent.Type.PRIMARY, null, true))
+                .active(true));
+        listGroup.add(new BSListGroupItem("id2", null, new BSText("Item 2 "), new BSBadge("5", BSComponent.Type.SECONDARY, null, true))
+                .disabled(true));
+        listGroup.add(new BSListGroupItem("id3", null, new BSText("Item 3 "), new BSBadge("1", BSComponent.Type.SUCCESS, null, true)));
 
         panel.add(listGroup);
 

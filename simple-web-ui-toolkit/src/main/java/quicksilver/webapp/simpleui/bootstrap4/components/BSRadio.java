@@ -25,6 +25,11 @@ import quicksilver.webapp.simpleui.HtmlStream;
     Bootstrap Docs : ??? https://getbootstrap.com/docs/4.1/components/forms/
  */
 
+/**
+ * @deprecated
+ * @see BSInputRadio
+ */
+@Deprecated
 public class BSRadio extends BSComponentContainer {
 
     protected void defineAttributes() {

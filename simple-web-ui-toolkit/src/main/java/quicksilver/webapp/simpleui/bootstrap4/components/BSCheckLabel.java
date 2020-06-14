@@ -18,6 +18,9 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import quicksilver.webapp.simpleui.html.components.HTMLLabel;
 
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/forms/#checkboxes-and-radios'>Bootstrap Docs</a>
+ */
 public class BSCheckLabel extends HTMLLabel {
 
     public BSCheckLabel(String text, String forAttribute) {

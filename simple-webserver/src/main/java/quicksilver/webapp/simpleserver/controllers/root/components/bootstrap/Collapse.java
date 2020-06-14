@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSCard;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSCollapse;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
-import quicksilver.webapp.simpleui.bootstrap4.components.BSText;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 import quicksilver.webapp.simpleui.html.components.HTMLThematicBreak;
@@ -32,6 +31,7 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         getSideBar().setActiveItem("Collapse");
     }
 
+    @Override
     protected BSPanel createContentPanelCenter() {
 
         BSPanel panel = new BSPanel();
@@ -40,7 +40,7 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         panel.add(new HTMLHeading("Example Collapse Component", 4));
         panel.add(new HTMLThematicBreak());
 
-        BSCollapse collapse = new BSCollapse(new BSCard("A card", null, "Collapsed cards may become visible again with a buton, as seen above"));
+        BSCollapse collapse = new BSCollapse(new BSCard().body("A card", null, "Collapsed cards may become visible again with a buton, as seen above"));
 
         panel.add(new BSButton("Link with href", BSComponent.Type.PRIMARY, false, collapse));
         panel.add(new HTMLLineBreak(1));
@@ -54,10 +54,11 @@ public class Collapse extends AbstractComponentsBootstrapPage {
         // Multiple Targets
 
         panel.add(new HTMLLineBreak(2));
-        panel.add(new HTMLHeading("Accordian Example", 4));
+        panel.add(new HTMLHeading("Accordion Example", 4));
         panel.add(new HTMLThematicBreak());
 
         // Accordian Example
+        //TODO: Add accordion example based on BSCard
 
 
 

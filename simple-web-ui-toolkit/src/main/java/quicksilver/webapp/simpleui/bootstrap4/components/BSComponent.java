@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,19 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
 public abstract class BSComponent extends HTMLComponent {
 
     public static final int HORIZONTAL_ALIGNMENT = 0;
     public static final int VERTICAL_ALIGNMENT = 1;
+    public static final Type DEFAULT_TYPE = Type.PRIMARY;
+    public static final Size DEFAULT_SIZE = Size.NORMAL;
 
-    private Type componentType = Type.PRIMARY;
-    private Size componentSize = Size.NORMAL;
+    private Type componentType = DEFAULT_TYPE;
+    @NonNull
+    private Size componentSize = DEFAULT_SIZE;
     private Alignment componentAlignment = Alignment.HORIZONTAL;
     private State componentState = State.ENABLED;
 
@@ -35,9 +39,11 @@ public abstract class BSComponent extends HTMLComponent {
         return componentType;
     }
 
-    public void setSize(Size size) {
+    public void setSize(@NonNull Size size) {
         componentSize = size;
     }
+
+    @NonNull
     public Size getSize() {
         return componentSize;
     }

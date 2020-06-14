@@ -28,7 +28,13 @@ public class BSInputEmail extends BSInput {
 
     @Override
     protected String getClassNames() {
-        return "form-control";
+        StringBuilder classes = new StringBuilder();
+        classes.append("form-control");
+
+        if (getSize() != Size.NORMAL) {
+            classes.append(" form-control-").append(getSize().getSizeName());
+        }
+        return classes.toString();
     }
 
 }

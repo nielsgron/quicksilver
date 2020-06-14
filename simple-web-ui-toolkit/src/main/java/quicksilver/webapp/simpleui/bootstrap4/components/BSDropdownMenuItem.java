@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/dropdowns/'>Bootstrap Docs</a>
+ */
 public class BSDropdownMenuItem extends BSComponentContainer {
 
     private String href;
@@ -33,6 +36,31 @@ public class BSDropdownMenuItem extends BSComponentContainer {
         add(new BSText(name));
     }
 
+    public String getHref() {
+        return href;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isDisabled() {
+        return isDisabled;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setDisabled(boolean isDisabled) {
+        this.isDisabled = isDisabled;
+    }
+
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Dropdown-Item");
@@ -44,6 +72,7 @@ public class BSDropdownMenuItem extends BSComponentContainer {
 
     }
 
+    @Override
     protected String getClassNames() {
         StringBuilder cNames = new StringBuilder();
 

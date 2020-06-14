@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,10 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-/*
-    Example :
-
-    W3Schools : https://www.w3schools.com/bootstrap4/bootstrap_dropdowns.asp
-    Bootstrap Docs : https://getbootstrap.com/docs/4.1/components/dropdowns/
+/**
+ * @see <a href='https://www.w3schools.com/bootstrap4/bootstrap_dropdowns.asp'>W3Schools</a>
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/dropdowns/'>Bootstrap Docs</a>
  */
-
 public class BSDropdown extends BSComponentContainer {
 
     private boolean isBtnGroup = false;
@@ -49,13 +46,14 @@ public class BSDropdown extends BSComponentContainer {
     }
 
     public BSDropdown() {
-
+        //TODO: what does isBtnGroup = false mean? We generate the same thing
     }
 
     public BSDropdown(boolean isBtnGroup) {
         this.isBtnGroup = isBtnGroup;
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Dropdown");
@@ -66,6 +64,7 @@ public class BSDropdown extends BSComponentContainer {
 
     }
 
+    @Override
     protected String getClassNames() {
         StringBuilder cNames = new StringBuilder();
 

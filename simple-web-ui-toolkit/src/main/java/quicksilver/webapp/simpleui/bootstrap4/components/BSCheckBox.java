@@ -25,6 +25,11 @@ import quicksilver.webapp.simpleui.HtmlStream;
     Bootstrap Docs : ??? https://getbootstrap.com/docs/4.1/components/forms/
  */
 
+/**
+ * @deprecated
+ * @see BSInputCheckbox
+ */
+@Deprecated
 public class BSCheckBox extends BSComponent {
 
     protected void defineAttributes() {

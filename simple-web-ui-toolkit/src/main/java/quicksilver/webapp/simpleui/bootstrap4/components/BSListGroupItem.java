@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,58 +13,93 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-/*
-    Example :
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
-    W3Schools :
-    Bootstrap Docs :
+/**
+ * @see
+ * <a href='https://getbootstrap.com/docs/4.1/components/list-group/'>Bootstrap
+ * Docs</a>
  */
-
 public class BSListGroupItem extends BSComponentContainer {
 
     private String itemName;
     private String urlReference;
     private boolean isActive;
+    private boolean disabled;
 
-    public BSListGroupItem(String name) {
+    public BSListGroupItem(@NonNull String name) {
         this(name, null);
     }
 
-    public BSListGroupItem(String name, String url) {
-        itemName = name;
-        urlReference = url;
-        add(new BSText(name));
-
+    public BSListGroupItem(@NonNull String name, @Nullable String url) {
+        this(name, url, new BSText(name));
     }
 
+    public BSListGroupItem(@NonNull String name, @Nullable String url, HTMLComponent ...children) {
+        this.itemName = name;
+        this.urlReference = url;
+        for(HTMLComponent c : children) {
+            add(c);
+        }
+    }
+
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "List Group Item");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
 
-        if ( urlReference == null ) {
-            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "li");
+        addTagAttribute("class", getClassNames());
 
-            addTagAttribute("class", "list-group-item");
+        if (urlReference == null) {
+            putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "li");
         } else {
             putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "a");
+            addTagAttribute("href", urlReference);
+        }
+    }
 
-            if ( isActive() ) {
-                addTagAttribute("href", urlReference );
-                addTagAttribute("class", "list-group-item list-group-item-action active");
-            } else {
-                addTagAttribute("href", urlReference );
-                addTagAttribute("class", "list-group-item list-group-item-action");
-            }
+    @Override
+    protected String getClassNames() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("list-group-item");
+        if (urlReference != null) {
+            sb.append(" list-group-item-action");
+        }
+        if (isActive()) {
+            sb.append(" active");
+        }
+        if (disabled) {
+            //XXX: Bootstrap limitation: won't work for <a> links
+            sb.append(" disabled");
+        }
+        if (getType() != null && getType() != DEFAULT_TYPE) {
+            sb.append(" list-group-item-").append(getType().getTypeName());
         }
 
+        return sb.toString();
     }
 
     public String getName() {
         return itemName;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public BSListGroupItem disabled(boolean disabled) {
+        setDisabled(disabled);
+        return this;
     }
 
     public boolean isActive() {
@@ -73,16 +108,11 @@ public class BSListGroupItem extends BSComponentContainer {
 
     public void setActive(boolean active) {
         isActive = active;
-
-        removeTagAttribute("class");
-
-        if ( isActive() ) {
-            addTagAttribute("class", "list-group-item list-group-item-action active");
-        } else {
-            addTagAttribute("class", "list-group-item list-group-item-action");
-        }
-
     }
 
+    public BSListGroupItem active(boolean active) {
+        setActive(active);
+        return this;
+    }
 
 }

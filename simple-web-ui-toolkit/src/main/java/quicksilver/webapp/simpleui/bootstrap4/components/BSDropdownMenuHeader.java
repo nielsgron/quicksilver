@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/dropdowns/'>Bootstrap Docs</a>
+ */
 public class BSDropdownMenuHeader extends BSComponentContainer {
 
-    private String headerName;
     private int headerSize;
 
     public BSDropdownMenuHeader(String headerName) {
@@ -26,12 +28,15 @@ public class BSDropdownMenuHeader extends BSComponentContainer {
     }
 
     public BSDropdownMenuHeader(String headerName, int headerSize) {
-        this.headerName = headerName;
         this.headerSize = headerSize;
+        if (headerSize < 1 || headerSize > 6) {
+            throw new IllegalArgumentException("Header size must be between 1-6");
+        }
 
         add(new BSText(headerName));
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Dropdown-Menu-Header");
@@ -42,6 +47,7 @@ public class BSDropdownMenuHeader extends BSComponentContainer {
 
     }
 
+    @Override
     protected String getClassNames() {
         StringBuilder cNames = new StringBuilder();
 
