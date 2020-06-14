@@ -31,6 +31,7 @@ public abstract class BSInput extends BSComponent {
     private String input_aria_describedby;
     private String input_id;
     protected boolean readonly;
+    protected boolean disabled;
 
     public BSInput(String type) {
         this(type, null);
@@ -49,6 +50,7 @@ public abstract class BSInput extends BSComponent {
 
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Input");
@@ -76,6 +78,9 @@ public abstract class BSInput extends BSComponent {
         if (readonly) {
             addTagAttribute("readonly", null);
         }
+        if (disabled) {
+            addTagAttribute("disabled", null);
+        }
     }
 
     public void setReadOnly(boolean readonly) {
@@ -86,10 +91,19 @@ public abstract class BSInput extends BSComponent {
         return readonly;
     }
 
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
     public void setValue(String v) {
         addTagAttribute("value", v);
     }
 
+    @Override
     protected String getClassNames() {
         return "form-control";
     }
