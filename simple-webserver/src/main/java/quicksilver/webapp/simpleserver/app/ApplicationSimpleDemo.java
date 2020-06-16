@@ -33,9 +33,12 @@ public class ApplicationSimpleDemo extends SimpleWebApplication {
     private static String DEFAULT_DB_PASSWORD = "password";
 
     public static void main(String[] args) {
-
         // Create the application Simple Demo
         SimpleApplication application = new ApplicationSimpleDemo(APPLICATION_NAME, APPLICATION_CONFIG_FOLDER);
+
+        if ("true".equals(application.getConfigApplication().getProperty("quicksilver.autoredeploy"))) {
+            FSWatcher.launch();
+        }
 
         // Initialize database connection pool and test if connection can be established.  If it fails, close application.
         initializeDatabaseOrExitApplication(application, true);
