@@ -1,0 +1,9 @@
+apply plugin:'application'
+mainClassName = 'quicksilver.webapp.simpleserver.app.ApplicationSimpleDemo'
+dependencies {
+    implementation project(':quicksilver-core')
+    implementation project(':quicksilver-webui')
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
+}
+
+description = 'Quicksilver Webserver'

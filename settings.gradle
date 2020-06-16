@@ -1,0 +1,8 @@
+rootProject.name = 'parent'
+include(':quicksaw-charts')
+include(':quicksilver-core')
+include(':quicksilver-webui')
+include(':quicksilver-webserver')
+project(':quicksilver-core').projectDir = file('simple-commons')
+project(':quicksilver-webui').projectDir = file('simple-web-ui-toolkit')
+project(':quicksilver-webserver').projectDir = file('simple-webserver')

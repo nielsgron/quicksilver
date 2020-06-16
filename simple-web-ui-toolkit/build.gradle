@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation project(':quicksilver-core')
+    api 'org.checkerframework:checker-qual:3.4.1'
+    testImplementation 'junit:junit:4.12'
+}
+
+description = 'Quicksilver WebUI'
