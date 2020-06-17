@@ -154,21 +154,12 @@ public class SimpleApplication {
 
         System.out.println("Java version: "  + System.getProperty("java.version"));
 
-        // Initializing Logger on Java 1.8 takes about 10 seconds and about 5.5 seconds on Java 11 & 13.
-        // I think the initialization is taking long because it loads Java Scripting Engines
-        // So, lets initialize in background for now.
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // This is the first call to get a Log4j-2 logger, which will initialize it
-                long startM = System.currentTimeMillis();
-                System.out.println("Logger initializing in background ...");
-                Logger LOG = LogManager.getLogger();
-                long endM = System.currentTimeMillis();
-                System.out.println("Logger initialization completed in (" + (endM-startM) + ") milliseconds");
-            }
-        });
-        t.start();
+        // This is the first call to get a Log4j-2 logger, which will initialize it
+        long startM = System.currentTimeMillis();
+        System.out.println("Logger initializing ...");
+        Logger LOG = LogManager.getLogger();
+        long endM = System.currentTimeMillis();
+        System.out.println("Logger initialization completed in (" + (endM - startM) + ") milliseconds");
 
         String fullPath = configLogger.getConfigFile().getAbsolutePath();
         System.out.println("Logger service started and configured with : " + fullPath);
