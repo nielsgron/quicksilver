@@ -160,6 +160,10 @@ public class SimpleApplication {
         Logger LOG = LogManager.getLogger();
         long endM = System.currentTimeMillis();
         System.out.println("Logger initialization completed in (" + (endM - startM) + ") milliseconds");
+        if ( (endM - startM) > 1000 ) {
+            System.out.println("Logger initialization took more then 1 second. Make sure your /etc/hosts contains the line >> ");
+            System.out.println("::1         localhost  MyComputerName.local");
+        }
 
         String fullPath = configLogger.getConfigFile().getAbsolutePath();
         System.out.println("Logger service started and configured with : " + fullPath);
