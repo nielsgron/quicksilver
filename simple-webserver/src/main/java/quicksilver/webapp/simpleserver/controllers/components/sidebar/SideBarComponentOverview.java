@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public class SideBarComponentOverview extends BSNavPill {
     private static String padding = "padding: 1px 1px 1px 5px;";
 
     public SideBarComponentOverview() {
-        super(BSComponent.VERTICAL_ALIGNMENT);
+        super(BSComponent.Alignment.VERTICAL);
 
         this.add(new BSNavItem("Alerts", "/components/bootstrap/alerts") {
             protected String getStyle() { return padding; }

@@ -21,9 +21,11 @@ import quicksilver.webapp.simpleui.HtmlStream;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public abstract class HTMLComponent {
     private static final Logger LOG = LogManager.getLogger();
@@ -145,4 +147,26 @@ public abstract class HTMLComponent {
         return valid;
     }
 
+    @Nullable
+    protected String getAttribute(@NonNull String name) {
+        Optional<AbstractMap.SimpleEntry<String, String>> entry = tagAttributes.stream()
+                .filter(e -> name.equals(e.getKey()))
+                .findFirst();
+        return entry.map(AbstractMap.SimpleEntry::getValue).orElse(null);
+    }
+
+    @Nullable
+    public String getId() {
+        return getAttribute("id");
+    }
+
+    public void setId(String id) {
+        removeTagAttribute("id");
+        addTagAttribute("id", id);
+    }
+
+    public HTMLComponent id(String id) {
+        setId(id);
+        return this;
+    }
 }

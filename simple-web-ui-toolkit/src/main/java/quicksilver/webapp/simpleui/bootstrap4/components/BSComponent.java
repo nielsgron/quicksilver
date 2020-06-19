@@ -21,8 +21,6 @@ import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
 public abstract class BSComponent extends HTMLComponent {
 
-    public static final int HORIZONTAL_ALIGNMENT = 0;
-    public static final int VERTICAL_ALIGNMENT = 1;
     public static final Type DEFAULT_TYPE = Type.PRIMARY;
     public static final Size DEFAULT_SIZE = Size.NORMAL;
 
