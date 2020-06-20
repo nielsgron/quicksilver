@@ -51,4 +51,8 @@ public class BSNavbarBrand extends BSComponentContainer {
     protected String getClassNames() {
         return "navbar-brand";
     }
+
+    public String getURL() {
+        return url;
+    }
 }
