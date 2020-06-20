@@ -18,26 +18,20 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-/*
-    Example :
-
-    W3Schools :
-    Bootstrap Docs :
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/navs/'>Bootstrap
+ * Docs</a>
  */
-
 public class BSNav extends BSComponentContainer {
 
-    public static enum Style {
-        BASE, TAB, PILL
-    }
-
-    private Style prop_style = Style.BASE;
     private Alignment prop_alignment = Alignment.HORIZONTAL;
 
-    public BSNav(@NonNull Style style, Alignment alignment) {
-        prop_style = style;
-        prop_alignment = alignment;
+    public BSNav() {
+        this(Alignment.HORIZONTAL);
+    }
 
+    public BSNav(@NonNull Alignment alignment) {
+        prop_alignment = alignment;
     }
 
     @Override
@@ -56,17 +50,6 @@ public class BSNav extends BSComponentContainer {
 
         if ( prop_alignment == Alignment.VERTICAL ) {
             classList += " flex-column";
-        }
-
-        switch (prop_style){
-            case BASE:
-                break;
-            case TAB:
-                classList += " nav-tabs";
-                break;
-            case PILL:
-                classList += " nav-pills";
-                break;
         }
 
         return classList;

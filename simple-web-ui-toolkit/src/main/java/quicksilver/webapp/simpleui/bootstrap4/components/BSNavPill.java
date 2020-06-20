@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-/*
-    Example :
-
-    W3Schools :
-    Bootstrap Docs :
+/**
+ * @see
+ * <a href='https://getbootstrap.com/docs/4.1/components/navs/#pills'>Bootstrap
+ * Docs</a>
  */
-
 public class BSNavPill extends BSNav {
 
     public BSNavPill() {
-        super(Style.PILL, Alignment.HORIZONTAL);
+        super(Alignment.HORIZONTAL);
     }
 
     public BSNavPill(Alignment alignment) {
-        super(Style.PILL, alignment);
+        super(alignment);
     }
 
+    @Override
+    protected String getClassNames() {
+        return super.getClassNames() + " nav-pills";
+    }
 }
