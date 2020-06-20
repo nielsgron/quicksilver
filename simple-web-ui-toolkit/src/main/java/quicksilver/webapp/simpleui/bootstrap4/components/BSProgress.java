@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,14 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-import quicksilver.webapp.simpleui.HtmlStream;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import quicksilver.webapp.simpleui.html.components.HTMLDiv;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 
-/*
-    Example :
-
-    W3Schools :
-    Bootstrap Docs :
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/progress/'>Bootstrap Docs</a>
  */
-
-public class BSProgress extends BSComponent {
+public class BSProgress extends BSComponentContainer {
 
     //TODO: Move this enum elsewhere
     public enum Background {
@@ -53,10 +49,10 @@ public class BSProgress extends BSComponent {
     private final int percentage;
     private final String label;
     //TODO: height?
-    //@Nullable
-    private final Background background;
-    private final boolean striped;
-    private final boolean animated;
+    @Nullable
+    private Background background;
+    private boolean striped;
+    private boolean animated;
 
 
     public BSProgress(int percentage) {
@@ -79,66 +75,99 @@ public class BSProgress extends BSComponent {
         this.background = background;
         this.striped = striped;
         this.animated = animated;
+        add(new Inner());
     }
 
-    public BSProgress background(Background background) {
-        return new BSProgress(this.percentage, this.label, background, this.striped, this.animated);
+    public BSProgress background(@Nullable Background background) {
+        setBackground(background);
+        return this;
     }
 
     public BSProgress striped() {
-        return new BSProgress(this.percentage, this.label, this.background, true, this.animated);
+        setStriped(true);
+        return this;
+    }
+
+    public void setStriped(boolean striped) {
+        this.striped = striped;
+    }
+
+    public boolean isStriped() {
+        return striped;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+    }
+
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setAnimated(boolean animated) {
+        this.animated = animated;
+    }
+
+    public boolean isAnimated() {
+        return animated;
     }
 
     public BSProgress animated() {
-        return new BSProgress(this.percentage, this.label, this.background, this.striped, true);
-    }
-
-    protected void defineAttributes() {
-
+        setAnimated(true);
+        return this;
     }
 
     @Override
-    public void render(HtmlStream stream) {
-        HTMLDiv outer = new HTMLDiv("progress");
+    protected void defineAttributes() {
+        putComponentAttribute(COMPONENT_ATTRIB_NAME, "Progress");
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
+        putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "div");
 
-        HTMLDiv inner = new HTMLDiv() {
-            {
-                addTagAttribute("role", "progressbar");
-                addTagAttribute("aria-valuenow", String.valueOf(percentage));
-                addTagAttribute("aria-valuemin", "0");
-                addTagAttribute("aria-valuemax", "100");
+        addTagAttribute("class", getClassNames());
+    }
 
-                add(new HTMLText(label));
+    @Override
+    protected String getClassNames() {
+        return "progress";
+    }
+
+    class Inner extends HTMLDiv {
+
+        Inner() {
+            add(new HTMLText(label));
+        }
+
+        @Override
+        protected void defineAttributes() {
+            super.defineAttributes();
+            addTagAttribute("role", "progressbar");
+            addTagAttribute("aria-valuenow", String.valueOf(percentage));
+            addTagAttribute("aria-valuemin", "0");
+            addTagAttribute("aria-valuemax", "100");
+        }
+
+        @Override
+        protected String getStyle() {
+            return "width: " + String.valueOf(percentage) + "%";
+        }
+
+        @Override
+        protected String getClassNames() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("progress-bar");
+            if (background != null) {
+                sb.append(" ")
+                        .append(background.name);
             }
-
-            @Override
-            protected String getStyle() {
-                return "width: " + String.valueOf(percentage) + "%";
-            }
-
-            @Override
-            protected String getClassNames() {
-                StringBuilder sb = new StringBuilder();
-
-                sb.append("progress-bar");
-                if (background != null) {
-                    sb.append(" ")
-                            .append(background.name);
+            if (striped) {
+                sb.append(" progress-bar-striped");
+                if (animated) {
+                    sb.append(" progress-bar-animated");
                 }
-                if (striped) {
-                    sb.append(" progress-bar-striped");
-                    if (animated) {
-                        sb.append(" progress-bar-animated");
-                    }
-                }
-
-                return sb.toString();
             }
 
-        };
-
-        outer.add(inner);
-        
-        outer.render(stream);
+            return sb.toString();
+        }
     }
 }
