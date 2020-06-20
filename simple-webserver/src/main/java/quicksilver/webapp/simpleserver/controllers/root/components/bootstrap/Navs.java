@@ -52,6 +52,7 @@ public class Navs extends AbstractComponentsBootstrapPage {
             nav.add(new BSNavItem("Disabled", "#").disabled(true));
 
             panel.add(nav);
+            panel.add(new HTMLLineBreak());
         }
 
         {
@@ -65,6 +66,7 @@ public class Navs extends AbstractComponentsBootstrapPage {
             nav.add(new BSNavItem("Disabled", "#").disabled(true));
 
             panel.add(nav);
+            panel.add(new HTMLLineBreak());
         }
 
         {
@@ -78,6 +80,7 @@ public class Navs extends AbstractComponentsBootstrapPage {
             nav.add(new BSNavItem("Disabled", "#").disabled(true));
 
             panel.add(nav);
+            panel.add(new HTMLLineBreak());
         }
 
         {
@@ -91,8 +94,24 @@ public class Navs extends AbstractComponentsBootstrapPage {
             nav.add(new BSNavItem("Disabled", "#").disabled(true));
 
             panel.add(nav);
+            panel.add(new HTMLLineBreak());
         }
 
+        {
+            panel.add(new HTMLHeading("Fill", 5));
+            panel.add(new HTMLThematicBreak());
+
+            BSNavPill nav = new BSNavPill();
+            //TODO: there's also nav-justify but I don't see the difference?
+            nav.setFill(true);
+            nav.add(new BSNavItem("Active", "#").active(true));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Disabled", "#").disabled(true));
+
+            panel.add(nav);
+            panel.add(new HTMLLineBreak());
+        }
         return panel;
     }
 
