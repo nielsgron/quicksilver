@@ -25,6 +25,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 public class BSNav extends BSComponentContainer {
 
     private Alignment prop_alignment = Alignment.HORIZONTAL;
+    private boolean fill = false;
 
     public BSNav() {
         this(Alignment.HORIZONTAL);
@@ -52,7 +53,19 @@ public class BSNav extends BSComponentContainer {
             classList += " flex-column";
         }
 
+        if (fill) {
+            classList += " nav-fill";
+        }
+
         return classList;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
+
+    public boolean isFill() {
+        return fill;
     }
 
     public void setActiveItem(String name) {
