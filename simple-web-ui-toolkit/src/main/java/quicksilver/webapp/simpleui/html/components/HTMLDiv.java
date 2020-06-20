@@ -46,6 +46,7 @@ public class HTMLDiv extends HTMLComponentContainer {
 
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Div");
@@ -65,10 +66,12 @@ public class HTMLDiv extends HTMLComponentContainer {
 
     }
 
+    @Override
     protected String getClassNames() {
         return classNames;
     }
 
+    @Override
     protected String getStyle() {
         StringBuilder styleBuffer = new StringBuilder();
 

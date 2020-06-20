@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,10 @@ import quicksilver.webapp.simpleui.bootstrap4.components.BSNavPill;
 public class QuickSidebarMenu extends BSNavPill {
 
     public QuickSidebarMenu() {
-        super(BSComponent.VERTICAL_ALIGNMENT);
+        super(BSComponent.Alignment.VERTICAL);
     }
 
+    @Override
     protected String getStyle() {
         StringBuilder s = new StringBuilder();
 

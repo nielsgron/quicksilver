@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /*
     Example :
 
@@ -25,41 +27,49 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 
 public class BSNav extends BSComponentContainer {
 
-    public static final int STYLE_BASE = 0;
-    public static final int STYLE_TAB = 1;
-    public static final int STYLE_PILL = 2;
+    public static enum Style {
+        BASE, TAB, PILL
+    }
 
-    private int prop_style = STYLE_BASE;
-    private int prop_alignment = HORIZONTAL_ALIGNMENT;
+    private Style prop_style = Style.BASE;
+    private Alignment prop_alignment = Alignment.HORIZONTAL;
 
-    public BSNav(int style, int alignment) {
+    public BSNav(@NonNull Style style, Alignment alignment) {
         prop_style = style;
         prop_alignment = alignment;
 
     }
 
+    @Override
     protected void defineAttributes() {
 
         putComponentAttribute(COMPONENT_ATTRIB_NAME, "Nav");
         putComponentAttribute(COMPONENT_ATTRIB_TAG_CLOSE, Boolean.TRUE);
         putComponentAttribute(COMPONENT_ATTRIB_TAG_NAME, "ul");
 
+        addTagAttribute("class", getClassNames());
+    }
+
+    @Override
+    protected String getClassNames() {
         String classList = "nav";
 
-        if ( prop_alignment == VERTICAL_ALIGNMENT ) {
+        if ( prop_alignment == Alignment.VERTICAL ) {
             classList += " flex-column";
         }
 
-        if ( prop_style == STYLE_BASE ) {
-
-        } else if ( prop_style == STYLE_TAB ) {
-            classList += " nav-tabs";
-        } else if ( prop_style == STYLE_PILL ) {
-            classList += " nav-pills";
+        switch (prop_style){
+            case BASE:
+                break;
+            case TAB:
+                classList += " nav-tabs";
+                break;
+            case PILL:
+                classList += " nav-pills";
+                break;
         }
 
-        addTagAttribute("class", classList);
-
+        return classList;
     }
 
     public void setActiveItem(String name) {

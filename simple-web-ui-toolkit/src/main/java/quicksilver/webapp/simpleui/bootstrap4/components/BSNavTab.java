@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 public class BSNavTab extends BSNav {
 
     public BSNavTab() {
-        super(STYLE_TAB, HORIZONTAL_ALIGNMENT);
+        super(Style.TAB, Alignment.HORIZONTAL);
     }
 
-    public BSNavTab(int alignment) {
-        super(STYLE_TAB, alignment);
+    public BSNavTab(Alignment alignment) {
+        super(Style.TAB, alignment);
     }
 
 }

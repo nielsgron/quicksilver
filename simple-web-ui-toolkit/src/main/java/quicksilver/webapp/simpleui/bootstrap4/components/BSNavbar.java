@@ -56,7 +56,14 @@ public class BSNavbar extends BSComponentContainer {
 
         // Wrap the children components in the container tags
         //stream.writeln("<nav class=\"navbar\" navbar-expand-md navbar-dark bg-dark mb-4>");
-        stream.writeln("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">");
+        stream.write("<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\"");
+        String id = getId();
+        if(id != null) {
+            stream.write(" id='");
+            stream.write(id);
+            stream.write("'");
+        }
+        stream.writeln(">");
         if ( isFluid ) {
             stream.writeln("<div class=\"container-fluid\">");
         } else {

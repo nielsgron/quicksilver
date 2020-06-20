@@ -16,6 +16,7 @@
 
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
+import java.util.Random;
 import quicksilver.webapp.simpleserver.controllers.components.sidebar.SideBarComponentOverview;
 import quicksilver.webapp.simpleserver.controllers.root.components.AbstractComponentsPage;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNavPill;
@@ -52,6 +53,35 @@ public abstract class AbstractComponentsBootstrapPage extends AbstractComponents
 
     public BSNavPill getSideBar() {
         return sideBar;
+    }
+
+    private static final Random RAND = new Random();
+
+    protected String generateText(int numberOfPhrases) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < numberOfPhrases; i++) {
+            generatedPhrase(sb);
+            sb.append(' ');
+        }
+        return sb.toString();
+    }
+
+    private void generatedPhrase(StringBuilder sb) {
+        int words = RAND.nextInt(10) + 3;
+
+        for (int i = 0; i < words; i++) {
+            generateWord(sb);
+            sb.append(' ');
+        }
+        sb.append('.');
+    }
+
+    private void generateWord(StringBuilder sb) {
+        int len = RAND.nextInt(10) + 2;
+        for (int i = 0; i < len; i++) {
+            sb.append((char) ('a' + RAND.nextInt('z' - 'a')));
+        }
     }
 
 }

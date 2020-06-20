@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 public class BSNavPill extends BSNav {
 
     public BSNavPill() {
-        super(STYLE_PILL, HORIZONTAL_ALIGNMENT);
+        super(Style.PILL, Alignment.HORIZONTAL);
     }
 
-    public BSNavPill(int alignment) {
-        super(STYLE_PILL, alignment);
+    public BSNavPill(Alignment alignment) {
+        super(Style.PILL, alignment);
     }
 
 }
