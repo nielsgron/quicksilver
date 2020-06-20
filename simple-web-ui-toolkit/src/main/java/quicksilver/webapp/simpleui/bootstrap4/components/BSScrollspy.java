@@ -15,6 +15,7 @@
  */
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import quicksilver.webapp.simpleui.html.components.HTMLComponent;
 
 /**
@@ -27,12 +28,12 @@ public class BSScrollspy extends BSComponentContainer {
     private final String targetId;
     private final String height;
 
-    public BSScrollspy(String targetId, String height) {
+    public BSScrollspy(@NonNull String targetId, @NonNull String height) {
         this.targetId = targetId;
         this.height = height;
     }
 
-    public BSScrollspy(HTMLComponent nav, String height) {
+    public BSScrollspy(@NonNull HTMLComponent nav, @NonNull String height) {
         this(nav.getId(), height);
     }
 
