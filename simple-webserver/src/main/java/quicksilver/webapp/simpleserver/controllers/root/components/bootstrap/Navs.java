@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.webapp.simpleserver.controllers.root.components.bootstrap;
 
 import quicksilver.webapp.simpleui.bootstrap4.components.BSComponent;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSNav;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSNavItem;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSNavPill;
+import quicksilver.webapp.simpleui.bootstrap4.components.BSNavTab;
 import quicksilver.webapp.simpleui.bootstrap4.components.BSPanel;
 import quicksilver.webapp.simpleui.html.components.HTMLHeading;
 import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
@@ -39,9 +41,77 @@ public class Navs extends AbstractComponentsBootstrapPage {
         panel.add(new HTMLThematicBreak());
 
         // Navs Examples
+        {
+            panel.add(new HTMLHeading("Base nav", 5));
+            panel.add(new HTMLThematicBreak());
 
-        panel.add(new BSNav(BSNav.Style.TAB, BSComponent.Alignment.VERTICAL));
+            BSNav nav = new BSNav();
+            nav.add(new BSNavItem("Active", "#").active(true));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Disabled", "#").disabled(true));
 
+            panel.add(nav);
+            panel.add(new HTMLLineBreak());
+        }
+
+        {
+            panel.add(new HTMLHeading("Vertical", 5));
+            panel.add(new HTMLThematicBreak());
+
+            BSNav nav = new BSNav(BSComponent.Alignment.VERTICAL);
+            nav.add(new BSNavItem("Active", "#").active(true));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Disabled", "#").disabled(true));
+
+            panel.add(nav);
+            panel.add(new HTMLLineBreak());
+        }
+
+        {
+            panel.add(new HTMLHeading("Tabs", 5));
+            panel.add(new HTMLThematicBreak());
+
+            BSNavTab nav = new BSNavTab();
+            nav.add(new BSNavItem("Active", "#").active(true));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Disabled", "#").disabled(true));
+
+            panel.add(nav);
+            panel.add(new HTMLLineBreak());
+        }
+
+        {
+            panel.add(new HTMLHeading("Pills", 5));
+            panel.add(new HTMLThematicBreak());
+
+            BSNavPill nav = new BSNavPill();
+            nav.add(new BSNavItem("Active", "#").active(true));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Disabled", "#").disabled(true));
+
+            panel.add(nav);
+            panel.add(new HTMLLineBreak());
+        }
+
+        {
+            panel.add(new HTMLHeading("Fill", 5));
+            panel.add(new HTMLThematicBreak());
+
+            BSNavPill nav = new BSNavPill();
+            //TODO: there's also nav-justify but I don't see the difference?
+            nav.setFill(true);
+            nav.add(new BSNavItem("Active", "#").active(true));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Link", "#"));
+            nav.add(new BSNavItem("Disabled", "#").disabled(true));
+
+            panel.add(nav);
+            panel.add(new HTMLLineBreak());
+        }
         return panel;
     }
 

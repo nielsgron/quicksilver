@@ -43,6 +43,11 @@ public class BSHyperlink extends BSComponentContainer {
 
         addTagAttribute("href", url);
         addTagAttribute("class", getClassNames());
+
+        if (getStyle() != null) {
+            //TODO: this could be added all the way up in HTMLComponent as long as everybody calls super.defineAttributes by convention...
+            addTagAttribute("style", getStyle());
+        }
     }
 
     @Override

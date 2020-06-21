@@ -13,24 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-/*
-    Example :
+import org.checkerframework.checker.nullness.qual.NonNull;
 
-    W3Schools :
-    Bootstrap Docs :
+/**
+ * @see <a href='https://getbootstrap.com/docs/4.1/components/navs/#tabs'>Bootstrap
+ * Docs</a>
  */
-
 public class BSNavTab extends BSNav {
 
     public BSNavTab() {
-        super(Style.TAB, Alignment.HORIZONTAL);
+        super(Alignment.HORIZONTAL);
     }
 
-    public BSNavTab(Alignment alignment) {
-        super(Style.TAB, alignment);
+    public BSNavTab(@NonNull Alignment alignment) {
+        super(alignment);
     }
 
+    @Override
+    protected String getClassNames() {
+        return super.getClassNames() + " nav-tabs";
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Niels Gron and Contributors All Rights Reserved.
+ * Copyright 2018-2020 Niels Gron and Contributors All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,27 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
-// BSPanel is an invisible BSComponentContainer.
-// It just renders the component children, but nothing for itself.
+import quicksilver.webapp.simpleui.HtmlStream;
+
+/**
+ * BSPanel is an invisible BSComponentContainer.
+ * It just renders the component children, but nothing for itself.
+ */
 public class BSPanel extends BSComponentContainer {
 
     public BSPanel() {
 
     }
 
+    @Override
     protected void defineAttributes() {
 
     }
 
+    @Override
+    public void render(HtmlStream stream) {
+        // It just renders the component children, but nothing for itself.
+        renderBody(stream);
+    }
 
 }
