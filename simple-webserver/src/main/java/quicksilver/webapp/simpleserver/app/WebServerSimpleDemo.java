@@ -16,6 +16,16 @@
 
 package quicksilver.webapp.simpleserver.app;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import static javax.swing.Spring.height;
+import static javax.swing.Spring.width;
 import quicksilver.commons.app.SimpleApplication;
 import quicksilver.commons.app.SimpleWebServer;
 import quicksilver.webapp.simpleserver.controllers.root.About;
@@ -34,6 +44,8 @@ import quicksilver.webapp.simpleserver.controllers.root.components.tables.Tables
 import quicksilver.webapp.simpleui.HtmlPage;
 import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.HtmlStreamStringBuffer;
+import spark.Request;
+import spark.Response;
 
 public class WebServerSimpleDemo  extends SimpleWebServer {
 
@@ -61,6 +73,33 @@ public class WebServerSimpleDemo  extends SimpleWebServer {
         });
 
         // Top level site pages
+        webServer.get("/image", (Request request, Response response) -> {
+
+            int width = Integer.parseInt(request.queryParams("w"));
+            int height = Integer.parseInt(request.queryParams("h"));
+            String text = request.queryParams("text");
+            BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+            Graphics2D g2d = bi.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+
+            g2d.setBackground(Color.decode("0X" + request.queryParams("bg")));
+            g2d.clearRect(0, 0, width, height);
+
+            Font font = new Font("Arial", Font.BOLD, 20);
+            g2d.setFont(font);
+            g2d.setColor(Color.decode("0X" + request.queryParams("fg")));
+            FontMetrics fontMetrics = g2d.getFontMetrics();
+            int textWidth = fontMetrics.stringWidth(text);
+            int textHeight = fontMetrics.getAscent();
+            g2d.setPaint(Color.black);
+            g2d.drawString(text, (width - textWidth) / 2, height / 2 + textHeight / 4);
+
+            ImageIO.write(bi, "PNG", response.raw().getOutputStream());
+
+            return null;
+        });
         webServer.get("/about", (request, response) -> {
             return renderPageAndReturnStream(new About(), new HtmlStreamStringBuffer()).getText();
         });
