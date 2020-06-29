@@ -102,4 +102,8 @@ public abstract class DataFeed {
         return dataTable;
     }
 
+    public void setFeedTableName(String feedTableName) {
+        // Do nothing, but can be overridden
+    }
+
 }

@@ -15,6 +15,8 @@ public class MetaTable {
     protected HashMap<String, MetaColumn> columnMap = new HashMap<String, MetaColumn>();
     protected ArrayList<MetaColumn> columnList = new ArrayList<MetaColumn>();
 
+    protected MetaIndex primaryKey;
+
     protected HashMap<String, MetaIndex> indexMap = new HashMap<String, MetaIndex>();
     protected ArrayList<MetaIndex> indexList = new ArrayList<MetaIndex>();
 
@@ -40,6 +42,15 @@ public class MetaTable {
 
     public List getColumn() {
         return columnList;
+    }
+
+    public MetaIndex setPrimaryKey(MetaIndex index) {
+        this.primaryKey = index;
+        return index;
+    }
+
+    public MetaIndex getPrimaryKey() {
+        return primaryKey;
     }
 
     public MetaIndex addIndex(MetaIndex index) {

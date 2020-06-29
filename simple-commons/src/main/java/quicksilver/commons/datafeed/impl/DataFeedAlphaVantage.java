@@ -21,8 +21,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import java.net.URI;
 import java.util.Iterator;
 import java.util.Map;
+
+import quicksilver.commons.datafeed.AbstractHttpRequester;
 import quicksilver.commons.datafeed.DataFeedCSV;
 import quicksilver.commons.datafeed.DataFeedJSON;
 import tech.tablesaw.api.Table;
@@ -132,6 +136,42 @@ public class DataFeedAlphaVantage extends DataFeedCSV {
             //TODO: log
             return text;
         }
+    }
+
+    public void setFeedTableName(String feedTableName) {
+        setFunction(feedTableName);
+    }
+
+    public void request(AbstractHttpRequester req) throws IOException {
+
+        // Only 1 symbol can be retrieved per HTTP request, lets break up the list and merge table results
+
+        String symbols = getParameter("symbol");
+        String[] sym = symbols.split(",");
+
+        Table finalTable = null;
+
+        for ( int i = 0; i < sym.length; i++ ) {
+            addParameter("symbol", sym[i].trim());
+
+            URI uri = buildRequest();
+
+            dataPayload = req.requestURL(uri.toURL());
+            dataPayload = transformPayload(dataPayload);
+
+            buildDataSet();
+
+            if ( finalTable == null ) {
+                finalTable = dataTable;
+            } else {
+                finalTable.append(dataTable);
+            }
+        }
+
+        dataTable = finalTable;
+        dataPayload = dataTable.write().toString("csv").getBytes();
+
+        addParameter("symbol", symbols);
     }
 
     public void setFunction(String value) {
