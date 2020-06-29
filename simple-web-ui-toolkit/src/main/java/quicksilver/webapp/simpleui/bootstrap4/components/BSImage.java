@@ -46,7 +46,9 @@ public class BSImage extends BSComponent {
 //        addTagAttribute("height", "16");
         addTagAttribute("src", url);
         addTagAttribute("alt", alt);
-        addTagAttribute("class", getClassNames());
+        if(getClassNames() != null) {
+            addTagAttribute("class", getClassNames());
+        }
     }
 
     public void setFluid(boolean fluid) {
@@ -90,7 +92,7 @@ public class BSImage extends BSComponent {
             cNames.add("rounded");
         }
 
-        return String.join(" ", cNames);
+        return cNames.isEmpty() ? null : String.join(" ", cNames);
     }
 
 }
