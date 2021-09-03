@@ -22,6 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.Iterator;
 import java.util.Map;
@@ -29,7 +31,13 @@ import java.util.Map;
 import quicksilver.commons.datafeed.AbstractHttpRequester;
 import quicksilver.commons.datafeed.DataFeedCSV;
 import quicksilver.commons.datafeed.DataFeedJSON;
+import tech.tablesaw.api.ColumnType;
 import tech.tablesaw.api.Table;
+import tech.tablesaw.columns.dates.DateColumnType;
+import tech.tablesaw.columns.numbers.DoubleColumnType;
+import tech.tablesaw.columns.numbers.LongColumnType;
+import tech.tablesaw.columns.strings.StringColumnType;
+import tech.tablesaw.io.csv.CsvReadOptions;
 
 import java.io.IOException;
 
@@ -38,6 +46,8 @@ public class DataFeedAlphaVantage extends DataFeedCSV {
     // Public APIs : Finance : https://github.com/public-apis/public-apis#finance
     // Alpha Vantage API docs : https://www.alphavantage.co/documentation/
     // URL Example : https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&apikey=demo
+
+    public static String BATCH_STOCK_QUOTES = "BATCH_STOCK_QUOTES";
 
     public static String TIME_SERIES_INTRADAY = "TIME_SERIES_INTRADAY";
     public static String TIME_SERIES_DAILY = "TIME_SERIES_DAILY";
@@ -138,8 +148,27 @@ public class DataFeedAlphaVantage extends DataFeedCSV {
         }
     }
 
-    public void setFeedTableName(String feedTableName) {
-        setFunction(feedTableName);
+    @Override
+    protected void buildDataSet() throws IOException {
+
+        dataTable = null;
+
+        CsvReadOptions.Builder builder = CsvReadOptions.builder(new InputStreamReader(new ByteArrayInputStream(dataPayload), charset))
+                .columnTypes( new ColumnType[] {
+                        StringColumnType.instance(), // symbol
+                        DoubleColumnType.instance(), // open
+                        DoubleColumnType.instance(), // high
+                        DoubleColumnType.instance(), // low
+                        DoubleColumnType.instance(), // price
+                        LongColumnType.instance(),   // volume
+                        DateColumnType.instance(),   // latestDay
+                        DoubleColumnType.instance(), // previousClose
+                        DoubleColumnType.instance(), // change
+                        StringColumnType.instance(), // changePercent
+                } );
+
+        dataTable = Table.read().csv(builder);
+        //dataTable = Table.read().csv(new InputStreamReader(new ByteArrayInputStream(dataPayload), charset));
     }
 
     public void request(AbstractHttpRequester req) throws IOException {
@@ -156,22 +185,42 @@ public class DataFeedAlphaVantage extends DataFeedCSV {
 
             URI uri = buildRequest();
 
+            System.out.println("Requesting Symbol : " + sym[i].trim());
             dataPayload = req.requestURL(uri.toURL());
             dataPayload = transformPayload(dataPayload);
 
-            buildDataSet();
-
-            if ( finalTable == null ) {
-                finalTable = dataTable;
-            } else {
-                finalTable.append(dataTable);
+            try {
+                buildDataSet();
+            } catch ( Exception e ) {
+                e.printStackTrace();
             }
+
+            if ( dataTable != null ) {
+                if (finalTable == null) {
+                    finalTable = dataTable;
+                } else {
+                    finalTable.append(dataTable);
+                }
+            }
+
+            try {
+                Thread.sleep(15_000);
+            } catch ( Exception e ) {
+                e.printStackTrace();
+            }
+
         }
 
         dataTable = finalTable;
         dataPayload = dataTable.write().toString("csv").getBytes();
 
+        System.out.println(dataTable.printAll());
+
         addParameter("symbol", symbols);
+    }
+
+    public void setFeedTableName(String feedTableName) {
+        setFunction(feedTableName);
     }
 
     public void setFunction(String value) {

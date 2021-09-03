@@ -18,6 +18,11 @@ public class BulkImport {
     private int batchSize = 1000;
     protected boolean merge = false;
     private int currentBatchQueue = 0;
+    private long totalRowsBatched = 0;
+    private long totalRowInsertCount = -1;
+
+    private long prepareBatchStartTime = 0;
+    private long prepareBatchEndTime = 0;
 
     private String keyColumn = null;
 
@@ -40,6 +45,10 @@ public class BulkImport {
         this.batchSize = batchSize;
         this.merge = merge;
         this.keyColumn = keyColumn;
+    }
+
+    public void setTotalRowInsertCount(long total) {
+        totalRowInsertCount = total;
     }
 
     protected String getOperationCommand() {
@@ -105,16 +114,30 @@ public class BulkImport {
             // We still have uncommitted items in the batch, so commit them before stopping the import
 
             if ( enableLog ) {
-                System.out.println();
-                System.out.println("   ... Executing final batch, size : " + currentBatchQueue);
+                prepareBatchEndTime = System.currentTimeMillis();
+
+                System.out.print(" (" + (prepareBatchEndTime - prepareBatchStartTime) + "/ms)");
+                System.out.print(" ... Executing final batch, size : " + currentBatchQueue);
             }
 
-            preparedStatement.executeBatch();
+            long startTime = System.currentTimeMillis();
+            int[] updatedCounts = preparedStatement.executeBatch();
+            long endTime = System.currentTimeMillis();
+            if ( enableLog ) {
+                System.out.print(" (" + (endTime - startTime) + "/ms)");
+
+                long totalUpdateCounts = 0;
+                for ( int i = 0; i < updatedCounts.length; i++ ) {
+                    totalUpdateCounts += updatedCounts[i];
+                }
+
+                System.out.println(" ... [" + updatedCounts.length + "] Updates. Total Update Counts [" + totalUpdateCounts + "].");
+            }
             currentBatchQueue = 0;
         }
 
         if ( enableLog ) {
-            System.out.println("Ending bulk import.");
+            System.out.println("   -> Ending bulk import.");
             System.out.println("");
         }
 
@@ -126,21 +149,44 @@ public class BulkImport {
     public void saveIt() throws SQLException {
         assertStarted();
 
+        if ( currentBatchQueue == 0 ) {
+            prepareBatchStartTime = System.currentTimeMillis();
+            if ( enableLog ) {
+                System.out.print("   Preparing batches ...");
+            }
+        }
+
         try {
-            System.out.print(".");
+            //System.out.print(".");
             preparedStatement.addBatch();
             currentBatchQueue++;
+            totalRowsBatched++;
         } catch (SQLException e) {
             throw e;
         }
 
         if ( currentBatchQueue >= batchSize ) {
             if ( enableLog ) {
-                System.out.println();
-                System.out.println("   ... Executing current batch, size : " + currentBatchQueue);
+                prepareBatchEndTime = System.currentTimeMillis();
+
+                System.out.print(" (" + (prepareBatchEndTime - prepareBatchStartTime) + "/ms)");
+                System.out.print(" ... Executing current batch, size : " + currentBatchQueue + " [ " + totalRowsBatched + " of " + totalRowInsertCount + " ]");
             }
 
-            preparedStatement.executeBatch();
+            long startTime = System.currentTimeMillis();
+            int[] updatedCounts = preparedStatement.executeBatch();
+            long endTime = System.currentTimeMillis();
+            if ( enableLog ) {
+                System.out.print(" (" + (endTime - startTime) + "/ms)");
+
+                long totalUpdateCounts = 0;
+                for ( int i = 0; i < updatedCounts.length; i++ ) {
+                    totalUpdateCounts += updatedCounts[i];
+                }
+
+                System.out.println(" ... [" + updatedCounts.length + "] Updates. Total Update Counts [" + totalUpdateCounts + "].");
+
+            }
             currentBatchQueue = 0;
         }
 

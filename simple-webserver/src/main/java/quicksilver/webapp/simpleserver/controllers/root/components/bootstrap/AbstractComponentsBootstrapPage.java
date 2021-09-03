@@ -26,17 +26,13 @@ import quicksilver.webapp.simpleui.html.components.HTMLLineBreak;
 
 public abstract class AbstractComponentsBootstrapPage extends AbstractComponentsPage {
 
-    private BSNavPill sideBar;
+    private BSNavPill sideBar = new SideBarComponentOverview();
 
     public AbstractComponentsBootstrapPage() {
         getComponentNavTab().setActiveItem("Bootstrap");
     }
 
     protected BSPanel createContentPanelLeft() {
-
-        if ( sideBar == null ) {
-            sideBar = new SideBarComponentOverview();
-        }
 
         BSPanel panel = new BSPanel();
         panel.add(new HTMLLineBreak(1));

@@ -71,7 +71,7 @@ public class HttpRequester extends AbstractHttpRequester {
             outputStream.close();
             inputStream.close();
 
-            System.out.println("File downloaded");
+            //System.out.println("File downloaded");
         } else {
             System.out.println("No file to download. Server replied HTTP code: " + responseCode);
         }

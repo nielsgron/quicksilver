@@ -53,4 +53,128 @@ public class MetaDatabase {
 
     }
 
+    public void createIndexesIfNotExist(DatabaseConnection connection, String tableName, boolean includePrimaryKey) {
+
+        if ( tableName == null || tableName.trim().length() == 0 ) {
+            tableName = "ALL";
+        }
+
+        List<MetaTable> tableList = getTables();
+        int tableCount = tableList.size();
+
+        for ( int i = 0; i < tableCount; i++ ) {
+            MetaTable table = tableList.get(i);
+
+            if ( table.getName().equals(tableName) || tableName.equals("ALL") ) {
+
+                if ( includePrimaryKey ) {
+
+                    MetaIndex index = table.getPrimaryKey();
+                    if ( index != null ) {
+                        String ddl = index.getCREATE_DDL(true);
+
+                        System.out.println("Execute: " + ddl);
+                        try {
+                            connection.execute(ddl);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                List<MetaIndex> indexes = table.getIndexes();
+
+                for ( int j = 0; j < indexes.size(); j++ ) {
+
+                    MetaIndex index = indexes.get(j);
+                    String ddl = index.getCREATE_DDL(true);
+
+                    System.out.println("Execute: " + ddl);
+                    try {
+                        connection.execute(ddl);
+                    } catch ( Exception e ) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public void dropIndexesIfExist(DatabaseConnection connection, String tableName, boolean includePrimaryKey) {
+
+        if ( tableName == null || tableName.trim().length() == 0 ) {
+            tableName = "ALL";
+        }
+
+        List<MetaTable> tableList = getTables();
+        int tableCount = tableList.size();
+
+        for ( int i = 0; i < tableCount; i++ ) {
+            MetaTable table = tableList.get(i);
+
+            if ( table.getName().equals(tableName) || tableName.equals("ALL") ) {
+
+                if ( includePrimaryKey ) {
+
+                    MetaIndex index = table.getPrimaryKey();
+                    if ( index != null ) {
+                        String ddl = index.getDROP_DDL(true);
+
+                        System.out.println("Execute: " + ddl);
+                        try {
+                            connection.execute(ddl);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                List<MetaIndex> indexes = table.getIndexes();
+
+                for ( int j = 0; j < indexes.size(); j++ ) {
+
+                    MetaIndex index = indexes.get(j);
+                    String ddl = index.getDROP_DDL(true);
+
+                    System.out.println("Execute: " + ddl);
+                    try {
+                        connection.execute(ddl);
+                    } catch ( Exception e ) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public void deleteRows(DatabaseConnection connection, String tableName) {
+
+        if ( tableName == null || tableName.trim().length() == 0 ) {
+            tableName = "ALL";
+        }
+
+        List<MetaTable> tableList = getTables();
+        int tableCount = tableList.size();
+
+        for ( int i = 0; i < tableCount; i++ ) {
+            MetaTable table = tableList.get(i);
+
+            if ( table.getName().equals(tableName) || tableName.equals("ALL") ) {
+
+                String ddl = table.getDELETE_DDL();
+
+                System.out.println("Execute: " + ddl);
+                try {
+                    connection.execute(ddl);
+                } catch ( Exception e ) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public String getCREATE_DDL() {
+        return "create database if not exists " + name + " character set = 'utf8' collate = 'utf8_general_ci'";
+    }
+
 }

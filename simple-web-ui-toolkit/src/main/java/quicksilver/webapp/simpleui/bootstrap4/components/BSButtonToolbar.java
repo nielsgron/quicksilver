@@ -142,6 +142,34 @@ public class BSButtonToolbar extends BSComponentContainer {
                 }
             }
         }
+
+        count = tailPanel.getChildrenCount();
+        for ( int i = 0; i < count; i++ ) {
+            HTMLComponent component = tailPanel.get(i);
+            if ( component instanceof BSButton) {
+                if ( ((BSButton)component).getText().equals(title) ) {
+                    ((BSButton)component).setActive(true);
+                } else {
+                    ((BSButton)component).setActive(false);
+                }
+            } else if (component instanceof BSButtonGroup) {
+
+                BSButtonGroup bg = (BSButtonGroup)component;
+
+                int groupCount = bg.getChildrenCount();
+                for ( int j = 0; j < groupCount; j++ ) {
+                    HTMLComponent groupComponent = bg.get(j);
+                    if ( groupComponent instanceof BSButton) {
+                        if ( ((BSButton)groupComponent).getText().equals(title) ) {
+                            ((BSButton)groupComponent).setActive(true);
+                        } else {
+                            ((BSButton)groupComponent).setActive(false);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
 }

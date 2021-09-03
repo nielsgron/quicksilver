@@ -40,7 +40,7 @@ public class MetaTable {
         return columnMap.get(name);
     }
 
-    public List getColumn() {
+    public List getColumns() {
         return columnList;
     }
 
@@ -55,7 +55,7 @@ public class MetaTable {
 
     public MetaIndex addIndex(MetaIndex index) {
 
-        indexMap.put(index.getName(), index);
+        indexMap.put(index.getIndexName(), index);
         indexList.add(index);
 
         return index;
@@ -65,8 +65,8 @@ public class MetaTable {
         return indexMap.get(name);
     }
 
-    public List getIndexes() {
-        return columnList;
+    public List<MetaIndex> getIndexes() {
+        return indexList;
     }
 
     private void createTableFromTSTable(Table table) {
@@ -160,12 +160,22 @@ public class MetaTable {
 
     }
 
+    public String getDELETE_DDL() {
+
+        StringBuilder ddl = new StringBuilder();
+
+        ddl.append("DELETE FROM ");
+        ddl.append(name);
+
+        return ddl.toString();
+
+    }
+
     public String getINSERT_DML(Table table) {
 
         StringBuilder dml = new StringBuilder();
 
         dml.append("INSERT INTO ");
-
 
         return dml.toString();
 

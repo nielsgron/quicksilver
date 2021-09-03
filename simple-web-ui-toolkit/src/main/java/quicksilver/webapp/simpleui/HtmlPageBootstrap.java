@@ -27,13 +27,14 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
     private String customCSSURL = "/application/custom.css";
     private BootstrapTheme theme = BootstrapTheme.DEFAULT;
     private BSViewport viewport;
+    private BSNavbar navbar;
 
     public HtmlPageBootstrap() {
     }
 
     protected void initViewport() {
         viewport = createViewport();
-        viewport.setNavbar(createNavbar());
+        viewport.setNavbar(getNavbar());
         viewport.setContentPane(createContentPane());
     }
 
@@ -45,18 +46,17 @@ public abstract class HtmlPageBootstrap extends HtmlPage {
         return new BSPanel();
     }
 
-    protected BSNavbar createNavbar() {
-        return new BSNavbar(false, "");
-    }
-
     public BSViewport getViewport() {
         if ( viewport == null ) {
             initViewport();
         }
         return viewport;
     }
+    protected void setNavbar(BSNavbar navbar) {
+        this.navbar = navbar;
+    }
     public BSNavbar getNavbar() {
-        return getViewport().getNavbar();
+        return navbar;
     }
     public BSComponentContainer getContentPane() {
         return getViewport().getContentPane();

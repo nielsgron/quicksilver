@@ -50,7 +50,7 @@ public class OkHttpRequester extends AbstractHttpRequester {
                 }
                 IOUtils.copy(body.byteStream(), outputStream);
 
-                System.out.println("File downloaded");
+                //System.out.println("File downloaded");
             } else {
                 System.out.println("No file to download. Server replied HTTP code: " + responseCode);
             }

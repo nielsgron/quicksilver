@@ -77,14 +77,22 @@ public abstract class DatabaseConnection {
 
     }
 
-    public void disconnect() {
+    public synchronized void disconnect() {
         if ( _DB != null ) {
             _DB.close();
         }
         //Base.close();
     }
 
-    public Connection getConnection() {
+    public synchronized Connection getConnection() {
+        Connection conn = _DB.getConnection();
+
+        try {
+            changeDatabase(conn, _database);
+        } catch (Exception e) {
+            throw new DBException(_database, (Object[]) null, e);
+        }
+
         return _DB.getConnection();
     }
 
@@ -195,7 +203,8 @@ public abstract class DatabaseConnection {
                 @Override
                 public void executeOperation(Connection connection) {
                     // TODO: BulkImport
-                    BulkImport bulkImport = DatabaseConnection.this.createBulkImport(connection, null, 5000, true, keyColumns);
+                    BulkImport bulkImport = DatabaseConnection.this.createBulkImport(connection, null, 10000, false, keyColumns);
+                    bulkImport.setTotalRowInsertCount(table.rowCount());
 
                     List<String> columnNames = table.columnNames();
                     String[] columnNamesArray = columnNames.toArray(new String[0]);
@@ -322,6 +331,8 @@ public abstract class DatabaseConnection {
         }
 
     }
+
+    public abstract void changeDatabase(Connection conn, String databaseName) throws Exception;
 
     public abstract BulkImport createBulkImport(Connection connection, Model dbObject, int batchSize);
 

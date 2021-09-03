@@ -24,6 +24,10 @@ public class MyDatabaseConnection extends DatabaseConnection {
         return "jdbc:mysql://" + _host + ":" + _port + "/" + _database + "?verifyServerCertificate=false&useSSL=true&requireSSL=true&serverTimezone=UTC&useServerPrepStmts=false&rewriteBatchedStatements=true";
     }
 
+    public void changeDatabase(Connection conn, String databaseName) throws Exception {
+        this.execute(conn, "USE " + databaseName);
+    }
+
     public BulkImport createBulkImport(Connection connection, Model dbObject, int batchSize) {
         return new MyBulkImport(connection, dbObject, batchSize);
     }

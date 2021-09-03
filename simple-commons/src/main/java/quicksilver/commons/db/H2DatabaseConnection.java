@@ -28,6 +28,10 @@ public class H2DatabaseConnection extends DatabaseConnection {
         }
     }
 
+    public void changeDatabase(Connection conn, String databaseName) throws Exception {
+        // do nothing because H2 only supports 1 database per connection
+    }
+
     public BulkImport createBulkImport(Connection connection, Model dbObject, int batchSize) {
         return new BulkImport(connection, dbObject, batchSize);
     }

@@ -25,6 +25,7 @@ public class AbstractSitePage extends HtmlPageBootstrapAppLayout {
     public AbstractSitePage() {
         setBootstrapTheme(BootstrapTheme.DEFAULT);
         setCustomCSSURL("/application/demo-custom.css");
+        setNavbar(new NavSite());
     }
 
 //    NOTE : I could override this method to set my own custom theme path or set a pre-defined theme in constructor.
@@ -36,10 +37,5 @@ public class AbstractSitePage extends HtmlPageBootstrapAppLayout {
 //    protected String getCustomCSSURL() {
 //        return "/application/demo-custom.css";
 //    }
-
-    protected BSNavbar createNavbar() {
-        // Create a Navbar for the web site
-        return new NavSite();
-    }
 
 }

@@ -7,6 +7,7 @@ public class MetaColumn {
     protected String length;
     protected String precision;
     protected String scale;
+    protected boolean isNotNull = false;
 
     protected String typeDefinition;
 
@@ -24,10 +25,27 @@ public class MetaColumn {
         buildTypeDefinition();
     }
 
+    public MetaColumn(String name, String dataType, boolean isNotNull) {
+        this.name = name;
+        this.dataType = dataType;
+        this.isNotNull = isNotNull;
+
+        buildTypeDefinition();
+    }
+
     public MetaColumn(String name, String dataType, String length) {
         this.name = name;
         this.dataType = dataType;
         this.length = length;
+
+        buildTypeDefinition();
+    }
+
+    public MetaColumn(String name, String dataType, String length, boolean isNotNull) {
+        this.name = name;
+        this.dataType = dataType;
+        this.length = length;
+        this.isNotNull = isNotNull;
 
         buildTypeDefinition();
     }
@@ -37,6 +55,16 @@ public class MetaColumn {
         this.dataType = dataType;
         this.precision = precision;
         this.scale = scale;
+
+        buildTypeDefinition();
+    }
+
+    public MetaColumn(String name, String dataType, String precision, String scale, boolean isNotNull) {
+        this.name = name;
+        this.dataType = dataType;
+        this.precision = precision;
+        this.scale = scale;
+        this.isNotNull = isNotNull;
 
         buildTypeDefinition();
     }
@@ -70,6 +98,10 @@ public class MetaColumn {
 
             }
 
+        }
+
+        if ( isNotNull ) {
+            definitionBuilder.append(" NOT NULL");
         }
 
         typeDefinition = definitionBuilder.toString();

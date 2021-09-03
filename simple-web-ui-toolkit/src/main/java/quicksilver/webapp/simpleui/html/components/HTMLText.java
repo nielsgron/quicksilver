@@ -20,7 +20,7 @@ import quicksilver.webapp.simpleui.HtmlStream;
 
 public class HTMLText extends HTMLComponent {
 
-    private String text;
+    protected String text;
 
     public HTMLText(String txt) {
         text = txt;

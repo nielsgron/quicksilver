@@ -16,10 +16,13 @@
 
 package quicksilver.commons.datafeed;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+
+import org.apache.commons.io.FileUtils;
 import tech.tablesaw.api.Table;
 
 import java.util.Map;
@@ -40,7 +43,7 @@ public abstract class DataFeed {
     protected Charset charset = StandardCharsets.UTF_8;
 
     public DataFeed(String baseURLString) {
-        this.baseURLString = baseURLString;
+        setBaseURLString(baseURLString);
     }
 
     public void setBaseURLString(String value) {
@@ -76,6 +79,10 @@ public abstract class DataFeed {
         request(new OkHttpRequester());
     }
 
+    public void writePayLoadToFile(File file) throws IOException {
+        FileUtils.writeByteArrayToFile(file, dataPayload);
+    }
+
     public void request(AbstractHttpRequester req) throws IOException {
         URI uri = buildRequest();
 
@@ -92,6 +99,10 @@ public abstract class DataFeed {
 
     public void addParameter(String key, String value) {
         parameters.put(key, value);
+    }
+
+    public void removeParameter(String key) {
+        parameters.remove(key);
     }
 
     public String getParameter(String key) {

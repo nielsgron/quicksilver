@@ -43,4 +43,8 @@ public class H2DatabaseServer extends DatabaseServer {
         return connection;
     }
 
+    public void createDatabasesIfNotExist() {
+        // No command to explicitly create database in H2. Just open a connection.
+    }
+
 }

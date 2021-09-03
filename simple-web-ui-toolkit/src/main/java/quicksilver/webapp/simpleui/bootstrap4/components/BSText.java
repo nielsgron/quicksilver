@@ -16,6 +16,7 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.components;
 
+import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.html.components.HTMLText;
 
 /*
@@ -27,8 +28,47 @@ import quicksilver.webapp.simpleui.html.components.HTMLText;
 
 public class BSText extends HTMLText {
 
+    private boolean bSmall = false;
+    private boolean bBold = false;
+    private boolean bItalic = false;
+
     public BSText(String txt) {
         super(txt);
     }
+
+    public BSText(String txt, boolean bSmall, boolean bBold, boolean bItalic) {
+        super(txt);
+        this.bSmall = bSmall;
+        this.bBold = bBold;
+        this.bItalic = bItalic;
+    }
+
+    @Override
+    public void render(HtmlStream stream) {
+
+        if ( bSmall ) {
+            stream.write("<small>");
+        }
+        if ( bBold ) {
+            stream.write("<strong>");
+        }
+        if ( bItalic ) {
+            stream.write("<em>");
+        }
+
+        stream.write(text);
+
+        if ( bItalic ) {
+            stream.write("</em>");
+        }
+        if ( bBold ) {
+            stream.write("</strong>");
+        }
+        if ( bSmall ) {
+            stream.write("</small>");
+        }
+
+    }
+
 
 }

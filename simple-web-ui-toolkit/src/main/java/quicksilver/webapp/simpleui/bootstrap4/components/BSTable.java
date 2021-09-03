@@ -19,6 +19,7 @@ package quicksilver.webapp.simpleui.bootstrap4.components;
 import quicksilver.commons.data.DataSet;
 import quicksilver.webapp.simpleui.HtmlStream;
 
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -68,6 +69,10 @@ public class BSTable extends BSComponentContainer {
 
     public void setRowLimit(int rowLimit) {
         this.rowLimit = rowLimit;
+    }
+
+    public DataSet getDataSet() {
+        return dataSet;
     }
 
     protected String getStyle() {
@@ -170,6 +175,14 @@ public class BSTable extends BSComponentContainer {
             targetWindow = tWindow;
         }
 
+        public String encode(String value) {
+            try {
+                return java.net.URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+            } catch ( Exception e ) {
+                return value;
+            }
+        }
+
         @Override
         public String render(int row, int column, Object value) {
             if ( value == null ) {
@@ -192,6 +205,50 @@ public class BSTable extends BSComponentContainer {
 
         protected String getHREF(Object value) {
             return "/" + value.toString();
+        }
+
+    }
+
+    public static class PercentTableCellRenderer extends NumberTableCellRenderer {
+
+        private boolean multiplyValueBy100 = true;
+
+        public PercentTableCellRenderer() {
+            super(2, true, false, true);
+        }
+
+        public PercentTableCellRenderer(int numberOfDigits, boolean multiplyValueBy100) {
+            super(numberOfDigits, true, false, true);
+            this.multiplyValueBy100 = multiplyValueBy100;
+        }
+
+        @Override
+        public String render(int row, int column, Object value) {
+            if ( value == null ) {
+                return null;
+            }
+
+            if ( this.multiplyValueBy100) {
+                if ( value instanceof Double ) {
+                    Double val = (Double)value;
+                    val = val * 100;
+                    value = val;
+                } else if ( value instanceof Long ) {
+                    Long val = (Long)value;
+                    val = val * 100;
+                    value = val;
+                } else if ( value instanceof Integer ) {
+                    Integer val = (Integer)value;
+                    val = val * 100;
+                    value = val;
+                } else if ( value instanceof Float ) {
+                    Float val = (Float)value;
+                    val = val * 100;
+                    value = val;
+                }
+            }
+
+            return super.render(row, column, value);
         }
 
     }

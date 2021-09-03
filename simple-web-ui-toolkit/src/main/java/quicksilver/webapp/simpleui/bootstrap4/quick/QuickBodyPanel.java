@@ -16,6 +16,8 @@
 
 package quicksilver.webapp.simpleui.bootstrap4.quick;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import quicksilver.webapp.simpleui.HtmlStream;
 import quicksilver.webapp.simpleui.bootstrap4.components.*;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSBorderLayout;
 import quicksilver.webapp.simpleui.bootstrap4.layouts.BSGridLayout;
@@ -84,6 +86,11 @@ public class QuickBodyPanel extends BSPanel {
         }
         this.components.add(panel);
 
+    }
+
+    public void render(@NonNull HtmlStream stream) {
+        validate();
+        super.render(stream);
     }
 
     protected void doLayout() {
