@@ -18,9 +18,9 @@
     <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-core:2.10.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: io.pebbletemplates:pebble:3.1.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: org.unbescape:unbescape:1.1.6.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-api:2.16.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-core:2.16.0" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-web:2.16.0" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-api:2.17.0" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-core:2.17.0" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-web:2.17.0" level="project" />
     <orderEntry type="library" exported="" name="Maven: com.lmax:disruptor:3.4.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-dbutils:commons-dbutils:1.7" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-io:commons-io:2.6" level="project" />
